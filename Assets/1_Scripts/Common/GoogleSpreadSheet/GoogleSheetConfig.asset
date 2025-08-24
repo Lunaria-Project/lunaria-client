@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61c14c764e3d0a45b85eaf236af5f7f, type: 3}
+  m_Name: GoogleSheetConfig
+  m_EditorClassIdentifier: 
+  _clientId: 20982752121-0q31a7pmb45giamtrohjcm4fv3u0g3r3.apps.googleusercontent.com
+  _clientSecretNumber: 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
+  _googleSheetId: 1b_MJJQca0QP6VACGel8QAORnfVpb0p8Gegck-h3Zji8
+  _portNumber: 8080
+  _cancelTimeSeconds: 30
+  _oAuthToken:
+    NextRefreshTime: 638916374035257150
