@@ -9,6 +9,16 @@ public partial class GameData
     public bool ContainsItemData(int key) => DTItemData.ContainsKey(key);
     private readonly Dictionary<int, ItemData> _dtItemData = new();
 
+    // MapNpcInfoData - MapNpcInfoData, key: NpcId
+    public IReadOnlyDictionary<int, MapNpcInfoData> DTMapNpcInfoData => _dtMapNpcInfoData;
+    public bool TryGetMapNpcInfoData(int key, out MapNpcInfoData result) => DTMapNpcInfoData.TryGetValue(key, out result);
+    public bool ContainsMapNpcInfoData(int key) => DTMapNpcInfoData.ContainsKey(key);
+    private readonly Dictionary<int, MapNpcInfoData> _dtMapNpcInfoData = new();
+
+    // MapNpcMenuData - MapNpcMenuData
+    public IReadOnlyList<MapNpcMenuData> DTMapNpcMenuData => _dtMapNpcMenuData;
+    private List<MapNpcMenuData> _dtMapNpcMenuData = new();
+
     // RequirementInfoData - RequirementInfoData, key: RequirementType
     public IReadOnlyDictionary<string, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
     public bool TryGetRequirementInfoData(string key, out RequirementInfoData result) => DTRequirementInfoData.TryGetValue(key, out result);
