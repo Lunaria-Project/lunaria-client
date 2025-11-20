@@ -14,6 +14,26 @@ public partial class GameData
         }
     }
 
+    private void LoadMapNpcInfoData(List<object[]> rows)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (List<int>)row[2], (row[3] as string) ?? string.Empty, (List<int>)row[4]);
+            _dtMapNpcInfoData.Add(newData.NpcId, newData);
+        }
+    }
+
+    private void LoadMapNpcMenuData(List<object[]> rows)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (List<int>)row[2], (row[3] as string) ?? string.Empty, (List<int>)row[4], Convert.ToInt32(row[5]), (row[6] as string) ?? string.Empty);
+            _dtMapNpcMenuData.Add(newData);
+        }
+    }
+
     private void LoadRequirementInfoData(List<object[]> rows)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -29,6 +49,8 @@ public partial class GameData
         switch (sheetName)
         {
             case "ItemData": LoadItemData(rows); break;
+            case "MapNpcInfoData": LoadMapNpcInfoData(rows); break;
+            case "MapNpcMenuData": LoadMapNpcMenuData(rows); break;
             case "RequirementInfoData": LoadRequirementInfoData(rows); break;
         }
     }

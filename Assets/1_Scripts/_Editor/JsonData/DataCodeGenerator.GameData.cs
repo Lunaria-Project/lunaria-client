@@ -5,10 +5,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEditor;
-using UnityEngine;
 
 public static partial class DataCodeGenerator
 {
+    private enum ColumnType
+    {
+        None,
+        Normal,
+        Enum,
+        List,
+    }
+
     private const string OutputNamespace = "Generated";
     private const string GameDataPath = "Assets/1_Scripts/Generated/GeneratedGameData.cs";
     private const string GameGetterDataPath = "Assets/1_Scripts/Generated/GameData.GeneratedClass.cs";
@@ -25,7 +32,7 @@ public static partial class DataCodeGenerator
         { "long", "long" },
         { "bool", "bool" },
         { "string", "string" }
-        // "enum" 은 별도 처리
+        // "enum", "list" 는 별도 처리
     };
 
     public static void GenerateGameDataCode(List<SheetInfo> sheets)
@@ -56,6 +63,8 @@ public static partial class DataCodeGenerator
     {
         var sb = new StringBuilder();
 
+        sb.AppendLine($"using System.Collections.Generic;");
+        sb.AppendLine();
         sb.AppendLine($"namespace {OutputNamespace}");
         sb.AppendLine("{");
 
@@ -71,13 +80,8 @@ public static partial class DataCodeGenerator
 
             for (var j = 0; j < sheet.ColumnNames.Length; j++)
             {
-                if (!TryGetColumnType(sheet.ColumnTypes[j], out var columnType)) continue;
-
-                var colName = sheet.ColumnNames[j];
-                var isEnum = string.Equals(columnType, "enum", StringComparison.OrdinalIgnoreCase);
-                var csType = isEnum ? colName : TypeMap.GetValueOrDefault(columnType ?? "", "string");
-
-                sb.AppendIndentedLine($"public {csType} {colName} {{ get; private set; }}", 2);
+                if (!TryGetCsType(sheet.ColumnTypes[j], sheet.ColumnNames[j], out var csType, out _)) continue;
+                sb.AppendIndentedLine($"public {csType} {sheet.ColumnNames[j]} {{ get; private set; }}", 2);
             }
 
             sb.AppendLine();
@@ -124,9 +128,7 @@ public static partial class DataCodeGenerator
             var (HasKeyColumn, KeyColumnName) = (keyIndex >= 0, keyIndex >= 0 ? sheet.ColumnNames[keyIndex] : string.Empty);
             if (HasKeyColumn)
             {
-                if (!TryGetColumnType(sheet.ColumnTypes[keyIndex], out var keyColumnType)) continue;
-                var isEnum = string.Equals(keyColumnType, "enum", StringComparison.OrdinalIgnoreCase);
-                var csType = isEnum ? sheet.ColumnNames[keyIndex] : (TypeMap.GetValueOrDefault(keyColumnType ?? "", "string"));
+                if (!TryGetCsType(sheet.ColumnTypes[keyIndex], sheet.ColumnNames[keyIndex], out var csType, out _)) continue;
                 sb.AppendIndentedLine($"// {sheet.SheetName} - {className}, key: {KeyColumnName}", 1);
                 sb.AppendIndentedLine($"public IReadOnlyDictionary<{csType}, {className}> DT{className} => _dt{className};", 1);
                 sb.AppendIndentedLine($"public bool TryGet{className}({csType} key, out {className} result) => DT{className}.TryGetValue(key, out result);", 1);
@@ -175,18 +177,26 @@ public static partial class DataCodeGenerator
             var args = new List<string>(sheet.ColumnNames.Length);
             for (var i = 0; i < sheet.ColumnNames.Length; i++)
             {
-                if (!TryGetColumnType(sheet.ColumnTypes[i], out var columnType)) continue;
-                var isEnum = string.Equals(columnType, "enum", StringComparison.OrdinalIgnoreCase);
-                if (isEnum)
+                if (!TryGetCsType(sheet.ColumnTypes[i], sheet.ColumnNames[i], out var csType, out var type)) continue;
+                switch (type)
                 {
-                    var columnName = sheet.ColumnNames[i];
-                    args.Add($"({columnName})Enum.Parse(typeof({columnName}), (string)row[{i}], true)");
-                }
-                else
-                {
-                    var csType = TypeMap.GetValueOrDefault(columnType ?? "", "string");
-                    var arg = CastExpr(csType, $"row[{i}]");
-                    args.Add(arg);
+                    case ColumnType.Enum:
+                    {
+                        var columnName = sheet.ColumnNames[i];
+                        args.Add($"({columnName})Enum.Parse(typeof({columnName}), (string)row[{i}], true)");
+                        break;
+                    }
+                    case ColumnType.List:
+                    {
+                        args.Add($"({csType})row[{i}]");
+                        break;
+                    }
+                    default:
+                    {
+                        var arg = CastExpr(csType, $"row[{i}]");
+                        args.Add(arg);
+                        break;
+                    }
                 }
             }
 
@@ -235,12 +245,9 @@ public static partial class DataCodeGenerator
         var parts = new List<string>();
         for (var i = 0; i < sheet.ColumnNames.Length; i++)
         {
-            var rawName = sheet.ColumnNames[i];
-            if (!TryGetColumnType(sheet.ColumnTypes[i], out var columnType)) continue;
+            if (!TryGetCsType(sheet.ColumnTypes[i], sheet.ColumnNames[i], out var csType, out _)) continue;
 
-            var isEnum = string.Equals(columnType, "enum", StringComparison.OrdinalIgnoreCase);
-            var csType = isEnum ? rawName : TypeMap.GetValueOrDefault(columnType ?? "", "string");
-            parts.Add($"{csType} {ToCamelCase(rawName)}");
+            parts.Add($"{csType} {ToCamelCase(sheet.ColumnNames[i])}");
         }
 
         return string.Join(", ", parts);
@@ -267,6 +274,35 @@ public static partial class DataCodeGenerator
         rawType = rawType.Replace(IdColumn, string.Empty);
         columnType = rawType;
         if (string.Equals(columnType, DesignColumnType, StringComparison.OrdinalIgnoreCase)) return false;
+        return true;
+    }
+
+    private static bool TryGetCsType(string columnType, string columnName, out string csType, out ColumnType columnTypeEnum)
+    {
+        csType = string.Empty;
+        columnTypeEnum = ColumnType.None;
+        if (!TryGetColumnType(columnType, out var columnType2)) return false;
+
+        var isEnum = string.Equals(columnType, "enum", StringComparison.OrdinalIgnoreCase);
+        var isList = columnType.Contains("list<");
+        if (isList)
+        {
+            var typeInList = columnType.Replace("list<", "").Replace(">", "");
+            if (!TryGetCsType(typeInList, columnName, out var csType2, out _)) return false;
+            csType = $"List<{csType2}>";
+            columnTypeEnum = ColumnType.List;
+        }
+        else if (isEnum)
+        {
+            csType = columnName;
+            columnTypeEnum = ColumnType.Enum;
+        }
+        else
+        {
+            csType = TypeMap.GetValueOrDefault(columnType2 ?? "", "string");
+            columnTypeEnum = ColumnType.Normal;
+        }
+
         return true;
     }
 

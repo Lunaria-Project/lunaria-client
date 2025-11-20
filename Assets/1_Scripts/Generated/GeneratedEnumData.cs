@@ -11,6 +11,13 @@ namespace Generated
     }
 
     [SerializeEnum]
+    public enum NpcMenuFunctionType
+    {
+        None = 0,
+        Talk = 1,
+    }
+
+    [SerializeEnum]
     public enum RequirementType
     {
         None = 0,
