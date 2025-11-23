@@ -188,7 +188,7 @@ public static partial class DataCodeGenerator
                     }
                     case ColumnType.List:
                     {
-                        args.Add($"({csType})row[{i}]");
+                        args.Add($"(row[{i}] as string).ParseIntList()");
                         break;
                     }
                     default:

@@ -19,7 +19,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (List<int>)row[2], (row[3] as string) ?? string.Empty, (List<int>)row[4]);
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseIntList(), (row[3] as string) ?? string.Empty, (row[4] as string).ParseIntList());
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }
@@ -29,7 +29,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (List<int>)row[2], (row[3] as string) ?? string.Empty, (List<int>)row[4], Convert.ToInt32(row[5]), (row[6] as string) ?? string.Empty);
+            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseIntList(), (row[3] as string) ?? string.Empty, (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]), (row[6] as string) ?? string.Empty);
             _dtMapNpcMenuData.Add(newData);
         }
     }
