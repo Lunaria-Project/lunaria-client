@@ -1,6 +1,6 @@
 using UnityEditor;
 
-public static class DebugToolMenu
+public static partial class LunariaMenu
 {
     private const string ToggleVisualizeColliderMenuName = "Lunaria/Debug/Visualize Collider";
 
