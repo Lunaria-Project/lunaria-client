@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Generated
 {
-    public partial class Cutscene
+    public partial class CutsceneData
     {
         public int CutsceneGroupId { get; private set; }
         public int CutsceneId { get; private set; }
@@ -14,7 +14,7 @@ namespace Generated
         public List<string> StringValues { get; private set; }
         public Vector2 Position { get; private set; }
 
-        public Cutscene(int cutsceneGroupId, int cutsceneId, int order, string cutsceneCommand, string cutsceneMessage, List<int> intValues, List<string> stringValues, Vector2 position)
+        public CutsceneData(int cutsceneGroupId, int cutsceneId, int order, string cutsceneCommand, string cutsceneMessage, List<int> intValues, List<string> stringValues, Vector2 position)
         {
             CutsceneGroupId = cutsceneGroupId;
             CutsceneId = cutsceneId;
@@ -27,7 +27,7 @@ namespace Generated
         }
     }
 
-    public partial class CutsceneGroup
+    public partial class CutsceneGroupData
     {
         public int CutsceneGroupId { get; private set; }
         public string CutsceneGroupName { get; private set; }
@@ -38,7 +38,7 @@ namespace Generated
         public List<int> RewardQuantities { get; private set; }
         public bool IsRepeatable { get; private set; }
 
-        public CutsceneGroup(int cutsceneGroupId, string cutsceneGroupName, string triggerRequirementType, List<int> triggerRequirementValues, int priority, List<int> rewardIds, List<int> rewardQuantities, bool isRepeatable)
+        public CutsceneGroupData(int cutsceneGroupId, string cutsceneGroupName, string triggerRequirementType, List<int> triggerRequirementValues, int priority, List<int> rewardIds, List<int> rewardQuantities, bool isRepeatable)
         {
             CutsceneGroupId = cutsceneGroupId;
             CutsceneGroupName = cutsceneGroupName;
@@ -48,6 +48,40 @@ namespace Generated
             RewardIds = rewardIds;
             RewardQuantities = rewardQuantities;
             IsRepeatable = isRepeatable;
+        }
+    }
+
+    public partial class EnumData
+    {
+        public string EnumName { get; private set; }
+        public string Order { get; private set; }
+        public string Value { get; private set; }
+        public string DisplayName { get; private set; }
+        public string ResourceKey { get; private set; }
+
+        public EnumData(string enumName, string order, string value, string displayName, string resourceKey)
+        {
+            EnumName = enumName;
+            Order = order;
+            Value = value;
+            DisplayName = displayName;
+            ResourceKey = resourceKey;
+        }
+    }
+
+    public partial class GameSettingData
+    {
+        public string DataType { get; private set; }
+        public string Name { get; private set; }
+        public string Value { get; private set; }
+        public string Design { get; private set; }
+
+        public GameSettingData(string dataType, string name, string value, string design)
+        {
+            DataType = dataType;
+            Name = name;
+            Value = value;
+            Design = design;
         }
     }
 

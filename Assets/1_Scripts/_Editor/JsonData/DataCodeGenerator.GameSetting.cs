@@ -7,7 +7,7 @@ using UnityEngine;
 public static partial class DataCodeGenerator
 {
     private const string GameSettingDataPath = "Assets/1_Scripts/Generated/GeneratedGameSettingData.cs";
-    private const string GameSettingDataFileName = "GameSettingData";
+    private const string GameSettingDataFileName = "GameSetting";
 
     public static void GenerateGameSettingCode(List<SheetInfo> sheets)
     {

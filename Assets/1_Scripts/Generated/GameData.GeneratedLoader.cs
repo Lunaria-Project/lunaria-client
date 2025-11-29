@@ -4,23 +4,43 @@ using Generated;
 
 public partial class GameData
 {
-    private void LoadCutscene(List<object[]> rows)
+    private void LoadCutsceneData(List<object[]> rows)
     {
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new Cutscene(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (row[3] as string) ?? string.Empty, (row[4] as string) ?? string.Empty, (row[5] as string).ParseIntList(), (row[6] as string).ParseStringList(), (row[7] as string).ParseVector2());
-            _dtCutscene.Add(newData);
+            var newData = new CutsceneData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (row[3] as string) ?? string.Empty, (row[4] as string) ?? string.Empty, (row[5] as string).ParseIntList(), (row[6] as string).ParseStringList(), (row[7] as string).ParseVector2());
+            _dtCutsceneData.Add(newData);
         }
     }
 
-    private void LoadCutsceneGroup(List<object[]> rows)
+    private void LoadCutsceneGroupData(List<object[]> rows)
     {
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new CutsceneGroup(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
-            _dtCutsceneGroup.Add(newData.CutsceneGroupId, newData);
+            var newData = new CutsceneGroupData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
+            _dtCutsceneGroupData.Add(newData.CutsceneGroupId, newData);
+        }
+    }
+
+    private void LoadEnumData(List<object[]> rows)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new EnumData((row[0] as string) ?? string.Empty, (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty, (row[4] as string) ?? string.Empty);
+            _dtEnumData.Add(newData);
+        }
+    }
+
+    private void LoadGameSettingData(List<object[]> rows)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new GameSettingData((row[0] as string) ?? string.Empty, (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty);
+            _dtGameSettingData.Add(newData);
         }
     }
 
@@ -68,12 +88,12 @@ public partial class GameData
     {
         switch (sheetName)
         {
-            case "Cutscene": LoadCutscene(rows); break;
-            case "CutsceneGroup": LoadCutsceneGroup(rows); break;
-            case "ItemData": LoadItemData(rows); break;
-            case "MapNpcInfoData": LoadMapNpcInfoData(rows); break;
-            case "MapNpcMenuData": LoadMapNpcMenuData(rows); break;
-            case "RequirementInfoData": LoadRequirementInfoData(rows); break;
+            case "Cutscene": LoadCutsceneData(rows); break;
+            case "CutsceneGroup": LoadCutsceneGroupData(rows); break;
+            case "Item": LoadItemData(rows); break;
+            case "MapNpcInfo": LoadMapNpcInfoData(rows); break;
+            case "MapNpcMenu": LoadMapNpcMenuData(rows); break;
+            case "RequirementInfo": LoadRequirementInfoData(rows); break;
         }
     }
 }

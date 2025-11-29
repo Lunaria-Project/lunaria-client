@@ -85,7 +85,7 @@ public static partial class DataCodeGenerator
         {
             var sheet = sheets[i];
 
-            var className = sheet.SheetName;
+            var className = $"{sheet.SheetName}Data";
             if (!CanGenerateCode(className)) continue;
 
             sb.AppendIndentedLine($"public partial class {className}", 1);
@@ -134,7 +134,7 @@ public static partial class DataCodeGenerator
         for (var i = 0; i < sheets.Count; i++)
         {
             var sheet = sheets[i];
-            var className = sheet.SheetName;
+            var className = $"{sheet.SheetName}Data";
             if (!CanGenerateCode(className)) continue;
 
             var keyIndex = FindKeyIndex(sheet);
@@ -142,7 +142,7 @@ public static partial class DataCodeGenerator
             if (HasKeyColumn)
             {
                 if (!TryGetCsType(sheet.ColumnTypes[keyIndex], sheet.ColumnNames[keyIndex], out var csType, out _)) continue;
-                sb.AppendIndentedLine($"// {sheet.SheetName} - {className}, key: {KeyColumnName}", 1);
+                sb.AppendIndentedLine($"// {sheet.SheetName}Data - {className}, key: {KeyColumnName}", 1);
                 sb.AppendIndentedLine($"public IReadOnlyDictionary<{csType}, {className}> DT{className} => _dt{className};", 1);
                 sb.AppendIndentedLine($"public bool TryGet{className}({csType} key, out {className} result) => DT{className}.TryGetValue(key, out result);", 1);
                 sb.AppendIndentedLine($"public bool Contains{className}({csType} key) => DT{className}.ContainsKey(key);", 1);
@@ -150,7 +150,7 @@ public static partial class DataCodeGenerator
             }
             else
             {
-                sb.AppendIndentedLine($"// {sheet.SheetName} - {className}", 1);
+                sb.AppendIndentedLine($"// {sheet.SheetName}Data - {className}", 1);
                 sb.AppendIndentedLine($"public IReadOnlyList<{className}> DT{className} => _dt{className};", 1);
                 sb.AppendIndentedLine($"private List<{className}> _dt{className} = new();", 1);
             }
@@ -179,7 +179,7 @@ public static partial class DataCodeGenerator
 
         foreach (var sheet in sheets)
         {
-            var className = sheet.SheetName;
+            var className = $"{sheet.SheetName}Data";
             var fieldName = "_dt" + className;
 
             if (!CanGenerateCode(className)) continue;
@@ -252,7 +252,7 @@ public static partial class DataCodeGenerator
         foreach (var sheet in sheets.Select(s => s.SheetName).Distinct())
         {
             if (!CanGenerateCode(sheet)) continue;
-            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}(rows); break;", 3);
+            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}Data(rows); break;", 3);
         }
 
         sb.AppendIndentedLine("}", 2);

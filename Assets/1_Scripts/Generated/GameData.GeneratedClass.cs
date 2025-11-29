@@ -3,15 +3,23 @@ using Generated;
 
 public partial class GameData
 {
-    // Cutscene - Cutscene
-    public IReadOnlyList<Cutscene> DTCutscene => _dtCutscene;
-    private List<Cutscene> _dtCutscene = new();
+    // CutsceneData - CutsceneData
+    public IReadOnlyList<CutsceneData> DTCutsceneData => _dtCutsceneData;
+    private List<CutsceneData> _dtCutsceneData = new();
 
-    // CutsceneGroup - CutsceneGroup, key: CutsceneGroupId
-    public IReadOnlyDictionary<int, CutsceneGroup> DTCutsceneGroup => _dtCutsceneGroup;
-    public bool TryGetCutsceneGroup(int key, out CutsceneGroup result) => DTCutsceneGroup.TryGetValue(key, out result);
-    public bool ContainsCutsceneGroup(int key) => DTCutsceneGroup.ContainsKey(key);
-    private readonly Dictionary<int, CutsceneGroup> _dtCutsceneGroup = new();
+    // CutsceneGroupData - CutsceneGroupData, key: CutsceneGroupId
+    public IReadOnlyDictionary<int, CutsceneGroupData> DTCutsceneGroupData => _dtCutsceneGroupData;
+    public bool TryGetCutsceneGroupData(int key, out CutsceneGroupData result) => DTCutsceneGroupData.TryGetValue(key, out result);
+    public bool ContainsCutsceneGroupData(int key) => DTCutsceneGroupData.ContainsKey(key);
+    private readonly Dictionary<int, CutsceneGroupData> _dtCutsceneGroupData = new();
+
+    // EnumData - EnumData
+    public IReadOnlyList<EnumData> DTEnumData => _dtEnumData;
+    private List<EnumData> _dtEnumData = new();
+
+    // GameSettingData - GameSettingData
+    public IReadOnlyList<GameSettingData> DTGameSettingData => _dtGameSettingData;
+    private List<GameSettingData> _dtGameSettingData = new();
 
     // ItemData - ItemData, key: Id
     public IReadOnlyDictionary<int, ItemData> DTItemData => _dtItemData;

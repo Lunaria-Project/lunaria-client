@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public partial class GameData : Singleton<GameData>
 {
@@ -18,8 +17,8 @@ public partial class GameData : Singleton<GameData>
             return;
         }
         
-        const string EnumDataFileName = "EnumData";
-        const string GameSettingDataFileName = "GameSettingData";
+        const string EnumDataFileName = "Enum";
+        const string GameSettingDataFileName = "GameSetting";
 
         foreach (var sheetInfo in sheets)
         {
