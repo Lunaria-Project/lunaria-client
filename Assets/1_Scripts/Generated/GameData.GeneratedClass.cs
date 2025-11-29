@@ -3,6 +3,14 @@ using Generated;
 
 public partial class GameData
 {
+    // Cutscene - Cutscene
+    public IReadOnlyList<Cutscene> DTCutscene => _dtCutscene;
+    private List<Cutscene> _dtCutscene = new();
+
+    // CutsceneGroup - CutsceneGroup
+    public IReadOnlyList<CutsceneGroup> DTCutsceneGroup => _dtCutsceneGroup;
+    private List<CutsceneGroup> _dtCutsceneGroup = new();
+
     // ItemData - ItemData, key: Id
     public IReadOnlyDictionary<int, ItemData> DTItemData => _dtItemData;
     public bool TryGetItemData(int key, out ItemData result) => DTItemData.TryGetValue(key, out result);
