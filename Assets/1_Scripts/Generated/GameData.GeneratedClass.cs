@@ -7,9 +7,11 @@ public partial class GameData
     public IReadOnlyList<Cutscene> DTCutscene => _dtCutscene;
     private List<Cutscene> _dtCutscene = new();
 
-    // CutsceneGroup - CutsceneGroup
-    public IReadOnlyList<CutsceneGroup> DTCutsceneGroup => _dtCutsceneGroup;
-    private List<CutsceneGroup> _dtCutsceneGroup = new();
+    // CutsceneGroup - CutsceneGroup, key: CutsceneGroupId
+    public IReadOnlyDictionary<int, CutsceneGroup> DTCutsceneGroup => _dtCutsceneGroup;
+    public bool TryGetCutsceneGroup(int key, out CutsceneGroup result) => DTCutsceneGroup.TryGetValue(key, out result);
+    public bool ContainsCutsceneGroup(int key) => DTCutsceneGroup.ContainsKey(key);
+    private readonly Dictionary<int, CutsceneGroup> _dtCutsceneGroup = new();
 
     // ItemData - ItemData, key: Id
     public IReadOnlyDictionary<int, ItemData> DTItemData => _dtItemData;

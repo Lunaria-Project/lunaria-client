@@ -20,7 +20,7 @@ public partial class GameData
         foreach (var row in rows)
         {
             var newData = new CutsceneGroup(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
-            _dtCutsceneGroup.Add(newData);
+            _dtCutsceneGroup.Add(newData.CutsceneGroupId, newData);
         }
     }
 
