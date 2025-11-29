@@ -38,8 +38,8 @@ public partial class GameData
     private List<MapNpcMenuData> _dtMapNpcMenuData = new();
 
     // RequirementInfoData - RequirementInfoData, key: RequirementType
-    public IReadOnlyDictionary<string, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
-    public bool TryGetRequirementInfoData(string key, out RequirementInfoData result) => DTRequirementInfoData.TryGetValue(key, out result);
-    public bool ContainsRequirementInfoData(string key) => DTRequirementInfoData.ContainsKey(key);
-    private readonly Dictionary<string, RequirementInfoData> _dtRequirementInfoData = new();
+    public IReadOnlyDictionary<RequirementType, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
+    public bool TryGetRequirementInfoData(RequirementType key, out RequirementInfoData result) => DTRequirementInfoData.TryGetValue(key, out result);
+    public bool ContainsRequirementInfoData(RequirementType key) => DTRequirementInfoData.ContainsKey(key);
+    private readonly Dictionary<RequirementType, RequirementInfoData> _dtRequirementInfoData = new();
 }

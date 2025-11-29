@@ -9,7 +9,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new CutsceneData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (row[3] as string) ?? string.Empty, (row[4] as string) ?? string.Empty, (row[5] as string).ParseIntList(), (row[6] as string).ParseStringList(), (row[7] as string).ParseVector2());
+            var newData = new CutsceneData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (CutsceneCommand)Enum.Parse(typeof(CutsceneCommand), (string)row[3], true), (row[4] as string) ?? string.Empty, (row[5] as string).ParseIntList(), (row[6] as string).ParseStringList(), (row[7] as string).ParseVector2());
             _dtCutsceneData.Add(newData);
         }
     }
@@ -19,7 +19,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new CutsceneGroupData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
+            var newData = new CutsceneGroupData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
             _dtCutsceneGroupData.Add(newData.CutsceneGroupId, newData);
         }
     }
@@ -59,7 +59,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseIntList(), (row[3] as string) ?? string.Empty, (row[4] as string).ParseIntList());
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList());
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }
@@ -69,7 +69,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseIntList(), (row[3] as string) ?? string.Empty, (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]), (row[6] as string) ?? string.Empty, Convert.ToInt32(row[7]), (row[8] as string) ?? string.Empty);
+            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[6], true), Convert.ToInt32(row[7]), (row[8] as string) ?? string.Empty);
             _dtMapNpcMenuData.Add(newData);
         }
     }
@@ -79,7 +79,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new RequirementInfoData((row[0] as string) ?? string.Empty);
+            var newData = new RequirementInfoData((RequirementType)Enum.Parse(typeof(RequirementType), (string)row[0], true));
             _dtRequirementInfoData.Add(newData.RequirementType, newData);
         }
     }

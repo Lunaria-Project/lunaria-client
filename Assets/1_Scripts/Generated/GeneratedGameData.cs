@@ -8,13 +8,13 @@ namespace Generated
         public int CutsceneGroupId { get; private set; }
         public int CutsceneId { get; private set; }
         public int Order { get; private set; }
-        public string CutsceneCommand { get; private set; }
+        public CutsceneCommand CutsceneCommand { get; private set; }
         public string CutsceneMessage { get; private set; }
         public List<int> IntValues { get; private set; }
         public List<string> StringValues { get; private set; }
         public Vector2 Position { get; private set; }
 
-        public CutsceneData(int cutsceneGroupId, int cutsceneId, int order, string cutsceneCommand, string cutsceneMessage, List<int> intValues, List<string> stringValues, Vector2 position)
+        public CutsceneData(int cutsceneGroupId, int cutsceneId, int order, CutsceneCommand cutsceneCommand, string cutsceneMessage, List<int> intValues, List<string> stringValues, Vector2 position)
         {
             CutsceneGroupId = cutsceneGroupId;
             CutsceneId = cutsceneId;
@@ -31,14 +31,14 @@ namespace Generated
     {
         public int CutsceneGroupId { get; private set; }
         public string CutsceneGroupName { get; private set; }
-        public string TriggerRequirementType { get; private set; }
+        public RequirementType TriggerRequirementType { get; private set; }
         public List<int> TriggerRequirementValues { get; private set; }
         public int Priority { get; private set; }
         public List<int> RewardIds { get; private set; }
         public List<int> RewardQuantities { get; private set; }
         public bool IsRepeatable { get; private set; }
 
-        public CutsceneGroupData(int cutsceneGroupId, string cutsceneGroupName, string triggerRequirementType, List<int> triggerRequirementValues, int priority, List<int> rewardIds, List<int> rewardQuantities, bool isRepeatable)
+        public CutsceneGroupData(int cutsceneGroupId, string cutsceneGroupName, RequirementType triggerRequirementType, List<int> triggerRequirementValues, int priority, List<int> rewardIds, List<int> rewardQuantities, bool isRepeatable)
         {
             CutsceneGroupId = cutsceneGroupId;
             CutsceneGroupName = cutsceneGroupName;
@@ -102,12 +102,12 @@ namespace Generated
     public partial class MapNpcInfoData
     {
         public int NpcId { get; private set; }
-        public string ShowRequirement { get; private set; }
+        public RequirementType ShowRequirement { get; private set; }
         public List<int> ShowRequirementValues { get; private set; }
-        public string HideRequirement { get; private set; }
+        public RequirementType HideRequirement { get; private set; }
         public List<int> HideRequirementValues { get; private set; }
 
-        public MapNpcInfoData(int npcId, string showRequirement, List<int> showRequirementValues, string hideRequirement, List<int> hideRequirementValues)
+        public MapNpcInfoData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues)
         {
             NpcId = npcId;
             ShowRequirement = showRequirement;
@@ -120,16 +120,16 @@ namespace Generated
     public partial class MapNpcMenuData
     {
         public int NpcId { get; private set; }
-        public string ShowRequirement { get; private set; }
+        public RequirementType ShowRequirement { get; private set; }
         public List<int> ShowRequirementValues { get; private set; }
-        public string HideRequirement { get; private set; }
+        public RequirementType HideRequirement { get; private set; }
         public List<int> HideRequirementValues { get; private set; }
         public int Order { get; private set; }
-        public string FunctionType { get; private set; }
+        public NpcMenuFunctionType FunctionType { get; private set; }
         public int FunctionValues { get; private set; }
         public string FunctionName { get; private set; }
 
-        public MapNpcMenuData(int npcId, string showRequirement, List<int> showRequirementValues, string hideRequirement, List<int> hideRequirementValues, int order, string functionType, int functionValues, string functionName)
+        public MapNpcMenuData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int order, NpcMenuFunctionType functionType, int functionValues, string functionName)
         {
             NpcId = npcId;
             ShowRequirement = showRequirement;
@@ -145,9 +145,9 @@ namespace Generated
 
     public partial class RequirementInfoData
     {
-        public string RequirementType { get; private set; }
+        public RequirementType RequirementType { get; private set; }
 
-        public RequirementInfoData(string requirementType)
+        public RequirementInfoData(RequirementType requirementType)
         {
             RequirementType = requirementType;
         }
