@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using UnityEngine;
+
 public static class StringExtension
 {
     public static List<int> ParseIntList(this string raw)
@@ -17,5 +19,22 @@ public static class StringExtension
         }
 
         return list;
+    }
+
+    public static List<string> ParseStringList(this string raw)
+    {
+        if (string.IsNullOrEmpty(raw)) return new List<string>();
+
+        var list = new List<string>();
+        var parts = raw.Split(',');
+        list.AddRange(parts);
+        return list;
+    }
+
+    public static Vector2 ParseVector2(this string raw)
+    {
+        var parts = raw.Split(',');
+        if (float.TryParse(parts[0], out var x) && float.TryParse(parts[1], out var y)) return new Vector2(x, y);
+        return Vector2.zero;
     }
 }

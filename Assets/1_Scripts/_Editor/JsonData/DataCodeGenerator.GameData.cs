@@ -13,7 +13,9 @@ public static partial class DataCodeGenerator
         None,
         Normal,
         Enum,
-        List,
+        ListInt,
+        ListString,
+        Vector2,
     }
 
     private const string OutputNamespace = "Generated";
@@ -26,14 +28,24 @@ public static partial class DataCodeGenerator
 
     private static readonly Dictionary<string, string> TypeMap = new(StringComparer.OrdinalIgnoreCase)
     {
-        { "int", "int" },
-        { "float", "float" },
-        { "double", "double" },
-        { "long", "long" },
-        { "bool", "bool" },
-        { "string", "string" }
+        { _intType, _intType },
+        { _floatType, _floatType },
+        { _doubleType, _doubleType },
+        { _longType, _longType },
+        { _boolType, _boolType },
+        { _stringType, _stringType },
+        { _vector2Type, "Vector2" }
         // "enum", "list" 는 별도 처리
     };
+
+    private const string _intType = "int";
+    private const string _floatType = "float";
+    private const string _doubleType = "double";
+    private const string _longType = "long";
+    private const string _boolType = "bool";
+    private const string _stringType = "string";
+    private const string _vector2Type = "vector2";
+    private const string _enumType = "enum";
 
     public static void GenerateGameDataCode(List<SheetInfo> sheets)
     {
@@ -63,7 +75,8 @@ public static partial class DataCodeGenerator
     {
         var sb = new StringBuilder();
 
-        sb.AppendLine($"using System.Collections.Generic;");
+        sb.AppendLine("using System.Collections.Generic;");
+        sb.AppendLine("using UnityEngine;");
         sb.AppendLine();
         sb.AppendLine($"namespace {OutputNamespace}");
         sb.AppendLine("{");
@@ -186,9 +199,19 @@ public static partial class DataCodeGenerator
                         args.Add($"({columnName})Enum.Parse(typeof({columnName}), (string)row[{i}], true)");
                         break;
                     }
-                    case ColumnType.List:
+                    case ColumnType.ListInt:
                     {
                         args.Add($"(row[{i}] as string).ParseIntList()");
+                        break;
+                    }
+                    case ColumnType.ListString:
+                    {
+                        args.Add($"(row[{i}] as string).ParseStringList()");
+                        break;
+                    }
+                    case ColumnType.Vector2:
+                    {
+                        args.Add($"(row[{i}] as string).ParseVector2()");
                         break;
                     }
                     default:
@@ -277,30 +300,43 @@ public static partial class DataCodeGenerator
         return true;
     }
 
-    private static bool TryGetCsType(string columnType, string columnName, out string csType, out ColumnType columnTypeEnum)
+    private static bool TryGetCsType(string columnType, string columnName, out string csType, out ColumnType columnCsType)
     {
         csType = string.Empty;
-        columnTypeEnum = ColumnType.None;
+        columnCsType = ColumnType.None;
         if (!TryGetColumnType(columnType, out var columnType2)) return false;
 
-        var isEnum = string.Equals(columnType, "enum", StringComparison.OrdinalIgnoreCase);
+        var isEnum = string.Equals(columnType, _enumType, StringComparison.OrdinalIgnoreCase);
+        var isVector2 = string.Equals(columnType, _vector2Type, StringComparison.OrdinalIgnoreCase);
         var isList = columnType.Contains("list<");
         if (isList)
         {
             var typeInList = columnType.Replace("list<", "").Replace(">", "");
             if (!TryGetCsType(typeInList, columnName, out var csType2, out _)) return false;
             csType = $"List<{csType2}>";
-            columnTypeEnum = ColumnType.List;
+            if (csType2 == TypeMap[_intType])
+            {
+                columnCsType = ColumnType.ListInt;
+            }
+            else if (csType2 == TypeMap[_stringType])
+            {
+                columnCsType = ColumnType.ListString;
+            }
         }
         else if (isEnum)
         {
             csType = columnName;
-            columnTypeEnum = ColumnType.Enum;
+            columnCsType = ColumnType.Enum;
+        }
+        else if (isVector2)
+        {
+            csType = TypeMap.GetValueOrDefault(columnType2 ?? "", "string");;
+            columnCsType = ColumnType.Vector2;
         }
         else
         {
             csType = TypeMap.GetValueOrDefault(columnType2 ?? "", "string");
-            columnTypeEnum = ColumnType.Normal;
+            columnCsType = ColumnType.Normal;
         }
 
         return true;
@@ -323,12 +359,12 @@ public static partial class DataCodeGenerator
     {
         return csType switch
         {
-            "int" => $"Convert.ToInt32({srcExpr})",
-            "long" => $"Convert.ToInt64({srcExpr})",
-            "float" => $"Convert.ToSingle({srcExpr})",
-            "double" => $"Convert.ToDouble({srcExpr})",
-            "bool" => $"Convert.ToBoolean({srcExpr})",
-            "string" => $"({srcExpr} as string) ?? string.Empty",
+            _intType => $"Convert.ToInt32({srcExpr})",
+            _longType => $"Convert.ToInt64({srcExpr})",
+            _floatType => $"Convert.ToSingle({srcExpr})",
+            _doubleType => $"Convert.ToDouble({srcExpr})",
+            _boolType => $"Convert.ToBoolean({srcExpr})",
+            _stringType => $"({srcExpr} as string) ?? string.Empty",
             _ => $"{srcExpr}"
         };
     }
