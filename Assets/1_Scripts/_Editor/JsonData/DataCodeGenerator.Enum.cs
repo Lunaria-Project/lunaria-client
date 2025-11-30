@@ -9,7 +9,7 @@ using UnityEngine;
 public static partial class DataCodeGenerator
 {
     private const string EnumDataPath = "Assets/1_Scripts/Generated/GeneratedEnumData.cs";
-    private const string EnumDataFileName = "EnumData";
+    private const string EnumDataFileName = "Enum";
 
     public static void GenerateEnumDataCode(List<SheetInfo> sheets)
     {

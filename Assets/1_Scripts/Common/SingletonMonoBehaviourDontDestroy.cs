@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBehaviour<T>
+public class SingletonMonoBehaviourDontDestroy<T> : MonoBehaviour where T : SingletonMonoBehaviourDontDestroy<T>
 {
     public static T Instance => GetInstance();
     public static bool HasInstance => _instance && !_isDestroyed;
@@ -23,6 +23,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
             {
                 var singletonObject = new GameObject(typeof(T).Name);
                 _instance = singletonObject.AddComponent<T>();
+                DontDestroyOnLoad(singletonObject);
             }
 
             return _instance;
@@ -34,6 +35,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         if (!_instance)
         {
             _instance = (T)this;
+            DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
         {

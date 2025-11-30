@@ -1,3 +1,4 @@
+using Generated;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -21,6 +22,32 @@ public class MyhomeMapManager : MonoBehaviour
     {
         _player.SetSortingLayer(_sortingOrderOffset);
         UpdateNpcMenu();
+        if (_currentNpcDataId > 0)
+        {
+            //TODO(지선): FunctionType에 따른 액션 구현하기
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_currentNpcDataId);
+                var npcData = npcDataList.GetAt(0);
+                if (npcData == null) return;
+                if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
+                {
+                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue);
+                    return;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_currentNpcDataId);
+                var npcData = npcDataList.GetAt(1);
+                if (npcData == null) return;
+                if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
+                {
+                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue);
+                    return;
+                }
+            }
+        }
     }
 
     private void UpdateNpcMenu()
@@ -35,7 +62,6 @@ public class MyhomeMapManager : MonoBehaviour
             if (nearestNpc != null && distance <= _config.NpcMenuDistance && _currentNpcDataId != nearestNpc.NpcDataId)
             {
                 ShowNpcMenu(nearestNpc.NpcDataId);
-                return;
             }
         }
         else
