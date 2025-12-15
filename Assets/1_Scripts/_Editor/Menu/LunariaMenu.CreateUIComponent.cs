@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ public static partial class LunariaMenu
 
         var text = gameObject.AddComponent<Lunaria.Text>();
         text.text = "New Text";
+        text.font = UIEditor.DefaultFont;
         text.raycastTarget = false;
 
         GameObjectUtility.SetParentAndAlign(gameObject, menuCommand.context as GameObject);
@@ -59,8 +59,9 @@ public static partial class LunariaMenu
 
         var text = textObject.AddComponent<Lunaria.Text>();
         text.text = "Button";
+        text.font = UIEditor.DefaultFont;
         text.color = Color.black;
-        text.alignment = TextAlignmentOptions.Center;
+        text.alignment = TMPro.TextAlignmentOptions.Center;
         text.raycastTarget = false;
 
         GameObjectUtility.SetParentAndAlign(buttonObject, menuCommand.context as GameObject);

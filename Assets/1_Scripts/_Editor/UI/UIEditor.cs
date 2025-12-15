@@ -18,5 +18,9 @@ public static class UIEditor
 
         return beforeGameObject.GetComponent<TAfter>();
     }
+
+    public static TMPro.TMP_FontAsset DefaultFont => AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>(
+        "Assets/Fonts/NPSfont_regular SDF.asset"
+    );
 }
 #endif
