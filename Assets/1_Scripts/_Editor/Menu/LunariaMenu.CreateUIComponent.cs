@@ -13,6 +13,7 @@ public static partial class LunariaMenu
         var text = gameObject.AddComponent<Lunaria.Text>();
         text.text = "New Text";
         text.font = UIEditor.DefaultFont;
+        text.color = Color.black;
         text.raycastTarget = false;
 
         GameObjectUtility.SetParentAndAlign(gameObject, menuCommand.context as GameObject);
