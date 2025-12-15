@@ -13,7 +13,9 @@ public static partial class DataCodeGenerator
         None,
         Normal,
         Enum,
-        List,
+        ListInt,
+        ListString,
+        Vector2,
     }
 
     private const string OutputNamespace = "Generated";
@@ -26,14 +28,24 @@ public static partial class DataCodeGenerator
 
     private static readonly Dictionary<string, string> TypeMap = new(StringComparer.OrdinalIgnoreCase)
     {
-        { "int", "int" },
-        { "float", "float" },
-        { "double", "double" },
-        { "long", "long" },
-        { "bool", "bool" },
-        { "string", "string" }
+        { _intType, _intType },
+        { _floatType, _floatType },
+        { _doubleType, _doubleType },
+        { _longType, _longType },
+        { _boolType, _boolType },
+        { _stringType, _stringType },
+        { _vector2Type, "Vector2" }
         // "enum", "list" 는 별도 처리
     };
+
+    private const string _intType = "int";
+    private const string _floatType = "float";
+    private const string _doubleType = "double";
+    private const string _longType = "long";
+    private const string _boolType = "bool";
+    private const string _stringType = "string";
+    private const string _vector2Type = "vector2";
+    private const string _enumType = "enum";
 
     public static void GenerateGameDataCode(List<SheetInfo> sheets)
     {
@@ -63,7 +75,8 @@ public static partial class DataCodeGenerator
     {
         var sb = new StringBuilder();
 
-        sb.AppendLine($"using System.Collections.Generic;");
+        sb.AppendLine("using System.Collections.Generic;");
+        sb.AppendLine("using UnityEngine;");
         sb.AppendLine();
         sb.AppendLine($"namespace {OutputNamespace}");
         sb.AppendLine("{");
@@ -72,7 +85,7 @@ public static partial class DataCodeGenerator
         {
             var sheet = sheets[i];
 
-            var className = sheet.SheetName;
+            var className = $"{sheet.SheetName}Data";
             if (!CanGenerateCode(className)) continue;
 
             sb.AppendIndentedLine($"public partial class {className}", 1);
@@ -80,7 +93,7 @@ public static partial class DataCodeGenerator
 
             for (var j = 0; j < sheet.ColumnNames.Length; j++)
             {
-                if (!TryGetCsType(sheet.ColumnTypes[j], sheet.ColumnNames[j], out var csType, out _)) continue;
+                if (!TryGetCsType(sheet.ColumnTypes[j], out var csType, out _)) continue;
                 sb.AppendIndentedLine($"public {csType} {sheet.ColumnNames[j]} {{ get; private set; }}", 2);
             }
 
@@ -121,15 +134,15 @@ public static partial class DataCodeGenerator
         for (var i = 0; i < sheets.Count; i++)
         {
             var sheet = sheets[i];
-            var className = sheet.SheetName;
+            var className = $"{sheet.SheetName}Data";
             if (!CanGenerateCode(className)) continue;
 
             var keyIndex = FindKeyIndex(sheet);
             var (HasKeyColumn, KeyColumnName) = (keyIndex >= 0, keyIndex >= 0 ? sheet.ColumnNames[keyIndex] : string.Empty);
             if (HasKeyColumn)
             {
-                if (!TryGetCsType(sheet.ColumnTypes[keyIndex], sheet.ColumnNames[keyIndex], out var csType, out _)) continue;
-                sb.AppendIndentedLine($"// {sheet.SheetName} - {className}, key: {KeyColumnName}", 1);
+                if (!TryGetCsType(sheet.ColumnTypes[keyIndex], out var csType, out _)) continue;
+                sb.AppendIndentedLine($"// {sheet.SheetName}Data - {className}, key: {KeyColumnName}", 1);
                 sb.AppendIndentedLine($"public IReadOnlyDictionary<{csType}, {className}> DT{className} => _dt{className};", 1);
                 sb.AppendIndentedLine($"public bool TryGet{className}({csType} key, out {className} result) => DT{className}.TryGetValue(key, out result);", 1);
                 sb.AppendIndentedLine($"public bool Contains{className}({csType} key) => DT{className}.ContainsKey(key);", 1);
@@ -137,7 +150,7 @@ public static partial class DataCodeGenerator
             }
             else
             {
-                sb.AppendIndentedLine($"// {sheet.SheetName} - {className}", 1);
+                sb.AppendIndentedLine($"// {sheet.SheetName}Data - {className}", 1);
                 sb.AppendIndentedLine($"public IReadOnlyList<{className}> DT{className} => _dt{className};", 1);
                 sb.AppendIndentedLine($"private List<{className}> _dt{className} = new();", 1);
             }
@@ -166,7 +179,7 @@ public static partial class DataCodeGenerator
 
         foreach (var sheet in sheets)
         {
-            var className = sheet.SheetName;
+            var className = $"{sheet.SheetName}Data";
             var fieldName = "_dt" + className;
 
             if (!CanGenerateCode(className)) continue;
@@ -177,18 +190,27 @@ public static partial class DataCodeGenerator
             var args = new List<string>(sheet.ColumnNames.Length);
             for (var i = 0; i < sheet.ColumnNames.Length; i++)
             {
-                if (!TryGetCsType(sheet.ColumnTypes[i], sheet.ColumnNames[i], out var csType, out var type)) continue;
+                if (!TryGetCsType(sheet.ColumnTypes[i], out var csType, out var type)) continue;
                 switch (type)
                 {
                     case ColumnType.Enum:
                     {
-                        var columnName = sheet.ColumnNames[i];
-                        args.Add($"({columnName})Enum.Parse(typeof({columnName}), (string)row[{i}], true)");
+                        args.Add($"({csType})Enum.Parse(typeof({csType}), (string)row[{i}], true)");
                         break;
                     }
-                    case ColumnType.List:
+                    case ColumnType.ListInt:
                     {
                         args.Add($"(row[{i}] as string).ParseIntList()");
+                        break;
+                    }
+                    case ColumnType.ListString:
+                    {
+                        args.Add($"(row[{i}] as string).ParseStringList()");
+                        break;
+                    }
+                    case ColumnType.Vector2:
+                    {
+                        args.Add($"(row[{i}] as string).ParseVector2()");
                         break;
                     }
                     default:
@@ -229,7 +251,7 @@ public static partial class DataCodeGenerator
         foreach (var sheet in sheets.Select(s => s.SheetName).Distinct())
         {
             if (!CanGenerateCode(sheet)) continue;
-            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}(rows); break;", 3);
+            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}Data(rows); break;", 3);
         }
 
         sb.AppendIndentedLine("}", 2);
@@ -245,7 +267,7 @@ public static partial class DataCodeGenerator
         var parts = new List<string>();
         for (var i = 0; i < sheet.ColumnNames.Length; i++)
         {
-            if (!TryGetCsType(sheet.ColumnTypes[i], sheet.ColumnNames[i], out var csType, out _)) continue;
+            if (!TryGetCsType(sheet.ColumnTypes[i], out var csType, out _)) continue;
 
             parts.Add($"{csType} {ToCamelCase(sheet.ColumnNames[i])}");
         }
@@ -277,30 +299,44 @@ public static partial class DataCodeGenerator
         return true;
     }
 
-    private static bool TryGetCsType(string columnType, string columnName, out string csType, out ColumnType columnTypeEnum)
+    private static bool TryGetCsType(string columnType, out string csType, out ColumnType columnCsType)
     {
         csType = string.Empty;
-        columnTypeEnum = ColumnType.None;
-        if (!TryGetColumnType(columnType, out var columnType2)) return false;
+        columnCsType = ColumnType.None;
+        if (!TryGetColumnType(columnType, out var realColumnType)) return false;
 
-        var isEnum = string.Equals(columnType, "enum", StringComparison.OrdinalIgnoreCase);
-        var isList = columnType.Contains("list<");
-        if (isList)
+        var isEnum = realColumnType.Contains("enum<");
+        var isList = realColumnType.Contains("list<");
+        var isVector2 = string.Equals(realColumnType, _vector2Type, StringComparison.OrdinalIgnoreCase);
+        if (isEnum)
         {
-            var typeInList = columnType.Replace("list<", "").Replace(">", "");
-            if (!TryGetCsType(typeInList, columnName, out var csType2, out _)) return false;
-            csType = $"List<{csType2}>";
-            columnTypeEnum = ColumnType.List;
+            var enumType = realColumnType.Replace("enum<", string.Empty).Replace(">", string.Empty);
+            csType = enumType;
+            columnCsType = ColumnType.Enum;
         }
-        else if (isEnum)
+        else if (isList)
         {
-            csType = columnName;
-            columnTypeEnum = ColumnType.Enum;
+            var typeInList = realColumnType.Replace("list<", "").Replace(">", "");
+            if (!TryGetCsType(typeInList, out var csType2, out _)) return false;
+            csType = $"List<{csType2}>";
+            if (csType2 == TypeMap[_intType])
+            {
+                columnCsType = ColumnType.ListInt;
+            }
+            else if (csType2 == TypeMap[_stringType])
+            {
+                columnCsType = ColumnType.ListString;
+            }
+        }
+        else if (isVector2)
+        {
+            csType = TypeMap.GetValueOrDefault(realColumnType ?? "", "string");
+            columnCsType = ColumnType.Vector2;
         }
         else
         {
-            csType = TypeMap.GetValueOrDefault(columnType2 ?? "", "string");
-            columnTypeEnum = ColumnType.Normal;
+            csType = TypeMap.GetValueOrDefault(realColumnType ?? "", "string");
+            columnCsType = ColumnType.Normal;
         }
 
         return true;
@@ -323,12 +359,12 @@ public static partial class DataCodeGenerator
     {
         return csType switch
         {
-            "int" => $"Convert.ToInt32({srcExpr})",
-            "long" => $"Convert.ToInt64({srcExpr})",
-            "float" => $"Convert.ToSingle({srcExpr})",
-            "double" => $"Convert.ToDouble({srcExpr})",
-            "bool" => $"Convert.ToBoolean({srcExpr})",
-            "string" => $"({srcExpr} as string) ?? string.Empty",
+            _intType => $"Convert.ToInt32({srcExpr})",
+            _longType => $"Convert.ToInt64({srcExpr})",
+            _floatType => $"Convert.ToSingle({srcExpr})",
+            _doubleType => $"Convert.ToDouble({srcExpr})",
+            _boolType => $"Convert.ToBoolean({srcExpr})",
+            _stringType => $"({srcExpr} as string) ?? string.Empty",
             _ => $"{srcExpr}"
         };
     }

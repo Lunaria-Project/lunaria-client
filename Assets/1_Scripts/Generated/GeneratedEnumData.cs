@@ -1,20 +1,21 @@
 namespace Generated
 {
     [SerializeEnum]
-    public enum ColorType
+    public enum CutsceneCommand
     {
         None = 0,
-        Blue = 1,
-        Green = 2,
-        Red = 3,
-        Yellow = 4,
+        HideFullIllustration = 1,
+        HideSpotIllustration = 2,
+        ShowDialog = 3,
+        ShowFullIllustration = 4,
+        ShowSpotIllustration = 5,
     }
 
     [SerializeEnum]
     public enum NpcMenuFunctionType
     {
         None = 0,
-        Talk = 1,
+        PlayCutscene = 1,
     }
 
     [SerializeEnum]

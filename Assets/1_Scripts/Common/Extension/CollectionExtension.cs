@@ -2,12 +2,31 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-public static class ListExtension
+public static class CollectionExtension
 {
-    public static bool IsNullOrEmpty<T>(this List<T> list)
+    public static bool IsNullOrEmpty<T>(this IList<T> list)
     {
         return list == null || list.Count == 0;
     }
+
+    public static T GetAt<T>(this IList<T> list, int index, T defaultValue = default)
+    {
+        if (list == null || index < 0 || index >= list.Count) return defaultValue;
+        return list[index];
+    }
+
+    public static T GetAtWithError<T>(this IList<T> list, int index, T defaultValue = default)
+    {
+        if (list == null || index < 0 || index >= list.Count)
+        {
+            LogManager.LogErrorFormat("invalid index in IList", list, index);
+            return defaultValue;
+        }
+
+        return list[index];
+    }
+
+    #region List
 
     public static void EnsureCapacity<TItem>([NotNull] this List<TItem> list, int capacity)
     {
@@ -37,4 +56,6 @@ public static class ListExtension
         list.RemoveRange(index, count);
         return last;
     }
+
+    #endregion
 }
