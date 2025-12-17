@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
-using Sirenix.Utilities;
 using UnityEngine;
 
 public partial class PanelManager
