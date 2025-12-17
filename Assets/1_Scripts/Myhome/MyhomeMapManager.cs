@@ -16,6 +16,7 @@ public class MyhomeMapManager : MonoBehaviour
     {
         _currentNpcDataId = 0;
         SetMapObjectSortingLayer();
+        PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
     }
 
     private void Update()
