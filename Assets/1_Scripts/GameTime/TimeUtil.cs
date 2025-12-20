@@ -3,6 +3,7 @@ using UnityEngine;
 
 public struct GameTime
 {
+    public static GameTime Invalid = new();
     public long TotalSeconds { get; private set; }
     public bool IsAM { get; private set; }
     public int HoursForUI { get; private set; }

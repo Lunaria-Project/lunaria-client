@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 8595066580396315547}
   - component: {fileID: 5648307360698995672}
   m_Layer: 5
-  m_Name: Txt_Time
+  m_Name: Txt_AmPm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,6 +1128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MyhomeMainPanel
   _walletText: {fileID: 1411919391565550466}
+  _currentTimeText: {fileID: 2739745823601020919}
+  _currentTimeAMPMText: {fileID: 5648307360698995672}
 --- !u!1 &2153451921154936009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2239,7 @@ GameObject:
   - component: {fileID: 881822852033241465}
   - component: {fileID: 2739745823601020919}
   m_Layer: 5
-  m_Name: AMPM
+  m_Name: Txt_Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

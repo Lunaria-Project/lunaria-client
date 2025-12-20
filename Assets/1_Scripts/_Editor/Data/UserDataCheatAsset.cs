@@ -18,6 +18,8 @@ public class UserDataCheatAsset : ScriptableObject
     }
 
     [SerializeField] private SerializedUserData _userInventory = new();
+    [SerializeField] private int _timeSpeedMultiplier;
 
     public SerializedUserData UserInventory => _userInventory;
+    public int TimeSpeedMultiplier => _timeSpeedMultiplier;
 }
