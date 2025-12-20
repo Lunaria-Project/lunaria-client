@@ -12,10 +12,8 @@ public class UserDataInfo
     }
 }
 
-public class UserData : Singleton<UserData>
+public partial class UserData : Singleton<UserData>
 {
-    public Dictionary<int, long> ItemDictionary { get; private set; } = new();
-
     public void Init(UserDataInfo info)
     {
         ItemDictionary = info.ItemDictionary;

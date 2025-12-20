@@ -4,4 +4,9 @@ public static class LongExtension
     {
         return value.ToString("N0");
     }
+    
+    public static string ToPrice(this long value)
+    {
+        return value.ToString("N0");
+    }
 }
