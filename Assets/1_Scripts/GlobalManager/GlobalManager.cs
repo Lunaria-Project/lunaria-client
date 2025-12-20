@@ -1,11 +1,28 @@
-// ReSharper disable All
-public class GlobalManager : Singleton<GlobalManager>
+using System;
+using UnityEngine;
+
+public class GlobalManager : SingletonMonoBehaviourDontDestroy<GlobalManager>
 {
+    public event Action OnQKeyDown;
+    public event Action OnEKeyDown;
+    
     private bool _isRunning = false;
 
-    protected override void OnInit()
+    private void Update()
     {
-        base.OnInit();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OnQKeyDown?.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnEKeyDown?.Invoke();
+        }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
         GameTimeManager.Instance.OnEndDay -= OnEndDay;
         GameTimeManager.Instance.OnEndDay += OnEndDay;
     }
