@@ -90,12 +90,14 @@ namespace Generated
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string IconResourceKey { get; private set; }
+        public ItemType ItemType { get; private set; }
 
-        public ItemData(int id, string name, string iconResourceKey)
+        public ItemData(int id, string name, string iconResourceKey, ItemType itemType)
         {
             Id = id;
             Name = name;
             IconResourceKey = iconResourceKey;
+            ItemType = itemType;
         }
     }
 

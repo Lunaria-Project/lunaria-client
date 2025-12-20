@@ -49,7 +49,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new ItemData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty);
+            var newData = new ItemData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (ItemType)Enum.Parse(typeof(ItemType), (string)row[3], true));
             _dtItemData.Add(newData.Id, newData);
         }
     }

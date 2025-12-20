@@ -12,6 +12,13 @@ namespace Generated
     }
 
     [SerializeEnum]
+    public enum ItemType
+    {
+        None = 0,
+        MainCoin = 1,
+    }
+
+    [SerializeEnum]
     public enum NpcMenuFunctionType
     {
         None = 0,
