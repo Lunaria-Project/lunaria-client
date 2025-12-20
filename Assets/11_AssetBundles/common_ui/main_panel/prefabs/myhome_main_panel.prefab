@@ -454,7 +454,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.454
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -477,7 +477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &759107076157998371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1128,6 +1128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MyhomeMainPanel
   _walletText: {fileID: 1411919391565550466}
+  _timeBackground: {fileID: 5906091232882720435}
+  _defaultTimeBackgroundZRotation: 60
   _currentTimeText: {fileID: 2739745823601020919}
   _currentTimeAMPMText: {fileID: 5648307360698995672}
 --- !u!1 &2153451921154936009
@@ -1313,7 +1315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2635553492770061620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1572,7 +1574,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.398
+  m_FillAmount: 0.62
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -2632,7 +2634,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5425387136992052723}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0, z: 0.9999881, w: -0.004886735}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2641,7 +2643,7 @@ RectTransform:
   - {fileID: 2684054170967704833}
   - {fileID: 5260493659416669512}
   m_Father: {fileID: 1269380397511381881}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.56}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -66, y: -35}
@@ -3801,7 +3803,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.943
+  m_FillAmount: 0.593
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0

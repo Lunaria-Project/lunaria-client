@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
 {
     public event Action OnIntervalChanged;
+    public event Action OnTimeSecondsChanged;
     public event Action OnEndDay;
 
     public GameTime CurrentGameTime => _currentGameTime;
@@ -27,6 +28,9 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
         var currentDaySecondsToInt = Mathf.FloorToInt((float)_currentDaySeconds);
         var tenMinuteIndex = TimeUtil.GetTenMinuteIntervalIndex(currentDaySecondsToInt);
         _currentGameTime.SetTime(currentDaySecondsToInt);
+
+        OnTimeSecondsChanged?.Invoke();
+
         if (_currentIntervalIndex == tenMinuteIndex) return;
 
         _currentIntervalIndex = tenMinuteIndex;
