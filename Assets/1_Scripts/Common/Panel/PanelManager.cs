@@ -215,21 +215,6 @@ public partial class PanelManager
         panel.gameObject.SetActive(true);
         await panel.ShowByManager(this, panelInfo, panelInfo.Args);
         OnShowAction?.Invoke(panelType);
-
-        static async UniTask OnWillShowAsync(Type panelType, Func<Type, UniTask> handler, ICollection<UniTask> handlerTaskCache)
-        {
-            if (handler == null) return;
-            var invocationList = handler.GetInvocationList();
-            handlerTaskCache.Clear();
-
-            foreach (var invocation in invocationList)
-            {
-                handlerTaskCache.Add(((Func<Type, UniTask>)invocation)(panelType));
-            }
-
-            await UniTask.WhenAll(handlerTaskCache);
-            handlerTaskCache.Clear();
-        }
     }
 
     private async UniTask<bool> Hide(PanelInfo panelInfo)

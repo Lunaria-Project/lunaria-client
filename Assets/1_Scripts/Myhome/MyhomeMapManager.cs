@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Generated;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -33,7 +34,7 @@ public class MyhomeMapManager : MonoBehaviour
                 if (npcData == null) return;
                 if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
                 {
-                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue);
+                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
                     return;
                 }
             }
@@ -44,7 +45,7 @@ public class MyhomeMapManager : MonoBehaviour
                 if (npcData == null) return;
                 if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
                 {
-                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue);
+                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
                     return;
                 }
             }
