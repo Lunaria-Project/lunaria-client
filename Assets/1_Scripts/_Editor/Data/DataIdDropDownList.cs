@@ -41,10 +41,15 @@ public static class DataIdDropDownList
     #endregion
     
     private static ValueDropdownList<int> _itemDataIdCache;
-
     public static ValueDropdownList<int> GetItemDataIds()
     {
         return _itemDataIdCache ??= GetDropdownListFromGameData("Item", "Id");
+    }
+    
+    private static ValueDropdownList<int> _npcDataIdCache;
+    public static ValueDropdownList<int> GetNpcDataIds()
+    {
+        return _npcDataIdCache ??= GetDropdownListFromGameData("MapNpcInfo", "NpcId");
     }
 
     private static ValueDropdownList<int> GetDropdownListFromGameData(string sheetName, string columnName)
