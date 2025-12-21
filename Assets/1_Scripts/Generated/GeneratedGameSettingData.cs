@@ -9,6 +9,9 @@ public class GameSetting : Singleton<GameSetting>
     public int GrainsPerLunite { get; private set; }
     public int StartUserLunite { get; private set; }
     public int MaximumSolariCount { get; private set; }
+    public int StartGameTimeSeconds { get; private set; }
+    public int EndGameTimeSeconds { get; private set; }
+    public float SpeedUpRate { get; private set; }
 
     public void InvokeLoadForSheet(SheetInfo sheetInfo)
     {
@@ -24,6 +27,9 @@ public class GameSetting : Singleton<GameSetting>
                 case "GrainsPerLunite": GrainsPerLunite = Convert.ToInt32(row[2]); break;
                 case "StartUserLunite": StartUserLunite = Convert.ToInt32(row[2]); break;
                 case "MaximumSolariCount": MaximumSolariCount = Convert.ToInt32(row[2]); break;
+                case "StartGameTimeSeconds": StartGameTimeSeconds = Convert.ToInt32(row[2]); break;
+                case "EndGameTimeSeconds": EndGameTimeSeconds = Convert.ToInt32(row[2]); break;
+                case "SpeedUpRate": SpeedUpRate = Convert.ToSingle(row[2]); break;
             }
         }
     }

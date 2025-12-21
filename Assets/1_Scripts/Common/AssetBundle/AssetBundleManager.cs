@@ -52,11 +52,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     {
         asset = null;
         if (string.IsNullOrEmpty(assetName)) return false;
-        if (!_index.TryGetEntry(assetName, out var entry))
-        {
-            Debug.LogError($"Asset not found in index. AssetName: {assetName}");
-            return false;
-        }
+        if (!_index.TryGetEntry(assetName, out var entry)) return false;
 
 #if UNITY_EDITOR
         asset = AssetDatabase.LoadAssetAtPath<T>(entry.AssetPathInUnity);

@@ -43,5 +43,9 @@ public class PlayerObject : MovableObject
         }
 
         MoveDirection.Normalize();
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            MoveDirection *= GameSetting.Instance.SpeedUpRate;
+        }
     }
 }

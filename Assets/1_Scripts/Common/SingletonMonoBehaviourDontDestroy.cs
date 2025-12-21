@@ -30,7 +30,7 @@ public class SingletonMonoBehaviourDontDestroy<T> : MonoBehaviour where T : Sing
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (!_instance)
         {

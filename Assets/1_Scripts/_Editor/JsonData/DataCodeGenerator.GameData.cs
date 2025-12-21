@@ -16,6 +16,7 @@ public static partial class DataCodeGenerator
         ListInt,
         ListString,
         Vector2,
+        LocalString,
     }
 
     private const string OutputNamespace = "Generated";
@@ -34,7 +35,8 @@ public static partial class DataCodeGenerator
         { _longType, _longType },
         { _boolType, _boolType },
         { _stringType, _stringType },
-        { _vector2Type, "Vector2" }
+        { _vector2Type, "Vector2" },
+        { _localStringType, "LocalString" },
         // "enum", "list" 는 별도 처리
     };
 
@@ -46,6 +48,7 @@ public static partial class DataCodeGenerator
     private const string _stringType = "string";
     private const string _vector2Type = "vector2";
     private const string _enumType = "enum";
+    private const string _localStringType = "local_string";
 
     public static void GenerateGameDataCode(List<SheetInfo> sheets)
     {
@@ -182,7 +185,7 @@ public static partial class DataCodeGenerator
             var className = $"{sheet.SheetName}Data";
             var fieldName = "_dt" + className;
 
-            if (!CanGenerateCode(className)) continue;
+            if (!CanGenerateCode(sheet.SheetName)) continue;
 
             var keyIndex = FindKeyIndex(sheet);
             var (HasKeyColumn, KeyColumnName) = (keyIndex >= 0, keyIndex >= 0 ? sheet.ColumnNames[keyIndex] : string.Empty);
@@ -213,6 +216,11 @@ public static partial class DataCodeGenerator
                         args.Add($"(row[{i}] as string).ParseVector2()");
                         break;
                     }
+                    case ColumnType.LocalString:
+                    {
+                        args.Add($"GetLocalString((row[{i}] as string) ?? string.Empty, type)");
+                        break;
+                    }
                     default:
                     {
                         var arg = CastExpr(csType, $"row[{i}]");
@@ -222,7 +230,7 @@ public static partial class DataCodeGenerator
                 }
             }
 
-            sb.AppendIndentedLine($"private void Load{className}(List<object[]> rows)", 1);
+            sb.AppendIndentedLine($"private void Load{className}(List<object[]> rows, LocalType type)", 1);
             sb.AppendIndentedLine("{", 1);
             sb.AppendIndentedLine("if (rows.IsNullOrEmpty()) return;", 2);
             sb.AppendIndentedLine("foreach (var row in rows)", 2);
@@ -244,14 +252,14 @@ public static partial class DataCodeGenerator
             sb.AppendLine();
         }
 
-        sb.AppendIndentedLine("private void InvokeLoadForSheet(string sheetName, List<object[]> rows)", 1);
+        sb.AppendIndentedLine("private void InvokeLoadForSheet(string sheetName, List<object[]> rows, LocalType type)", 1);
         sb.AppendIndentedLine("{", 1);
         sb.AppendIndentedLine("switch (sheetName)", 2);
         sb.AppendIndentedLine("{", 2);
         foreach (var sheet in sheets.Select(s => s.SheetName).Distinct())
         {
             if (!CanGenerateCode(sheet)) continue;
-            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}Data(rows); break;", 3);
+            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}Data(rows, type); break;", 3);
         }
 
         sb.AppendIndentedLine("}", 2);
@@ -308,6 +316,7 @@ public static partial class DataCodeGenerator
         var isEnum = realColumnType.Contains("enum<");
         var isList = realColumnType.Contains("list<");
         var isVector2 = string.Equals(realColumnType, _vector2Type, StringComparison.OrdinalIgnoreCase);
+        var isLocalString = realColumnType.Contains(_localStringType);
         if (isEnum)
         {
             var enumType = realColumnType.Replace("enum<", string.Empty).Replace(">", string.Empty);
@@ -332,6 +341,11 @@ public static partial class DataCodeGenerator
         {
             csType = TypeMap.GetValueOrDefault(realColumnType ?? "", "string");
             columnCsType = ColumnType.Vector2;
+        }
+        else if (isLocalString)
+        {
+            csType = TypeMap.GetValueOrDefault(realColumnType ?? "", "string");
+            columnCsType = ColumnType.LocalString;
         }
         else
         {
@@ -373,7 +387,9 @@ public static partial class DataCodeGenerator
     {
         var dir = Path.GetDirectoryName(path);
         if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+        {
             Directory.CreateDirectory(dir);
+        }
 
         File.WriteAllText(path, content, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
         AssetDatabase.Refresh();

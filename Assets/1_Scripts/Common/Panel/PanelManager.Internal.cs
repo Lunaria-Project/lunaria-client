@@ -29,11 +29,10 @@ public class PanelInfo
     }
 }
 
-public partial class PanelManager : SingletonMonoBehaviour<PanelManager>
+public partial class PanelManager : SingletonMonoBehaviourDontDestroy<PanelManager>
 {
     [SerializeField] private RectTransform _parentRectTransform;
 
-    private readonly Dictionary<Type, string> _panelResourceKey = new();
     private readonly Dictionary<Type, Func<Action, UniTask>> _panelPreShowAction = new();
 
     private readonly object[] _emptyArgs = Array.Empty<object>();
@@ -146,7 +145,11 @@ public partial class PanelManager : SingletonMonoBehaviour<PanelManager>
         return null;
     }
 
-    private PanelBase GetPanelPrefab(Type panelType) => _panelResourceKey.TryGetValue(panelType, out var panelResourceKey) ? Resources.Load<PanelBase>(panelResourceKey) : null;
+    private PanelBase GetPanelPrefab(Type panelType)
+    {
+        if (!_panelResourceKey.TryGetValue(panelType, out var panelResourceKey)) return null;
+        return ResourceManager.Instance.LoadPrefab<PanelBase>(panelResourceKey);
+    }
 
     private PanelBase InstantiatePanel(PanelBase panelPrefab)
     {

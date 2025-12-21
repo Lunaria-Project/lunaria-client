@@ -27,9 +27,7 @@ public class GameTimeTestScene : SingletonMonoBehaviour<GameTimeTestScene>
         }
         else
         {
-            var startGameTime = new GameTime();
-            startGameTime.SetTime(0);
-            GameTimeManager.Instance.Initialize(startGameTime);
+            GameTimeManager.Instance.StartDay();
         }
     }
 }

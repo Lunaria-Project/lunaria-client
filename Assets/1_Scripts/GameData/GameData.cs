@@ -2,8 +2,15 @@ using System;
 
 public partial class GameData : Singleton<GameData>
 {
+    public enum LocalType
+    {
+        Ko, En, Ja,
+    }
+    
     public void LoadGameData()
     {
+        var localType = LocalType.Ko;
+        
 #if UNITY_EDITOR
         var sheets = JsonDataLoader.LoadAllSheets();
 #else
@@ -16,6 +23,8 @@ public partial class GameData : Singleton<GameData>
             LogManager.LogWarning("[GameDataRuntimeLoader] No sheets found.");
             return;
         }
+
+        LoadLocalString();
         
         const string EnumDataFileName = "Enum";
         const string GameSettingDataFileName = "GameSetting";
@@ -30,7 +39,7 @@ public partial class GameData : Singleton<GameData>
                 GameSetting.Instance.InvokeLoadForSheet(sheetInfo);
                 continue;
             }
-            InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows);
+            InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows, localType);
         }
     }
 }
