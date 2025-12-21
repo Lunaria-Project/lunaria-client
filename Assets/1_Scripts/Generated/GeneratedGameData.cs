@@ -122,6 +122,7 @@ namespace Generated
     public partial class MapNpcMenuData
     {
         public int NpcId { get; private set; }
+        public string MenuName { get; private set; }
         public RequirementType ShowRequirement { get; private set; }
         public List<int> ShowRequirementValues { get; private set; }
         public RequirementType HideRequirement { get; private set; }
@@ -129,11 +130,11 @@ namespace Generated
         public int Order { get; private set; }
         public NpcMenuFunctionType FunctionType { get; private set; }
         public int FunctionValue { get; private set; }
-        public string FunctionName { get; private set; }
 
-        public MapNpcMenuData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int order, NpcMenuFunctionType functionType, int functionValue, string functionName)
+        public MapNpcMenuData(int npcId, string menuName, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int order, NpcMenuFunctionType functionType, int functionValue)
         {
             NpcId = npcId;
+            MenuName = menuName;
             ShowRequirement = showRequirement;
             ShowRequirementValues = showRequirementValues;
             HideRequirement = hideRequirement;
@@ -141,7 +142,6 @@ namespace Generated
             Order = order;
             FunctionType = functionType;
             FunctionValue = functionValue;
-            FunctionName = functionName;
         }
     }
 

@@ -69,7 +69,7 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[6], true), Convert.ToInt32(row[7]), (row[8] as string) ?? string.Empty);
+            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[4], true), (row[5] as string).ParseIntList(), Convert.ToInt32(row[6]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[7], true), Convert.ToInt32(row[8]));
             _dtMapNpcMenuData.Add(newData);
         }
     }
