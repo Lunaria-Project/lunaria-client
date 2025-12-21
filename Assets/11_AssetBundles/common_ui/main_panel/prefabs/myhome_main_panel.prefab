@@ -993,7 +993,7 @@ MonoBehaviour:
   _currentTimeText: {fileID: 2739745823601020919}
   _currentTimeAMPMText: {fileID: 5648307360698995672}
   _backgroundTemp: {fileID: 504273139435783843}
-  _cellAnimation: {fileID: 3601333144808792017}
+  _cellAnimation: {fileID: 0}
 --- !u!1 &2114577249072683218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1585,7 @@ RectTransform:
   m_Children:
   - {fileID: 5906091232882720435}
   - {fileID: 2622000192157404113}
+  - {fileID: 8401182282060921707}
   m_Father: {fileID: 6043557260892948561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -3609,8 +3610,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8401182282060921707}
+  m_Children: []
   m_Father: {fileID: 5260493659416669512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3651,7 +3651,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.438
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -4441,11 +4441,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6475696975126926911}
+  m_Father: {fileID: 1269380397511381881}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -224, y: -114}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 79, y: 190}
   m_SizeDelta: {x: 140, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8860573653126399996
@@ -5894,17 +5894,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8277383229645261782, guid: caefef2c83c714e9987aaca064ac2ae8, type: 3}
   m_PrefabInstance: {fileID: 6339918794888192844}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3601333144808792017 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7350274709479046301, guid: caefef2c83c714e9987aaca064ac2ae8, type: 3}
-  m_PrefabInstance: {fileID: 6339918794888192844}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::DG.Tweening.DOTweenAnimation
 --- !u!1001 &8091580654825264638
 PrefabInstance:
   m_ObjectHideFlags: 0
