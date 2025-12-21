@@ -24,26 +24,6 @@ public partial class GameData
         }
     }
 
-    private void LoadEnumData(List<object[]> rows)
-    {
-        if (rows.IsNullOrEmpty()) return;
-        foreach (var row in rows)
-        {
-            var newData = new EnumData((row[0] as string) ?? string.Empty, (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty, (row[4] as string) ?? string.Empty);
-            _dtEnumData.Add(newData);
-        }
-    }
-
-    private void LoadGameSettingData(List<object[]> rows)
-    {
-        if (rows.IsNullOrEmpty()) return;
-        foreach (var row in rows)
-        {
-            var newData = new GameSettingData((row[0] as string) ?? string.Empty, (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty);
-            _dtGameSettingData.Add(newData);
-        }
-    }
-
     private void LoadItemData(List<object[]> rows)
     {
         if (rows.IsNullOrEmpty()) return;

@@ -182,7 +182,7 @@ public static partial class DataCodeGenerator
             var className = $"{sheet.SheetName}Data";
             var fieldName = "_dt" + className;
 
-            if (!CanGenerateCode(className)) continue;
+            if (!CanGenerateCode(sheet.SheetName)) continue;
 
             var keyIndex = FindKeyIndex(sheet);
             var (HasKeyColumn, KeyColumnName) = (keyIndex >= 0, keyIndex >= 0 ? sheet.ColumnNames[keyIndex] : string.Empty);
@@ -373,7 +373,9 @@ public static partial class DataCodeGenerator
     {
         var dir = Path.GetDirectoryName(path);
         if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+        {
             Directory.CreateDirectory(dir);
+        }
 
         File.WriteAllText(path, content, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
         AssetDatabase.Refresh();
