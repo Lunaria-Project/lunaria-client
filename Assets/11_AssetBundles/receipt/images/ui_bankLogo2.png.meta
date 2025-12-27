@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: 5a9347cbb69b04bd08cda5455d09d22e
+guid: 560fbc88b03f84e869fe3907ebfb5a8a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8185596110985447909
-    second: ui_myhome_familiarSlot_0
+      213: -9106810376708967236
+    second: ui_bankLogo2_0
+  - first:
+      213: 3402224257476001458
+    second: ui_bankLogo2_1
+  - first:
+      213: -5375030398079609332
+    second: ui_bankLogo2_2
+  - first:
+      213: -4923922047409997218
+    second: ui_bankLogo2_3
+  - first:
+      213: 7541857596576564407
+    second: ui_bankLogo2_4
+  - first:
+      213: 5766354531283156847
+    second: ui_bankLogo2_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +67,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 54, z: 0, w: 58}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -126,23 +141,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_myhome_familiarSlot_0
+      name: ui_bankLogo2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 293
+        width: 27
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b16b4e9c4bbe66e80800000000000000
-      internalID: -8185596110985447909
+      spriteID: cb4bb6b563c1e9180800000000000000
+      internalID: -9106810376708967236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bankLogo2_1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 30
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bef219bfe0273f20800000000000000
+      internalID: 3402224257476001458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bankLogo2_2
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 0
+        width: 53
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c06d981c45e0865b0800000000000000
+      internalID: -5375030398079609332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bankLogo2_3
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 0
+        width: 28
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ab9666cf6baabb0800000000000000
+      internalID: -4923922047409997218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bankLogo2_4
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 0
+        width: 58
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b4078e868f0aa860800000000000000
+      internalID: 7541857596576564407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_bankLogo2_5
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 0
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6fb81e05e4360050800000000000000
+      internalID: 5766354531283156847
       vertices: []
       indices: 
       edges: []
@@ -152,7 +277,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +286,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui_myhome_familiarSlot_0: -8185596110985447909
+      ui_bankLogo2_0: -9106810376708967236
+      ui_bankLogo2_1: 3402224257476001458
+      ui_bankLogo2_2: -5375030398079609332
+      ui_bankLogo2_3: -4923922047409997218
+      ui_bankLogo2_4: 7541857596576564407
+      ui_bankLogo2_5: 5766354531283156847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
