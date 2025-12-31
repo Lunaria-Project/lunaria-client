@@ -13,6 +13,12 @@ public partial class GameData
     public bool ContainsCutsceneGroupData(int key) => DTCutsceneGroupData.ContainsKey(key);
     private readonly Dictionary<int, CutsceneGroupData> _dtCutsceneGroupData = new();
 
+    // CutsceneSelectionData - CutsceneSelectionData, key: SelectionId
+    public IReadOnlyDictionary<int, CutsceneSelectionData> DTCutsceneSelectionData => _dtCutsceneSelectionData;
+    public bool TryGetCutsceneSelectionData(int key, out CutsceneSelectionData result) => DTCutsceneSelectionData.TryGetValue(key, out result);
+    public bool ContainsCutsceneSelectionData(int key) => DTCutsceneSelectionData.ContainsKey(key);
+    private readonly Dictionary<int, CutsceneSelectionData> _dtCutsceneSelectionData = new();
+
     // EnumData - EnumData
     public IReadOnlyList<EnumData> DTEnumData => _dtEnumData;
     private List<EnumData> _dtEnumData = new();

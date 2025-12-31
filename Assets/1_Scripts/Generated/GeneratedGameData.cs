@@ -51,6 +51,26 @@ namespace Generated
         }
     }
 
+    public partial class CutsceneSelectionData
+    {
+        public int SelectionId { get; private set; }
+        public RequirementType ShowRequirement { get; private set; }
+        public List<int> ShowRequirementValues { get; private set; }
+        public RequirementType HideRequirement { get; private set; }
+        public List<int> HideRequirementValues { get; private set; }
+        public string SelectionTitle { get; private set; }
+
+        public CutsceneSelectionData(int selectionId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, string selectionTitle)
+        {
+            SelectionId = selectionId;
+            ShowRequirement = showRequirement;
+            ShowRequirementValues = showRequirementValues;
+            HideRequirement = hideRequirement;
+            HideRequirementValues = hideRequirementValues;
+            SelectionTitle = selectionTitle;
+        }
+    }
+
     public partial class EnumData
     {
         public string EnumName { get; private set; }

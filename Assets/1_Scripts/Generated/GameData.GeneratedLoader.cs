@@ -24,6 +24,16 @@ public partial class GameData
         }
     }
 
+    private void LoadCutsceneSelectionData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new CutsceneSelectionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), GetLocalString((row[5] as string) ?? string.Empty, type));
+            _dtCutsceneSelectionData.Add(newData.SelectionId, newData);
+        }
+    }
+
     private void LoadItemData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -70,6 +80,7 @@ public partial class GameData
         {
             case "Cutscene": LoadCutsceneData(rows, type); break;
             case "CutsceneGroup": LoadCutsceneGroupData(rows, type); break;
+            case "CutsceneSelection": LoadCutsceneSelectionData(rows, type); break;
             case "Item": LoadItemData(rows, type); break;
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;

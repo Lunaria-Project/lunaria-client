@@ -6,9 +6,10 @@ namespace Generated
         None = 0,
         HideFullIllustration = 1,
         HideSpotIllustration = 2,
-        ShowDialog = 3,
-        ShowFullIllustration = 4,
-        ShowSpotIllustration = 5,
+        Selection = 3,
+        ShowDialog = 4,
+        ShowFullIllustration = 5,
+        ShowSpotIllustration = 6,
     }
 
     [SerializeEnum]
