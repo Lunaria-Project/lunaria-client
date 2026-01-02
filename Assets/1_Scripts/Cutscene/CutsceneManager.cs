@@ -45,6 +45,7 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
             {
                 ShowDialog(data);
                 await GetWaitClickTask();
+
                 break;
             }
             case CutsceneCommand.ShowFullIllustration:
@@ -67,6 +68,15 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
             case CutsceneCommand.HideSpotIllustration:
             {
                 HideSpotIllustration();
+                break;
+            }
+            case CutsceneCommand.Selection:
+            {
+                ShowSelection(data.StringValues.GetAt(0), data.IntValues);
+                var selectionIndex = await GetWaitSelectionClickTask();
+                HideSelection();
+                if (!GameData.Instance.TryGetCutsceneSelectionData(data.IntValues.GetAt(selectionIndex), out var selectionData)) break;
+                await PlayCutscene(selectionData.SelectionCutsceneId);
                 break;
             }
             default:
