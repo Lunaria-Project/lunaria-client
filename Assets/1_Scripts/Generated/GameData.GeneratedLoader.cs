@@ -4,6 +4,16 @@ using Generated;
 
 public partial class GameData
 {
+    private void LoadCharacterInfoData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new CharacterInfoData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (row[2] as string) ?? string.Empty);
+            _dtCharacterInfoData.Add(newData.Id, newData);
+        }
+    }
+
     private void LoadCutsceneData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;

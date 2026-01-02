@@ -10,12 +10,14 @@ public partial class GameData
     // CutsceneInfoData - CutsceneInfoData, key: CutsceneId
     public IReadOnlyDictionary<int, CutsceneInfoData> DTCutsceneInfoData => _dtCutsceneInfoData;
     public bool TryGetCutsceneInfoData(int key, out CutsceneInfoData result) => DTCutsceneInfoData.TryGetValue(key, out result);
+    public CutsceneInfoData GetCutsceneInfoData(int key) => DTCutsceneInfoData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsCutsceneInfoData(int key) => DTCutsceneInfoData.ContainsKey(key);
     private readonly Dictionary<int, CutsceneInfoData> _dtCutsceneInfoData = new();
 
     // CutsceneSelectionData - CutsceneSelectionData, key: SelectionId
     public IReadOnlyDictionary<int, CutsceneSelectionData> DTCutsceneSelectionData => _dtCutsceneSelectionData;
     public bool TryGetCutsceneSelectionData(int key, out CutsceneSelectionData result) => DTCutsceneSelectionData.TryGetValue(key, out result);
+    public CutsceneSelectionData GetCutsceneSelectionData(int key) => DTCutsceneSelectionData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsCutsceneSelectionData(int key) => DTCutsceneSelectionData.ContainsKey(key);
     private readonly Dictionary<int, CutsceneSelectionData> _dtCutsceneSelectionData = new();
 
@@ -30,12 +32,14 @@ public partial class GameData
     // ItemData - ItemData, key: Id
     public IReadOnlyDictionary<int, ItemData> DTItemData => _dtItemData;
     public bool TryGetItemData(int key, out ItemData result) => DTItemData.TryGetValue(key, out result);
+    public ItemData GetItemData(int key) => DTItemData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsItemData(int key) => DTItemData.ContainsKey(key);
     private readonly Dictionary<int, ItemData> _dtItemData = new();
 
     // MapNpcInfoData - MapNpcInfoData, key: NpcId
     public IReadOnlyDictionary<int, MapNpcInfoData> DTMapNpcInfoData => _dtMapNpcInfoData;
     public bool TryGetMapNpcInfoData(int key, out MapNpcInfoData result) => DTMapNpcInfoData.TryGetValue(key, out result);
+    public MapNpcInfoData GetMapNpcInfoData(int key) => DTMapNpcInfoData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsMapNpcInfoData(int key) => DTMapNpcInfoData.ContainsKey(key);
     private readonly Dictionary<int, MapNpcInfoData> _dtMapNpcInfoData = new();
 
@@ -46,6 +50,7 @@ public partial class GameData
     // RequirementInfoData - RequirementInfoData, key: RequirementType
     public IReadOnlyDictionary<RequirementType, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
     public bool TryGetRequirementInfoData(RequirementType key, out RequirementInfoData result) => DTRequirementInfoData.TryGetValue(key, out result);
+    public RequirementInfoData GetRequirementInfoData(RequirementType key) => DTRequirementInfoData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsRequirementInfoData(RequirementType key) => DTRequirementInfoData.ContainsKey(key);
     private readonly Dictionary<RequirementType, RequirementInfoData> _dtRequirementInfoData = new();
 }

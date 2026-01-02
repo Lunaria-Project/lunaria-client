@@ -148,6 +148,7 @@ public static partial class DataCodeGenerator
                 sb.AppendIndentedLine($"// {sheet.SheetName}Data - {className}, key: {KeyColumnName}", 1);
                 sb.AppendIndentedLine($"public IReadOnlyDictionary<{csType}, {className}> DT{className} => _dt{className};", 1);
                 sb.AppendIndentedLine($"public bool TryGet{className}({csType} key, out {className} result) => DT{className}.TryGetValue(key, out result);", 1);
+                sb.AppendIndentedLine($"public {className} Get{className}({csType} key) => DT{className}.TryGetValue(key, out var result) ? result : null;", 1);
                 sb.AppendIndentedLine($"public bool Contains{className}({csType} key) => DT{className}.ContainsKey(key);", 1);
                 sb.AppendIndentedLine($"private readonly Dictionary<{csType}, {className}> _dt{className} = new();", 1);
             }

@@ -75,7 +75,8 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
                 ShowSelection(data.StringValues.GetAt(0), data.IntValues);
                 var selectionIndex = await GetWaitSelectionClickTask();
                 HideSelection();
-                if (!GameData.Instance.TryGetCutsceneSelectionData(data.IntValues.GetAt(selectionIndex), out var selectionData)) break;
+
+                var selectionData = GameData.Instance.GetCutsceneSelectionData(data.IntValues.GetAt(selectionIndex));
                 await PlayCutscene(selectionData.SelectionCutsceneId);
                 break;
             }
