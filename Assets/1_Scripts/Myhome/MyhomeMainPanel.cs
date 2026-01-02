@@ -9,10 +9,7 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
     [SerializeField] Text _walletText;
 
     [Header("Time"), Space(8)]
-    [SerializeField] RectTransform _timeBackground;
-    [SerializeField] float _defaultTimeBackgroundZRotation;
-    [SerializeField] Text _currentTimeText;
-    [SerializeField] Text _currentTimeAMPMText;
+    [SerializeField] MyhomeTimeUI _timeUI;
 
     [Header("마도구"), Space(8)]
     [SerializeField] Transform _backgroundTemp;
@@ -23,45 +20,26 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
     protected override void OnShow(params object[] args)
     {
-        GameTimeManager.Instance.OnIntervalChanged -= OnTimeChanged;
-        GameTimeManager.Instance.OnIntervalChanged += OnTimeChanged;
-        GameTimeManager.Instance.OnTimeSecondsChanged -= OnTimeSecondsChanged;
-        GameTimeManager.Instance.OnTimeSecondsChanged += OnTimeSecondsChanged;
         GlobalManager.Instance.OnQKeyDown -= OnQKeyDown;
         GlobalManager.Instance.OnQKeyDown += OnQKeyDown;
         GlobalManager.Instance.OnEKeyDown -= OnEKeyDown;
         GlobalManager.Instance.OnEKeyDown += OnEKeyDown;
+        _timeUI.OnShow();
         OnShowUI();
     }
 
     protected override void OnHide()
     {
-        GameTimeManager.Instance.OnIntervalChanged -= OnTimeChanged;
-        GameTimeManager.Instance.OnTimeSecondsChanged -= OnTimeSecondsChanged;
+        GlobalManager.Instance.OnQKeyDown -= OnQKeyDown;
+        GlobalManager.Instance.OnEKeyDown -= OnEKeyDown;
+        _timeUI.OnHide();
     }
 
     protected override void OnRefresh() { }
 
     private void OnShowUI()
     {
-        _walletText.SetText(UserData.Instance.GetItemQuantity(ItemType.MainCoin)
-            .ToPrice());
-        OnTimeChanged();
-    }
-
-    private void OnTimeSecondsChanged()
-    {
-        var normalizedTime = GameTimeManager.Instance.CurrentGameTime.TotalSeconds / (float)TimeUtil.SecondsPerDay;
-        var rotationZ = normalizedTime * 360f + _defaultTimeBackgroundZRotation;
-        _timeBackground.localRotation = Quaternion.Euler(0f, 0f, rotationZ);
-    }
-
-    private void OnTimeChanged()
-    {
-        var currentGameTime = GameTimeManager.Instance.CurrentGameTime;
-        _currentTimeText.SetText(TimeUtil.GameTimeToString(currentGameTime));
-        //TODO(지선): 로컬키
-        _currentTimeAMPMText.SetText(GameTimeManager.Instance.CurrentGameTime.IsAM ? "AM" : "PM");
+        _walletText.SetText(UserData.Instance.GetItemQuantity(ItemType.MainCoin).ToPrice());
     }
 
     private void OnQKeyDown()
@@ -70,22 +48,15 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
         _isRotating = true;
         _currentZRotation -= 60;
-        _backgroundTemp.DOLocalRotate(new Vector3(0f, 0f, _currentZRotation), 0.1f, RotateMode.Fast)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() => _isRotating = false)
-            .SetUpdate(true);
+        _backgroundTemp.DOLocalRotate(new Vector3(0f, 0f, _currentZRotation), 0.1f, RotateMode.Fast).SetEase(Ease.OutQuad).OnComplete(() => _isRotating = false).SetUpdate(true);
     }
 
     private void OnEKeyDown()
     {
-
         if (_isRotating) return;
 
         _isRotating = true;
         _currentZRotation += 60;
-        _backgroundTemp.DOLocalRotate(new Vector3(0f, 0f, _currentZRotation), 0.1f, RotateMode.Fast)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() => _isRotating = false)
-            .SetUpdate(true);
+        _backgroundTemp.DOLocalRotate(new Vector3(0f, 0f, _currentZRotation), 0.1f, RotateMode.Fast).SetEase(Ease.OutQuad).OnComplete(() => _isRotating = false).SetUpdate(true);
     }
 }
