@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using Generated;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using Lunaria;
 
 public partial class CutsceneManager
 {
@@ -11,7 +11,11 @@ public partial class CutsceneManager
     [SerializeField] private GameObject _dialogBlock;
     [SerializeField] private Image _dialogCharacter;
     [SerializeField] private RectTransform _dialogNpcTransform;
-    [SerializeField] private TMP_Text _dialogText;
+    [SerializeField] private Text _dialogText;
+    [SerializeField] private GameObject _selectionBlock;
+    [SerializeField] private GameObject[] _selectionButtons;
+    [SerializeField] private Image[] _selectionImages;
+    [SerializeField] private Text[] _selectionTexts;
 
     private const string IsFlipped = "Flipped";
 
@@ -48,12 +52,36 @@ public partial class CutsceneManager
         //_dialogCharacter.SetSprite(ResourceManager.Instance.LoadSprite(characterResourceKey));
         _dialogNpcTransform.anchoredPosition = data.Position;
         _dialogNpcTransform.localScale = isFlipped ? new Vector3(-1, 1, 1) : Vector3.one;
-        _dialogText.text = data.CutsceneMessage;
+        _dialogText.SetText(data.CutsceneMessage);
     }
 
     private void HideDialog()
     {
         _dialogBlock.SetActive(false);
+    }
+
+    private void ShowSelection(string resourceKey, List<int> selectionIds)
+    {
+        _selectionBlock.SetActive(true);
+        _selectionButtons.SetActiveAll(false);
+        var selectionImage = ResourceManager.Instance.LoadSprite(resourceKey);
+        foreach (var image in _selectionImages)
+        {
+            image.SetSprite(selectionImage);
+        }
+        var index = 0;
+        foreach (var selectionId in selectionIds)
+        {
+            if (!GameData.Instance.TryGetCutsceneSelectionData(selectionId, out var selectionData)) continue;
+            //TODO(지선): Requirement.IsSatisfied 구현하기
+            _selectionButtons.GetAt(index).SetActive(true);
+            _selectionTexts.GetAt(index++).SetText(selectionData.SelectionTitle);
+        }
+    }
+
+    private void HideSelection()
+    {
+        _selectionBlock.SetActive(false);
     }
 
     private void ClearUI()
@@ -62,5 +90,6 @@ public partial class CutsceneManager
         _fullIllustration.SetActive(false);
         _spotIllustration.SetActive(false);
         _dialogBlock.SetActive(false);
+        _selectionBlock.SetActive(false);
     }
 }

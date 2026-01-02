@@ -5,7 +5,6 @@ namespace Generated
 {
     public partial class CutsceneData
     {
-        public int CutsceneGroupId { get; private set; }
         public int CutsceneId { get; private set; }
         public int Order { get; private set; }
         public CutsceneCommand CutsceneCommand { get; private set; }
@@ -14,9 +13,8 @@ namespace Generated
         public List<string> StringValues { get; private set; }
         public Vector2 Position { get; private set; }
 
-        public CutsceneData(int cutsceneGroupId, int cutsceneId, int order, CutsceneCommand cutsceneCommand, string cutsceneMessage, List<int> intValues, List<string> stringValues, Vector2 position)
+        public CutsceneData(int cutsceneId, int order, CutsceneCommand cutsceneCommand, string cutsceneMessage, List<int> intValues, List<string> stringValues, Vector2 position)
         {
-            CutsceneGroupId = cutsceneGroupId;
             CutsceneId = cutsceneId;
             Order = order;
             CutsceneCommand = cutsceneCommand;
@@ -27,10 +25,10 @@ namespace Generated
         }
     }
 
-    public partial class CutsceneGroupData
+    public partial class CutsceneInfoData
     {
-        public int CutsceneGroupId { get; private set; }
-        public string CutsceneGroupName { get; private set; }
+        public int CutsceneId { get; private set; }
+        public string CutsceneName { get; private set; }
         public RequirementType TriggerRequirementType { get; private set; }
         public List<int> TriggerRequirementValues { get; private set; }
         public int Priority { get; private set; }
@@ -38,16 +36,38 @@ namespace Generated
         public List<int> RewardQuantities { get; private set; }
         public bool IsRepeatable { get; private set; }
 
-        public CutsceneGroupData(int cutsceneGroupId, string cutsceneGroupName, RequirementType triggerRequirementType, List<int> triggerRequirementValues, int priority, List<int> rewardIds, List<int> rewardQuantities, bool isRepeatable)
+        public CutsceneInfoData(int cutsceneId, string cutsceneName, RequirementType triggerRequirementType, List<int> triggerRequirementValues, int priority, List<int> rewardIds, List<int> rewardQuantities, bool isRepeatable)
         {
-            CutsceneGroupId = cutsceneGroupId;
-            CutsceneGroupName = cutsceneGroupName;
+            CutsceneId = cutsceneId;
+            CutsceneName = cutsceneName;
             TriggerRequirementType = triggerRequirementType;
             TriggerRequirementValues = triggerRequirementValues;
             Priority = priority;
             RewardIds = rewardIds;
             RewardQuantities = rewardQuantities;
             IsRepeatable = isRepeatable;
+        }
+    }
+
+    public partial class CutsceneSelectionData
+    {
+        public int SelectionId { get; private set; }
+        public RequirementType ShowRequirement { get; private set; }
+        public List<int> ShowRequirementValues { get; private set; }
+        public RequirementType HideRequirement { get; private set; }
+        public List<int> HideRequirementValues { get; private set; }
+        public string SelectionTitle { get; private set; }
+        public int SelectionCutsceneId { get; private set; }
+
+        public CutsceneSelectionData(int selectionId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, string selectionTitle, int selectionCutsceneId)
+        {
+            SelectionId = selectionId;
+            ShowRequirement = showRequirement;
+            ShowRequirementValues = showRequirementValues;
+            HideRequirement = hideRequirement;
+            HideRequirementValues = hideRequirementValues;
+            SelectionTitle = selectionTitle;
+            SelectionCutsceneId = selectionCutsceneId;
         }
     }
 

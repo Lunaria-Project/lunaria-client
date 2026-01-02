@@ -9,18 +9,28 @@ public partial class GameData
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new CutsceneData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (CutsceneCommand)Enum.Parse(typeof(CutsceneCommand), (string)row[3], true), GetLocalString((row[4] as string) ?? string.Empty, type), (row[5] as string).ParseIntList(), (row[6] as string).ParseStringList(), (row[7] as string).ParseVector2());
+            var newData = new CutsceneData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (CutsceneCommand)Enum.Parse(typeof(CutsceneCommand), (string)row[2], true), GetLocalString((row[3] as string) ?? string.Empty, type), (row[4] as string).ParseIntList(), (row[5] as string).ParseStringList(), (row[6] as string).ParseVector2());
             _dtCutsceneData.Add(newData);
         }
     }
 
-    private void LoadCutsceneGroupData(List<object[]> rows, LocalType type)
+    private void LoadCutsceneInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
         foreach (var row in rows)
         {
-            var newData = new CutsceneGroupData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
-            _dtCutsceneGroupData.Add(newData.CutsceneGroupId, newData);
+            var newData = new CutsceneInfoData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
+            _dtCutsceneInfoData.Add(newData.CutsceneId, newData);
+        }
+    }
+
+    private void LoadCutsceneSelectionData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new CutsceneSelectionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), GetLocalString((row[5] as string) ?? string.Empty, type), Convert.ToInt32(row[6]));
+            _dtCutsceneSelectionData.Add(newData.SelectionId, newData);
         }
     }
 
@@ -69,7 +79,8 @@ public partial class GameData
         switch (sheetName)
         {
             case "Cutscene": LoadCutsceneData(rows, type); break;
-            case "CutsceneGroup": LoadCutsceneGroupData(rows, type); break;
+            case "CutsceneInfo": LoadCutsceneInfoData(rows, type); break;
+            case "CutsceneSelection": LoadCutsceneSelectionData(rows, type); break;
             case "Item": LoadItemData(rows, type); break;
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;

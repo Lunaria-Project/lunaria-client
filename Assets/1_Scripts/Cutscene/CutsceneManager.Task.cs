@@ -7,13 +7,13 @@ public partial class CutsceneManager
 
     public bool IsWaiting => _waitClickTask != null;
     private UniTaskCompletionSource _waitClickTask;
+    private UniTaskCompletionSource<int> _waitSelectionClickTask;
 
     public UniTask GetWaitClickTask()
     {
         if (_waitClickTask != null)
         {
             LogManager.LogError("이미 기다리는 _waitClickTask가 있습니다.");
-            TaskUtil.SetResult(ref _waitClickTask);
         }
 
         _emptyButton.SetActive(true);
@@ -21,10 +21,25 @@ public partial class CutsceneManager
         return _waitClickTask.Task;
     }
 
+    public UniTask<int> GetWaitSelectionClickTask()
+    {
+        if (_waitClickTask != null)
+        {
+            LogManager.LogError("이미 기다리는 _waitClickTask가 있습니다.");
+        }
+        _waitSelectionClickTask = new UniTaskCompletionSource<int>();
+        return _waitSelectionClickTask.Task;
+    }
+
     public void OnWaitButtonClick()
     {
         _emptyButton.SetActive(false);
         TaskUtil.SetResult(ref _waitClickTask);
+    }
+
+    public void OnWaitSelectionButtonClick(int index)
+    {
+        TaskUtil.SetResult(ref _waitSelectionClickTask, index);
     }
 
     private void ClearTask()

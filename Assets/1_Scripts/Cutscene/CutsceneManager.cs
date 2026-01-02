@@ -8,18 +8,18 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
         EndCutscene();
     }
 
-    public async UniTask PlayCutscene(int cutsceneGroupId)
+    public async UniTask PlayCutscene(int cutsceneId)
     {
-        if (!GameData.Instance.ContainsCutsceneGroupData(cutsceneGroupId))
+        if (!GameData.Instance.ContainsCutsceneInfoData(cutsceneId))
         {
-            LogManager.LogErrorFormat("CutsceneManager: Invalid cutscene group id", cutsceneGroupId);
+            LogManager.LogErrorFormat("CutsceneManager: Invalid cutscene id", cutsceneId);
             return;
         }
 
-        var cutsceneDataList = GameData.Instance.GetCutsceneGroupDataListByGroupId(cutsceneGroupId);
+        var cutsceneDataList = GameData.Instance.GetCutsceneDataListById(cutsceneId);
         if (cutsceneDataList.IsNullOrEmpty())
         {
-            LogManager.LogErrorFormat("CutsceneManager: 컷신이 없음", cutsceneGroupId);
+            LogManager.LogErrorFormat("CutsceneManager: 컷신이 없음", cutsceneId);
             return;
         }
 
@@ -45,6 +45,7 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
             {
                 ShowDialog(data);
                 await GetWaitClickTask();
+
                 break;
             }
             case CutsceneCommand.ShowFullIllustration:
@@ -67,6 +68,15 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
             case CutsceneCommand.HideSpotIllustration:
             {
                 HideSpotIllustration();
+                break;
+            }
+            case CutsceneCommand.Selection:
+            {
+                ShowSelection(data.StringValues.GetAt(0), data.IntValues);
+                var selectionIndex = await GetWaitSelectionClickTask();
+                HideSelection();
+                if (!GameData.Instance.TryGetCutsceneSelectionData(data.IntValues.GetAt(selectionIndex), out var selectionData)) break;
+                await PlayCutscene(selectionData.SelectionCutsceneId);
                 break;
             }
             default:

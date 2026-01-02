@@ -44,7 +44,6 @@ public partial class GameData
             };
         }
         if (string.IsNullOrEmpty(key)) return string.Empty;
-        LogManager.LogError("GetLocalString: local string 을 찾을 수 없습니다.");
         return string.Empty;
     }
 }

@@ -3,12 +3,12 @@ using Generated;
 
 public partial class GameData
 {
-    public List<CutsceneData> GetCutsceneGroupDataListByGroupId(int cutsceneGroupId)
+    public List<CutsceneData> GetCutsceneDataListById(int cutsceneId)
     {
         var result = new List<CutsceneData>();
         foreach (var data in DTCutsceneData)
         {
-            if (data.CutsceneGroupId != cutsceneGroupId) continue;
+            if (data.CutsceneId != cutsceneId) continue;
             result.Add(data);
         }
 
