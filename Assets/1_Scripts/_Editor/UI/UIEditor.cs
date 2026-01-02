@@ -7,6 +7,8 @@ public static class UIEditor
 {
     public static TAfter ChangeScript<TBefore, TAfter>(TBefore beforeScript) where TBefore : MonoBehaviour where TAfter : MonoBehaviour
     {
+        if (beforeScript is TAfter afterScript) return afterScript;
+        
         var beforeGameObject = beforeScript.gameObject;
         var beforeScriptSerializedObject = new SerializedObject(beforeScript);
         var scriptSerializedProperty = beforeScriptSerializedObject.FindProperty("m_Script");
@@ -14,7 +16,13 @@ public static class UIEditor
         var afterComponent = typeof(TAfter).IsSubclassOf(typeof(UIBehaviour)) ? new GameObject("TempChangeScript", typeof(RectTransform)).AddComponent<TAfter>() : new GameObject("TempChangeScript").AddComponent<TAfter>();
         scriptSerializedProperty.objectReferenceValue = MonoScript.FromMonoBehaviour(afterComponent);
         beforeScriptSerializedObject.ApplyModifiedProperties();
-        Object.DestroyImmediate(afterComponent.gameObject);
+        EditorApplication.delayCall += () =>
+        {
+            if (afterComponent != null)
+            {
+                Object.DestroyImmediate(afterComponent.gameObject);
+            }
+        };
 
         return beforeGameObject.GetComponent<TAfter>();
     }
