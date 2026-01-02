@@ -3,6 +3,20 @@ using UnityEngine;
 
 namespace Generated
 {
+    public partial class CharacterInfoData
+    {
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string ResourceKey { get; private set; }
+
+        public CharacterInfoData(int id, string name, string resourceKey)
+        {
+            Id = id;
+            Name = name;
+            ResourceKey = resourceKey;
+        }
+    }
+
     public partial class CutsceneData
     {
         public int CutsceneId { get; private set; }

@@ -88,6 +88,7 @@ public partial class GameData
     {
         switch (sheetName)
         {
+            case "CharacterInfo": LoadCharacterInfoData(rows, type); break;
             case "Cutscene": LoadCutsceneData(rows, type); break;
             case "CutsceneInfo": LoadCutsceneInfoData(rows, type); break;
             case "CutsceneSelection": LoadCutsceneSelectionData(rows, type); break;

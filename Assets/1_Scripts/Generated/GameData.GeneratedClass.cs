@@ -3,6 +3,13 @@ using Generated;
 
 public partial class GameData
 {
+    // CharacterInfoData - CharacterInfoData, key: Id
+    public IReadOnlyDictionary<int, CharacterInfoData> DTCharacterInfoData => _dtCharacterInfoData;
+    public bool TryGetCharacterInfoData(int key, out CharacterInfoData result) => DTCharacterInfoData.TryGetValue(key, out result);
+    public CharacterInfoData GetCharacterInfoData(int key) => DTCharacterInfoData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsCharacterInfoData(int key) => DTCharacterInfoData.ContainsKey(key);
+    private readonly Dictionary<int, CharacterInfoData> _dtCharacterInfoData = new();
+
     // CutsceneData - CutsceneData
     public IReadOnlyList<CutsceneData> DTCutsceneData => _dtCutsceneData;
     private List<CutsceneData> _dtCutsceneData = new();

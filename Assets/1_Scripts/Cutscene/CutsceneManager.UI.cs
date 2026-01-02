@@ -5,13 +5,19 @@ using Lunaria;
 
 public partial class CutsceneManager
 {
+    [Header("Illustration"), Space(8)]
     [SerializeField] private Image _fullIllustration;
     [SerializeField] private Image _spotIllustration;
     [SerializeField] private RectTransform _spotIllustrationTransform;
+
+    [Header("Dialog"), Space(8)]
     [SerializeField] private GameObject _dialogBlock;
     [SerializeField] private Image _dialogCharacter;
+    [SerializeField] private Text _dialogCharacterName;
     [SerializeField] private RectTransform _dialogNpcTransform;
     [SerializeField] private Text _dialogText;
+
+    [Header("Selection"), Space(8)]
     [SerializeField] private GameObject _selectionBlock;
     [SerializeField] private GameObject[] _selectionButtons;
     [SerializeField] private Image[] _selectionImages;
@@ -48,8 +54,12 @@ public partial class CutsceneManager
     {
         var isFlipped = data.StringValues.IsNullOrEmpty() || string.Equals(data.StringValues.GetAtWithError(0), IsFlipped);
         _dialogBlock.SetActive(true);
-        //TODO(지선) : 캐릭터 데이터를 만들어서, 캐릭터아이디를 통해 그 리소스키를 읽어오도록 수정
-        //_dialogCharacter.SetSprite(ResourceManager.Instance.LoadSprite(characterResourceKey));
+
+        var characterId = data.IntValues.GetAt(0);
+        var characterInfoData = GameData.Instance.GetCharacterInfoData(characterId);
+        _dialogCharacter.SetSprite(ResourceManager.Instance.LoadSprite(characterInfoData.ResourceKey));
+        _dialogCharacterName.SetText(characterInfoData.Name);
+
         _dialogNpcTransform.anchoredPosition = data.Position;
         _dialogNpcTransform.localScale = isFlipped ? new Vector3(-1, 1, 1) : Vector3.one;
         _dialogText.SetText(data.CutsceneMessage);
