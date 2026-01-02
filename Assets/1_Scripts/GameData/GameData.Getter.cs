@@ -22,7 +22,9 @@ public partial class GameData
         foreach (var data in _dtMapNpcMenuData)
         {
             if (data.NpcId != npcDataId) continue;
-            //TODO(지선): Requirement.IsSatisfied 구현하기
+            if (!RequirementManager.Instance.IsSatisfied(data.ShowRequirement, data.ShowRequirementValues)) continue;
+            if (RequirementManager.Instance.IsSatisfied(data.HideRequirement, data.HideRequirementValues)) continue;
+
             result.Add(data);
         }
 

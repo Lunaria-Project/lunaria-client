@@ -73,7 +73,9 @@ public partial class CutsceneManager
         foreach (var selectionId in selectionIds)
         {
             if (!GameData.Instance.TryGetCutsceneSelectionData(selectionId, out var selectionData)) continue;
-            //TODO(지선): Requirement.IsSatisfied 구현하기
+            if (!RequirementManager.Instance.IsSatisfied(selectionData.ShowRequirement, selectionData.ShowRequirementValues)) continue;
+            if (RequirementManager.Instance.IsSatisfied(selectionData.HideRequirement, selectionData.HideRequirementValues)) continue;
+
             _selectionButtons.GetAt(index).SetActive(true);
             _selectionTexts.GetAt(index++).SetText(selectionData.SelectionTitle);
         }
