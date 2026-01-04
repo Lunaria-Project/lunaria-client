@@ -16,4 +16,9 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         return AssetBundleManager.Instance.TryLoadAsset<TData>(resourceKey, out var data) ? data : Resources.Load<TData>(resourceKey);
     }
+
+    public PopupBase LoadPopupPrefab(string resourceKey)
+    {
+        return LoadPrefab<PopupBase>(resourceKey);
+    }
 }
