@@ -54,6 +54,16 @@ public partial class GameData
         }
     }
 
+    private void LoadLoadingData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        foreach (var row in rows)
+        {
+            var newData = new LoadingData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (row[2] as string) ?? string.Empty);
+            _dtLoadingData.Add(newData.Id, newData);
+        }
+    }
+
     private void LoadMapNpcInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -93,6 +103,7 @@ public partial class GameData
             case "CutsceneInfo": LoadCutsceneInfoData(rows, type); break;
             case "CutsceneSelection": LoadCutsceneSelectionData(rows, type); break;
             case "Item": LoadItemData(rows, type); break;
+            case "Loading": LoadLoadingData(rows, type); break;
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;
             case "RequirementInfo": LoadRequirementInfoData(rows, type); break;

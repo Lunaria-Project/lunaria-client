@@ -43,6 +43,13 @@ public partial class GameData
     public bool ContainsItemData(int key) => DTItemData.ContainsKey(key);
     private readonly Dictionary<int, ItemData> _dtItemData = new();
 
+    // LoadingData - LoadingData, key: Id
+    public IReadOnlyDictionary<int, LoadingData> DTLoadingData => _dtLoadingData;
+    public bool TryGetLoadingData(int key, out LoadingData result) => DTLoadingData.TryGetValue(key, out result);
+    public LoadingData GetLoadingData(int key) => DTLoadingData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsLoadingData(int key) => DTLoadingData.ContainsKey(key);
+    private readonly Dictionary<int, LoadingData> _dtLoadingData = new();
+
     // MapNpcInfoData - MapNpcInfoData, key: NpcId
     public IReadOnlyDictionary<int, MapNpcInfoData> DTMapNpcInfoData => _dtMapNpcInfoData;
     public bool TryGetMapNpcInfoData(int key, out MapNpcInfoData result) => DTMapNpcInfoData.TryGetValue(key, out result);

@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Generated;
 using Lunaria;
 using UnityEngine;
@@ -27,5 +26,10 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
     private void OnShowUI()
     {
         _walletText.SetText(UserData.Instance.GetItemQuantity(ItemType.MainCoin).ToPrice());
+    }
+
+    public void OnShoppingSquareButtonClick()
+    {
+        
     }
 }

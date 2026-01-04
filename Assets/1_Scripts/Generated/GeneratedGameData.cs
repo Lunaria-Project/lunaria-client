@@ -135,6 +135,20 @@ namespace Generated
         }
     }
 
+    public partial class LoadingData
+    {
+        public int Id { get; private set; }
+        public string Description { get; private set; }
+        public string ResourceKey { get; private set; }
+
+        public LoadingData(int id, string description, string resourceKey)
+        {
+            Id = id;
+            Description = description;
+            ResourceKey = resourceKey;
+        }
+    }
+
     public partial class MapNpcInfoData
     {
         public int NpcId { get; private set; }
