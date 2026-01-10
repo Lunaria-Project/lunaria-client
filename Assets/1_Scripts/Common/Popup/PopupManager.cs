@@ -7,6 +7,17 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
 
     private readonly Stack<PopupBase> _popupStack = new();
 
+    private void Update()
+    {
+        if (_popupStack.Count <= 0) return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_popupStack.TryPeek(out var currentPopup)) return;
+            if (!currentPopup.HideWithEscapeKey()) return;
+            HideCurrentPopup();
+        }
+    }
+
     public TPopup ShowPopup<TPopup, TPopupParameter>(Type popupType, TPopupParameter parameter) where TPopup : Popup<TPopup, TPopupParameter> where TPopupParameter : IPopupParameter<TPopup>
     {
         var popup = GetPopup(popupType) as TPopup;

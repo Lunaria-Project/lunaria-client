@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public abstract class PopupBase : MonoBehaviour
 {
-    public static readonly Dictionary<string, List<MemberInfo>> ParameterMemberInfosDictionary = new();
-
-    public bool HideOnEscapeKey = false;
+    [SerializeField] private bool _hideOnEscapeKey = false;
 
     public RectTransform RectTransform
     {
@@ -26,7 +22,6 @@ public abstract class PopupBase : MonoBehaviour
     private double _delayTimeForHideOnTouchDefaultBackground;
     private DateTime _openClientDateTime;
 
-    protected abstract UniTask HidePopup();
     protected abstract void SetTaskResult();
 
     protected virtual void Awake()
@@ -34,9 +29,9 @@ public abstract class PopupBase : MonoBehaviour
         _rectTransformRef = transform as RectTransform;
     }
 
-    protected virtual bool OnEscapeKeyDown()
+    public virtual bool HideWithEscapeKey()
     {
-        return false;
+        return _hideOnEscapeKey;
     }
 }
 
@@ -62,6 +57,10 @@ public abstract class Popup<TPopupType, TPopupParameter> : Popup<TPopupType> whe
 {
     public abstract void OnShow(TPopupParameter parameter);
     public abstract void OnHide();
+    public void HidePopup()
+    {
+        PopupManager.Instance.HideCurrentPopup();
+    }
 }
 
 public interface IPopupParameter<TPopupType> where TPopupType : PopupBase { }
