@@ -891,10 +891,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5572236291663123277}
-  - component: {fileID: 1352169885379873835}
-  - component: {fileID: 6326127113847561752}
   m_Layer: 5
-  m_Name: 'BG '
+  m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -921,44 +919,6 @@ RectTransform:
   m_AnchoredPosition: {x: 19.506, y: 0}
   m_SizeDelta: {x: 450.9887, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1352169885379873835
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367326153346464473}
-  m_CullTransparentMesh: 1
---- !u!114 &6326127113847561752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367326153346464473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a39c30f99c4819887832eec37de9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58e257f5f358e4230a87f9312a7ca597, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2792476988619113328
 GameObject:
   m_ObjectHideFlags: 0

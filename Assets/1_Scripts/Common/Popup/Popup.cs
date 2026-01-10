@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public abstract class PopupBase : MonoBehaviour
     public PopupManager.Type PopupType { get; private set; }
 
     private UniTaskCompletionSource _hideTaskCompletionSource = null;
+    private Action _onHideAction = null;
+    
+    public void SetOnHideAction(Action onHideAction)
+    {
+        _onHideAction = onHideAction;
+    }
 
     public UniTask GetTask()
     {
@@ -44,6 +51,8 @@ public abstract class PopupBase : MonoBehaviour
     {
         OnHideInternal();
         TaskUtil.SetResult(ref _hideTaskCompletionSource);
+        _onHideAction?.Invoke();
+        _onHideAction = null;
     }
 }
 

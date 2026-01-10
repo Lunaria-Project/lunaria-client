@@ -3,6 +3,8 @@ using Generated;
 
 public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<CutsceneManager>
 {
+    public bool IsPlaying { get; private set; }
+    
     private void Start()
     {
         EndCutscene();
@@ -23,6 +25,7 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
             return;
         }
 
+        IsPlaying = true;
         foreach (var cutsceneData in cutsceneDataList)
         {
             await PlayCutsceneImpl(cutsceneData);
@@ -33,6 +36,7 @@ public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<Cutscen
 
     private void EndCutscene()
     {
+        IsPlaying = false;
         ClearUI();
         ClearTask();
     }

@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-using Generated;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -24,38 +22,13 @@ public class MyhomeMapManager : MonoBehaviour
     {
         _player.SetSortingLayer(_sortingOrderOffset);
         UpdateNpcMenu();
-        if (_currentNpcDataId > 0)
-        {
-            //TODO(지선): FunctionType에 따른 액션 구현하기
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_currentNpcDataId);
-                var npcData = npcDataList.GetAt(0);
-                if (npcData == null) return;
-                if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
-                {
-                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
-                    return;
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_currentNpcDataId);
-                var npcData = npcDataList.GetAt(1);
-                if (npcData == null) return;
-                if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
-                {
-                    CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
-                    return;
-                }
-            }
-        }
     }
 
     private void UpdateNpcMenu()
     {
         if (_player == null) return;
         if (_npcObjects == null || _npcObjects.Length == 0) return;
+        if (CutsceneManager.Instance.IsPlaying) return;
 
         var nearestNpc = GetNearestNpc(out var distance);
 
@@ -63,14 +36,18 @@ public class MyhomeMapManager : MonoBehaviour
         {
             if (nearestNpc != null && distance <= _config.NpcMenuDistance && _currentNpcDataId != nearestNpc.NpcDataId)
             {
-                ShowNpcMenu(nearestNpc.NpcDataId);
+                _currentNpcDataId = nearestNpc.NpcDataId;
+                PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _currentNpcDataId }).SetOnHideAction(() => _currentNpcDataId = 0);
             }
         }
         else
         {
             if (nearestNpc == null || distance > _config.NpcMenuDistance)
             {
-                HideNpcMenu();
+                _currentNpcDataId = 0;
+                var currentPopup = PopupManager.Instance.GetCurrentPopup();
+                if (currentPopup == null || currentPopup is not NpcSelectionPopup) return;
+                PopupManager.Instance.HideCurrentPopup(PopupManager.Type.NpcSelection);
             }
         }
     }
@@ -94,20 +71,6 @@ public class MyhomeMapManager : MonoBehaviour
 
         distance = minDist;
         return nearest;
-    }
-
-    private void ShowNpcMenu(int npcDataId)
-    {
-        _currentNpcDataId = npcDataId;
-        LogManager.Log("메뉴 보여주기");
-        // 메뉴 보여주기
-    }
-
-    private void HideNpcMenu()
-    {
-        _currentNpcDataId = 0;
-        LogManager.Log("메뉴 없애기");
-        // 메뉴 없애기
     }
 
     [Button]

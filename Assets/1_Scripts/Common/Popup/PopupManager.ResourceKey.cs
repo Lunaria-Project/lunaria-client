@@ -5,11 +5,11 @@ public partial class PopupManager
     public enum Type
     {
         None = 0,
-        TitleMain = 1,
+        NpcSelection = 1,
     }
 
     private readonly Dictionary<Type, string> _popupResourceKey = new()
     {
-        { Type.TitleMain, "title_main_panel" },
+        { Type.NpcSelection, "npc_selection_popup" },
     };
 }
