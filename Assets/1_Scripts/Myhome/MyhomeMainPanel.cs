@@ -39,8 +39,7 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
         {
             LoadingManager.Instance.ShowLoading();
             await UniTask.NextFrame();
-            SceneManager.LoadSceneAsync("ShoppingSquareScene");
-            await UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true);
+            await UniTask.WhenAll(SceneManager.LoadSceneAsync("ShoppingSquareScene").ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
             LoadingManager.Instance.HideLoading();
         }
     }
