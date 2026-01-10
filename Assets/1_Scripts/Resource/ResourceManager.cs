@@ -21,4 +21,9 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         return LoadPrefab<PopupBase>(resourceKey);
     }
+
+    public MapConfig LoadMapConfig()
+    {
+        return LoadScriptableObject<MapConfig>("map_config");
+    }
 }

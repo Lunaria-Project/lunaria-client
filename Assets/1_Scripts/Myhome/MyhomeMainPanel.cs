@@ -38,6 +38,7 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
         async UniTask ShoppingSquareButtonClickAsync()
         {
             LoadingManager.Instance.ShowLoading();
+            HidePanel();
             await UniTask.NextFrame();
             await UniTask.WhenAll(SceneManager.LoadSceneAsync("ShoppingSquareScene").ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
             LoadingManager.Instance.HideLoading();
