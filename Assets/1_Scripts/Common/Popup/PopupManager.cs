@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManager>
@@ -10,48 +11,67 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
     private void Update()
     {
         if (_popupStack.Count <= 0) return;
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!_popupStack.TryPeek(out var currentPopup)) return;
-            if (!currentPopup.HideWithEscapeKey()) return;
-            HideCurrentPopup();
-        }
+
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+        if (!_popupStack.TryPeek(out var currentPopup)) return;
+        if (!currentPopup.HideWithEscapeKey()) return;
+
+        HideCurrentPopup().Forget();
     }
 
-    public TPopup ShowPopup<TPopup, TPopupParameter>(Type popupType, TPopupParameter parameter) where TPopup : Popup<TPopup, TPopupParameter> where TPopupParameter : IPopupParameter<TPopup>
+    public PopupBase ShowPopup(Type popupType, IPopupParameter parameter)
     {
-        var popup = GetPopup(popupType) as TPopup;
+        var popup = CreatePopupInstance(popupType);
         if (popup == null) return null;
 
         PushPopup(popup);
-        popup.OnShow(parameter);
+        popup.ShowInternal(popupType, parameter);
 
         return popup;
     }
 
-    public void HideCurrentPopup()
+    public PopupBase ShowPopup(Type popupType)
     {
-        if (_popupStack.Count <= 0) return;
-
-        var popup = _popupStack.Pop();
-        HidePopupInternal(popup);
+        return ShowPopup(popupType, new PopupEmptyParameter());
     }
 
-    public void HideAllPopups()
+    public PopupBase GetCurrentPopup()
     {
-        if (_popupStack.Count <= 0) return;
+        if (_popupStack.Count <= 0) return null;
+        return _popupStack.Peek();
+    }
 
+    public UniTask HideCurrentPopup(Type type = Type.None)
+    {
+        if (_popupStack.Count <= 0) return UniTask.CompletedTask;
+
+        var popup = _popupStack.Peek();
+        if (type != Type.None && popup.PopupType != type) return UniTask.CompletedTask;
+        return HidePopupInternal(_popupStack.Pop());
+    }
+
+    public UniTask HideAllPopups()
+    {
+        if (_popupStack.Count <= 0) return UniTask.CompletedTask;
+
+        return HideAllPopupsInternal();
+    }
+
+    private async UniTask HideAllPopupsInternal()
+    {
         while (_popupStack.Count > 0)
         {
             var popup = _popupStack.Pop();
-            HidePopupInternal(popup);
+            await HidePopupInternal(popup);
         }
     }
 
-    private void HidePopupInternal(PopupBase popup)
+    private async UniTask HidePopupInternal(PopupBase popup)
     {
         if (popup == null) return;
 
+        popup.HideInternal();
         Destroy(popup.gameObject);
     }
 
@@ -63,7 +83,7 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
         popup.transform.SetAsLastSibling();
     }
 
-    private PopupBase GetPopup(Type popupType)
+    private PopupBase CreatePopupInstance(Type popupType)
     {
         if (!_popupResourceKey.TryGetValue(popupType, out var popupResourceKey)) return null;
 
@@ -72,6 +92,7 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
 
         var popup = Instantiate(popupPrefab, _parentRectTransform);
         popup.gameObject.SetActive(true);
+
         return popup;
     }
 }
