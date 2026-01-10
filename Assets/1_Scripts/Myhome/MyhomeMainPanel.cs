@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using Generated;
 using Lunaria;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 {
@@ -30,6 +32,16 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
     public void OnShoppingSquareButtonClick()
     {
-        
+        ShoppingSquareButtonClickAsync().Forget();
+        return;
+
+        async UniTask ShoppingSquareButtonClickAsync()
+        {
+            LoadingManager.Instance.ShowLoading();
+            await UniTask.NextFrame();
+            SceneManager.LoadSceneAsync("ShoppingSquareScene");
+            await UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true);
+            LoadingManager.Instance.HideLoading();
+        }
     }
 }
