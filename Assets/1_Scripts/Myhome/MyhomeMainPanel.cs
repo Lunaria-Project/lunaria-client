@@ -37,11 +37,13 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
         async UniTask ShoppingSquareButtonClickAsync()
         {
+            GameTimeManager.Instance.Pause();
             LoadingManager.Instance.ShowLoading();
+            await PopupManager.Instance.HideAllPopups();
             HidePanel();
-            await UniTask.NextFrame();
             await UniTask.WhenAll(SceneManager.LoadSceneAsync("ShoppingSquareScene").ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
             LoadingManager.Instance.HideLoading();
+            GameTimeManager.Instance.Resume();
         }
     }
 }

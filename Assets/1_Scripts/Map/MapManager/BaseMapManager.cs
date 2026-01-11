@@ -20,6 +20,8 @@ public class BaseMapManager : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (GameTimeManager.Instance.IsPaused) return;
+        
         _player.SetSortingLayer(_sortingOrderOffset);
         UpdateNpcMenu();
     }

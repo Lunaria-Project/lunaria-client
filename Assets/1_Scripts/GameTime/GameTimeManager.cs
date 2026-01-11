@@ -9,6 +9,7 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
 
     public GameTime CurrentGameTime => _currentGameTime;
     public bool IsInitialized => _isInitialized;
+    public bool IsPaused => _isPaused;
 
     private GameTime _currentGameTime;
     private bool _isPaused;
@@ -21,6 +22,7 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
     {
         if (!_isInitialized || _isPaused) return;
         if (GameSetting.Instance.SecondsPerGameHour <= 0) return;
+        if (CutsceneManager.Instance.IsPlaying) return;
 
         // 현실 Δt → 게임 초 환산: (1시간=3600초) * (Δt / 현실_초당_게임1시간)
         _currentDaySeconds += Time.deltaTime * (TimeUtil.MinutesPerHour * TimeUtil.SecondsPerMinute) * _timeSpeedMultiplier / GameSetting.Instance.SecondsPerGameHour;

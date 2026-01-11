@@ -42,13 +42,14 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
         return _popupStack.Peek();
     }
 
-    public UniTask HideCurrentPopup(Type type = Type.None)
+    public async UniTask HideCurrentPopup(Type type = Type.None)
     {
-        if (_popupStack.Count <= 0) return UniTask.CompletedTask;
+        if (_popupStack.Count <= 0) return;
 
         var popup = _popupStack.Peek();
-        if (type != Type.None && popup.PopupType != type) return UniTask.CompletedTask;
-        return HidePopupInternal(_popupStack.Pop());
+        if (type != Type.None && popup.PopupType != type) return;
+        HidePopupInternal(_popupStack.Pop());
+        await UniTask.NextFrame();
     }
 
     public UniTask HideAllPopups()
@@ -62,12 +63,12 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
     {
         while (_popupStack.Count > 0)
         {
-            var popup = _popupStack.Pop();
-            await HidePopupInternal(popup);
+            HidePopupInternal(_popupStack.Pop());
         }
+        await UniTask.NextFrame();
     }
 
-    private async UniTask HidePopupInternal(PopupBase popup)
+    private static void HidePopupInternal(PopupBase popup)
     {
         if (popup == null) return;
 
