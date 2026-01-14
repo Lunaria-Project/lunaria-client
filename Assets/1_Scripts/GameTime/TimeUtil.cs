@@ -59,10 +59,10 @@ public static class TimeUtil
         return Sb.ToString();
     }
 
-    public static string GameTimeToStringForUI(GameTime @this)
+    public static string GameTimeToStringForTopUI(GameTime @this)
     {
         Sb.Clear();
-        Sb.AppendFormat(TimeFormat, @this.HoursForUI, @this.MinutesForUI);
+        Sb.AppendFormat(TimeFormat, @this.HoursForUI, @this.MinutesForUI / 10f * 10);
         return Sb.ToString();
     }
 

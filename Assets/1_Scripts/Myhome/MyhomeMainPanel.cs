@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 {
     [SerializeField] Text _walletText;
-    [SerializeField] MyhomeTimeUI _timeUI;
+    [SerializeField] TopTimeUI _timeUI;
     [SerializeField] MyhomeArtifactUI _artifactUI;
 
     protected override void OnShow(params object[] args)
@@ -40,7 +40,7 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
             GameTimeManager.Instance.Pause();
             LoadingManager.Instance.ShowLoading();
             await PopupManager.Instance.HideAllPopups();
-            HidePanel();
+            PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquare);
             await UniTask.WhenAll(SceneManager.LoadSceneAsync("ShoppingSquareScene").ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
             LoadingManager.Instance.HideLoading();
             GameTimeManager.Instance.Resume();

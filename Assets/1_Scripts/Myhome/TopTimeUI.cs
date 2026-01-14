@@ -1,7 +1,7 @@
 using Lunaria;
 using UnityEngine;
 
-public class MyhomeTimeUI : MonoBehaviour
+public class TopTimeUI : MonoBehaviour
 {
     [SerializeField] RectTransform _timeBackground;
     [SerializeField] float _defaultTimeBackgroundZRotation;
@@ -33,7 +33,7 @@ public class MyhomeTimeUI : MonoBehaviour
     private void OnTimeChanged()
     {
         var currentGameTime = GameTimeManager.Instance.CurrentGameTime;
-        _currentTimeText.SetText(TimeUtil.GameTimeToString(currentGameTime));
+        _currentTimeText.SetText(TimeUtil.GameTimeToStringForTopUI(currentGameTime));
         //TODO(지선): 로컬키
         _currentTimeAMPMText.SetText(GameTimeManager.Instance.CurrentGameTime.IsAM ? "AM" : "PM");
     }
