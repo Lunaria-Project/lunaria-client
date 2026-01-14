@@ -7,6 +7,7 @@ public partial class GameData
     private void LoadCharacterInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtCharacterInfoData.Clear();
         foreach (var row in rows)
         {
             var newData = new CharacterInfoData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (row[2] as string) ?? string.Empty);
@@ -17,6 +18,7 @@ public partial class GameData
     private void LoadCutsceneData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtCutsceneData.Clear();
         foreach (var row in rows)
         {
             var newData = new CutsceneData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (CutsceneCommand)Enum.Parse(typeof(CutsceneCommand), (string)row[2], true), GetLocalString((row[3] as string) ?? string.Empty, type), (row[4] as string).ParseIntList(), (row[5] as string).ParseStringList(), (row[6] as string).ParseVector2());
@@ -27,6 +29,7 @@ public partial class GameData
     private void LoadCutsceneInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtCutsceneInfoData.Clear();
         foreach (var row in rows)
         {
             var newData = new CutsceneInfoData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), (row[5] as string).ParseIntList(), (row[6] as string).ParseIntList(), Convert.ToBoolean(row[7]));
@@ -37,6 +40,7 @@ public partial class GameData
     private void LoadCutsceneSelectionData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtCutsceneSelectionData.Clear();
         foreach (var row in rows)
         {
             var newData = new CutsceneSelectionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), GetLocalString((row[5] as string) ?? string.Empty, type), Convert.ToInt32(row[6]));
@@ -47,6 +51,7 @@ public partial class GameData
     private void LoadItemData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtItemData.Clear();
         foreach (var row in rows)
         {
             var newData = new ItemData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (row[2] as string) ?? string.Empty, (ItemType)Enum.Parse(typeof(ItemType), (string)row[3], true));
@@ -57,6 +62,7 @@ public partial class GameData
     private void LoadLoadingData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtLoadingData.Clear();
         foreach (var row in rows)
         {
             var newData = new LoadingData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (row[2] as string) ?? string.Empty);
@@ -67,6 +73,7 @@ public partial class GameData
     private void LoadMapNpcInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtMapNpcInfoData.Clear();
         foreach (var row in rows)
         {
             var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList());
@@ -77,6 +84,7 @@ public partial class GameData
     private void LoadMapNpcMenuData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtMapNpcMenuData.Clear();
         foreach (var row in rows)
         {
             var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[4], true), (row[5] as string).ParseIntList(), Convert.ToInt32(row[6]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[7], true), Convert.ToInt32(row[8]));
@@ -87,6 +95,7 @@ public partial class GameData
     private void LoadRequirementInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
+        _dtRequirementInfoData.Clear();
         foreach (var row in rows)
         {
             var newData = new RequirementInfoData((RequirementType)Enum.Parse(typeof(RequirementType), (string)row[0], true));

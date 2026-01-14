@@ -18,8 +18,6 @@ public static class DataIdDropDownList
         {
             public string String;
             public int Int;
-            public string SheetName;
-            public string ColumnName;
         }
     }
 
@@ -39,34 +37,65 @@ public static class DataIdDropDownList
     }
 
     #endregion
-    
+
     private static ValueDropdownList<int> _itemDataIdCache;
     public static ValueDropdownList<int> GetItemDataIds()
     {
-        return _itemDataIdCache ??= GetDropdownListFromGameData("Item", "Id");
+        if (_itemDataIdCache.IsNullOrEmpty())
+        {
+            _itemDataIdCache = GetDropdownListFromGameData("Item", "Id");
+        }
+        return _itemDataIdCache;
     }
-    
+
     private static ValueDropdownList<int> _npcDataIdCache;
     public static ValueDropdownList<int> GetNpcDataIds()
     {
-        return _npcDataIdCache ??= GetDropdownListFromGameData("MapNpcInfo", "NpcId");
+        if (_npcDataIdCache.IsNullOrEmpty())
+        {
+            _npcDataIdCache = GetDropdownListFromGameData("MapNpcInfo", "NpcId");
+        }
+        return _npcDataIdCache;
     }
 
     private static ValueDropdownList<int> GetDropdownListFromGameData(string sheetName, string columnName)
     {
+        GameData.Instance.LoadGameData();
         LoadDataIdMap();
 
         var list = new ValueDropdownList<int>();
         if (_dataIdMap == null) return list;
 
-        foreach (var tag in _dataIdMap.Tags)
+        var sheets = JsonDataLoader.LoadAllSheets();
+        foreach (var sheet in sheets)
         {
-            if (!string.Equals(tag.SheetName, sheetName)) continue;
-            if (!string.Equals(tag.ColumnName, columnName)) continue;
-
-            list.Add(new ValueDropdownItem<int>($"[{tag.Int}] - {tag.String})", tag.Int));
+            if (!sheet.SheetName.Equals(sheetName)) continue;
+            var columnIndex = -1;
+            for (var i = 0; i < sheet.ColumnNames.Length; i++)
+            {
+                if (!sheet.ColumnNames[i].Equals(columnName)) continue;
+                columnIndex = i;
+                break;
+            }
+            if (columnIndex < 0) return list;
+            foreach (var row in sheet.Rows)
+            {
+                var id = Convert.ToInt32(row.GetAt(columnIndex));
+                var tag = GetTagString(id);
+                if (string.IsNullOrEmpty(tag)) continue;
+                list.Add(new ValueDropdownItem<int>($"[{tag}] - {id}", id));
+            }
         }
-
         return list;
+
+        string GetTagString(int id)
+        {
+            foreach (var tag in _dataIdMap.Tags)
+            {
+                if (tag.Int != id) continue;
+                return tag.String;
+            }
+            return string.Empty;
+        }
     }
 }

@@ -234,6 +234,7 @@ public static partial class DataCodeGenerator
             sb.AppendIndentedLine($"private void Load{className}(List<object[]> rows, LocalType type)", 1);
             sb.AppendIndentedLine("{", 1);
             sb.AppendIndentedLine("if (rows.IsNullOrEmpty()) return;", 2);
+            sb.AppendIndentedLine($"{fieldName}.Clear();", 2);
             sb.AppendIndentedLine("foreach (var row in rows)", 2);
             sb.AppendIndentedLine("{", 2);
 
