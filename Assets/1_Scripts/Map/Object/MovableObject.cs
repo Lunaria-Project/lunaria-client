@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class MovableObject : MapObject
 {
-    [Header("[Move]")] [SerializeField] private Rigidbody2D _rigidbody2D;
+    [Header("[Move]")]
+    [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private ContactFilter2D _contactFilter;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite[] _frontSprites;
     [SerializeField] private Sprite[] _backSprites;
-    [SerializeField] private MapConfig _config;
 
     public Vector2 MoveDirection { get; protected set; }
     protected Vector2 ForceMoveDirection;
 
+    private MapConfig _config;
     private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
     private bool _isFacingFront;
     private float _spriteFrameTime;
@@ -22,6 +23,7 @@ public class MovableObject : MapObject
     protected void Start()
     {
         _isFacingFront = true;
+        _config = ResourceManager.Instance.LoadMapConfig();
         InitMove();
         InitSprite();
     }
