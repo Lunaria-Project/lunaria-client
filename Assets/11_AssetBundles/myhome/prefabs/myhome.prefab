@@ -223,7 +223,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 960
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: d37588ebe909e44d4945d2bba6347988, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -637,7 +637,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 4330
+  m_SortingOrder: 42
   m_Sprite: {fileID: 21300000, guid: 97b08b65db21340ef98fb274abe83723, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -774,7 +774,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 127
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0c3e00e8cd8974b42bddcf05fe7ba4be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1423,7 +1423,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 880
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: e649a76a602a94ab2a4c9aaeedf64551, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1858,7 +1858,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 156
+  m_SortingOrder: 31
   m_Sprite: {fileID: 21300000, guid: fefe071cb6392455081abad7ffa26503, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2261,7 +2261,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 123
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 77a3b0362c58e47cbbe3fb4aab241f66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2373,7 +2373,6 @@ MonoBehaviour:
   _npcObjects:
   - {fileID: 5689712815854982562}
   _player: {fileID: 8764432954273424492}
-  _sortingOrderOffset: 100
 --- !u!1 &7108925812633564732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,7 +2452,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 3110
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 573d440f1294b4fb5bc52a7ba715a45e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2747,7 +2746,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: -2370
+  m_SortingOrder: -24
   m_Sprite: {fileID: 21300000, guid: 16b0988520b104d2296e898312127485, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3602,7 +3601,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 2380
+  m_SortingOrder: 22
   m_Sprite: {fileID: 21300000, guid: 6e6b5b3129358414d809957614363e6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3675,7 +3674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6900653485525934237, guid: ecef528689047441bac8d604dcedfd67, type: 3}
       propertyPath: m_SortingOrder
-      value: 104
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7422733350310678624, guid: ecef528689047441bac8d604dcedfd67, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3752,7 +3751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4590960734529882879, guid: 882d147e4a35443d9a60633682f77f57, type: 3}
       propertyPath: m_SortingOrder
-      value: 3680
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8039834460680580791, guid: 882d147e4a35443d9a60633682f77f57, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3818,7 +3817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4590960734529882879, guid: 882d147e4a35443d9a60633682f77f57, type: 3}
       propertyPath: m_SortingOrder
-      value: -1050
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8039834460680580791, guid: 882d147e4a35443d9a60633682f77f57, type: 3}
       propertyPath: m_LocalPosition.x

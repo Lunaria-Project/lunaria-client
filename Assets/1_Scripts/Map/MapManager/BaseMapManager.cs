@@ -6,7 +6,6 @@ public class BaseMapManager : MonoBehaviour
     [SerializeField] private MapObject[] _mapObjects;
     [SerializeField] private NpcObject[] _npcObjects;
     [SerializeField] private PlayerObject _player;
-    [SerializeField] private int _sortingOrderOffset = 10;
 
     private int _currentNpcDataId;
     private MapConfig _config;
@@ -22,7 +21,7 @@ public class BaseMapManager : MonoBehaviour
     {
         if (GameTimeManager.Instance.IsPaused) return;
         
-        _player.SetSortingLayer(_sortingOrderOffset);
+        _player.SetSortingLayer();
         UpdateNpcMenu();
     }
 
@@ -85,7 +84,7 @@ public class BaseMapManager : MonoBehaviour
     {
         foreach (var mapObject in _mapObjects)
         {
-            mapObject.SetSortingLayer(_sortingOrderOffset);
+            mapObject.SetSortingLayer();
         }
     }
 }
