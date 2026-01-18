@@ -57,7 +57,7 @@ public partial class CutsceneManager
 
         var characterId = data.IntValues.GetAt(0);
         var characterInfoData = GameData.Instance.GetCharacterInfoData(characterId);
-        _dialogCharacter.SetSprite(ResourceManager.Instance.LoadSprite(characterInfoData.ResourceKey));
+        _dialogCharacter.SetSprite(ResourceManager.Instance.LoadCutsceneCharacterSprite(characterInfoData.ResourceKey));
         _dialogCharacterName.SetText(characterInfoData.Name);
 
         _dialogNpcTransform.anchoredPosition = data.Position;

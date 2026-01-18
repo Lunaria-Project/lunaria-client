@@ -26,4 +26,10 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         return LoadScriptableObject<MapConfig>("map_config");
     }
+    
+    public Sprite LoadCutsceneCharacterSprite(string resourceKey)
+    {
+        var cutsceneResourceKey = $"{resourceKey}_cutscene";
+        return LoadSprite(cutsceneResourceKey);
+    }
 }
