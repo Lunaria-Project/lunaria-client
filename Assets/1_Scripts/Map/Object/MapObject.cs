@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class MapObject : MonoBehaviour
 {
-    [SerializeField] protected Transform _transform;
-    [SerializeField] protected SpriteRenderer _sprite;
+    [SerializeField] private Transform _transform;
+    [SerializeField] private SpriteRenderer _sprite;
+
+    protected SpriteRenderer SpriteRenderer => _sprite;
 
     public void SetSortingLayer()
     {

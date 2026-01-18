@@ -156,14 +156,16 @@ namespace Generated
         public List<int> ShowRequirementValues { get; private set; }
         public RequirementType HideRequirement { get; private set; }
         public List<int> HideRequirementValues { get; private set; }
+        public int CharacterId { get; private set; }
 
-        public MapNpcInfoData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues)
+        public MapNpcInfoData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int characterId)
         {
             NpcId = npcId;
             ShowRequirement = showRequirement;
             ShowRequirementValues = showRequirementValues;
             HideRequirement = hideRequirement;
             HideRequirementValues = hideRequirementValues;
+            CharacterId = characterId;
         }
     }
 

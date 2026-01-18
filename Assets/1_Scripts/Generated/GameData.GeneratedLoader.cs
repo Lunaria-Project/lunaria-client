@@ -76,7 +76,7 @@ public partial class GameData
         _dtMapNpcInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList());
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]));
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }

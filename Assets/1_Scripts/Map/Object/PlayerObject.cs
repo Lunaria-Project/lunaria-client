@@ -1,11 +1,22 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerObject : MovableObject
 {
+#if UNITY_EDITOR
+    [ValueDropdown("@DataIdDropDownList.GetCharacterDataIds()")]
+#endif
+    [SerializeField] private int _characterDataId;
+    
     protected override void Update()
     {
         base.Update();
         UpdateMoveDirection();
+    }
+
+    protected override int GetCharacterDataId()
+    {
+        return _characterDataId;
     }
 
     private void UpdateMoveDirection()

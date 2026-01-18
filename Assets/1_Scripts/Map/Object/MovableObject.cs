@@ -1,22 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MovableObject : MapObject
+public abstract class MovableObject : MapObject
 {
     [Header("[Move]")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private ContactFilter2D _contactFilter;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Sprite[] _frontSprites;
-    [SerializeField] private Sprite[] _backSprites;
 
     public Vector2 MoveDirection { get; protected set; }
-    protected Vector2 ForceMoveDirection;
+
+    private Vector2 _forceMoveDirection;
 
     private MapConfig _config;
     private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
     private bool _isFacingFront;
     private float _spriteFrameTime;
     private int _spriteIndex;
+    private List<Sprite> _frontSprites = new();
+    private List<Sprite> _backSprites = new();
+    private const string _frontSpriteFormat = "{0}_front_{1:D2}";
+    private const string _backSpriteFormat = "{0}_back_{1:D2}";
 
     #region UnityEvent
 
@@ -42,8 +45,10 @@ public class MovableObject : MapObject
 
     public void SetForceMoveDirection(Vector2 direction)
     {
-        ForceMoveDirection = direction;
+        _forceMoveDirection = direction;
     }
+
+    protected abstract int GetCharacterDataId();
 
     private void InitMove()
     {
@@ -56,18 +61,33 @@ public class MovableObject : MapObject
     private void InitSprite()
     {
         _spriteIndex = 0;
-        if (_frontSprites.Length > 0)
+        var characterData = GameData.Instance.GetCharacterInfoData(GetCharacterDataId());
+        for (var i = 0; i < 10; i++)
         {
-            _spriteRenderer.sprite = _frontSprites[_spriteIndex];
+            var resourceKey = string.Format(_frontSpriteFormat, characterData.ResourceKey, i);
+            var sprite = ResourceManager.Instance.LoadSprite(resourceKey);
+            if (sprite == null) break;
+            _frontSprites.Add(sprite);
+        }
+        for (var i = 0; i < 10; i++)
+        {
+            var resourceKey = string.Format(_backSpriteFormat, characterData.ResourceKey, i);
+            var sprite = ResourceManager.Instance.LoadSprite(resourceKey);
+            if (sprite == null) break;
+            _backSprites.Add(sprite);
+        }
+        if (_frontSprites.Count > 0)
+        {
+            SpriteRenderer.sprite = _frontSprites[_spriteIndex];
         }
         _spriteFrameTime = 0;
     }
 
     private void UpdateSprite(float dt)
     {
-        if (_frontSprites.Length == 0 || _backSprites.Length == 0) return;
+        if (_frontSprites.Count == 0 || _backSprites.Count == 0) return;
 
-        var moveDirection = ForceMoveDirection != Vector2.zero ? ForceMoveDirection : MoveDirection;
+        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
         if (moveDirection.y > 0)
         {
             _isFacingFront = false;
@@ -79,11 +99,11 @@ public class MovableObject : MapObject
 
         if (moveDirection.x > 0)
         {
-            _spriteRenderer.flipX = false;
+            SpriteRenderer.flipX = false;
         }
         else if (moveDirection.x < 0)
         {
-            _spriteRenderer.flipX = true;
+            SpriteRenderer.flipX = true;
         }
 
         if (moveDirection == Vector2.zero)
@@ -98,16 +118,16 @@ public class MovableObject : MapObject
             {
                 _spriteFrameTime -= _config.FrameDuration;
                 _spriteIndex += 1;
-                _spriteIndex %= (_isFacingFront ? _frontSprites.Length : _backSprites.Length);
+                _spriteIndex %= (_isFacingFront ? _frontSprites.Count : _backSprites.Count);
             }
         }
 
-        _spriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
+        SpriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
     }
 
     private void UpdateMove(float dt)
     {
-        var moveDirection = ForceMoveDirection != Vector2.zero ? ForceMoveDirection : MoveDirection;
+        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
         if (moveDirection == Vector2.zero) return;
 
         var deltaPosition = moveDirection * (dt * _config.PlayerSpeed);

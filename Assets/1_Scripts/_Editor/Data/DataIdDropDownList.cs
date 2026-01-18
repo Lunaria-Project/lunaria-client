@@ -38,6 +38,13 @@ public static class DataIdDropDownList
 
     #endregion
 
+    public static void ClearData()
+    {
+        _itemDataIdCache = null;
+        _characterDataIdCache = null;
+        _npcDataIdCache = null;
+    }
+
     private static ValueDropdownList<int> _itemDataIdCache;
     public static ValueDropdownList<int> GetItemDataIds()
     {
@@ -46,6 +53,16 @@ public static class DataIdDropDownList
             _itemDataIdCache = GetDropdownListFromGameData("Item", "Id");
         }
         return _itemDataIdCache;
+    }
+
+    private static ValueDropdownList<int> _characterDataIdCache;
+    public static ValueDropdownList<int> GetCharacterDataIds()
+    {
+        if (_characterDataIdCache.IsNullOrEmpty())
+        {
+            _characterDataIdCache = GetDropdownListFromGameData("CharacterInfo", "Id");
+        }
+        return _characterDataIdCache;
     }
 
     private static ValueDropdownList<int> _npcDataIdCache;

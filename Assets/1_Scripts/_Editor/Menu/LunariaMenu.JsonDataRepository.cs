@@ -11,5 +11,11 @@ public static partial class LunariaMenu
         DataCodeGenerator.GenerateEnumDataCode(sheets);
         DataCodeGenerator.GenerateGameSettingCode(sheets);
     }
+
+    [MenuItem("Lunaria/Json Data/[Reset DropDownList]", priority = 11)]
+    public static void ClearDropDownData()
+    {
+        DataIdDropDownList.ClearData();
+    }
 }
 #endif
