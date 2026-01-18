@@ -8,6 +8,8 @@ public partial class PanelManager
 {
     public event Action<Type> OnShowAction;
     public event Action<Type> OnHideAction;
+    public PanelInfo CurrentPanelInfo;
+    
     private UniTaskCompletionSource<bool> _taskCompletionSource;
     private (bool isCompleted, bool isSuccess) _isHideAndShowCompletedResult;
 
@@ -74,7 +76,7 @@ public partial class PanelManager
                 // Hide
                 if (hidePanelInfo != null)
                 {
-                    if (!await HidePanelProcess(showDirectionType, hidePanelInfo, showPanelInfo.Type)) return;
+                    if (!await HidePanelProcess(showDirectionType, hidePanelInfo, CurrentPanelInfo.Type)) return;
 
                     PopPanelInfo(1);
                     popPanelCount--;
@@ -161,6 +163,7 @@ public partial class PanelManager
 
         async UniTask ShowPanelProcess(DirectionType showPanelDirectionType, PanelInfo showPanelInfo, Type previousPanelType)
         {
+            CurrentPanelInfo = showPanelInfo;
             showPanelInfo.PreviousType = previousPanelType;
             showPanelInfo.ShowDirectionType = showPanelDirectionType;
 

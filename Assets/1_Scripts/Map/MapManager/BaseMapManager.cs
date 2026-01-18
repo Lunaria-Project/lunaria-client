@@ -20,7 +20,7 @@ public class BaseMapManager : MonoBehaviour
     protected virtual void Update()
     {
         if (GameTimeManager.Instance.IsPaused) return;
-        
+
         _player.SetSortingLayer();
         UpdateNpcMenu();
     }
@@ -32,9 +32,7 @@ public class BaseMapManager : MonoBehaviour
 
     private void UpdateNpcMenu()
     {
-        if (_player == null) return;
-        if (_npcObjects == null || _npcObjects.Length == 0) return;
-        if (CutsceneManager.Instance.IsPlaying) return;
+        if (!CanShowNpcSelectionPopup()) return;
 
         var nearestNpc = GetNearestNpc(out var distance);
 
@@ -77,6 +75,14 @@ public class BaseMapManager : MonoBehaviour
 
         distance = minDist;
         return nearest;
+    }
+
+    protected virtual bool CanShowNpcSelectionPopup()
+    {
+        if (_player == null) return false;
+        if (_npcObjects == null || _npcObjects.Length == 0) return false;
+        if (CutsceneManager.Instance.IsPlaying) return false;
+        return true;
     }
 
     [Button]

@@ -33,12 +33,20 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
 
     public void OnSelectionButtonClick(int index)
     {
-        //TODO(지선): FunctionType에 따른 액션 구현하기
         var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_npcDataId);
         var npcData = npcDataList.GetAt(index);
-        if (npcData.FunctionType == NpcMenuFunctionType.PlayCutscene)
+        switch (npcData.FunctionType)
         {
-            CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
+            case NpcMenuFunctionType.PlayCutscene:
+            {
+                CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
+                break;
+            }
+            case NpcMenuFunctionType.PlaySlimeMinigame:
+            {
+                PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);
+                break;
+            }
         }
         OnHideButtonClick();
     }

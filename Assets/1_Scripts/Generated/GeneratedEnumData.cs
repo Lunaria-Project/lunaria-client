@@ -24,6 +24,7 @@ namespace Generated
     {
         None = 0,
         PlayCutscene = 1,
+        PlaySlimeMinigame = 2,
     }
 
     [SerializeEnum]
