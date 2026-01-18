@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MonoBehaviourExtensions
+public static class MonoBehaviourExtension
 {
     public static void SetActive<T>(this T component, bool isActive) where T : MonoBehaviour
     {
