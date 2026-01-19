@@ -101,6 +101,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(bundleName);
             foreach (var assetPath in assetPaths)
             {
+                if (!assetPath.Contains("Assets/11_AssetBundles")) break;
                 var mainType = AssetDatabase.GetMainAssetTypeAtPath(assetPath);
                 if (mainType == null) continue;
 
