@@ -31,11 +31,11 @@ public class SlimeBlock : MonoBehaviour
 
         DOTween.Kill(this);
         await DOTween.Sequence().SetId(this)
-               .Append(_rectTransform.DOAnchorPos(_showPosition, 0.3f).SetEase(Ease.OutQuad))
-               .SetDelay(showTime)
-               .Append(_rectTransform.DOAnchorPos(Vector2.zero, 0.2f)).SetEase(Ease.OutQuad)
-               .AppendOnComplete(Hide)
-               .GetTask();
+            .Append(_rectTransform.DOAnchorPos(_showPosition, 0.3f).SetEase(Ease.OutQuad))
+            .SetDelay(showTime)
+            .Append(_rectTransform.DOAnchorPos(Vector2.zero, 0.2f)).SetEase(Ease.OutQuad)
+            .AppendOnComplete(Hide)
+            .GetTask();
     }
 
     public void Hide()
