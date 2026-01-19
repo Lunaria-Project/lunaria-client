@@ -15,6 +15,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     [SerializeField] private float _showDelayMaxSeconds = 7;
     [SerializeField] private int _minigameSeconds = 60;
 
+    private bool _isInitialized;
     private float _remainTime;
     private readonly List<Coroutine> _coroutines = new();
     private int _slimeCount;
@@ -29,18 +30,26 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     private void Update()
     {
+        if (!_isInitialized) return;
         _remainTime -= Time.deltaTime;
         _remainTimeText.SetText(Mathf.RoundToInt(_remainTime).ToString());
     }
 
     protected override void OnShow(params object[] args)
     {
+        _isInitialized = false;
         _remainTime = _minigameSeconds;
         _slimeCount = 0;
-        _countText.SetText(_slimeCount.ToPrice());
+
         HideAll();
-        StartSlimeCoroutine();
-        Invoke(nameof(StopSlimeCoroutine), _minigameSeconds);
+
+        PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter { CountDownSeconds = 3 })
+            .SetOnHideAction(() =>
+            {
+                _isInitialized = true;
+                StartSlimeCoroutine();
+                Invoke(nameof(StopSlimeCoroutine), _minigameSeconds);
+            });
     }
 
     protected override void OnHide()
@@ -48,7 +57,10 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         HideAll();
     }
 
-    protected override void OnRefresh() { }
+    protected override void OnRefresh()
+    {
+        _countText.SetText(_slimeCount.ToPrice());
+    }
 
     private void StartSlimeCoroutine()
     {
@@ -94,6 +106,6 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     private void OnTouchSlime(int slimeOrder)
     {
         _slimeCount++;
-        _countText.SetText(_slimeCount.ToPrice());
+        OnRefresh();
     }
 }
