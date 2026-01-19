@@ -83,3 +83,13 @@ public abstract class Popup<TPopupParameter> : PopupBase where TPopupParameter :
         OnHide();
     }
 }
+
+public abstract class EmptyParamPopup : Popup<PopupEmptyParameter>
+{
+    protected override sealed void OnShow(PopupEmptyParameter parameter)
+    {
+        OnShow();
+    }
+
+    protected abstract void OnShow();
+}
