@@ -16,8 +16,8 @@ public abstract class MovableObject : MapObject
     private bool _isFacingFront;
     private float _spriteFrameTime;
     private int _spriteIndex;
-    private List<Sprite> _frontSprites = new();
-    private List<Sprite> _backSprites = new();
+    private readonly List<Sprite> _frontSprites = new();
+    private readonly List<Sprite> _backSprites = new();
     private const string _frontSpriteFormat = "{0}_front_{1:D2}";
     private const string _backSpriteFormat = "{0}_back_{1:D2}";
 
@@ -62,14 +62,14 @@ public abstract class MovableObject : MapObject
     {
         _spriteIndex = 0;
         var characterData = GameData.Instance.GetCharacterInfoData(GetCharacterDataId());
-        for (var i = 0; i < 10; i++)
+        for (var i = 1; i < 10; i++)
         {
             var resourceKey = string.Format(_frontSpriteFormat, characterData.ResourceKey, i);
             var sprite = ResourceManager.Instance.LoadSprite(resourceKey);
             if (sprite == null) break;
             _frontSprites.Add(sprite);
         }
-        for (var i = 0; i < 10; i++)
+        for (var i = 1; i < 10; i++)
         {
             var resourceKey = string.Format(_backSpriteFormat, characterData.ResourceKey, i);
             var sprite = ResourceManager.Instance.LoadSprite(resourceKey);

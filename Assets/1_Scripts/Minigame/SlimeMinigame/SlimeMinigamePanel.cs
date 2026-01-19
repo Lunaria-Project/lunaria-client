@@ -13,6 +13,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     [SerializeField] private int _slimeShowCount = 3;
     [SerializeField] private float _showDelayMinSeconds = 2;
     [SerializeField] private float _showDelayMaxSeconds = 7;
+    [SerializeField] private float _delaySecondsAfterHide;
     [SerializeField] private int _minigameSeconds = 60;
 
     private bool _isInitialized;
@@ -83,6 +84,8 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     private IEnumerator CoShowNpcDialog()
     {
+        var waitFirstSeconds = Random.Range(_showDelayMinSeconds, _showDelayMaxSeconds);
+        yield return UniTask.Delay(TimeUtil.SecondsToMillis(waitFirstSeconds));
         while (true)
         {
             var randomDialogIndex = Random.Range(0, _slimeBlocks.Length);
@@ -91,7 +94,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
             var delaySeconds = Random.Range(_showDelayMinSeconds, _showDelayMaxSeconds);
             yield return slimeBlock.Show(1, delaySeconds).ToCoroutine(); // TODO(지선): order값 넣어야함
-            yield return new WaitForSeconds(delaySeconds);
+            yield return UniTask.Delay(TimeUtil.SecondsToMillis(_delaySecondsAfterHide));
         }
     }
 

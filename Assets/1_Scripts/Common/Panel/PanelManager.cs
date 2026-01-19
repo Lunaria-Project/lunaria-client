@@ -77,13 +77,10 @@ public partial class PanelManager
                 if (hidePanelInfo != null)
                 {
                     if (!await HidePanelProcess(showDirectionType, hidePanelInfo, CurrentPanelInfo.Type)) return;
-
-                    PopPanelInfo(1);
-                    popPanelCount--;
                 }
 
                 // Pop 할게 있다면 Pop 함
-                PopPanelInfoProcess(popPanelCount);
+                PopPanelInfo(popPanelCount);
                 // Show 해야 할게 여러개 있다면 미리 Push 함
                 ShowPanelInfoProcess(showPanelInfoList);
 
@@ -108,7 +105,7 @@ public partial class PanelManager
                 }
 
                 // pop하고 show할 패널을 가져옴
-                var (previousPopPanelInfo, showPanelInfo) = PopPanelInfoProcess(popPanelCount);
+                var (previousPopPanelInfo, showPanelInfo) = PopPanelInfo(popPanelCount);
                 previousPopPanelInfo ??= hidePanelInfo;
                 var previousPanelType = previousPopPanelInfo?.Type ?? Type.None;
 
@@ -137,11 +134,6 @@ public partial class PanelManager
             }
 
             return true;
-        }
-
-        (PanelInfo previousPopPanelInfo, PanelInfo popPanelInfo) PopPanelInfoProcess(int count)
-        {
-            return count <= 0 ? (null, null) : PopPanelInfo(count);
         }
 
         void ShowPanelInfoProcess(IList<PanelInfo> panelInfoList)

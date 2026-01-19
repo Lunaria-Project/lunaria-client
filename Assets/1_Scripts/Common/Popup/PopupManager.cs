@@ -60,6 +60,7 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
         }
 
         HidePopupInternal(_popupList.GetLast());
+        _popupList.RemoveLast();
         await UniTask.NextFrame();
     }
 

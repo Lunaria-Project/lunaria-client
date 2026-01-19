@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 
@@ -8,11 +9,8 @@ public static class TweenExtension
         var source = new UniTaskCompletionSource<T>();
         @this.AppendOnComplete(OnComplete);
         @this.AppendOnKill(OnKill);
-        if (suppressCancellation)
-        {
-            source.Task.SuppressCancellationThrow();
-        }
-        return source.Task;
+
+        return suppressCancellation ? Suppress(source.Task) : source.Task;
 
         void OnComplete()
         {
@@ -32,6 +30,18 @@ public static class TweenExtension
 
             @this.onComplete -= OnComplete;
             @this.onKill -= OnKill;
+        }
+
+        async UniTask<T> Suppress<T>(UniTask<T> task)
+        {
+            try
+            {
+                return await task;
+            }
+            catch (OperationCanceledException)
+            {
+                return default;
+            }
         }
     }
 

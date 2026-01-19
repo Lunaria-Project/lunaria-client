@@ -74,6 +74,8 @@ public partial class PanelManager : SingletonMonoBehaviourDontDestroy<PanelManag
 
     private (PanelInfo previousPopPanelInfo, PanelInfo popPanelInfo) PopPanelInfo(int count)
     {
+        if (count <= 0) return (null, null);
+
         if (_panelInfoList.Count < count)
         {
             Debug.LogError("PanelInfoList count is only one");

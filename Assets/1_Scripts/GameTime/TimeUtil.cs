@@ -36,9 +36,11 @@ public static class TimeUtil
     public const int HoursPerDay = 24;
     public const int HoursPerHalfDay = 12;
     public const int MinutesPerInterval = 10;
+    public const int MillisPerSeconds = 1000;
     private const string TimeFormat = "{0:00}:{1:00}";
     private static readonly StringBuilder Sb = new(8);
 
+    public static int SecondsToMillis(float timeSeconds) => (int)(timeSeconds * MillisPerSeconds);
     public static int SecondsToMinutes(float timeSeconds) => (int)(timeSeconds / SecondsPerMinute);
     public static int MinutesToHours(float timeMinutes) => (int)(timeMinutes / MinutesPerHour);
     public static int SecondsToHours(float timeSeconds) => MinutesToHours(SecondsToMinutes(timeSeconds));

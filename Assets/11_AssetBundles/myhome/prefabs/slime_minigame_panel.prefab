@@ -400,8 +400,9 @@ MonoBehaviour:
   - {fileID: 4155641325346572435}
   - {fileID: 8552365438120172803}
   _slimeShowCount: 3
-  _showDelayMinSeconds: 5
-  _showDelayMaxSeconds: 7
+  _showDelayMinSeconds: 0.5
+  _showDelayMaxSeconds: 2.5
+  _delaySecondsAfterHide: 2.5
   _minigameSeconds: 60
 --- !u!1 &2994157455917972045
 GameObject:
