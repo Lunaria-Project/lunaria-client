@@ -25,6 +25,12 @@ public static class CollectionExtension
 
         return list[index];
     }
+    
+    public static T GetLast<T>(this IList<T> list, T defaultValue = default)
+    {
+        if (list == null || list.Count <= 0) return defaultValue;
+        return list[^1];
+    }
 
     #region List
 
