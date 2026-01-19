@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -51,7 +52,7 @@ public class BaseMapManager : MonoBehaviour
                 _currentNpcDataId = 0;
                 var currentPopup = PopupManager.Instance.GetCurrentPopup();
                 if (currentPopup == null || currentPopup is not NpcSelectionPopup) return;
-                PopupManager.Instance.HideCurrentPopup(PopupManager.Type.NpcSelection);
+                PopupManager.Instance.HideCurrentPopup(PopupManager.Type.NpcSelection).Forget();
             }
         }
     }

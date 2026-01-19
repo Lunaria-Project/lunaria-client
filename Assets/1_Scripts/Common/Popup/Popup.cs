@@ -28,7 +28,7 @@ public abstract class PopupBase : MonoBehaviour
     public void OnHideButtonClick()
     {
         if (PopupManager.Instance == null) return;
-        PopupManager.Instance.HideCurrentPopup(PopupType);
+        PopupManager.Instance.HideCurrentPopup(PopupType).Forget();
     }
     
     public virtual bool HideWithEscapeKey()
