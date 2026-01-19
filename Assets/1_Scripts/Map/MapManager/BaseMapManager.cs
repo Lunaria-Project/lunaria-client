@@ -80,6 +80,7 @@ public class BaseMapManager : MonoBehaviour
 
     protected virtual bool CanShowNpcSelectionPopup()
     {
+        if (PopupManager.Instance.ContainsPopup(PopupManager.Type.NpcSelection)) return false;
         if (_player == null) return false;
         if (_npcObjects == null || _npcObjects.Length == 0) return false;
         if (CutsceneManager.Instance.IsPlaying) return false;
