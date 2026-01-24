@@ -75,6 +75,16 @@ public static class DataIdDropDownList
         return _npcDataIdCache;
     }
 
+    private static ValueDropdownList<int> _cutsceneDataIdCache;
+    public static ValueDropdownList<int> GetCutsceneDataIds()
+    {
+        if (_cutsceneDataIdCache.IsNullOrEmpty())
+        {
+            _cutsceneDataIdCache = GetDropdownListFromGameData("CutsceneInfo", "CutsceneId");
+        }
+        return _cutsceneDataIdCache;
+    }
+
     private static ValueDropdownList<int> GetDropdownListFromGameData(string sheetName, string columnName)
     {
         GameData.Instance.LoadGameData();

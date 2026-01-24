@@ -1,10 +1,15 @@
 using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TitleMainPanel : Panel<TitleMainPanel>
 {
     [SerializeField] GameObject _editorObject;
+#if UNITY_EDITOR
+    [ValueDropdown("@DataIdDropDownList.GetCutsceneDataIds()")]
+#endif
+    [SerializeField] int _cutsceneId;
 
     protected override void OnShow(params object[] args)
     {
@@ -17,6 +22,13 @@ public class TitleMainPanel : Panel<TitleMainPanel>
     protected override void OnHide() { }
 
     protected override void OnRefresh() { }
+
+    private async UniTask StartGame(UserDataInfo info)
+    {
+        UserData.Instance.Init(info);
+        await SceneManager.LoadSceneAsync(1);
+        GlobalManager.Instance.StartDay();
+    }
 
     public void OnGoMyhomeButtonClick()
     {
@@ -36,10 +48,8 @@ public class TitleMainPanel : Panel<TitleMainPanel>
 #endif
     }
 
-    private async UniTask StartGame(UserDataInfo info)
+    public void OnCutsceneTestButtonClick()
     {
-        UserData.Instance.Init(info);
-        await SceneManager.LoadSceneAsync(1);
-        GlobalManager.Instance.StartDay();
+        CutsceneManager.Instance.PlayCutscene(_cutsceneId).Forget();
     }
 }
