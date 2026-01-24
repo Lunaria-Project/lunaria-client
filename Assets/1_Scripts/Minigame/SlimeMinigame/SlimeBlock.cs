@@ -33,8 +33,6 @@ public class SlimeBlock : MonoBehaviour
         _touchButton.SetActive(true);
 
         _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(type));
-        var isToxic = type is SlimeType.ToxicLevel1 or SlimeType.ToxicLevel2 or SlimeType.ToxicLevel3;
-        _slimeImage.color = isToxic ? Color.gray : Color.white; // TODO(지선):임시 코드
         _slimeImageRectTransform.SetScale(scale);
 
         DOTween.Kill(this);
