@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GameTimeManager : SingletonMonoBehaviourDontDestroy<GameTimeManager>
+public class GameTimeManager : Singleton<GameTimeManager>
 {
     public event Action OnIntervalChanged;
     public event Action OnTimeSecondsChanged;
