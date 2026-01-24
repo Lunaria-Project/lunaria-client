@@ -39,7 +39,7 @@ public class MyhomeArtifactUI : MonoBehaviour
         var selectedIndex = GetSelectedIndex();
         for (var i = 0; i < _cells.Length; i++)
         {
-            _cells[i].SetSelected(i == selectedIndex);
+            _cells[i].SetSelected(true, i == selectedIndex);
         }
         SetItem(selectedIndex, 0);
         SetItem(selectedIndex + 1, 1);
@@ -70,23 +70,23 @@ public class MyhomeArtifactUI : MonoBehaviour
         var selectedCellItemIndex = _itemDataIds.IndexOf(selectedCellItemId);
         SetItem(selectedIndex - 2, selectedCellItemIndex - 2);
         SetItem(selectedIndex + 2, selectedCellItemIndex + 2);
-        
+
 
         _rotation.z += isClockwise ? 60 : -60;
         var newSelectedIndex = GetSelectedIndex();
         var newSelectedCellItemId = _cells.GetAt(newSelectedIndex).ItemDataId;
         UserData.Instance.SetEquippedArtifact(newSelectedCellItemId);
-        
+
         _backgroundTemp.DOLocalRotate(_rotation, 0.1f, RotateMode.Fast).SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
                 _isRotating = false;
 
-                
+
                 for (var i = 0; i < _cells.Length; i++)
                 {
                     var isSelected = i == newSelectedIndex;
-                    _cells[i].SetSelected(isSelected);
+                    _cells[i].SetSelected(false, isSelected);
                 }
                 RefreshCellRotation(false);
             })

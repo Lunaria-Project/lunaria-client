@@ -21,14 +21,21 @@ public class MyhomeArtifactUICell : MonoBehaviour
         _image.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
     }
 
-    public void SetSelected(bool isSelected)
+    public void SetSelected(bool isInit, bool isSelected)
     {
         _selectedBlock.SetActive(isSelected);
         _unselectedBlock.SetActive(!isSelected);
 
         if (isSelected)
         {
-            _rectTransform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f).SetEase(Ease.InOutFlash);
+            if (isInit)
+            {
+                _rectTransform.SetScale(1.2f);
+            }
+            else
+            {
+                _rectTransform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f).SetEase(Ease.InOutFlash);
+            }
         }
         else
         {
