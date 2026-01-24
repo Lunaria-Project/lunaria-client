@@ -70,15 +70,19 @@ public class MyhomeArtifactUI : MonoBehaviour
         var selectedCellItemIndex = _itemDataIds.IndexOf(selectedCellItemId);
         SetItem(selectedIndex - 2, selectedCellItemIndex - 2);
         SetItem(selectedIndex + 2, selectedCellItemIndex + 2);
-        UserData.Instance.SetEquippedArtifact(selectedCellItemId);
+        
 
         _rotation.z += isClockwise ? 60 : -60;
+        var newSelectedIndex = GetSelectedIndex();
+        var newSelectedCellItemId = _cells.GetAt(newSelectedIndex).ItemDataId;
+        UserData.Instance.SetEquippedArtifact(newSelectedCellItemId);
+        
         _backgroundTemp.DOLocalRotate(_rotation, 0.1f, RotateMode.Fast).SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
                 _isRotating = false;
 
-                var newSelectedIndex = GetSelectedIndex();
+                
                 for (var i = 0; i < _cells.Length; i++)
                 {
                     var isSelected = i == newSelectedIndex;
