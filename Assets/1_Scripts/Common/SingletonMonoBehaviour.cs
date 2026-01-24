@@ -39,7 +39,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         }
         else if (_instance != this)
         {
-            LogManager.LogErrorFormat("Instance already exists {0}", this);
+            LogManager.LogErrorPack("Instance already exists {0}", this);
             Destroy(gameObject);
         }
     }

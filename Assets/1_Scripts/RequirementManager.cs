@@ -10,7 +10,7 @@ public class RequirementManager : Singleton<RequirementManager>
             case RequirementType.AlwaysTrue: return true;
             case RequirementType.AlwaysFalse: return false;
         }
-        LogManager.LogErrorFormat("대응되지 않은 타입", type);
+        LogManager.LogErrorPack("대응되지 않은 타입", type);
         return false;
     }
 }

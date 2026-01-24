@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 using Debug = UnityEngine.Debug;
 
 public static class LogManager
@@ -14,7 +15,7 @@ public static class LogManager
     {
         Debug.LogWarning(message);
     }
-    
+
     [Conditional("UNITY_EDITOR")]
     public static void Assert(bool condition, string message = null)
     {
@@ -28,9 +29,15 @@ public static class LogManager
     }
 
     [Conditional("UNITY_EDITOR")]
-    public static void LogErrorFormat(string format, params object[] args)
+    public static void LogErrorPack(string format, params object[] args)
     {
-        Debug.LogErrorFormat(format, args);
+        var sb = new StringBuilder();
+        sb.Append(format);
+        foreach (var arg in args)
+        {
+            sb.Append($" {arg.GetType()}={arg}");
+        }
+        Debug.LogError(sb.ToString());
     }
 
     [Conditional("UNITY_EDITOR")]

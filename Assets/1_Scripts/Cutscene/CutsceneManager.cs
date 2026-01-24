@@ -14,14 +14,14 @@ public partial class CutsceneManager : SingletonMonoBehaviour<CutsceneManager>
     {
         if (!GameData.Instance.ContainsCutsceneInfoData(cutsceneId))
         {
-            LogManager.LogErrorFormat("CutsceneManager: Invalid cutscene id", cutsceneId);
+            LogManager.LogErrorPack("CutsceneManager: Invalid cutscene id", cutsceneId);
             return;
         }
 
         var cutsceneDataList = GameData.Instance.GetCutsceneDataListById(cutsceneId);
         if (cutsceneDataList.IsNullOrEmpty())
         {
-            LogManager.LogErrorFormat("CutsceneManager: 컷신이 없음", cutsceneId);
+            LogManager.LogErrorPack("CutsceneManager: 컷신이 없음", cutsceneId);
             return;
         }
 
@@ -86,7 +86,7 @@ public partial class CutsceneManager : SingletonMonoBehaviour<CutsceneManager>
             }
             default:
             {
-                LogManager.LogErrorFormat("CutsceneManager: Invalid CutsceneCommand", data.CutsceneCommand);
+                LogManager.LogErrorPack("CutsceneManager: Invalid CutsceneCommand", data.CutsceneCommand);
                 break;
             }
         }

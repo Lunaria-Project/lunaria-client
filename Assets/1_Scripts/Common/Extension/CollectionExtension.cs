@@ -19,7 +19,7 @@ public static class CollectionExtension
     {
         if (list == null || index < 0 || index >= list.Count)
         {
-            LogManager.LogErrorFormat("invalid index in IList", list, index);
+            LogManager.LogErrorPack("invalid index in IList", list, index);
             return defaultValue;
         }
 

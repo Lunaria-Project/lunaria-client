@@ -42,7 +42,7 @@ public partial class GlobalManager
         _currentCursorSprites.Clear();
         if (!_cursorPrefix.TryGetValue(cursorType, out var data))
         {
-            LogManager.LogErrorFormat("GlobalManager.Cursor: prefix를 찾을 수 없습니다.", cursorType);
+            LogManager.LogErrorPack("GlobalManager.Cursor: prefix를 찾을 수 없습니다.", cursorType);
             return;
         }
         _currentCursorSprites.AddRange(data.Sprites);
