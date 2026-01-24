@@ -15,6 +15,7 @@ public class SlimeBlock : MonoBehaviour
 
     private Action<int> _onTouchSlime;
     private int _slimeOrder;
+    private int _remainTouchCount;
 
     public void SetOnTouchSlime(Action<int> onTouchSlime)
     {
@@ -24,10 +25,13 @@ public class SlimeBlock : MonoBehaviour
     public async UniTask Show(int slimeOrder, float showTime)
     {
         _slimeOrder = slimeOrder;
+        _remainTouchCount = slimeOrder;
         IsShowing = true;
         _rectTransform.anchoredPosition = Vector2.zero;
         _rectTransform.gameObject.SetActive(true);
         _touchButton.SetActive(true);
+
+        _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(_slimeOrder));
 
         DOTween.Kill(this);
         await DOTween.Sequence().SetId(this)
@@ -49,6 +53,9 @@ public class SlimeBlock : MonoBehaviour
 
     public void OnTouchButtonClick()
     {
+        _remainTouchCount--;
+        if (_remainTouchCount > 0) return;
+
         _onTouchSlime.Invoke(_slimeOrder);
         Hide();
     }

@@ -10,11 +10,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     [SerializeField] private Text _remainTimeText;
     [SerializeField] private Text _countText;
     [SerializeField] private SlimeBlock[] _slimeBlocks;
-    [SerializeField] private int _slimeShowCount = 3;
-    [SerializeField] private float _showDelayMinSeconds = 2;
-    [SerializeField] private float _showDelayMaxSeconds = 7;
-    [SerializeField] private float _delaySecondsAfterHide;
-    [SerializeField] private int _minigameSeconds = 60;
+    [SerializeField] private SlimeMinigameConfig _config;
 
     private bool _isInitialized;
     private float _remainTime;
@@ -39,7 +35,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     protected override void OnShow(params object[] args)
     {
         _isInitialized = false;
-        _remainTime = _minigameSeconds;
+        _remainTime = _config.MinigameSeconds;
         _slimeCount = 0;
 
         HideAll();
@@ -49,7 +45,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             {
                 _isInitialized = true;
                 StartSlimeCoroutine();
-                Invoke(nameof(StopSlimeCoroutine), _minigameSeconds);
+                Invoke(nameof(StopSlimeCoroutine), _config.MinigameSeconds);
             });
     }
 
@@ -66,7 +62,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     private void StartSlimeCoroutine()
     {
         _coroutines.Clear();
-        for (var i = 0; i < _slimeShowCount; i++)
+        for (var i = 0; i < _config.SlimeShowCount; i++)
         {
             _coroutines.Add(StartCoroutine(CoShowNpcDialog()));
         }
@@ -84,7 +80,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     private IEnumerator CoShowNpcDialog()
     {
-        var waitFirstSeconds = Random.Range(_showDelayMinSeconds, _showDelayMaxSeconds);
+        var waitFirstSeconds = _config.GetShowDelayRandomSeconds(1);
         yield return UniTask.Delay(TimeUtil.SecondsToMillis(waitFirstSeconds));
         while (true)
         {
@@ -92,9 +88,10 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             var slimeBlock = _slimeBlocks.GetAt(randomDialogIndex);
             if (slimeBlock.IsShowing) continue;
 
-            var delaySeconds = Random.Range(_showDelayMinSeconds, _showDelayMaxSeconds);
-            yield return slimeBlock.Show(1, delaySeconds).ToCoroutine(); // TODO(지선): order값 넣어야함
-            yield return UniTask.Delay(TimeUtil.SecondsToMillis(_delaySecondsAfterHide));
+            var randomOrder = _config.GetRandomSlimeOrder();
+            var delaySeconds = _config.GetShowDelayRandomSeconds(randomOrder);
+            yield return slimeBlock.Show(randomOrder, delaySeconds).ToCoroutine();
+            yield return UniTask.Delay(TimeUtil.SecondsToMillis(_config.GetHideDelayRandomSeconds()));
         }
     }
 

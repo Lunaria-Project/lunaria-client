@@ -32,4 +32,9 @@ public class ResourceManager : Singleton<ResourceManager>
         var cutsceneResourceKey = $"{resourceKey}_cutscene";
         return LoadSprite(cutsceneResourceKey);
     }
+
+    public Sprite LoadSlimeMinigameSprite(int order)
+    {
+        return LoadSprite($"slime_{order:D2}");
+    }
 }
