@@ -12,6 +12,7 @@ public partial class CutsceneManager
 
     [Header("Dialog"), Space(8)]
     [SerializeField] private GameObject _dialogBlock;
+    [SerializeField] private GameObject _dialogCharacterBlock;
     [SerializeField] private Image _dialogCharacter;
     [SerializeField] private Text _dialogCharacterName;
     [SerializeField] private RectTransform _dialogNpcTransform;
@@ -56,9 +57,17 @@ public partial class CutsceneManager
         _dialogBlock.SetActive(true);
 
         var characterId = data.IntValues.GetAt(0);
-        var characterInfoData = GameData.Instance.GetCharacterInfoData(characterId);
-        _dialogCharacter.SetSprite(ResourceManager.Instance.LoadCutsceneCharacterSprite(characterInfoData.ResourceKey));
-        _dialogCharacterName.SetText(characterInfoData.Name);
+        if (characterId > 0)
+        {
+            _dialogCharacterBlock.SetActive(true);
+            var characterInfoData = GameData.Instance.GetCharacterInfoData(characterId);
+            _dialogCharacter.SetSprite(ResourceManager.Instance.LoadCutsceneCharacterSprite(characterInfoData.ResourceKey));
+            _dialogCharacterName.SetText(characterInfoData.Name);
+        }
+        else
+        {
+            _dialogCharacterBlock.SetActive(false);
+        }
 
         _dialogNpcTransform.anchoredPosition = data.Position;
         _dialogNpcTransform.localScale = isFlipped ? new Vector3(-1, 1, 1) : Vector3.one;
