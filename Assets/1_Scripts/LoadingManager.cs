@@ -1,10 +1,9 @@
-using System;
 using System.Linq;
 using Lunaria;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class LoadingManager : SingletonMonoBehaviourDontDestroy<LoadingManager>
+public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
 {
     [SerializeField] private Image _loadingImage;
     [SerializeField] private Text _loadingDescription;

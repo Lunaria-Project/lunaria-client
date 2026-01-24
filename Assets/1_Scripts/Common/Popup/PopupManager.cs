@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManager>
+public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 {
     [SerializeField] private RectTransform _parentRectTransform;
 

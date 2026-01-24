@@ -29,7 +29,7 @@ public class PanelInfo
     }
 }
 
-public partial class PanelManager : SingletonMonoBehaviourDontDestroy<PanelManager>
+public partial class PanelManager : SingletonMonoBehaviour<PanelManager>
 {
     [SerializeField] private RectTransform _parentRectTransform;
 

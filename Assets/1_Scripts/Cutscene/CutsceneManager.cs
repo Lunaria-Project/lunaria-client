@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Generated;
 
-public partial class CutsceneManager : SingletonMonoBehaviourDontDestroy<CutsceneManager>
+public partial class CutsceneManager : SingletonMonoBehaviour<CutsceneManager>
 {
     public bool IsPlaying { get; private set; }
     

@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-public class GlobalManager : SingletonMonoBehaviourDontDestroy<GlobalManager>
+public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 {
     public event Action OnQKeyDown;
     public event Action OnEKeyDown;
-    
+
     private bool _isRunning = false;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -15,8 +15,9 @@ public class GlobalManager : SingletonMonoBehaviourDontDestroy<GlobalManager>
         GameTimeManager.Instance.OnEndDay += OnEndDay;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnQKeyDown?.Invoke();
