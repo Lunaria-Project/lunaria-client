@@ -91,10 +91,11 @@ public partial class PopupManager : SingletonMonoBehaviourDontDestroy<PopupManag
         await UniTask.NextFrame();
     }
 
-    private static void HidePopupInternal(PopupBase popup)
+    private void HidePopupInternal(PopupBase popup)
     {
         if (popup == null) return;
 
+        _popupList.Remove(popup);
         popup.HideInternal();
         Destroy(popup.gameObject);
     }
