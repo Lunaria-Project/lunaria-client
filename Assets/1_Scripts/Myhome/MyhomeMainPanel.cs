@@ -1,12 +1,10 @@
 using Cysharp.Threading.Tasks;
-using Generated;
-using Lunaria;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 {
-    [SerializeField] Text _walletText;
+    [SerializeField] TopWalletUI _walletUI;
     [SerializeField] TopTimeUI _timeUI;
     [SerializeField] MyhomeArtifactUI _artifactUI;
 
@@ -27,7 +25,7 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
     private void OnShowUI()
     {
-        _walletText.SetText(UserData.Instance.GetItemQuantity(ItemType.MainCoin).ToPrice());
+        _walletUI.Refresh();
     }
 
     public void OnShoppingSquareButtonClick()
