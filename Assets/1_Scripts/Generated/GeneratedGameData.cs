@@ -119,6 +119,18 @@ namespace Generated
         }
     }
 
+    public partial class ArtifactData
+    {
+        public int Id { get; private set; }
+        public ArtifactType ArtifactType { get; private set; }
+
+        public ArtifactData(int id, ArtifactType artifactType)
+        {
+            Id = id;
+            ArtifactType = artifactType;
+        }
+    }
+
     public partial class InitialItemData
     {
         public int ItemId { get; private set; }

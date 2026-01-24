@@ -48,6 +48,17 @@ public partial class GameData
         }
     }
 
+    private void LoadArtifactData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtArtifactData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new ArtifactData(Convert.ToInt32(row[0]), (ArtifactType)Enum.Parse(typeof(ArtifactType), (string)row[1], true));
+            _dtArtifactData.Add(newData.Id, newData);
+        }
+    }
+
     private void LoadInitialItemData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -122,6 +133,7 @@ public partial class GameData
             case "Cutscene": LoadCutsceneData(rows, type); break;
             case "CutsceneInfo": LoadCutsceneInfoData(rows, type); break;
             case "CutsceneSelection": LoadCutsceneSelectionData(rows, type); break;
+            case "Artifact": LoadArtifactData(rows, type); break;
             case "InitialItem": LoadInitialItemData(rows, type); break;
             case "Item": LoadItemData(rows, type); break;
             case "Loading": LoadLoadingData(rows, type); break;

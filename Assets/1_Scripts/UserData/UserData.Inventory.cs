@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public partial class UserData
 {
     public Dictionary<int, long> ItemDictionary { get; private set; } = new();
-    public int EquippedArtifact { get; private set; }
+    public int EquippedArtifactId { get; private set; }
 
     public long GetItemQuantity(int itemDataId)
     {
@@ -30,6 +30,6 @@ public partial class UserData
 
     public void SetEquippedArtifact(int itemId)
     {
-        EquippedArtifact = itemId;
+        EquippedArtifactId = itemId;
     }
 }

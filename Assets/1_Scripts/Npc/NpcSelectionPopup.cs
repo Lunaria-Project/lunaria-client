@@ -44,6 +44,12 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
             }
             case NpcMenuFunctionType.PlaySlimeMinigame:
             {
+                var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
+                if (artifactData.ArtifactType != ArtifactType.Bubblegun)
+                {
+                    LogManager.Log("버블건 필요하다. 센터메시지.. 필요?");
+                    return;
+                }
                 PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);
                 break;
             }

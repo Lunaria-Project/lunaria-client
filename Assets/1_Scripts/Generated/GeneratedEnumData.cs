@@ -1,6 +1,17 @@
 namespace Generated
 {
     [SerializeEnum]
+    public enum ArtifactType
+    {
+        None = 0,
+        Bubblegun = 1,
+        Grinder = 2,
+        Pendant = 3,
+        Powder = 4,
+        Stick = 5,
+    }
+
+    [SerializeEnum]
     public enum CutsceneCommand
     {
         None = 0,
