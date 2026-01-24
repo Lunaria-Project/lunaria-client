@@ -14,25 +14,27 @@ public class SlimeBlock : MonoBehaviour
 
     public bool IsShowing { get; private set; }
 
-    private Action<int> _onTouchSlime;
-    private int _slimeOrder;
+    private Action<SlimeType> _onTouchSlime;
+    private SlimeType _slimeType;
     private int _remainTouchCount;
 
-    public void SetOnTouchSlime(Action<int> onTouchSlime)
+    public void SetOnTouchSlime(Action<SlimeType> onTouchSlime)
     {
         _onTouchSlime = onTouchSlime;
     }
 
-    public async UniTask Show(int slimeOrder, float scale, float showTime)
+    public async UniTask Show(SlimeType type, int touchCount, float scale, float showTime)
     {
-        _slimeOrder = slimeOrder;
-        _remainTouchCount = slimeOrder;
+        _slimeType = type;
+        _remainTouchCount = touchCount;
         IsShowing = true;
         _rectTransform.anchoredPosition = Vector2.zero;
         _rectTransform.gameObject.SetActive(true);
         _touchButton.SetActive(true);
 
-        _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(_slimeOrder));
+        _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(type));
+        var isToxic = type is SlimeType.ToxicLevel1 or SlimeType.ToxicLevel2 or SlimeType.ToxicLevel3;
+        _slimeImage.color = isToxic ? Color.gray : Color.white; // TODO(지선):임시 코드
         _slimeImageRectTransform.SetScale(scale);
 
         DOTween.Kill(this);
@@ -58,7 +60,7 @@ public class SlimeBlock : MonoBehaviour
         _remainTouchCount--;
         if (_remainTouchCount > 0) return;
 
-        _onTouchSlime.Invoke(_slimeOrder);
+        _onTouchSlime.Invoke(_slimeType);
         Hide();
     }
 }

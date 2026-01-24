@@ -26,15 +26,26 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         return LoadScriptableObject<MapConfig>("map_config");
     }
-    
+
     public Sprite LoadCutsceneCharacterSprite(string resourceKey)
     {
         var cutsceneResourceKey = $"{resourceKey}_cutscene";
         return LoadSprite(cutsceneResourceKey);
     }
 
-    public Sprite LoadSlimeMinigameSprite(int order)
+    public Sprite LoadSlimeMinigameSprite(SlimeType type)
     {
-        return LoadSprite($"slime_{order:D2}");
+        var resourceKey = type switch
+        {
+            SlimeType.Level1      => "slime_01",
+            SlimeType.Level2      => "slime_02",
+            SlimeType.Level3      => "slime_03",
+            SlimeType.ToxicLevel1 => "toxic_slime_01",
+            SlimeType.ToxicLevel2 => "toxic_slime_02",
+            SlimeType.ToxicLevel3 => "toxic_slime_03",
+            SlimeType.Bonus       => "bonus_slime",
+            _                     => null,
+        };
+        return LoadSprite(resourceKey);
     }
 }

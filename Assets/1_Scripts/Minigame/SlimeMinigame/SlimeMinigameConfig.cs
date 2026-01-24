@@ -10,10 +10,11 @@ public class SlimeMinigameConfig : ScriptableObject
     [SerializeField] private float _hideDelayMinSeconds = 0.5f;
     [SerializeField] private float _hideDelayMaxSeconds = 2.5f;
     [SerializeField] private float _showDelayMultiplier = 0.2f;
+    [SerializeField] private int _toxicSlimeRatePercent = 20;
     [SerializeField] private int _slime1Rate = 100;
     [SerializeField] private int _slime2Rate = 100;
     [SerializeField] private int _slime3Rate = 100;
-    [SerializeField] private int _slime4Rate = 100;
+    [SerializeField] private int _bonusSlimeRate = 100;
     [SerializeField] private float _slime1Size = 0.3f;
     [SerializeField] private float _slime2Size = 0.6f;
     [SerializeField] private float _slime3Size = 1f;
@@ -22,9 +23,17 @@ public class SlimeMinigameConfig : ScriptableObject
     public int MinigameSeconds => _minigameSeconds;
     public int SlimeShowCount => _slimeShowCount;
 
-    public float GetShowDelayRandomSeconds(int order)
+    public float GetShowDelayRandomSeconds(SlimeType type)
     {
-        return Random.Range(_showDelayMinSeconds, _showDelayMaxSeconds) * order * _showDelayMultiplier;
+        var multiplier = type switch
+        {
+            SlimeType.Bonus                           => _showDelayMultiplier,
+            SlimeType.Level1 or SlimeType.ToxicLevel1 => _showDelayMultiplier * 2,
+            SlimeType.Level2 or SlimeType.ToxicLevel2 => _showDelayMultiplier * 3,
+            SlimeType.Level3 or SlimeType.ToxicLevel3 => _showDelayMultiplier * 4,
+            _                                         => 1f,
+        };
+        return Random.Range(_showDelayMinSeconds, _showDelayMaxSeconds) * multiplier;
     }
 
     public float GetHideDelayRandomSeconds()
@@ -32,30 +41,43 @@ public class SlimeMinigameConfig : ScriptableObject
         return Random.Range(_hideDelayMinSeconds, _hideDelayMaxSeconds);
     }
 
-    public int GetRandomSlimeOrder()
+    public (SlimeType type, bool isToxic) GetRandomSlime()
     {
-        var totalRate = _slime1Rate + _slime2Rate + _slime3Rate + _slime4Rate;
+        var isToxic = Random.Range(0, 100) < _toxicSlimeRatePercent;
+        var totalRate = _slime1Rate + _slime2Rate + _slime3Rate + _bonusSlimeRate;
         var random = Random.Range(0, totalRate);
-        if (random < _slime1Rate) return 1;
+        if (random < _slime1Rate) return (isToxic ? SlimeType.ToxicLevel1 : SlimeType.Level1, isToxic);
         random -= _slime1Rate;
-        if (random < _slime2Rate) return 2;
+        if (random < _slime2Rate) return (isToxic ? SlimeType.ToxicLevel2 : SlimeType.Level2, isToxic);
         random -= _slime2Rate;
-        if (random < _slime3Rate) return 3;
+        if (random < _slime3Rate) return (isToxic ? SlimeType.ToxicLevel3 : SlimeType.Level3, isToxic);
         random -= _slime3Rate;
-        if (random < _slime4Rate) return 4;
+        if (random < _bonusSlimeRate) return (SlimeType.Bonus, isToxic);
         LogManager.LogError("Unreachable");
-        return 1;
+        return (SlimeType.Level1, isToxic);
     }
 
-    public float GetSlimeScale(int order)
+    public float GetSlimeScale(SlimeType type)
     {
-        return order switch
+        return type switch
         {
-            1 => _slime1Size,
-            2 => _slime2Size,
-            3 => _slime3Size,
-            4 => _slime4Size,
-            _ => 1f,
+            SlimeType.Bonus                           => _slime1Size,
+            SlimeType.Level1 or SlimeType.ToxicLevel1 => _slime2Size,
+            SlimeType.Level2 or SlimeType.ToxicLevel2 => _slime3Size,
+            SlimeType.Level3 or SlimeType.ToxicLevel3 => _slime4Size,
+            _                                         => 1f,
+        };
+    }
+
+    public int GetTouchCount(SlimeType type)
+    {
+        return type switch
+        {
+            SlimeType.Bonus                           => 1,
+            SlimeType.Level1 or SlimeType.ToxicLevel1 => 1,
+            SlimeType.Level2 or SlimeType.ToxicLevel2 => 2,
+            SlimeType.Level3 or SlimeType.ToxicLevel3 => 3,
+            _                                         => 1,
         };
     }
 }

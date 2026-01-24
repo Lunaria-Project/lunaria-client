@@ -5,6 +5,17 @@ using Lunaria;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum SlimeType
+{
+    Level1,
+    Level2,
+    Level3,
+    Bonus,
+    ToxicLevel1,
+    ToxicLevel2,
+    ToxicLevel3,
+}
+
 public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 {
     [SerializeField] private Text _remainTimeText;
@@ -80,7 +91,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     private IEnumerator CoShowNpcDialog()
     {
-        var waitFirstSeconds = _config.GetShowDelayRandomSeconds(1);
+        var waitFirstSeconds = _config.GetShowDelayRandomSeconds(SlimeType.Level1);
         yield return UniTask.Delay(TimeUtil.SecondsToMillis(waitFirstSeconds));
         while (true)
         {
@@ -88,10 +99,11 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             var slimeBlock = _slimeBlocks.GetAt(randomDialogIndex);
             if (slimeBlock.IsShowing) continue;
 
-            var randomOrder = _config.GetRandomSlimeOrder();
-            var scale = _config.GetSlimeScale(randomOrder);
-            var delaySeconds = _config.GetShowDelayRandomSeconds(randomOrder);
-            yield return slimeBlock.Show(randomOrder, scale, delaySeconds).ToCoroutine();
+            var (slimeType, isToxic) = _config.GetRandomSlime();
+            var scale = _config.GetSlimeScale(slimeType);
+            var delaySeconds = _config.GetShowDelayRandomSeconds(slimeType);
+            var touchCount = _config.GetTouchCount(slimeType);
+            yield return slimeBlock.Show(slimeType, touchCount, scale, delaySeconds).ToCoroutine();
             yield return UniTask.Delay(TimeUtil.SecondsToMillis(_config.GetHideDelayRandomSeconds()));
         }
     }
@@ -104,9 +116,19 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         }
     }
 
-    private void OnTouchSlime(int slimeOrder)
+    private void OnTouchSlime(SlimeType type)
     {
-        _slimeCount++;
+        _slimeCount += type switch
+        {
+            SlimeType.Level1      => 1,
+            SlimeType.Level2      => 2,
+            SlimeType.Level3      => 3,
+            SlimeType.ToxicLevel1 => -1,
+            SlimeType.ToxicLevel2 => -2,
+            SlimeType.ToxicLevel3 => -3,
+            SlimeType.Bonus       => Random.Range(1, 4),
+            _                     => 0,
+        };
         OnRefresh();
     }
 }
