@@ -43,7 +43,6 @@ public class ResourceManager : Singleton<ResourceManager>
             SlimeType.ToxicLevel1 => "toxic_slime_01",
             SlimeType.ToxicLevel2 => "toxic_slime_02",
             SlimeType.ToxicLevel3 => "toxic_slime_03",
-            SlimeType.Bonus       => "bonus_slime",
             _                     => null,
         };
         return LoadSprite(resourceKey);

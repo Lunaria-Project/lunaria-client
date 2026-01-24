@@ -10,7 +10,6 @@ public enum SlimeType
     Level1,
     Level2,
     Level3,
-    Bonus,
     ToxicLevel1,
     ToxicLevel2,
     ToxicLevel3,
@@ -126,7 +125,6 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             SlimeType.ToxicLevel1 => -1,
             SlimeType.ToxicLevel2 => -2,
             SlimeType.ToxicLevel3 => -3,
-            SlimeType.Bonus       => Random.Range(1, 4),
             _                     => 0,
         };
         OnRefresh();
