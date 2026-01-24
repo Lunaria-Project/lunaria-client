@@ -7,6 +7,13 @@ public class GlobalManager : SingletonMonoBehaviourDontDestroy<GlobalManager>
     public event Action OnEKeyDown;
     
     private bool _isRunning = false;
+    
+    protected override void Awake()
+    {
+        base.Awake();
+        GameTimeManager.Instance.OnEndDay -= OnEndDay;
+        GameTimeManager.Instance.OnEndDay += OnEndDay;
+    }
 
     private void Update()
     {
@@ -18,13 +25,6 @@ public class GlobalManager : SingletonMonoBehaviourDontDestroy<GlobalManager>
         {
             OnEKeyDown?.Invoke();
         }
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        GameTimeManager.Instance.OnEndDay -= OnEndDay;
-        GameTimeManager.Instance.OnEndDay += OnEndDay;
     }
 
     public void StartDay()
@@ -40,6 +40,7 @@ public class GlobalManager : SingletonMonoBehaviourDontDestroy<GlobalManager>
 
     private void OnEndDay()
     {
+        if (!_isRunning) return;
         _isRunning = false;
         // TODO(지선): 여기서 영수증이 나오게 작업 필요
         LogManager.Log("하루 끝");
