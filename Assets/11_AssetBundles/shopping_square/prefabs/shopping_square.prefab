@@ -2434,7 +2434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShoppingSquareMapManager
   _mapObjects: []
   _npcObjects: []
-  _player: {fileID: 0}
+  _player: {fileID: 554057881316292089}
   _camera: {fileID: 0}
 --- !u!1 &7769178720353754546
 GameObject:
@@ -3083,6 +3083,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecef528689047441bac8d604dcedfd67, type: 3}
+--- !u!114 &554057881316292089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5983847348493533748, guid: ecef528689047441bac8d604dcedfd67, type: 3}
+  m_PrefabInstance: {fileID: 6105348103005681613}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd451b150dae481eac146cbe0a58a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerObject
 --- !u!4 &3726822592828712877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7422733350310678624, guid: ecef528689047441bac8d604dcedfd67, type: 3}
