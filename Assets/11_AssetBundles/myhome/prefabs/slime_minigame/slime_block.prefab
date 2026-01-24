@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c9cfa1dbe00a1d41ae9d14f5ac543ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d338c631fa36f345b72a36f1c91ff9a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -183,9 +183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeBlock
   _rectTransform: {fileID: 1920356545689696492}
   _touchButton: {fileID: 6030732575075844793}
+  _slimeImageRectTransform: {fileID: 1920356545689696492}
   _slimeImage: {fileID: 5588931672040469625}
   _showPosition: {x: 0, y: 1}
-  _showDistance: 100
 --- !u!1 &8513420221879403644
 GameObject:
   m_ObjectHideFlags: 0

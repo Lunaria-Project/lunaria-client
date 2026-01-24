@@ -89,8 +89,9 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             if (slimeBlock.IsShowing) continue;
 
             var randomOrder = _config.GetRandomSlimeOrder();
+            var scale = _config.GetSlimeScale(randomOrder);
             var delaySeconds = _config.GetShowDelayRandomSeconds(randomOrder);
-            yield return slimeBlock.Show(randomOrder, delaySeconds).ToCoroutine();
+            yield return slimeBlock.Show(randomOrder, scale, delaySeconds).ToCoroutine();
             yield return UniTask.Delay(TimeUtil.SecondsToMillis(_config.GetHideDelayRandomSeconds()));
         }
     }

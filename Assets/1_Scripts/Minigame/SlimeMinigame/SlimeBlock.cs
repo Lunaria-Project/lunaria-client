@@ -8,6 +8,7 @@ public class SlimeBlock : MonoBehaviour
 {
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private GameObject _touchButton;
+    [SerializeField] private RectTransform _slimeImageRectTransform;
     [SerializeField] private Image _slimeImage;
     [SerializeField] private Vector2 _showPosition = Vector2.up;
 
@@ -22,7 +23,7 @@ public class SlimeBlock : MonoBehaviour
         _onTouchSlime = onTouchSlime;
     }
 
-    public async UniTask Show(int slimeOrder, float showTime)
+    public async UniTask Show(int slimeOrder, float scale, float showTime)
     {
         _slimeOrder = slimeOrder;
         _remainTouchCount = slimeOrder;
@@ -32,6 +33,7 @@ public class SlimeBlock : MonoBehaviour
         _touchButton.SetActive(true);
 
         _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(_slimeOrder));
+        _slimeImageRectTransform.SetScale(scale);
 
         DOTween.Kill(this);
         await DOTween.Sequence().SetId(this)

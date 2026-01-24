@@ -14,6 +14,10 @@ public class SlimeMinigameConfig : ScriptableObject
     [SerializeField] private int _slime2Rate = 100;
     [SerializeField] private int _slime3Rate = 100;
     [SerializeField] private int _slime4Rate = 100;
+    [SerializeField] private float _slime1Size = 0.3f;
+    [SerializeField] private float _slime2Size = 0.6f;
+    [SerializeField] private float _slime3Size = 1f;
+    [SerializeField] private float _slime4Size = 1.2f;
 
     public int MinigameSeconds => _minigameSeconds;
     public int SlimeShowCount => _slimeShowCount;
@@ -41,5 +45,17 @@ public class SlimeMinigameConfig : ScriptableObject
         if (random < _slime4Rate) return 4;
         LogManager.LogError("Unreachable");
         return 1;
+    }
+
+    public float GetSlimeScale(int order)
+    {
+        return order switch
+        {
+            1 => _slime1Size,
+            2 => _slime2Size,
+            3 => _slime3Size,
+            4 => _slime4Size,
+            _ => 1f,
+        };
     }
 }
