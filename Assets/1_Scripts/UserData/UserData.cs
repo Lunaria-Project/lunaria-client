@@ -14,6 +14,14 @@ public class UserDataInfo
 
 public partial class UserData : Singleton<UserData>
 {
+    public void AddInitialItems()
+    {
+        foreach (var (id, data) in GameData.Instance.DTInitialItemData)
+        {
+            ItemDictionary.TryAdd(id, data.Quantity);
+        }
+    }
+
     public void Init(UserDataInfo info)
     {
         ItemDictionary = info.ItemDictionary;

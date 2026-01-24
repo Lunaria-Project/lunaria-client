@@ -26,6 +26,7 @@ public class TitleMainPanel : Panel<TitleMainPanel>
     private async UniTask StartGame(UserDataInfo info)
     {
         UserData.Instance.Init(info);
+        UserData.Instance.AddInitialItems();
         await SceneManager.LoadSceneAsync(1);
         GlobalManager.Instance.StartDay();
     }
