@@ -119,19 +119,33 @@ namespace Generated
         }
     }
 
+    public partial class InitialItemData
+    {
+        public int ItemId { get; private set; }
+        public int Quantity { get; private set; }
+
+        public InitialItemData(int itemId, int quantity)
+        {
+            ItemId = itemId;
+            Quantity = quantity;
+        }
+    }
+
     public partial class ItemData
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string IconResourceKey { get; private set; }
         public ItemType ItemType { get; private set; }
+        public int Order { get; private set; }
 
-        public ItemData(int id, string name, string iconResourceKey, ItemType itemType)
+        public ItemData(int id, string name, string iconResourceKey, ItemType itemType, int order)
         {
             Id = id;
             Name = name;
             IconResourceKey = iconResourceKey;
             ItemType = itemType;
+            Order = order;
         }
     }
 

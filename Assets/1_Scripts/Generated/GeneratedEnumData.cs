@@ -16,7 +16,8 @@ namespace Generated
     public enum ItemType
     {
         None = 0,
-        MainCoin = 1,
+        Artifact = 1,
+        MainCoin = 2,
     }
 
     [SerializeEnum]

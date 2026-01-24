@@ -36,6 +36,13 @@ public partial class GameData
     public IReadOnlyList<GameSettingData> DTGameSettingData => _dtGameSettingData;
     private List<GameSettingData> _dtGameSettingData = new();
 
+    // InitialItemData - InitialItemData, key: ItemId
+    public IReadOnlyDictionary<int, InitialItemData> DTInitialItemData => _dtInitialItemData;
+    public bool TryGetInitialItemData(int key, out InitialItemData result) => DTInitialItemData.TryGetValue(key, out result);
+    public InitialItemData GetInitialItemData(int key) => DTInitialItemData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsInitialItemData(int key) => DTInitialItemData.ContainsKey(key);
+    private readonly Dictionary<int, InitialItemData> _dtInitialItemData = new();
+
     // ItemData - ItemData, key: Id
     public IReadOnlyDictionary<int, ItemData> DTItemData => _dtItemData;
     public bool TryGetItemData(int key, out ItemData result) => DTItemData.TryGetValue(key, out result);
