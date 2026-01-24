@@ -50,7 +50,10 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         _remainTime = _config.MinigameSeconds;
         _slimeCount = 0;
 
-        HideAll();
+        foreach (var slime in _slimeBlocks)
+        {
+            slime.Init();
+        }
 
         PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter { CountDownSeconds = 3 })
             .SetOnHideAction(() =>
@@ -63,7 +66,10 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     protected override void OnHide()
     {
-        HideAll();
+        foreach (var slime in _slimeBlocks)
+        {
+            slime.Hide();
+        }
         GlobalManager.Instance.SetDefaultCursor();
     }
 
@@ -101,35 +107,19 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             var slimeBlock = _slimeBlocks.GetAt(randomDialogIndex);
             if (slimeBlock.IsShowing) continue;
 
-            var (slimeType, isToxic) = _config.GetRandomSlime();
+            var slimeType = _config.GetRandomSlime();
             var scale = _config.GetSlimeScale(slimeType);
             var delaySeconds = _config.GetShowDelayRandomSeconds(slimeType);
             var touchCount = _config.GetTouchCount(slimeType);
-            yield return slimeBlock.Show(slimeType, touchCount, scale, delaySeconds).ToCoroutine();
+            var score = _config.GetScore(slimeType);
+            yield return slimeBlock.Show(slimeType, touchCount, score, scale, delaySeconds).ToCoroutine();
             yield return UniTask.Delay(TimeUtil.SecondsToMillis(_config.GetHideDelayRandomSeconds()));
-        }
-    }
-
-    private void HideAll()
-    {
-        foreach (var slime in _slimeBlocks)
-        {
-            slime.Hide();
         }
     }
 
     private void OnTouchSlime(SlimeType type)
     {
-        _slimeCount += type switch
-        {
-            SlimeType.Level1      => 1,
-            SlimeType.Level2      => 2,
-            SlimeType.Level3      => 3,
-            SlimeType.ToxicLevel1 => -1,
-            SlimeType.ToxicLevel2 => -2,
-            SlimeType.ToxicLevel3 => -3,
-            _                     => 0,
-        };
+        _slimeCount += _config.GetScore(type);
         OnRefresh();
     }
 }

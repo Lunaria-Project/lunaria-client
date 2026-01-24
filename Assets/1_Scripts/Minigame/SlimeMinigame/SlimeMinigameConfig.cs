@@ -39,18 +39,18 @@ public class SlimeMinigameConfig : ScriptableObject
         return Random.Range(_hideDelayMinSeconds, _hideDelayMaxSeconds);
     }
 
-    public (SlimeType type, bool isToxic) GetRandomSlime()
+    public SlimeType GetRandomSlime()
     {
         var isToxic = Random.Range(0, 100) < _toxicSlimeRatePercent;
         var totalRate = _slime1Rate + _slime2Rate + _slime3Rate;
         var random = Random.Range(0, totalRate);
-        if (random < _slime1Rate) return (isToxic ? SlimeType.ToxicLevel1 : SlimeType.Level1, isToxic);
+        if (random < _slime1Rate) return isToxic ? SlimeType.ToxicLevel1 : SlimeType.Level1;
         random -= _slime1Rate;
-        if (random < _slime2Rate) return (isToxic ? SlimeType.ToxicLevel2 : SlimeType.Level2, isToxic);
+        if (random < _slime2Rate) return isToxic ? SlimeType.ToxicLevel2 : SlimeType.Level2;
         random -= _slime2Rate;
-        if (random < _slime3Rate) return (isToxic ? SlimeType.ToxicLevel3 : SlimeType.Level3, isToxic);
+        if (random < _slime3Rate) return isToxic ? SlimeType.ToxicLevel3 : SlimeType.Level3;
         LogManager.LogError("Unreachable");
-        return (SlimeType.Level1, isToxic);
+        return SlimeType.Level1;
     }
 
     public float GetSlimeScale(SlimeType type)
@@ -72,6 +72,20 @@ public class SlimeMinigameConfig : ScriptableObject
             SlimeType.Level2 or SlimeType.ToxicLevel2 => 2,
             SlimeType.Level3 or SlimeType.ToxicLevel3 => 3,
             _                                         => 1,
+        };
+    }
+    
+    public int GetScore(SlimeType type)
+    {
+        return type switch
+        {
+            SlimeType.Level1      => 1,
+            SlimeType.Level2      => 2,
+            SlimeType.Level3      => 3,
+            SlimeType.ToxicLevel1 => -1,
+            SlimeType.ToxicLevel2 => -2,
+            SlimeType.ToxicLevel3 => -3,
+            _                     => 0,
         };
     }
 }
