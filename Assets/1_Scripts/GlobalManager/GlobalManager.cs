@@ -18,6 +18,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     protected override void Update()
     {
         base.Update();
+        UpdateCursor();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnQKeyDown?.Invoke();
@@ -25,6 +26,14 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         else if (Input.GetKeyDown(KeyCode.E))
         {
             OnEKeyDown?.Invoke();
+        }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            HideUserCursor();
         }
     }
 

@@ -13,6 +13,7 @@ public class BaseMapManager : MonoBehaviour
 
     protected virtual void Start()
     {
+        GlobalManager.Instance.SetDefaultCursor();
         _currentNpcDataId = 0;
         SetMapObjectSortingLayer();
         _config = ResourceManager.Instance.LoadMapConfig();

@@ -1,8 +1,9 @@
 public class TitleManager : SingletonMonoBehaviour<TitleManager>
 {
-    public void Start()
+    protected override void Start()
     {
         GameData.Instance.LoadGameData();
+        GlobalManager.Instance.SetCursor(CursorType.DefaultEmpty);
         PanelManager.Instance.ShowPanel(PanelManager.Type.TitleMain);
     }
 }

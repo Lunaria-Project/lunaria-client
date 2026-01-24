@@ -6,12 +6,12 @@ public class GameTimeTestScene : SingletonMonoBehaviour<GameTimeTestScene>
     [SerializeField] private TextMeshProUGUI _secondsText;
     [SerializeField] private TextMeshProUGUI _currentTimeText;
 
-    public void Start()
+    protected override void Start()
     {
         GameData.Instance.LoadGameData();
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (!GameTimeManager.Instance.IsInitialized) return;
 

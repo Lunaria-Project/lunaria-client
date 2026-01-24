@@ -44,6 +44,8 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         }
     }
 
+    protected virtual void Start() { }
+
     protected virtual void Update() { }
 
     private void OnApplicationQuit()

@@ -10,7 +10,7 @@ public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
 
     public const int DefaultLoadingAwaitMillis = 2000;
 
-    private void Start()
+    protected override void Start()
     {
         _loadingImage.SetActive(false);
     }

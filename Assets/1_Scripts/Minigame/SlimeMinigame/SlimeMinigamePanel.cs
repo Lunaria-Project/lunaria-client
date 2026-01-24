@@ -44,6 +44,8 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     protected override void OnShow(params object[] args)
     {
+        GlobalManager.Instance.SetCursor(CursorType.BubbleGun);
+
         _isInitialized = false;
         _remainTime = _config.MinigameSeconds;
         _slimeCount = 0;
@@ -62,6 +64,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     protected override void OnHide()
     {
         HideAll();
+        GlobalManager.Instance.SetDefaultCursor();
     }
 
     protected override void OnRefresh()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>
@@ -47,4 +48,6 @@ public class ResourceManager : Singleton<ResourceManager>
         };
         return LoadSprite(resourceKey);
     }
+
+    private readonly Dictionary<string, List<Sprite>> _cursorSpriteCache = new();
 }
