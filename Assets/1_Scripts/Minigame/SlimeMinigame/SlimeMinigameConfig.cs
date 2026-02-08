@@ -68,13 +68,13 @@ public class SlimeMinigameConfig : ScriptableObject
     {
         return type switch
         {
-            SlimeType.Level1 or SlimeType.ToxicLevel1 => 1,
-            SlimeType.Level2 or SlimeType.ToxicLevel2 => 2,
-            SlimeType.Level3 or SlimeType.ToxicLevel3 => 3,
-            _                                         => 1,
+            SlimeType.Level1 => 1,
+            SlimeType.Level2 => 2,
+            SlimeType.Level3 => 3,
+            _                => 1,
         };
     }
-    
+
     public int GetScore(SlimeType type)
     {
         return type switch
