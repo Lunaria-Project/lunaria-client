@@ -1,14 +1,20 @@
 using System;
+using DG.Tweening;
+using Lunaria;
 using UnityEngine;
 
 public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 {
+    [SerializeField] private Image _toastMessageBackground;
+    [SerializeField] private Text _toastMessageText;
+
     public event Action OnApplicationPaused;
     public event Action OnApplicationResume;
     public event Action OnQKeyDown;
     public event Action OnEKeyDown;
 
     private bool _isRunning = false;
+    private Color _transparentColor = new Color(1, 1, 1, 0);
 
     protected override void Awake()
     {
@@ -19,8 +25,15 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         OnApplicationResume += HideUserCursor;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        _toastMessageBackground.SetActive(false);
+    }
+
     protected override void OnDestroy()
     {
+        DOTween.Kill(_toastMessageBackground);
         OnApplicationResume -= HideUserCursor;
     }
 
@@ -56,6 +69,8 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         OnApplicationResume?.Invoke();
     }
 
+    #region Day
+
     public void StartDay()
     {
         if (_isRunning)
@@ -75,4 +90,28 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         LogManager.Log("하루 끝");
         StartDay();
     }
+
+    #endregion
+
+    #region ToastMessage
+
+    public void ShowToastMessage(string message, float showTimeSeconds = 0.8f)
+    {
+        _toastMessageBackground.color = new Color(_toastMessageBackground.color.r, _toastMessageBackground.color.g, _toastMessageBackground.color.b, 0);
+        _toastMessageText.color = _transparentColor;
+
+        _toastMessageBackground.SetActive(true);
+        _toastMessageText.SetText(message);
+
+        DOTween.Kill(_toastMessageBackground);
+        var sequence = DOTween.Sequence().SetId(_toastMessageBackground);
+        sequence.Append(_toastMessageBackground.DOFade(0.78f, 0.2f))
+            .Join(_toastMessageText.DOFade(1f, 0.2f))
+            .AppendInterval(showTimeSeconds)
+            .Append(_toastMessageBackground.DOFade(0f, 0.2f))
+            .Join(_toastMessageText.DOFade(0f, 0.2f))
+            .OnComplete(() => { _toastMessageBackground.SetActive(false); });
+    }
+
+    #endregion
 }

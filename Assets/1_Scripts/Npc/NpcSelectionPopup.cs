@@ -47,7 +47,7 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
                 var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
                 if (artifactData.ArtifactType != ArtifactType.Bubblegun)
                 {
-                    LogManager.Log("버블건 필요하다. 센터메시지.. 필요?");
+                    GlobalManager.Instance.ShowToastMessage("버블건을 장착하자."); // TODO
                     return;
                 }
                 PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);
