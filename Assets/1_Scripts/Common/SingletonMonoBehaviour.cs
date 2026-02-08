@@ -53,7 +53,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         _isDestroyed = true;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         _instance = null;
     }

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 {
+    public event Action OnApplicationPaused;
+    public event Action OnApplicationResume;
     public event Action OnQKeyDown;
     public event Action OnEKeyDown;
 
@@ -13,6 +15,13 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         base.Awake();
         GameTimeManager.Instance.OnEndDay -= OnEndDay;
         GameTimeManager.Instance.OnEndDay += OnEndDay;
+        OnApplicationResume -= HideUserCursor;
+        OnApplicationResume += HideUserCursor;
+    }
+
+    protected override void OnDestroy()
+    {
+        OnApplicationResume -= HideUserCursor;
     }
 
     protected override void Update()
@@ -33,8 +42,18 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         if (hasFocus)
         {
-            HideUserCursor();
+            OnApplicationResume?.Invoke();
         }
+        OnApplicationPaused?.Invoke();
+    }
+
+    private void OnApplicationPause(bool isPaused)
+    {
+        if (isPaused)
+        {
+            OnApplicationPaused?.Invoke();
+        }
+        OnApplicationResume?.Invoke();
     }
 
     public void StartDay()
