@@ -21,6 +21,7 @@ public partial class GlobalManager
         public float Scale;
     }
 
+    [Header("Cursor")]
     [SerializeField] private RectTransform _cursorRectTransform;
     [SerializeField] private RectTransform _cursorImageRectTransform;
     [SerializeField] private Image _cursorImage;
