@@ -6,6 +6,7 @@ public struct GameTime
     public static GameTime Invalid = new();
     public long TotalSeconds { get; private set; }
     public bool IsAM { get; private set; }
+    public int Hours { get; private set; }
     public int HoursForUI { get; private set; }
     public int MinutesForUI { get; private set; }
 
@@ -17,12 +18,13 @@ public struct GameTime
         var hours = TimeUtil.MinutesToHours(totalMinutes) % TimeUtil.HoursPerDay;
 
         IsAM = hours < TimeUtil.HoursPerHalfDay;
+        Hours = hours;
         HoursForUI = hours switch
         {
-            0 => TimeUtil.HoursPerHalfDay,
-            < TimeUtil.HoursPerHalfDay => hours,
-            TimeUtil.HoursPerHalfDay => TimeUtil.HoursPerHalfDay,
-            _ => hours - TimeUtil.HoursPerHalfDay
+            0                           => TimeUtil.HoursPerHalfDay,
+            <= TimeUtil.HoursPerHalfDay => hours,
+            > TimeUtil.HoursPerDay      => hours - TimeUtil.HoursPerDay,
+            _                           => hours - TimeUtil.HoursPerHalfDay
         };
         MinutesForUI = totalMinutes % TimeUtil.MinutesPerHour;
     }

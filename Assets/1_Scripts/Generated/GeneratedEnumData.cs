@@ -43,8 +43,9 @@ namespace Generated
     public enum RequirementType
     {
         None = 0,
-        AlwaysFalse = 1,
-        AlwaysTrue = 2,
+        ActivateDuration = 1,
+        AlwaysFalse = 2,
+        AlwaysTrue = 3,
     }
 
 }

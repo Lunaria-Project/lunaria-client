@@ -109,7 +109,7 @@ public partial class GameData
         _dtMapNpcMenuData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[4], true), (row[5] as string).ParseIntList(), Convert.ToInt32(row[6]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[7], true), Convert.ToInt32(row[8]));
+            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[4], true), (row[5] as string).ParseIntList(), Convert.ToInt32(row[6]), Convert.ToBoolean(row[7]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[8], true), Convert.ToInt32(row[9]));
             _dtMapNpcMenuData.Add(newData);
         }
     }
