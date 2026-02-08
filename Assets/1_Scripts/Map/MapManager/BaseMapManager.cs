@@ -40,6 +40,7 @@ public class BaseMapManager : MonoBehaviour
 
         if (_currentNpcDataId <= 0)
         {
+            if (PopupManager.Instance.ContainsPopup(PopupManager.Type.NpcSelection)) return;
             if (nearestNpc != null && distance <= _config.NpcMenuDistance && _currentNpcDataId != nearestNpc.NpcDataId)
             {
                 _currentNpcDataId = nearestNpc.NpcDataId;
@@ -81,7 +82,6 @@ public class BaseMapManager : MonoBehaviour
 
     protected virtual bool CanShowNpcSelectionPopup()
     {
-        if (PopupManager.Instance.ContainsPopup(PopupManager.Type.NpcSelection)) return false;
         if (_player == null) return false;
         if (_npcObjects == null || _npcObjects.Length == 0) return false;
         if (CutsceneManager.Instance.IsPlaying) return false;
