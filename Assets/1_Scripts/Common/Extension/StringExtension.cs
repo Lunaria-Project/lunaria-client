@@ -37,4 +37,9 @@ public static class StringExtension
         if (float.TryParse(parts[0], out var x) && float.TryParse(parts[1], out var y)) return new Vector2(x, y);
         return Vector2.zero;
     }
+    
+    public static string ToNDigits(this int value, int digits)
+    {
+        return value.ToString($"D{digits}");
+    }
 }
