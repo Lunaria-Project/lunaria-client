@@ -71,6 +71,7 @@ public class SlimeBlock : MonoBehaviour
     public void Hide()
     {
         DOTween.Kill(this);
+        IsShowing = false;
         _touchButton.SetActive(false);
         _healthObjects.SetActiveAll(false);
         _slimeImageRectTransform.SetActive(false);
