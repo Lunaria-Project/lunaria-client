@@ -7,10 +7,12 @@ public class PlayerObject : MovableObject
     [ValueDropdown("@DataIdDropDownList.GetCharacterDataIds()")]
 #endif
     [SerializeField] private int _characterDataId;
-    
+
     protected override void Update()
     {
         base.Update();
+        if (!GlobalManager.Instance.CanPlayerMove()) return;
+
         UpdateMoveDirection();
     }
 

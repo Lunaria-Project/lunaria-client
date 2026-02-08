@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,13 +7,11 @@ public class BaseMapManager : MonoBehaviour
     [SerializeField] private NpcObject[] _npcObjects;
     [SerializeField] private PlayerObject _player;
 
-    private int _currentNpcDataId;
     private MapConfig _config;
 
     protected virtual void Start()
     {
-        GlobalManager.Instance.SetDefaultCursor();
-        _currentNpcDataId = 0;
+        GlobalManager.Instance.OnChangeMap(_npcObjects);
         SetMapObjectSortingLayer();
         _config = ResourceManager.Instance.LoadMapConfig();
     }
@@ -24,7 +21,7 @@ public class BaseMapManager : MonoBehaviour
         if (GameTimeManager.Instance.IsPaused) return;
 
         _player.SetSortingLayer();
-        UpdateNpcMenu();
+        UpdateNpcDistance();
     }
 
     protected Vector3 GetPlayerPosition()
@@ -32,60 +29,13 @@ public class BaseMapManager : MonoBehaviour
         return _player.transform.position;
     }
 
-    private void UpdateNpcMenu()
+    private void UpdateNpcDistance()
     {
-        if (!CanShowNpcSelectionPopup()) return;
-
-        var nearestNpc = GetNearestNpc(out var distance);
-
-        if (_currentNpcDataId <= 0)
-        {
-            if (PopupManager.Instance.ContainsPopup(PopupManager.Type.NpcSelection)) return;
-            if (nearestNpc != null && distance <= _config.NpcMenuDistance && _currentNpcDataId != nearestNpc.NpcDataId)
-            {
-                _currentNpcDataId = nearestNpc.NpcDataId;
-                PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _currentNpcDataId }).SetOnHideAction(() => _currentNpcDataId = 0);
-            }
-        }
-        else
-        {
-            if (nearestNpc == null || distance > _config.NpcMenuDistance)
-            {
-                _currentNpcDataId = 0;
-                var currentPopup = PopupManager.Instance.GetCurrentPopup();
-                if (currentPopup == null || currentPopup is not NpcSelectionPopup) return;
-                PopupManager.Instance.HideCurrentPopup(PopupManager.Type.NpcSelection).Forget();
-            }
-        }
-    }
-
-    private NpcObject GetNearestNpc(out float distance)
-    {
-        NpcObject nearest = null;
-        var minDist = float.MaxValue;
-
         foreach (var npc in _npcObjects)
         {
-            if (npc == null) continue;
-
-            var d = Vector2.Distance(_player.transform.position, npc.transform.position);
-            if (d < minDist)
-            {
-                minDist = d;
-                nearest = npc;
-            }
+            var distance = Vector2.Distance(_player.transform.position, npc.transform.position);
+            npc.SetIsNearByPlayer(distance <= _config.NpcMenuDistance);
         }
-
-        distance = minDist;
-        return nearest;
-    }
-
-    protected virtual bool CanShowNpcSelectionPopup()
-    {
-        if (_player == null) return false;
-        if (_npcObjects == null || _npcObjects.Length == 0) return false;
-        if (CutsceneManager.Instance.IsPlaying) return false;
-        return true;
     }
 
     [Button]

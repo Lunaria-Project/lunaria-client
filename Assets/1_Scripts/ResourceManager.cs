@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>
@@ -49,4 +48,8 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadSprite(resourceKey);
     }
 
+    public NpcCompassUI LoadCompassUI()
+    {
+        return LoadPrefab<NpcCompassUI>("compass_ui");
+    }
 }

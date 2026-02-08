@@ -27,6 +27,8 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
             _selections[i].SetActive(true);
             _selectionTexts[i].SetText(npcDataList.GetAt(i).MenuName);
         }
+        _selections.GetAt(count).SetActive(true);
+        _selectionTexts.GetAt(count).SetText("대화 마치기"); //TODO
     }
 
     protected override void OnHide() { }
@@ -34,6 +36,11 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
     public void OnSelectionButtonClick(int index)
     {
         var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_npcDataId);
+        if (index == npcDataList.Count)
+        {
+            OnHideButtonClick();
+            return;
+        }
         var npcData = npcDataList.GetAt(index);
         switch (npcData.FunctionType)
         {

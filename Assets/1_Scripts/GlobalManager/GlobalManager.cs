@@ -5,6 +5,7 @@ using UnityEngine;
 
 public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 {
+    [SerializeField] private Camera _globalCamara;
     [SerializeField] private Image _toastMessageBackground;
     [SerializeField] private Text _toastMessageText;
 
@@ -41,6 +42,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         base.Update();
         UpdateCursor();
+        UpdateCompassUIs();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnQKeyDown?.Invoke();
@@ -111,6 +113,16 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
             .Append(_toastMessageBackground.DOFade(0f, 0.2f))
             .Join(_toastMessageText.DOFade(0f, 0.2f))
             .OnComplete(() => { _toastMessageBackground.SetActive(false); });
+    }
+
+    #endregion
+
+    #region MapManager
+
+    public void OnChangeMap(NpcObject[] npcObjects)
+    {
+        SetDefaultCursor();
+        InitCompassUIs(npcObjects);
     }
 
     #endregion

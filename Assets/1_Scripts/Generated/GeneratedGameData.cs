@@ -204,10 +204,11 @@ namespace Generated
         public RequirementType HideRequirement { get; private set; }
         public List<int> HideRequirementValues { get; private set; }
         public int Order { get; private set; }
+        public int Priority { get; private set; }
         public NpcMenuFunctionType FunctionType { get; private set; }
         public int FunctionValue { get; private set; }
 
-        public MapNpcMenuData(int npcId, string menuName, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int order, NpcMenuFunctionType functionType, int functionValue)
+        public MapNpcMenuData(int npcId, string menuName, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int order, int priority, NpcMenuFunctionType functionType, int functionValue)
         {
             NpcId = npcId;
             MenuName = menuName;
@@ -216,6 +217,7 @@ namespace Generated
             HideRequirement = hideRequirement;
             HideRequirementValues = hideRequirementValues;
             Order = order;
+            Priority = priority;
             FunctionType = functionType;
             FunctionValue = functionValue;
         }
