@@ -44,7 +44,7 @@ public class NpcCompassUI : MonoBehaviour
                 _hideWhenNotNearByPlayer = true;
                 _titleBlock.SetActive(true);
                 _content.SetText(npcData.MenuName);
-                _isNearByPlayer = npcInfo.IsNearByPlayer;
+                _isNearByPlayer = NpcInfo.IsNearByPlayer;
                 if (!_isNearByPlayer) return;
                 break;
             }
@@ -70,6 +70,11 @@ public class NpcCompassUI : MonoBehaviour
 
     public void OnCompassUIClick()
     {
+        if (!NpcInfo.IsNearByPlayer)
+        {
+            GlobalManager.Instance.ShowToastMessage("좀 더 가까이 가주세염"); // TODO
+            return;
+        }
         PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = NpcInfo.NpcDataId });
     }
 
@@ -89,7 +94,7 @@ public class NpcCompassUI : MonoBehaviour
         return data;
     }
 
-    private CompassUIType GetCompassUIType(NpcMenuFunctionType functionType)
+    private static CompassUIType GetCompassUIType(NpcMenuFunctionType functionType)
     {
         return functionType switch
         {
