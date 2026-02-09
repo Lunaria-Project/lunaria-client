@@ -23,7 +23,7 @@ public abstract class MovableObject : MapObject
 
     #region UnityEvent
 
-    protected void Start()
+    protected virtual void Start()
     {
         _isFacingFront = true;
         _config = ResourceManager.Instance.LoadMapConfig();

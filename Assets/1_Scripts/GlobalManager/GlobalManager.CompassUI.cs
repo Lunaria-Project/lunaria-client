@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public partial class GlobalManager
@@ -8,7 +9,7 @@ public partial class GlobalManager
 
     private RectTransform _canvasRectTransform;
 
-    public void InitCompassUIs(NpcObject[] npcObjects)
+    public void InitCompassUIs(IList<NpcInfo> npcInfos)
     {
         if (_canvasRectTransform == null)
         {
@@ -18,15 +19,15 @@ public partial class GlobalManager
         {
             compassUI.Init();
         }
-        if (npcObjects.IsNullOrEmpty()) return;
-        for (var i = 0; i < npcObjects.Length; i++)
+        if (npcInfos.IsNullOrEmpty()) return;
+        for (var i = 0; i < npcInfos.Count; i++)
         {
             if (_compassUIs.Length <= i)
             {
                 LogManager.LogError("Compass ui 가 npc 수보다 적습니다.");
                 break;
             }
-            _compassUIs[i].Show(npcObjects[i]);
+            _compassUIs[i].Show(npcInfos[i]);
         }
     }
 
@@ -34,8 +35,8 @@ public partial class GlobalManager
     {
         foreach (var compassUI in _compassUIs)
         {
-            if (compassUI._npcObject == null) continue;
-            var screenPosition = _globalCamara.WorldToScreenPoint(compassUI._npcObject.CompassUITransform.position);
+            if (compassUI.NpcInfo == null) continue;
+            var screenPosition = _globalCamara.WorldToScreenPoint(compassUI.NpcInfo.CompassUITransform.position);
             screenPosition.x -= _canvasRectTransform.rect.width * 0.5f;
             compassUI.UpdatePosition(screenPosition);
         }

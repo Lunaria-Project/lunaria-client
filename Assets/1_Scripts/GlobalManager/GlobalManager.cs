@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Lunaria;
 using UnityEngine;
@@ -119,10 +120,10 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     #region MapManager
 
-    public void OnChangeMap(NpcObject[] npcObjects)
+    public void OnChangeMap(IList<NpcInfo> npcInfo)
     {
         SetDefaultCursor();
-        InitCompassUIs(npcObjects);
+        InitCompassUIs(npcInfo);
     }
 
     #endregion

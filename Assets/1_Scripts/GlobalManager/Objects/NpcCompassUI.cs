@@ -16,19 +16,19 @@ public class NpcCompassUI : MonoBehaviour
     [SerializeField] private GameObject _titleBlock;
     [SerializeField] private GameObject _bubbleBlock;
 
-    public NpcObject _npcObject { get; private set; }
+    public NpcInfo NpcInfo { get; private set; }
     private bool _hideWhenNotNearByPlayer;
     private bool _isNearByPlayer;
 
     public void Init()
     {
-        _npcObject = null;
+        NpcInfo = null;
         gameObject.SetActive(false);
     }
 
-    public void Show(NpcObject npcObject)
+    public void Show(NpcInfo npcInfo)
     {
-        _npcObject = npcObject;
+        NpcInfo = npcInfo;
         gameObject.SetActive(false);
         _titleBlock.SetActive(false);
         _bubbleBlock.SetActive(false);
@@ -44,7 +44,7 @@ public class NpcCompassUI : MonoBehaviour
                 _hideWhenNotNearByPlayer = true;
                 _titleBlock.SetActive(true);
                 _content.SetText(npcData.MenuName);
-                _isNearByPlayer = npcObject.IsNearByPlayer;
+                _isNearByPlayer = npcInfo.IsNearByPlayer;
                 if (!_isNearByPlayer) return;
                 break;
             }
@@ -60,9 +60,9 @@ public class NpcCompassUI : MonoBehaviour
 
     public void UpdatePosition(Vector2 position)
     {
-        if (_hideWhenNotNearByPlayer && _isNearByPlayer != _npcObject.IsNearByPlayer)
+        if (_hideWhenNotNearByPlayer && _isNearByPlayer != NpcInfo.IsNearByPlayer)
         {
-            _isNearByPlayer = _npcObject.IsNearByPlayer;
+            _isNearByPlayer = NpcInfo.IsNearByPlayer;
             gameObject.SetActive(_isNearByPlayer);
         }
         _rectTransform.anchoredPosition = position;
@@ -70,12 +70,12 @@ public class NpcCompassUI : MonoBehaviour
 
     public void OnCompassUIClick()
     {
-        PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _npcObject.NpcDataId });
+        PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = NpcInfo.NpcDataId });
     }
 
     private MapNpcMenuData GetNpcMenuData()
     {
-        var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_npcObject.NpcDataId);
+        var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(NpcInfo.NpcDataId);
         var currentPriority = -1;
         MapNpcMenuData data = null;
         foreach (var npcData in npcDataList)

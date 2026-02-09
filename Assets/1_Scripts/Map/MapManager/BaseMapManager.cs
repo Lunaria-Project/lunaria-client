@@ -1,17 +1,27 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class BaseMapManager : MonoBehaviour
 {
     [SerializeField] private MapObject[] _mapObjects;
-    [SerializeField] private NpcObject[] _npcObjects;
     [SerializeField] private PlayerObject _player;
 
     private MapConfig _config;
+    private List<NpcInfo> _npcInfoList = new();
 
     protected virtual void Start()
     {
-        GlobalManager.Instance.OnChangeMap(_npcObjects);
+        _npcInfoList.Clear();
+        foreach (var mapObject in _mapObjects)
+        {
+            if (mapObject is MovableNpcObject movableNpcObject)
+            {
+                _npcInfoList.Add(movableNpcObject.NpcInfo);
+            }
+            
+        }
+        GlobalManager.Instance.OnChangeMap(_npcInfoList);
         SetMapObjectSortingLayer();
         _config = ResourceManager.Instance.LoadMapConfig();
     }
@@ -31,9 +41,9 @@ public class BaseMapManager : MonoBehaviour
 
     private void UpdateNpcDistance()
     {
-        foreach (var npc in _npcObjects)
+        foreach (var npc in _npcInfoList)
         {
-            var distance = Vector2.Distance(_player.transform.position, npc.transform.position);
+            var distance = Vector2.Distance(_player.transform.position, npc.Transform.position);
             npc.SetIsNearByPlayer(distance <= _config.NpcMenuDistance);
         }
     }
