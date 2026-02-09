@@ -68,9 +68,9 @@ public class SlimeMinigameConfig : ScriptableObject
     {
         return type switch
         {
-            SlimeType.Level1 => 1,
+            SlimeType.Level1 => 3,
             SlimeType.Level2 => 2,
-            SlimeType.Level3 => 3,
+            SlimeType.Level3 => 1,
             _                => 1,
         };
     }
