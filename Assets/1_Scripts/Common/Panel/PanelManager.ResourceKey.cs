@@ -6,7 +6,7 @@ public partial class PanelManager
     {
         { Type.TitleMain, "title_main_panel" },
         { Type.MyhomeMain, "myhome_main_panel" },
-        { Type.ShoppingSquare, "shopping_square_panel" },
+        { Type.ShoppingSquareMain, "shopping_square_panel" },
         { Type.SlimeMinigame, "slime_minigame_panel" },
     };
 }

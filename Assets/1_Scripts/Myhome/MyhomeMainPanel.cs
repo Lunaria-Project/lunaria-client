@@ -30,18 +30,6 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
     public void OnShoppingSquareButtonClick()
     {
-        ShoppingSquareButtonClickAsync().Forget();
-        return;
-
-        async UniTask ShoppingSquareButtonClickAsync()
-        {
-            GameTimeManager.Instance.Pause();
-            LoadingManager.Instance.ShowLoading();
-            await PopupManager.Instance.HideAllPopups();
-            PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquare);
-            await UniTask.WhenAll(SceneManager.LoadSceneAsync("ShoppingSquareScene").ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
-            LoadingManager.Instance.HideLoading();
-            GameTimeManager.Instance.Resume();
-        }
+        GlobalManager.Instance.GoToShoppingSquareAsync().Forget();
     }
 }

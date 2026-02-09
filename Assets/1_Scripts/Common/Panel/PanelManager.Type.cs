@@ -12,7 +12,7 @@ public partial class PanelManager
         None = 0,
         TitleMain = 10,
         MyhomeMain = 11,
-        ShoppingSquare = 12,
+        ShoppingSquareMain = 12,
         SlimeMinigame = 13,
     }
 }
