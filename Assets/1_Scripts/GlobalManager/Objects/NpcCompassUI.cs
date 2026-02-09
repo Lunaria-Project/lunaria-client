@@ -41,17 +41,17 @@ public class NpcCompassUI : MonoBehaviour
             case CompassUIType.None: return;
             case CompassUIType.ShowTitle:
             {
+                _hideWhenNotNearByPlayer = true;
                 _titleBlock.SetActive(true);
                 _content.SetText(npcData.MenuName);
+                _isNearByPlayer = npcObject.IsNearByPlayer;
+                if (!_isNearByPlayer) return;
                 break;
             }
             case CompassUIType.ShowOnlyBubble:
             {
                 _bubbleBlock.SetActive(true);
                 _content.SetText("...");
-                _hideWhenNotNearByPlayer = true;
-                _isNearByPlayer = npcObject.IsNearByPlayer;
-                if (!_isNearByPlayer) return;
                 break;
             }
         }
