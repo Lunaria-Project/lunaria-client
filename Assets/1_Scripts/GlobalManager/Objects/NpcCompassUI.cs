@@ -1,8 +1,5 @@
-using Cysharp.Threading.Tasks;
 using Generated;
-using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.UI;
 using Text = Lunaria.Text;
 
 public class NpcCompassUI : MonoBehaviour
@@ -83,6 +80,8 @@ public class NpcCompassUI : MonoBehaviour
         MapNpcMenuData data = null;
         foreach (var npcData in npcDataList)
         {
+            if (!RequirementManager.Instance.IsSatisfied(npcData.ShowRequirement, npcData.ShowRequirementValues)) continue;
+            if (RequirementManager.Instance.IsSatisfied(npcData.HideRequirement, npcData.HideRequirementValues)) continue;
             if (npcData.Priority <= currentPriority) continue;
             currentPriority = npcData.Priority;
             data = npcData;
