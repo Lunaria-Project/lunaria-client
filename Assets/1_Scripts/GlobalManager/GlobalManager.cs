@@ -15,7 +15,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     public event Action OnEKeyDown;
 
     private bool _isRunning = false;
-    private Color _transparentColor = new Color(1, 1, 1, 0);
+    private readonly Color _transparentColor = new Color(1, 1, 1, 0);
 
     protected override void Awake()
     {
