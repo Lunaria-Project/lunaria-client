@@ -80,13 +80,15 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
         }
         return false;
     }
-
+    
     private async UniTask HideAllPopupsInternal()
     {
-        foreach (var popup in _popupList)
+        for (var index = _popupList.Count - 1; index >= 0; index--)
         {
+            var popup = _popupList[index];
             HidePopupInternal(popup);
         }
+
         _popupList.Clear();
         await UniTask.NextFrame();
     }
@@ -95,7 +97,6 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
     {
         if (popup == null) return;
 
-        _popupList.Remove(popup);
         popup.HideInternal();
         Destroy(popup.gameObject);
     }
