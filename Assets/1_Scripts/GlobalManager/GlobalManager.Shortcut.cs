@@ -1,5 +1,13 @@
+using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
+
+public enum ShortcutType
+{
+    Myhome,
+    ShoppingSquare,
+}
 
 public partial class GlobalManager
 {
@@ -10,7 +18,17 @@ public partial class GlobalManager
         ShoppingSquare = 2,
     }
 
-    public async UniTask GoToShoppingSquareAsync()
+    public UniTask ShortcutInvoke(ShortcutType type)
+    {
+        switch (type)
+        {
+            case ShortcutType.Myhome: return GoToMyhomeAsync();
+            case ShortcutType.ShoppingSquare: return GoToShoppingSquareAsync();
+        }
+        return UniTask.CompletedTask;
+    }
+
+    private async UniTask GoToShoppingSquareAsync()
     {
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading();
@@ -23,7 +41,7 @@ public partial class GlobalManager
         LoadingManager.Instance.HideLoading();
     }
 
-    public async UniTask GoToMyhomeAsync()
+    private async UniTask GoToMyhomeAsync()
     {
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading();

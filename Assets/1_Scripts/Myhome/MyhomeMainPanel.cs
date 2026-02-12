@@ -30,6 +30,6 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
 
     public void OnShoppingSquareButtonClick()
     {
-        GlobalManager.Instance.GoToShoppingSquareAsync().Forget();
+        GlobalManager.Instance.ShortcutInvoke(ShortcutType.ShoppingSquare).Forget();
     }
 }
