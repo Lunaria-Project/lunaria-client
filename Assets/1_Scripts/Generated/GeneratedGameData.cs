@@ -232,4 +232,18 @@ namespace Generated
             RequirementType = requirementType;
         }
     }
+
+    public partial class ShopInfoData
+    {
+        public int ShopId { get; private set; }
+        public int StartTime { get; private set; }
+        public int EndTime { get; private set; }
+
+        public ShopInfoData(int shopId, int startTime, int endTime)
+        {
+            ShopId = shopId;
+            StartTime = startTime;
+            EndTime = endTime;
+        }
+    }
 }

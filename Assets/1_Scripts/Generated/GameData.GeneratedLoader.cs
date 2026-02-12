@@ -125,6 +125,17 @@ public partial class GameData
         }
     }
 
+    private void LoadShopInfoData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtShopInfoData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new ShopInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]));
+            _dtShopInfoData.Add(newData.ShopId, newData);
+        }
+    }
+
     private void InvokeLoadForSheet(string sheetName, List<object[]> rows, LocalType type)
     {
         switch (sheetName)
@@ -140,6 +151,7 @@ public partial class GameData
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;
             case "RequirementInfo": LoadRequirementInfoData(rows, type); break;
+            case "ShopInfo": LoadShopInfoData(rows, type); break;
         }
     }
 }

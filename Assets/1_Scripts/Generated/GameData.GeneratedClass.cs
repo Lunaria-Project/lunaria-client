@@ -81,4 +81,11 @@ public partial class GameData
     public RequirementInfoData GetRequirementInfoData(RequirementType key) => DTRequirementInfoData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsRequirementInfoData(RequirementType key) => DTRequirementInfoData.ContainsKey(key);
     private readonly Dictionary<RequirementType, RequirementInfoData> _dtRequirementInfoData = new();
+
+    // ShopInfoData - ShopInfoData, key: ShopId
+    public IReadOnlyDictionary<int, ShopInfoData> DTShopInfoData => _dtShopInfoData;
+    public bool TryGetShopInfoData(int key, out ShopInfoData result) => DTShopInfoData.TryGetValue(key, out result);
+    public ShopInfoData GetShopInfoData(int key) => DTShopInfoData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsShopInfoData(int key) => DTShopInfoData.ContainsKey(key);
+    private readonly Dictionary<int, ShopInfoData> _dtShopInfoData = new();
 }
