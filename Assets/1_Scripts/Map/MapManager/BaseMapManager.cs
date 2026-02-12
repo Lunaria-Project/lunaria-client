@@ -19,7 +19,7 @@ public class BaseMapManager : MonoBehaviour
             {
                 _npcInfoList.Add(movableNpcObject.NpcInfo);
             }
-            
+
         }
         GlobalManager.Instance.OnChangeMap(_npcInfoList);
         SetMapObjectSortingLayer();
@@ -32,6 +32,7 @@ public class BaseMapManager : MonoBehaviour
 
         _player.SetSortingLayer();
         UpdateNpcDistance();
+        GlobalManager.Instance.UpdateCameraPosition(GetPlayerPosition());
     }
 
     protected Vector3 GetPlayerPosition()

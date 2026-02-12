@@ -17,8 +17,10 @@ public partial class GlobalManager
         await PopupManager.Instance.HideAllPopups();
         PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.ShoppingSquare).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
-        LoadingManager.Instance.HideLoading();
+        FollowPlayer = true;
+        GlobalCamera.orthographicSize = 250;
         GameTimeManager.Instance.Resume();
+        LoadingManager.Instance.HideLoading();
     }
 
     public async UniTask GoToMyhomeAsync()
@@ -28,7 +30,10 @@ public partial class GlobalManager
         await PopupManager.Instance.HideAllPopups();
         PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Myhome).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
-        LoadingManager.Instance.HideLoading();
+        FollowPlayer = false;
+        GlobalCamera.orthographicSize = 540;
+        ResetCamaraPosition();
         GameTimeManager.Instance.Resume();
+        LoadingManager.Instance.HideLoading();
     }
 }

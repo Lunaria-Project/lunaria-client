@@ -14,6 +14,8 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     public event Action OnApplicationResume;
     public event Action OnQKeyDown;
     public event Action OnEKeyDown;
+    public Camera GlobalCamera => _globalCamara;
+    public bool FollowPlayer { get; private set; }
 
     private bool _isRunning = false;
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
@@ -124,6 +126,19 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         SetDefaultCursor();
         InitCompassUIs(npcInfo);
+    }
+
+    public void UpdateCameraPosition(Vector3 playerPosition)
+    {
+        if (!FollowPlayer) return;
+        var cameraTransform = GlobalCamera.transform;
+        cameraTransform.position = new Vector3(playerPosition.x, playerPosition.y, cameraTransform.position.z);
+    }
+
+    private void ResetCamaraPosition()
+    {
+        var cameraTransform = GlobalCamera.transform;
+        cameraTransform.position = new Vector3(0, 0, cameraTransform.position.z);
     }
 
     #endregion
