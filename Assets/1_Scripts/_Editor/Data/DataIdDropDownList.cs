@@ -85,6 +85,16 @@ public static class DataIdDropDownList
         return _cutsceneDataIdCache;
     }
 
+    private static ValueDropdownList<int> _shopDataIdCache;
+    public static ValueDropdownList<int> GetShopDataIds()
+    {
+        if (_shopDataIdCache.IsNullOrEmpty())
+        {
+            _shopDataIdCache = GetDropdownListFromGameData("ShopInfo", "ShopId");
+        }
+        return _shopDataIdCache;
+    }
+
     private static ValueDropdownList<int> GetDropdownListFromGameData(string sheetName, string columnName)
     {
         GameData.Instance.LoadGameData();
