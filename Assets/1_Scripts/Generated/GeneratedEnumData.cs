@@ -32,6 +32,16 @@ namespace Generated
     }
 
     [SerializeEnum]
+    public enum LoadingType
+    {
+        None = 0,
+        BeddingShop = 1,
+        CottonCandyShop = 2,
+        Normal = 3,
+        PowderShop = 4,
+    }
+
+    [SerializeEnum]
     public enum NpcMenuFunctionType
     {
         None = 0,

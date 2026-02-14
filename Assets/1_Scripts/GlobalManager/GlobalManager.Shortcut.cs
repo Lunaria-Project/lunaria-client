@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Generated;
 using UnityEngine.SceneManagement;
 
 public enum ShortcutType
@@ -31,7 +32,7 @@ public partial class GlobalManager
     private async UniTask GoToShoppingSquareAsync()
     {
         GameTimeManager.Instance.Pause();
-        LoadingManager.Instance.ShowLoading();
+        LoadingManager.Instance.ShowLoading(LoadingType.Normal);
         await PopupManager.Instance.HideAllPopups();
         PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.ShoppingSquare).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
@@ -44,7 +45,7 @@ public partial class GlobalManager
     private async UniTask GoToMyhomeAsync()
     {
         GameTimeManager.Instance.Pause();
-        LoadingManager.Instance.ShowLoading();
+        LoadingManager.Instance.ShowLoading(LoadingType.Normal);
         await PopupManager.Instance.HideAllPopups();
         PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Myhome).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));

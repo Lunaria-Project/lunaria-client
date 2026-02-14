@@ -31,4 +31,15 @@ public partial class GameData
         result.Sort((left, right) => left.Order.CompareTo(right.Order));
         return result;
     }
+
+    public List<LoadingData> GetLoadingDataByLoadingType(LoadingType type)
+    {
+        var result = new List<LoadingData>();
+        foreach (var (_, data) in _dtLoadingData)
+        {
+            if (data.LoadingType != type) continue;
+            result.Add(data);
+        }
+        return result;
+    }
 }

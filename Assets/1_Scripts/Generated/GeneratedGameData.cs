@@ -166,12 +166,14 @@ namespace Generated
         public int Id { get; private set; }
         public string Description { get; private set; }
         public string ResourceKey { get; private set; }
+        public LoadingType LoadingType { get; private set; }
 
-        public LoadingData(int id, string description, string resourceKey)
+        public LoadingData(int id, string description, string resourceKey, LoadingType loadingType)
         {
             Id = id;
             Description = description;
             ResourceKey = resourceKey;
+            LoadingType = loadingType;
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Linq;
+using Generated;
 using Lunaria;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,13 +16,13 @@ public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
         _loadingImage.SetActive(false);
     }
 
-    public void ShowLoading()
+    public void ShowLoading(LoadingType loadingType)
     {
         _loadingImage.SetActive(true);
-        
-        var loadingDataDictionary = GameData.Instance.DTLoadingData;
-        var index = Random.Range(0, loadingDataDictionary.Count);
-        var randomLoadingData = loadingDataDictionary.ElementAt(index).Value;
+
+        var loadingDataList = GameData.Instance.GetLoadingDataByLoadingType(loadingType);
+        var index = Random.Range(0, loadingDataList.Count);
+        var randomLoadingData = loadingDataList.GetAt(index);
         _loadingImage.SetSprite(ResourceManager.Instance.LoadSprite(randomLoadingData.ResourceKey));
         _loadingDescription.SetText(randomLoadingData.Description);
     }
