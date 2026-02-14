@@ -5,8 +5,10 @@ public abstract class MovableObject : MapObject
 {
     [Header("[Move]")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] private CircleCollider2D _collider2D;
     [SerializeField] private ContactFilter2D _contactFilter;
 
+    public Collider2D Collider => _collider2D;
     public Vector2 MoveDirection { get; protected set; }
 
     private Vector2 _forceMoveDirection;
@@ -23,8 +25,9 @@ public abstract class MovableObject : MapObject
 
     #region UnityEvent
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         _isFacingFront = true;
         _config = ResourceManager.Instance.LoadMapConfig();
         InitMove();

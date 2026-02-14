@@ -6,12 +6,14 @@ public class NpcInfo
     public bool IsNearByPlayer { get; private set; }
     public Transform CompassUITransform { get; private set; }
     public Transform Transform { get; private set; }
+    public Collider2D Collider { get; private set; }
 
-    public void Init(int npcDataId, Transform compassUITransform, Transform transform)
+    public void Init(int npcDataId, Transform compassUITransform, Transform transform, Collider2D collider)
     {
         NpcDataId = npcDataId;
         CompassUITransform = compassUITransform;
         Transform = transform;
+        Collider = collider;
     }
 
     public void SetIsNearByPlayer(bool isNearByPlayer)

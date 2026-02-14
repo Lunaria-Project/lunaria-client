@@ -20,7 +20,10 @@ public class BaseMapManager : MonoBehaviour
             {
                 _npcInfoList.Add(movableNpcObject.NpcInfo);
             }
-
+            if (mapObject is NotMovableNpcObject notMovableNpcObject)
+            {
+                _npcInfoList.Add(notMovableNpcObject.NpcInfo);
+            }
         }
         GlobalManager.Instance.OnChangeMap(_npcInfoList);
         SetMapObjectSortingLayer();
@@ -45,8 +48,8 @@ public class BaseMapManager : MonoBehaviour
     {
         foreach (var npc in _npcInfoList)
         {
-            var distance = Vector2.Distance(_player.transform.position, npc.Transform.position);
-            npc.SetIsNearByPlayer(distance <= _config.NpcMenuDistance);
+            var distance = _player.Collider.Distance(npc.Collider).distance;
+            npc.SetIsNearByPlayer(distance <= _config.NpcDistance);
         }
     }
 

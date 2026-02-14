@@ -47,7 +47,8 @@ namespace Generated
         None = 0,
         PlayCutscene = 1,
         PlayFixedCutscene = 2,
-        PlaySlimeMinigame = 3,
+        PlayPowderPortalMinigame = 3,
+        PlaySlimeMinigame = 4,
     }
 
     [SerializeEnum]

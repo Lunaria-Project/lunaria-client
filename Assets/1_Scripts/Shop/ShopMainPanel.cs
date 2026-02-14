@@ -26,9 +26,4 @@ public class ShopMainPanel : Panel<ShopMainPanel>
     {
         _walletUI.Refresh();
     }
-
-    public void OnShoppingSquareButtonClick()
-    {
-        GlobalManager.Instance.ShortcutInvoke(ShortcutType.ShoppingSquare).Forget();
-    }
 }

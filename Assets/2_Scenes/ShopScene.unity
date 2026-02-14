@@ -194,6 +194,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 53315929369973065, guid: ebf57fd9c71f64c6da613a2e77e9c5e2, type: 3}
   m_PrefabInstance: {fileID: 108208058}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &108208061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 256757947342930817, guid: ebf57fd9c71f64c6da613a2e77e9c5e2, type: 3}
+  m_PrefabInstance: {fileID: 108208058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1408bf47c4a7e44f68b1c19b2a47e003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NotMovableNpcObject
+--- !u!114 &108208062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7271775639576303601, guid: ebf57fd9c71f64c6da613a2e77e9c5e2, type: 3}
+  m_PrefabInstance: {fileID: 108208058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1408bf47c4a7e44f68b1c19b2a47e003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NotMovableNpcObject
 --- !u!1 &184411973
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693eeeb7ebaec4ad59dec6ea67bcda81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowderShopMapManager
-  _mapObjects: []
+  _mapObjects:
+  - {fileID: 108208061}
+  - {fileID: 108208062}
   _player: {fileID: 1510903405}
   _powderShopCameraPosition: {fileID: 108208060}
   _powderShopStartPosition: {fileID: 108208059}

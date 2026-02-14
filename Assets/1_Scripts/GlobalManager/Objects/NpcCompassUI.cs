@@ -98,9 +98,10 @@ public class NpcCompassUI : MonoBehaviour
     {
         return functionType switch
         {
-            NpcMenuFunctionType.PlayFixedCutscene => CompassUIType.ShowTitle,
-            NpcMenuFunctionType.PlaySlimeMinigame => CompassUIType.ShowOnlyBubble,
-            _                                     => CompassUIType.None,
+            NpcMenuFunctionType.PlayFixedCutscene        => CompassUIType.ShowTitle,
+            NpcMenuFunctionType.PlaySlimeMinigame        => CompassUIType.ShowOnlyBubble,
+            NpcMenuFunctionType.PlayPowderPortalMinigame => CompassUIType.ShowOnlyBubble,
+            _                                            => CompassUIType.None,
         };
     }
 }

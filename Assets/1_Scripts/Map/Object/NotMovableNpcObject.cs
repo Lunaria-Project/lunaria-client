@@ -1,25 +1,20 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class MovableNpcObject : MovableObject
+public class NotMovableNpcObject : MapObject
 {
 #if UNITY_EDITOR
     [ValueDropdown("@DataIdDropDownList.GetNpcDataIds()")]
 #endif
     [SerializeField] private int _npcDataId;
+    [SerializeField] private CircleCollider2D _collider2D;
     [SerializeField] private Transform _compassUITransform;
 
     public NpcInfo NpcInfo { get; private set; } = new();
 
     protected override void Start()
     {
-        NpcInfo.Init(_npcDataId, _compassUITransform, transform, Collider);
         base.Start();
-    }
-
-    protected override int GetCharacterDataId()
-    {
-        var npcData = GameData.Instance.GetMapNpcInfoData(_npcDataId);
-        return npcData.CharacterId;
+        NpcInfo.Init(_npcDataId, _compassUITransform, transform, _collider2D);
     }
 }

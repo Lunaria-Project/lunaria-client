@@ -18,6 +18,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     public bool FollowPlayer { get; private set; }
 
     private bool _isRunning = false;
+    private List<NpcInfo> _npcInfos = new();
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
 
     protected override void Awake()
@@ -79,6 +80,11 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         {
             OnApplicationResume?.Invoke();
         }
+    }
+
+    public void InitUI()
+    {
+        _compassUIs.SetActiveAll(false);
     }
 
     #region Day

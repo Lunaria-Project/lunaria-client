@@ -9,8 +9,10 @@ public partial class GlobalManager
 
     private RectTransform _canvasRectTransform;
 
-    public void InitCompassUIs(IList<NpcInfo> npcInfos)
+    private void InitCompassUIs(IList<NpcInfo> npcInfos)
     {
+        _npcInfos.Clear();
+        _npcInfos.AddRange(npcInfos);
         if (_canvasRectTransform == null)
         {
             _canvasRectTransform = _compassCanvas.transform as RectTransform;
@@ -19,15 +21,15 @@ public partial class GlobalManager
         {
             compassUI.Init();
         }
-        if (npcInfos.IsNullOrEmpty()) return;
-        for (var i = 0; i < npcInfos.Count; i++)
+        if (_npcInfos.IsNullOrEmpty()) return;
+        for (var i = 0; i < _npcInfos.Count; i++)
         {
             if (_compassUIs.Length <= i)
             {
                 LogManager.LogError("Compass ui 가 npc 수보다 적습니다.");
                 break;
             }
-            _compassUIs[i].Show(npcInfos[i]);
+            _compassUIs[i].Show(_npcInfos[i]);
         }
     }
 

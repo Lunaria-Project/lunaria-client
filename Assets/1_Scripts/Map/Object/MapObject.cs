@@ -8,11 +8,13 @@ public class MapObject : MonoBehaviour
 
     protected SpriteRenderer SpriteRenderer => _sprite;
 
+    protected virtual void Start() { }
+
     public void SetSortingLayer()
     {
         if (string.Equals(_sprite.sortingLayerName, NameContainer.SortingLayer.MapObject, StringComparison.Ordinal))
         {
-            _sprite.sortingOrder = - Mathf.RoundToInt(_transform.localPosition.y / 10);
+            _sprite.sortingOrder = -Mathf.RoundToInt(_transform.localPosition.y / 10);
         }
     }
 }
