@@ -75,6 +75,12 @@ public class NpcCompassUI : MonoBehaviour
             GlobalManager.Instance.ShowToastMessage("좀 더 가까이 가주세염"); // TODO
             return;
         }
+        var data = GetNpcMenuData();
+        if (!data.ShowMenuPopup)
+        {
+            NpcSelectionPopup.SelectNpcMenu(data.FunctionType, data.FunctionValue);
+            return;
+        }
         PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = NpcInfo.NpcDataId });
     }
 

@@ -11,7 +11,7 @@ public class PlayerObject : MovableObject
     protected override void Update()
     {
         base.Update();
-        if (!GlobalManager.Instance.CanPlayerMove()) return;
+        if (!GlobalManager.Instance.CanCharacterMove()) return;
 
         UpdateMoveDirection();
     }

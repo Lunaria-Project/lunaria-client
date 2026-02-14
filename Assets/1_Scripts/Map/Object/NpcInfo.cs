@@ -4,6 +4,7 @@ public class NpcInfo
 {
     public int NpcDataId { get; private set; }
     public bool IsNearByPlayer { get; private set; }
+    public float DistanceToPlayer { get; private set; }
     public Transform CompassUITransform { get; private set; }
     public Transform Transform { get; private set; }
     public Collider2D Collider { get; private set; }
@@ -16,8 +17,9 @@ public class NpcInfo
         Collider = collider;
     }
 
-    public void SetIsNearByPlayer(bool isNearByPlayer)
+    public void SetDistanceToPlayer(float distance, float nearByThreshold)
     {
-        IsNearByPlayer = isNearByPlayer;
+        DistanceToPlayer = distance;
+        IsNearByPlayer = distance <= nearByThreshold;
     }
 }

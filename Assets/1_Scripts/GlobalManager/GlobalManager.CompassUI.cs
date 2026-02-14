@@ -12,8 +12,6 @@ public partial class GlobalManager
     {
         _npcInfos.Clear();
         _npcInfos.AddRange(npcInfos);
-        if (_npcInfos.IsNullOrEmpty()) return;
-
         foreach (var compassUI in _compassUIs)
         {
             compassUI.Init();
@@ -38,5 +36,34 @@ public partial class GlobalManager
             screenPosition.x -= _canvasRectTransform.rect.width * 0.5f;
             compassUI.UpdatePosition(screenPosition);
         }
+    }
+
+    private void ClearCompassUI()
+    {
+        _npcInfos.Clear();
+        foreach (var compassUI in _compassUIs)
+        {
+            compassUI.Init();
+        }
+    }
+
+    private void TryInteractNearestNpc()
+    {
+        if (!CanCharacterMove()) return;
+        NpcCompassUI nearest = null;
+        var minDistance = float.MaxValue;
+
+        foreach (var compassUI in _compassUIs)
+        {
+            if (compassUI.NpcInfo == null) continue;
+            if (!compassUI.NpcInfo.IsNearByPlayer) continue;
+            if (compassUI.NpcInfo.DistanceToPlayer < minDistance)
+            {
+                minDistance = compassUI.NpcInfo.DistanceToPlayer;
+                nearest = compassUI;
+            }
+        }
+        if (nearest == null) return;
+        nearest.OnCompassUIClick();
     }
 }

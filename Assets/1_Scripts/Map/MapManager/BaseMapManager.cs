@@ -49,7 +49,7 @@ public class BaseMapManager : MonoBehaviour
         foreach (var npc in _npcInfoList)
         {
             var distance = _player.Collider.Distance(npc.Collider).distance;
-            npc.SetIsNearByPlayer(distance <= _config.NpcDistance);
+            npc.SetDistanceToPlayer(distance, _config.NpcDistance);
         }
     }
 

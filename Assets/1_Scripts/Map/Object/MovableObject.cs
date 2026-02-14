@@ -36,11 +36,13 @@ public abstract class MovableObject : MapObject
 
     protected virtual void Update()
     {
+        if (!GlobalManager.Instance.CanCharacterMove()) return;
         UpdateSprite(Time.deltaTime);
     }
 
     protected void FixedUpdate()
     {
+        if (!GlobalManager.Instance.CanCharacterMove()) return;
         UpdateMove(Time.fixedDeltaTime);
     }
 

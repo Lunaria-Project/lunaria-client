@@ -56,6 +56,10 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         {
             OnEKeyDown?.Invoke();
         }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TryInteractNearestNpc();
+        }
     }
 
     private void OnApplicationFocus(bool hasFocus)

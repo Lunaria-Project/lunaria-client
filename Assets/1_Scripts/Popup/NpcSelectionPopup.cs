@@ -17,6 +17,8 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
 
     protected override void OnShow(NpcSelectionPopupParameter parameter)
     {
+        GameTimeManager.Instance.Pause();
+
         _npcDataId = parameter.NpcDataId;
 
         var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_npcDataId);
@@ -31,7 +33,10 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
         _selectionTexts.GetAt(count).SetText("대화 마치기"); //TODO
     }
 
-    protected override void OnHide() { }
+    protected override void OnHide()
+    {
+        GameTimeManager.Instance.Resume();
+    }
 
     public void OnSelectionButtonClick(int index)
     {
@@ -42,11 +47,17 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
             return;
         }
         var npcData = npcDataList.GetAt(index);
-        switch (npcData.FunctionType)
+        SelectNpcMenu(npcData.FunctionType, npcData.FunctionValue);
+        OnHideButtonClick();
+    }
+
+    public static void SelectNpcMenu(NpcMenuFunctionType type, int value)
+    {
+        switch (type)
         {
             case NpcMenuFunctionType.PlayCutscene:
             {
-                CutsceneManager.Instance.PlayCutscene(npcData.FunctionValue).Forget();
+                CutsceneManager.Instance.PlayCutscene(value).Forget();
                 break;
             }
             case NpcMenuFunctionType.PlaySlimeMinigame:
@@ -61,6 +72,5 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
                 break;
             }
         }
-        OnHideButtonClick();
     }
 }
