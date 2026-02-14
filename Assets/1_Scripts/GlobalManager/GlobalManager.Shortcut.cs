@@ -7,6 +7,9 @@ public enum ShortcutType
     Myhome,
     ShoppingSquare,
     PowderShop,
+    ShoppingSquareByPowderShop,
+    ShoppingSquareByBeddingShop,
+    ShoppingSquareByCottonCandyShop,
 }
 
 public partial class GlobalManager
@@ -43,13 +46,16 @@ public partial class GlobalManager
             case ShortcutType.Myhome: return GoToMyhomeAsync();
             case ShortcutType.ShoppingSquare: return GoToShoppingSquareAsync();
             case ShortcutType.PowderShop: return GoToShopAsync(ShopType.PowderShop);
+            case ShortcutType.ShoppingSquareByPowderShop: return GoToShoppingSquareAsync(ShopType.PowderShop);
+            case ShortcutType.ShoppingSquareByBeddingShop: return GoToShoppingSquareAsync(ShopType.BeddingShop);
+            case ShortcutType.ShoppingSquareByCottonCandyShop: return GoToShoppingSquareAsync(ShopType.CottonCandyShop);
         }
         return UniTask.CompletedTask;
     }
 
     #region Implement
 
-    private async UniTask GoToShoppingSquareAsync()
+    private async UniTask GoToShoppingSquareAsync(ShopType type = ShopType.None)
     {
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
@@ -59,6 +65,11 @@ public partial class GlobalManager
         PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
 
         FollowPlayer = true;
+        if (type != ShopType.None)
+        {
+            var mapManager = FindAnyObjectByType<ShoppingSquareMapManager>();
+            mapManager.InitWithShopType(type);
+        }
         SetCameraSize(540);
 
         GameTimeManager.Instance.Resume();
@@ -98,6 +109,7 @@ public partial class GlobalManager
         FollowPlayer = false;
         SetCameraSize(360);
         var mapManager = FindAnyObjectByType<ShopMapManager>();
+        mapManager.Init(shopType);
         var cameraPosition = mapManager.GetCameraPosition(shopType).position;
         SetCamaraPosition(cameraPosition.x, cameraPosition.y);
 
