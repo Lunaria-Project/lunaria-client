@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class MyhomeMainPanel : Panel<MyhomeMainPanel>
+public class ShopMainPanel : Panel<ShopMainPanel>
 {
     [SerializeField] TopWalletUI _walletUI;
     [SerializeField] TopTimeUI _timeUI;

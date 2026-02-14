@@ -8,5 +8,6 @@ public partial class PanelManager
         { Type.MyhomeMain, "myhome_main_panel" },
         { Type.ShoppingSquareMain, "shopping_square_panel" },
         { Type.SlimeMinigame, "slime_minigame_panel" },
+        { Type.Shop, "shop_main_panel" },
     };
 }

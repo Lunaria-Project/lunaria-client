@@ -98,13 +98,16 @@ public partial class GlobalManager
         GameTimeManager.Instance.Pause();
         var loadingType = shopType switch
         {
-            _ => LoadingType.Normal,
+            ShopType.CottonCandyShop => LoadingType.CottonCandyShop,
+            ShopType.PowderShop      => LoadingType.PowderShop,
+            ShopType.BeddingShop     => LoadingType.BeddingShop,
+            _                        => LoadingType.Normal,
         };
         LoadingManager.Instance.ShowLoading(loadingType);
 
         await PopupManager.Instance.HideAllPopups();
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Shop).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
-        //PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
+        PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
 
         FollowPlayer = false;
         SetCameraSize(360);
