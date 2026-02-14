@@ -49,4 +49,13 @@ namespace Generated
         AlwaysTrue = 3,
     }
 
+    [SerializeEnum]
+    public enum ShopType
+    {
+        None = 0,
+        BeddingShop = 1,
+        CottonCandyShop = 2,
+        PowderShop = 3,
+    }
+
 }

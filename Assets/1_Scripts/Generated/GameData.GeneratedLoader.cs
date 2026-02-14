@@ -131,7 +131,7 @@ public partial class GameData
         _dtShopInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new ShopInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]));
+            var newData = new ShopInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), (ShopType)Enum.Parse(typeof(ShopType), (string)row[3], true));
             _dtShopInfoData.Add(newData.ShopId, newData);
         }
     }

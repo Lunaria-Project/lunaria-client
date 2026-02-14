@@ -490,10 +490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopZone
   _shopDataId: 1000026
-  _uiBlock: {fileID: 8655408958697533090}
   _openedObject: {fileID: 3602035479629628570}
   _closedObject: {fileID: 1241663499367884460}
-  _positionTransform: {fileID: 7034918472705370998}
 --- !u!60 &735154023389150116
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -989,9 +987,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NpcCompassUI, Assembly-CSharp
-        m_MethodName: OnCompassUIClick
+      - m_Target: {fileID: 6948148571546103887}
+        m_TargetAssemblyTypeName: ShopZone, Assembly-CSharp
+        m_MethodName: OnClosedShopButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1122,9 +1120,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NpcCompassUI, Assembly-CSharp
-        m_MethodName: OnCompassUIClick
+      - m_Target: {fileID: 2682910146860745566}
+        m_TargetAssemblyTypeName: ShopZone, Assembly-CSharp
+        m_MethodName: OnClosedShopButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1255,9 +1253,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NpcCompassUI, Assembly-CSharp
-        m_MethodName: OnCompassUIClick
+      - m_Target: {fileID: 1561202467460392665}
+        m_TargetAssemblyTypeName: ShopZone, Assembly-CSharp
+        m_MethodName: OnOpenedShopButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1420,9 +1418,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NpcCompassUI, Assembly-CSharp
-        m_MethodName: OnCompassUIClick
+      - m_Target: {fileID: 1561202467460392665}
+        m_TargetAssemblyTypeName: ShopZone, Assembly-CSharp
+        m_MethodName: OnClosedShopButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2939,9 +2937,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NpcCompassUI, Assembly-CSharp
-        m_MethodName: OnCompassUIClick
+      - m_Target: {fileID: 2682910146860745566}
+        m_TargetAssemblyTypeName: ShopZone, Assembly-CSharp
+        m_MethodName: OnOpenedShopButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3299,10 +3297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopZone
   _shopDataId: 1000024
-  _uiBlock: {fileID: 2096714119085643066}
   _openedObject: {fileID: 1271748653999792705}
   _closedObject: {fileID: 1522117970803144842}
-  _positionTransform: {fileID: 3487705919508425817}
 --- !u!60 &3963096886581786835
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3907,9 +3903,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NpcCompassUI, Assembly-CSharp
-        m_MethodName: OnCompassUIClick
+      - m_Target: {fileID: 6948148571546103887}
+        m_TargetAssemblyTypeName: ShopZone, Assembly-CSharp
+        m_MethodName: OnOpenedShopButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5620,10 +5616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopZone
   _shopDataId: 1000024
-  _uiBlock: {fileID: 2076317305246265363}
   _openedObject: {fileID: 5370217053517030411}
   _closedObject: {fileID: 1049539852590651717}
-  _positionTransform: {fileID: 3456814013526541551}
 --- !u!60 &9037845615743529814
 PolygonCollider2D:
   m_ObjectHideFlags: 0

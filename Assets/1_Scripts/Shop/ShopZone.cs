@@ -1,3 +1,4 @@
+using Generated;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class ShopZone : MonoBehaviour
 
     private int _startTime;
     private int _endTime;
+    private bool _isNearBy;
 
     private void OnEnable()
     {
@@ -20,6 +22,7 @@ public class ShopZone : MonoBehaviour
         var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
         _startTime = shopInfoData.StartTime;
         _endTime = shopInfoData.EndTime;
+        OnIntervalChanged();
     }
 
     private void OnDisable()
@@ -27,9 +30,15 @@ public class ShopZone : MonoBehaviour
         GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) { }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        _isNearBy = true;
+    }
 
-    private void OnTriggerExit2D(Collider2D other) { }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        _isNearBy = false;
+    }
 
     private void OnIntervalChanged()
     {
@@ -38,5 +47,32 @@ public class ShopZone : MonoBehaviour
         var isOpened = _startTime <= currentHHMM && currentHHMM < _endTime;
         _openedObject.SetActive(isOpened);
         _closedObject.SetActive(!isOpened);
+    }
+
+    public void OnClosedShopButtonClick()
+    {
+        GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO
+    }
+
+    public void OnOpenedShopButtonClick()
+    {
+        if (_isNearBy)
+        {
+            var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
+            switch (shopInfoData.ShopType)
+            {
+                case ShopType.PowderShop:
+                case ShopType.CottonCandyShop:
+                case ShopType.BeddingShop:
+                {
+                    GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO
+                    break;
+                }
+            }
+        }
+        else
+        {
+            GlobalManager.Instance.ShowToastMessage("상점 앞으로 가주세요."); // TODO
+        }
     }
 }

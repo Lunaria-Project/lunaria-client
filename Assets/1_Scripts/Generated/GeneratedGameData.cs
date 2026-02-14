@@ -238,12 +238,14 @@ namespace Generated
         public int ShopId { get; private set; }
         public int StartTime { get; private set; }
         public int EndTime { get; private set; }
+        public ShopType ShopType { get; private set; }
 
-        public ShopInfoData(int shopId, int startTime, int endTime)
+        public ShopInfoData(int shopId, int startTime, int endTime, ShopType shopType)
         {
             ShopId = shopId;
             StartTime = startTime;
             EndTime = endTime;
+            ShopType = shopType;
         }
     }
 }
