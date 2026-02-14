@@ -39,7 +39,8 @@ public partial class PanelManager
     private PanelInfo ShowPanelInternal(Type showType, object[] args)
     {
         var showPanelInfo = CreatePanelInfo(showType, args);
-        NewHideAndShowPanel(DirectionType.Forward, 0, new List<PanelInfo> { showPanelInfo }).Forget();
+        NewHideAndShowPanel(DirectionType.Forward, 0, new List<PanelInfo> { showPanelInfo })
+            .Forget(e => LogManager.LogException(e));
         return showPanelInfo;
     }
 
@@ -48,7 +49,8 @@ public partial class PanelManager
     {
         // 최종적으로 NewHideAndShowPanel의 return 값을 사용하는 형태로 변경이 필요함
         var showPanelInfo = PeekPanelInfo(count);
-        NewHideAndShowPanel(DirectionType.Backward, count, null).Forget();
+        NewHideAndShowPanel(DirectionType.Backward, count, null)
+            .Forget(e => LogManager.LogException(e));
         return showPanelInfo;
     }
 

@@ -17,7 +17,24 @@ public partial class GlobalManager
         ShoppingSquare = 2,
     }
 
-    public UniTask ShortcutInvoke(ShortcutType type)
+    private bool _isShortcutInvoking;
+
+    public async UniTask ShortcutInvoke(ShortcutType type)
+    {
+        if (_isShortcutInvoking) return;
+        _isShortcutInvoking = true;
+        try
+        {
+            await ShortcutInvokeImpl(type);
+        }
+        finally
+        {
+            _isShortcutInvoking = false;
+        }
+
+    }
+
+    private UniTask ShortcutInvokeImpl(ShortcutType type)
     {
         switch (type)
         {
@@ -31,11 +48,14 @@ public partial class GlobalManager
     {
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
+
         await PopupManager.Instance.HideAllPopups();
-        PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.ShoppingSquare).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
+        PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
+
         FollowPlayer = true;
         GlobalCamera.orthographicSize = 250;
+
         GameTimeManager.Instance.Resume();
         LoadingManager.Instance.HideLoading();
     }
@@ -44,12 +64,15 @@ public partial class GlobalManager
     {
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
+
         await PopupManager.Instance.HideAllPopups();
-        PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Myhome).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
+        PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
+
         FollowPlayer = false;
         GlobalCamera.orthographicSize = 540;
         ResetCamaraPosition();
+
         GameTimeManager.Instance.Resume();
         LoadingManager.Instance.HideLoading();
     }

@@ -37,6 +37,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     protected override void OnDestroy()
     {
+        base.OnDestroy();
         DOTween.Kill(_toastMessageBackground);
         OnApplicationResume -= HideUserCursor;
     }
@@ -62,7 +63,10 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         {
             OnApplicationResume?.Invoke();
         }
-        OnApplicationPaused?.Invoke();
+        else
+        {
+            OnApplicationPaused?.Invoke();
+        }
     }
 
     private void OnApplicationPause(bool isPaused)
@@ -71,7 +75,10 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         {
             OnApplicationPaused?.Invoke();
         }
-        OnApplicationResume?.Invoke();
+        else
+        {
+            OnApplicationResume?.Invoke();
+        }
     }
 
     #region Day

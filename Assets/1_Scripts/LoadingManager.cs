@@ -17,11 +17,16 @@ public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
 
     public void ShowLoading(LoadingType loadingType)
     {
-        _loadingImage.SetActive(true);
-
         var loadingDataList = GameData.Instance.GetLoadingDataByLoadingType(loadingType);
+        if (loadingDataList.IsNullOrEmpty())
+        {
+            LogManager.LogErrorPack("LoadingManager: 해당 타입의 로딩데이터가 없습니다.", loadingType);
+            return;
+        }
+        
         var index = Random.Range(0, loadingDataList.Count);
         var randomLoadingData = loadingDataList.GetAt(index);
+        _loadingImage.SetActive(true);
         _loadingImage.SetSprite(ResourceManager.Instance.LoadSprite(randomLoadingData.ResourceKey));
         _loadingDescription.SetText(randomLoadingData.Description);
     }

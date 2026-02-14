@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Singleton<T> where T : Singleton<T>, new()
 {
     public static T Instance => GetInstance();
@@ -14,18 +16,24 @@ public class Singleton<T> where T : Singleton<T>, new()
             {
                 _instance = new T();
                 _instance.OnInit();
+                Application.quitting -= DestroyInstance;
+                Application.quitting += DestroyInstance;
             }
-
             return _instance;
         }
     }
 
-    protected virtual void OnInit()
+    protected virtual void OnInit() { }
+
+    private static void DestroyInstance()
     {
+        if (!HasInstance) return;
+        _instance.OnDestroy();
     }
 
     protected virtual void OnDestroy()
     {
+        Application.quitting -= DestroyInstance;
         _instance = null;
     }
 }

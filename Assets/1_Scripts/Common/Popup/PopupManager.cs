@@ -50,11 +50,17 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 
         if (type != Type.None)
         {
+            PopupBase target = null;
             foreach (var popupBase in _popupList)
             {
                 if (popupBase.PopupType != type) continue;
-                HidePopupInternal(popupBase);
-                return;
+                target = popupBase;
+                break;
+            }
+            if (target != null)
+            {
+                _popupList.Remove(target);
+                HidePopupInternal(target);
             }
             return;
         }
@@ -80,7 +86,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
         }
         return false;
     }
-    
+
     private async UniTask HideAllPopupsInternal()
     {
         for (var index = _popupList.Count - 1; index >= 0; index--)
