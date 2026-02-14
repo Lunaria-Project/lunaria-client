@@ -47,7 +47,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         base.Update();
         UpdateCursor();
-        UpdateCompassUIs();
+        UpdateCompassUIPosition();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnQKeyDown?.Invoke();
@@ -135,7 +135,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     #region MapManager
 
-    public void OnChangeMap(IList<NpcInfo> npcInfo)
+    public void OnChangeMap(IEnumerable<NpcInfo> npcInfo)
     {
         SetDefaultCursor();
         InitCompassUIs(npcInfo);

@@ -6,22 +6,18 @@ public partial class GlobalManager
     [Header("CompassUI")]
     [SerializeField] private NpcCompassUI[] _compassUIs;
     [SerializeField] private Canvas _compassCanvas;
+    [SerializeField] private RectTransform _canvasRectTransform;
 
-    private RectTransform _canvasRectTransform;
-
-    private void InitCompassUIs(IList<NpcInfo> npcInfos)
+    private void InitCompassUIs(IEnumerable<NpcInfo> npcInfos)
     {
         _npcInfos.Clear();
         _npcInfos.AddRange(npcInfos);
-        if (_canvasRectTransform == null)
-        {
-            _canvasRectTransform = _compassCanvas.transform as RectTransform;
-        }
+        if (_npcInfos.IsNullOrEmpty()) return;
+
         foreach (var compassUI in _compassUIs)
         {
             compassUI.Init();
         }
-        if (_npcInfos.IsNullOrEmpty()) return;
         for (var i = 0; i < _npcInfos.Count; i++)
         {
             if (_compassUIs.Length <= i)
@@ -33,7 +29,7 @@ public partial class GlobalManager
         }
     }
 
-    private void UpdateCompassUIs()
+    private void UpdateCompassUIPosition()
     {
         foreach (var compassUI in _compassUIs)
         {
