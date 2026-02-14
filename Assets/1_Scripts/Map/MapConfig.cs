@@ -11,7 +11,7 @@ public class MapConfig : ScriptableObject
     [SerializeField] private float _npcMenuDistance = 2f;
 
     public float CollisionMargin => _collisionMargin;
-    public float MapCharacterSpeed => _playerSpeed * GlobalManager.Instance.CharacterSpeed;
+    public float MapCharacterSpeed => _playerSpeed;
     public float FrameDuration => _frameDuration;
     public int CollisionResolveCount => _collisionResolveCount;
     public float SlidePush => _slidePush;

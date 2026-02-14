@@ -19,7 +19,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     private bool _isRunning = false;
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
-    public float CharacterSpeed { get; private set; }
 
     protected override void Awake()
     {
@@ -34,7 +33,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         base.Start();
         _toastMessageBackground.SetActive(false);
-        CharacterSpeed = 1f;
     }
 
     protected override void OnDestroy()
@@ -147,7 +145,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     private void SetCameraSize(float size)
     {
         GlobalCamera.orthographicSize = size;
-        CharacterSpeed = size / 540f;
     }
 
     private void ResetCamaraPosition()
