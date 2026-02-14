@@ -14,11 +14,11 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     public event Action OnApplicationResume;
     public event Action OnQKeyDown;
     public event Action OnEKeyDown;
-    public Camera GlobalCamera => _globalCamara;
-    public bool FollowPlayer { get; private set; }
 
-    private bool _isRunning = false;
-    private List<NpcInfo> _npcInfos = new();
+    private bool _isDayRunning;
+    private bool _followPlayer;
+    
+    private readonly List<NpcInfo> _npcInfos = new();
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
 
     protected override void Awake()
@@ -91,19 +91,19 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     public void StartDay()
     {
-        if (_isRunning)
+        if (_isDayRunning)
         {
             LogManager.LogError("이미 게임을 진행중입니다.");
             return;
         }
-        _isRunning = true;
+        _isDayRunning = true;
         GameTimeManager.Instance.StartDay();
     }
 
     private void OnEndDay()
     {
-        if (!_isRunning) return;
-        _isRunning = false;
+        if (!_isDayRunning) return;
+        _isDayRunning = false;
         // TODO(지선): 여기서 영수증이 나오게 작업 필요
         LogManager.Log("하루 끝");
         StartDay();
@@ -143,14 +143,14 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     public void UpdateCameraPosition(Vector3 playerPosition)
     {
-        if (!FollowPlayer) return;
-        var cameraTransform = GlobalCamera.transform;
+        if (!_followPlayer) return;
+        var cameraTransform = _globalCamara.transform;
         cameraTransform.position = new Vector3(playerPosition.x, playerPosition.y, cameraTransform.position.z);
     }
 
     private void SetCameraSize(float size)
     {
-        GlobalCamera.orthographicSize = size;
+        _globalCamara.orthographicSize = size;
     }
 
     private void ResetCamaraPosition()
@@ -160,7 +160,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     private void SetCamaraPosition(float x, float y)
     {
-        var cameraTransform = GlobalCamera.transform;
+        var cameraTransform = _globalCamara.transform;
         cameraTransform.position = new Vector3(x, y, cameraTransform.position.z);
     }
 

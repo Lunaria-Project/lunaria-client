@@ -64,7 +64,7 @@ public partial class GlobalManager
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.ShoppingSquare).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
 
-        FollowPlayer = true;
+        _followPlayer = true;
         if (type != ShopType.None)
         {
             var mapManager = FindAnyObjectByType<ShoppingSquareMapManager>();
@@ -85,7 +85,7 @@ public partial class GlobalManager
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Myhome).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
 
-        FollowPlayer = false;
+        _followPlayer = false;
         SetCameraSize(540);
         ResetCamaraPosition();
 
@@ -109,7 +109,7 @@ public partial class GlobalManager
         await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Shop).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
 
-        FollowPlayer = false;
+        _followPlayer = false;
         SetCameraSize(360);
         var mapManager = FindAnyObjectByType<ShopMapManager>();
         mapManager.Init(shopType);
