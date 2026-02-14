@@ -28,6 +28,7 @@ public class ShopZone : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!GameTimeManager.HasInstance) return;    
         GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
     }
 
