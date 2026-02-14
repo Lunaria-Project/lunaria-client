@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Generated;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -62,6 +63,10 @@ public class ShopZone : MonoBehaviour
             switch (shopInfoData.ShopType)
             {
                 case ShopType.PowderShop:
+                {
+                    GlobalManager.Instance.ShortcutInvoke(ShortcutType.PowderShop).Forget();
+                    break;
+                }
                 case ShopType.CottonCandyShop:
                 case ShopType.BeddingShop:
                 {

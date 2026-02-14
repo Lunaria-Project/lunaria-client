@@ -6,6 +6,7 @@ public enum ShortcutType
 {
     Myhome,
     ShoppingSquare,
+    PowderShop,
 }
 
 public partial class GlobalManager
@@ -15,6 +16,7 @@ public partial class GlobalManager
         Title = 0,
         Myhome = 1,
         ShoppingSquare = 2,
+        Shop = 3,
     }
 
     private bool _isShortcutInvoking;
@@ -40,9 +42,12 @@ public partial class GlobalManager
         {
             case ShortcutType.Myhome: return GoToMyhomeAsync();
             case ShortcutType.ShoppingSquare: return GoToShoppingSquareAsync();
+            case ShortcutType.PowderShop: return GoToShopAsync(ShopType.PowderShop);
         }
         return UniTask.CompletedTask;
     }
+
+    #region Implement
 
     private async UniTask GoToShoppingSquareAsync()
     {
@@ -54,7 +59,7 @@ public partial class GlobalManager
         PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
 
         FollowPlayer = true;
-        GlobalCamera.orthographicSize = 250;
+        SetCameraSize(540);
 
         GameTimeManager.Instance.Resume();
         LoadingManager.Instance.HideLoading();
@@ -70,10 +75,35 @@ public partial class GlobalManager
         PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
 
         FollowPlayer = false;
-        GlobalCamera.orthographicSize = 540;
+        SetCameraSize(540);
         ResetCamaraPosition();
 
         GameTimeManager.Instance.Resume();
         LoadingManager.Instance.HideLoading();
     }
+
+    private async UniTask GoToShopAsync(ShopType shopType)
+    {
+        GameTimeManager.Instance.Pause();
+        var loadingType = shopType switch
+        {
+            _ => LoadingType.Normal,
+        };
+        LoadingManager.Instance.ShowLoading(loadingType);
+
+        await PopupManager.Instance.HideAllPopups();
+        await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.Shop).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
+        //PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
+
+        FollowPlayer = false;
+        SetCameraSize(360);
+        var mapManager = FindAnyObjectByType<ShopMapManager>();
+        var cameraPosition = mapManager.GetCameraPosition(shopType).position;
+        SetCamaraPosition(cameraPosition.x, cameraPosition.y);
+
+        GameTimeManager.Instance.Resume();
+        LoadingManager.Instance.HideLoading();
+    }
+
+    #endregion
 }

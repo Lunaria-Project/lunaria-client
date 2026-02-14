@@ -7,8 +7,9 @@ public class BaseMapManager : MonoBehaviour
     [SerializeField] private MapObject[] _mapObjects;
     [SerializeField] private PlayerObject _player;
 
+    protected PlayerObject Player => _player;
     private MapConfig _config;
-    private List<NpcInfo> _npcInfoList = new();
+    private readonly List<NpcInfo> _npcInfoList = new();
 
     protected virtual void Start()
     {
@@ -35,7 +36,7 @@ public class BaseMapManager : MonoBehaviour
         GlobalManager.Instance.UpdateCameraPosition(GetPlayerPosition());
     }
 
-    protected Vector3 GetPlayerPosition()
+    private Vector3 GetPlayerPosition()
     {
         return _player.transform.position;
     }

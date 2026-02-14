@@ -14,5 +14,6 @@ public partial class PanelManager
         MyhomeMain = 11,
         ShoppingSquareMain = 12,
         SlimeMinigame = 13,
+        Shop = 14,
     }
 }

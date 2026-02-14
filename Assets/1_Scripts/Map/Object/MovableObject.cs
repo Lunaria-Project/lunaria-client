@@ -128,9 +128,10 @@ public abstract class MovableObject : MapObject
     private void UpdateMove(float dt)
     {
         var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
+        moveDirection = moveDirection.normalized;
         if (moveDirection == Vector2.zero) return;
 
-        var deltaPosition = moveDirection * (dt * _config.PlayerSpeed);
+        var deltaPosition = moveDirection * (dt * _config.MapCharacterSpeed);
         for (var i = 0; i < _config.CollisionResolveCount; i++)
         {
             var deltaDistance = deltaPosition.magnitude;
