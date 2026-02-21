@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
 {
+    public const string AssetBundlePath = "Assets/11_AssetBundles";
     private const string AssetBundleFolderName = "11_AssetBundles";
     private const string IndexBundleName = "0_index";
     private const string IndexFileName = "asset_bundle_index.bytes";
@@ -101,7 +102,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(bundleName);
             foreach (var assetPath in assetPaths)
             {
-                if (!assetPath.Contains("Assets/11_AssetBundles")) break;
+                if (!assetPath.Contains(AssetBundlePath)) break;
                 var mainType = AssetDatabase.GetMainAssetTypeAtPath(assetPath);
                 if (mainType == null) continue;
 
