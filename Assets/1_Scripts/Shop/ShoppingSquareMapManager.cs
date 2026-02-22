@@ -16,6 +16,6 @@ public class ShoppingSquareMapManager : BaseMapManager
             ShopType.CottonCandyShop => _cottonCandyShopPosition.position,
             _                        => Vector3.zero,
         };
-        Player.transform.position = playerPosition;
+        //Player.transform.position = playerPosition;
     }
 }

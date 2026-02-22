@@ -5,9 +5,9 @@ using UnityEngine;
 public class BaseMapManager : MonoBehaviour
 {
     [SerializeField] private MapObject[] _mapObjects;
-    [SerializeField] private PlayerObject _player;
+    //[SerializeField] private PlayerObject _player;
 
-    protected PlayerObject Player => _player;
+    //protected PlayerObject Player => _player;
     private MapConfig _config;
     private readonly List<NpcInfo> _npcInfoList = new();
 
@@ -34,24 +34,24 @@ public class BaseMapManager : MonoBehaviour
     {
         if (GameTimeManager.Instance.IsPaused) return;
 
-        _player.SetSortingLayer();
-        UpdateNpcDistance();
-        GlobalManager.Instance.UpdateCameraPosition(GetPlayerPosition());
+        //_player.SetSortingLayer();
+        //UpdateNpcDistance();
+        //GlobalManager.Instance.UpdateCameraPosition(GetPlayerPosition());
     }
 
-    private Vector3 GetPlayerPosition()
-    {
-        return _player.transform.position;
-    }
+    //private Vector3 GetPlayerPosition()
+    //{
+    //    return _player.transform.position;
+    //}
 
-    private void UpdateNpcDistance()
-    {
-        foreach (var npc in _npcInfoList)
-        {
-            var distance = _player.Collider.Distance(npc.Collider).distance;
-            npc.SetDistanceToPlayer(distance, _config.NpcDistance);
-        }
-    }
+    //private void UpdateNpcDistance()
+    //{
+    //    foreach (var npc in _npcInfoList)
+    //    {
+    //        var distance = _player.Collider.Distance(npc.Collider).distance;
+    //        npc.SetDistanceToPlayer(distance, _config.NpcDistance);
+    //    }
+    //}
 
     [Button]
     private void SetMapObjectSortingLayer()

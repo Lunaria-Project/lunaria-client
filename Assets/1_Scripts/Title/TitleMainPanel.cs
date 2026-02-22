@@ -28,15 +28,16 @@ public class TitleMainPanel : Panel<TitleMainPanel>
         UserData.Instance.Init(info);
         UserData.Instance.AddInitialItems();
         await SceneManager.LoadSceneAsync(1);
+        MapManager.Instance.SetMap(MapType.Myhome);
         GlobalManager.Instance.StartDay();
     }
 
-    public void OnGoMyhomeButtonClick()
+    public void OnStartButtonClick()
     {
         StartGame(new UserDataInfo()).Forget();
     }
 
-    public void OnGoMyhomeWithCheatButtonClick()
+    public void OnStartWithCheatButtonClick()
     {
 #if UNITY_EDITOR
         var userDataInfo = new UserDataInfo();

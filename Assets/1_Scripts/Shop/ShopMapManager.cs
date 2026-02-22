@@ -29,6 +29,6 @@ public class ShopMapManager : BaseMapManager
 
     private void InitPowderShop()
     {
-        Player.transform.position = _powderShopStartPosition.position;
+        //Player.transform.position = _powderShopStartPosition.position;
     }
 }

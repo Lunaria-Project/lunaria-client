@@ -47,4 +47,22 @@ public class ResourceManager : Singleton<ResourceManager>
         };
         return LoadSprite(resourceKey);
     }
+
+    public BaseMap LoadMap(MapType type)
+    {
+        var resourceKey = type switch
+        {
+            MapType.Myhome         => "myhome_map",
+            MapType.ShoppingSquare => "shopping_square_map",
+            MapType.PowderShop     => "powder_shop_map",
+            _                      => string.Empty,
+        };
+        if (string.IsNullOrEmpty(resourceKey)) return null;
+        return LoadPrefab<BaseMap>(resourceKey);
+    }
+    
+    public PlayerObject LoadPlayerObject()
+    {
+        return LoadPrefab<PlayerObject>("map_player");
+    }
 }
