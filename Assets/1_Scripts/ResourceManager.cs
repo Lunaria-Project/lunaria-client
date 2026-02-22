@@ -67,8 +67,8 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadPrefab<PlayerObject>("map_player");
     }
     
-    public MovableNpcObject LoadNpcObject()
+    public NpcObject LoadNpcObject()
     {
-        return LoadPrefab<MovableNpcObject>("map_npc");
+        return LoadPrefab<NpcObject>("map_npc");
     }
 }

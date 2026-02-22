@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class BaseMapManager : MonoBehaviour
 {
-    [SerializeField] private MapObject[] _mapObjects;
+    [SerializeField] private OldMapObject[] _mapObjects;
     //[SerializeField] private PlayerObject _player;
 
     //protected PlayerObject Player => _player;
@@ -16,17 +15,16 @@ public class BaseMapManager : MonoBehaviour
         _npcInfoList.Clear();
         foreach (var mapObject in _mapObjects)
         {
-            if (mapObject is MovableNpcObject movableNpcObject)
-            {
-                _npcInfoList.Add(movableNpcObject.NpcInfo);
-            }
-            if (mapObject is NotMovableNpcObject notMovableNpcObject)
-            {
-                _npcInfoList.Add(notMovableNpcObject.NpcInfo);
-            }
+            //if (mapObject is OleMovableNpcObject movableNpcObject)
+            //{
+            //    _npcInfoList.Add(movableNpcObject.NpcInfo);
+            //}
+            //if (mapObject is NotMovableNpcObject notMovableNpcObject)
+            //{
+            //    _npcInfoList.Add(notMovableNpcObject.NpcInfo);
+            //}
         }
         GlobalManager.Instance.OnChangeMap(_npcInfoList);
-        SetMapObjectSortingLayer();
         _config = ResourceManager.Instance.LoadMapConfig();
     }
 
@@ -34,7 +32,6 @@ public class BaseMapManager : MonoBehaviour
     {
         if (GameTimeManager.Instance.IsPaused) return;
 
-        //_player.SetSortingLayer();
         //UpdateNpcDistance();
         //GlobalManager.Instance.UpdateCameraPosition(GetPlayerPosition());
     }
@@ -52,13 +49,4 @@ public class BaseMapManager : MonoBehaviour
     //        npc.SetDistanceToPlayer(distance, _config.NpcDistance);
     //    }
     //}
-
-    [Button]
-    private void SetMapObjectSortingLayer()
-    {
-        foreach (var mapObject in _mapObjects)
-        {
-            mapObject.SetSortingLayer();
-        }
-    }
 }

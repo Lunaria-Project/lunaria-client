@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class NotMovableNpcObject : MapObject
+public class NotMovableNpcObject : OldMapObject
 {
 #if UNITY_EDITOR
     [ValueDropdown("@DataIdDropDownList.GetNpcDataIds()")]

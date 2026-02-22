@@ -30,7 +30,7 @@ public class MyhomeArtifactUICell : MonoBehaviour
         {
             if (isInit)
             {
-                _rectTransform.SetScale(1.2f);
+                _rectTransform.SetLocalScale(1.2f);
             }
             else
             {
@@ -39,7 +39,7 @@ public class MyhomeArtifactUICell : MonoBehaviour
         }
         else
         {
-            _rectTransform.SetScale(1f);
+            _rectTransform.SetLocalScale(1f);
         }
     }
 }

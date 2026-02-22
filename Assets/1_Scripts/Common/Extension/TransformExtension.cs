@@ -9,7 +9,13 @@ public static class TransformExtension
         component.gameObject.SetActive(isActive);
     }
     
-    public static void SetScale(this RectTransform rectTransform, float scale)
+    public static void SetLocalScale(this RectTransform rectTransform, float scale)
+    {
+        if (rectTransform == null) return;
+        rectTransform.localScale = new Vector3(scale, scale, scale);
+    }
+    
+    public static void SetLocalScale(this Transform rectTransform, float scale)
     {
         if (rectTransform == null) return;
         rectTransform.localScale = new Vector3(scale, scale, scale);

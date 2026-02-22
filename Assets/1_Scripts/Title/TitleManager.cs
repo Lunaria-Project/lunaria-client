@@ -5,6 +5,5 @@ public class TitleManager : SingletonMonoBehaviour<TitleManager>
         GameData.Instance.LoadGameData();
         GlobalManager.Instance.SetCursor(CursorType.DefaultEmpty);
         PanelManager.Instance.ShowPanel(PanelManager.Type.TitleMain);
-        GlobalManager.Instance.InitUI();
     }
 }

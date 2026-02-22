@@ -57,7 +57,7 @@ public partial class GlobalManager
 
     private async UniTask GoToShoppingSquareAsync(ShopType type = ShopType.None)
     {
-        ClearCompassUI();
+        //ClearCompassUI();
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
 
@@ -79,7 +79,7 @@ public partial class GlobalManager
 
     private async UniTask GoToMyhomeAsync()
     {
-        ClearCompassUI();
+        //ClearCompassUI();
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
 
@@ -97,7 +97,7 @@ public partial class GlobalManager
 
     private async UniTask GoToShopAsync(ShopType shopType)
     {
-        ClearCompassUI();
+        //ClearCompassUI();
         GameTimeManager.Instance.Pause();
         var loadingType = shopType switch
         {

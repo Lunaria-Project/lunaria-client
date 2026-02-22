@@ -57,7 +57,7 @@ public partial class GlobalManager
 
         _cursorRectTransform.SetActive(true);
         _cursorImageRectTransform.anchoredPosition = data.Offset;
-        _cursorImageRectTransform.SetScale(data.Scale);
+        _cursorImageRectTransform.SetLocalScale(data.Scale);
         UpdateCursor();
     }
 

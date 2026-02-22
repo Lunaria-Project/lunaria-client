@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 8039834460680580791}
   _sprite: {fileID: 4590960734529882879}
+  _spriteTransform: {fileID: 0}
 --- !u!1 &4397094130553841169
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
-  m_SortingOrder: 88
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ec3848198b26b455f9a4c0cb39ae3d18, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

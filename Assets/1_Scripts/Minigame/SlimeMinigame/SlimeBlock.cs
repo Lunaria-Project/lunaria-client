@@ -51,7 +51,7 @@ public class SlimeBlock : MonoBehaviour
         _slimeImageRectTransform.SetActive(true);
 
         _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(type));
-        _slimeImageRectTransform.SetScale(scale);
+        _slimeImageRectTransform.SetLocalScale(scale);
         RefreshHealthObjects();
 
         DOTween.Kill(this);

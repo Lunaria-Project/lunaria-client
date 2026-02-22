@@ -3,18 +3,23 @@ using UnityEngine;
 
 public abstract class MovableObject : MapObject
 {
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Transform _spriteTransform;
+
     [Header("[Move]")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private CircleCollider2D _collider2D;
     [SerializeField] private ContactFilter2D _contactFilter;
 
-    public Collider2D Collider => _collider2D;
+    public CircleCollider2D Collider => _collider2D;
     public Vector2 MoveDirection { get; protected set; }
+    protected MapConfig Config;
 
+    // move
+    private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
     private Vector2 _forceMoveDirection;
 
-    private MapConfig _config;
-    private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
+    // sprite animation
     private bool _isFacingFront;
     private float _spriteFrameTime;
     private int _spriteIndex;
@@ -25,24 +30,15 @@ public abstract class MovableObject : MapObject
 
     #region UnityEvent
 
-    protected override void Start()
-    {
-        base.Start();
-        _isFacingFront = true;
-        _config = ResourceManager.Instance.LoadMapConfig();
-        InitMove();
-        InitSprite();
-    }
-
     protected virtual void Update()
     {
-        if (!GlobalManager.Instance.CanCharacterMove()) return;
+        if (!GlobalManager.Instance.CanPlayerMove()) return;
         UpdateSprite(Time.deltaTime);
     }
 
     protected void FixedUpdate()
     {
-        if (!GlobalManager.Instance.CanCharacterMove()) return;
+        if (!GlobalManager.Instance.CanPlayerMove()) return;
         UpdateMove(Time.fixedDeltaTime);
     }
 
@@ -53,6 +49,21 @@ public abstract class MovableObject : MapObject
         _forceMoveDirection = direction;
     }
 
+    protected void InitPositionAndScale(Vector2 initPosition, Vector2 spritePosition, float spriteScale, float colliderScale)
+    {
+        _isFacingFront = true;
+        if (Config == null)
+        {
+            Config = ResourceManager.Instance.LoadMapConfig();
+        }
+        _spriteTransform.localPosition = spritePosition;
+        _spriteTransform.SetLocalScale(spriteScale);
+        Transform.position = initPosition;
+        Transform.SetLocalScale(colliderScale);
+        InitMove();
+        InitSprite();
+    }
+
     protected abstract int GetCharacterDataId();
 
     private void InitMove()
@@ -61,6 +72,51 @@ public abstract class MovableObject : MapObject
         _rigidbody2D.interpolation = RigidbodyInterpolation2D.Interpolate;
         _rigidbody2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         MoveDirection = Vector2.zero;
+    }
+
+    private void UpdateMove(float dt)
+    {
+        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
+        moveDirection = moveDirection.normalized;
+        if (moveDirection == Vector2.zero) return;
+
+        var deltaPosition = moveDirection * (dt * Config.MapCharacterSpeed);
+        for (var i = 0; i < Config.CollisionResolveCount; i++)
+        {
+            var deltaDistance = deltaPosition.magnitude;
+            var collisionCount = _rigidbody2D.Cast(deltaPosition.normalized, _contactFilter, _hitBuffer, deltaDistance + Config.CollisionMargin);
+            if (collisionCount == 0)
+            {
+                _rigidbody2D.position += deltaPosition;
+                return;
+            }
+
+            var minCollisionRatio = 1f;
+            var nearestHit = _hitBuffer[0];
+            for (var j = 0; j < collisionCount; j++)
+            {
+                var hit = _hitBuffer[j];
+                var collisionRatio = Mathf.Clamp01((hit.distance - Config.CollisionMargin) / deltaDistance);
+                if (collisionRatio < minCollisionRatio)
+                {
+                    minCollisionRatio = collisionRatio;
+                    nearestHit = hit;
+                }
+            }
+
+            var newDeltaPosition = deltaPosition * minCollisionRatio;
+            _rigidbody2D.position += newDeltaPosition;
+
+            // 남은 이동에서 법선 성분 제거하여 슬라이드
+            var normal = nearestHit.normal;
+            deltaPosition *= (1 - minCollisionRatio);
+            var slide = deltaPosition - Vector2.Dot(deltaPosition, normal) * normal;
+            slide += normal * Config.SlidePush;
+
+            if (slide.magnitude <= float.Epsilon) return;
+
+            deltaPosition = slide;
+        }
     }
 
     private void InitSprite()
@@ -83,7 +139,7 @@ public abstract class MovableObject : MapObject
         }
         if (_frontSprites.Count > 0)
         {
-            SpriteRenderer.sprite = _frontSprites[_spriteIndex];
+            _spriteRenderer.sprite = _frontSprites[_spriteIndex];
         }
         _spriteFrameTime = 0;
     }
@@ -104,11 +160,11 @@ public abstract class MovableObject : MapObject
 
         if (moveDirection.x > 0)
         {
-            SpriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else if (moveDirection.x < 0)
         {
-            SpriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
         }
 
         if (moveDirection == Vector2.zero)
@@ -119,64 +175,14 @@ public abstract class MovableObject : MapObject
         else
         {
             _spriteFrameTime += dt;
-            if (_spriteFrameTime > _config.FrameDuration)
+            if (_spriteFrameTime > Config.FrameDuration)
             {
-                _spriteFrameTime -= _config.FrameDuration;
+                _spriteFrameTime -= Config.FrameDuration;
                 _spriteIndex += 1;
                 _spriteIndex %= (_isFacingFront ? _frontSprites.Count : _backSprites.Count);
             }
         }
 
-        SpriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
-    }
-    
-    protected void InitPosition(Vector2 position)
-    {
-        _rigidbody2D.position = position;
-    }
-
-    private void UpdateMove(float dt)
-    {
-        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
-        moveDirection = moveDirection.normalized;
-        if (moveDirection == Vector2.zero) return;
-
-        var deltaPosition = moveDirection * (dt * _config.MapCharacterSpeed);
-        for (var i = 0; i < _config.CollisionResolveCount; i++)
-        {
-            var deltaDistance = deltaPosition.magnitude;
-            var collisionCount = _rigidbody2D.Cast(deltaPosition.normalized, _contactFilter, _hitBuffer, deltaDistance + _config.CollisionMargin);
-            if (collisionCount == 0)
-            {
-                _rigidbody2D.position += deltaPosition;
-                return;
-            }
-
-            var minCollisionRatio = 1f;
-            var nearestHit = _hitBuffer[0];
-            for (var j = 0; j < collisionCount; j++)
-            {
-                var hit = _hitBuffer[j];
-                var collisionRatio = Mathf.Clamp01((hit.distance - _config.CollisionMargin) / deltaDistance);
-                if (collisionRatio < minCollisionRatio)
-                {
-                    minCollisionRatio = collisionRatio;
-                    nearestHit = hit;
-                }
-            }
-
-            var newDeltaPosition = deltaPosition * minCollisionRatio;
-            _rigidbody2D.position += newDeltaPosition;
-
-            // 남은 이동에서 법선 성분 제거하여 슬라이드
-            var normal = nearestHit.normal;
-            deltaPosition *= (1 - minCollisionRatio);
-            var slide = deltaPosition - Vector2.Dot(deltaPosition, normal) * normal;
-            slide += normal * _config.SlidePush;
-
-            if (slide.magnitude <= float.Epsilon) return;
-
-            deltaPosition = slide;
-        }
+        _spriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
     }
 }

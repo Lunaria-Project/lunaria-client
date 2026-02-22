@@ -17,7 +17,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     private bool _isDayRunning;
     private bool _followPlayer;
-    
+
     private readonly List<NpcInfo> _npcInfos = new();
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
 
@@ -47,7 +47,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         base.Update();
         UpdateCursor();
-        UpdateCompassUIPosition();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnQKeyDown?.Invoke();
@@ -58,7 +57,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            TryInteractNearestNpc();
+            MapManager.Instance.TryInteractNearestNpc();
         }
     }
 
@@ -84,11 +83,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         {
             OnApplicationResume?.Invoke();
         }
-    }
-
-    public void InitUI()
-    {
-        _compassUIs.SetActiveAll(false);
     }
 
     #region Day
@@ -142,7 +136,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     public void OnChangeMap(IEnumerable<NpcInfo> npcInfo)
     {
         SetDefaultCursor();
-        InitCompassUIs(npcInfo);
     }
 
     public void UpdateCameraPosition(Vector3 playerPosition)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7422733350310678624}
-  - component: {fileID: 5983847348493533748}
+  - component: {fileID: 4678758990972255950}
   - component: {fileID: 3168125611606894955}
   - component: {fileID: 2368768620848697183}
   - component: {fileID: 5725339903603900522}
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 1571769428971179239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5983847348493533748
+--- !u!114 &4678758990972255950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2622211507977707728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd451b150dae481eac146cbe0a58a22, type: 3}
+  m_Script: {fileID: 11500000, guid: 13a93c2a7a86a4843ab1e3cc1d2bf0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerObject
   _transform: {fileID: 7422733350310678624}
-  _sprite: {fileID: 6900653485525934237}
+  _spriteRenderer: {fileID: 6900653485525934237}
   _spriteTransform: {fileID: 1571769428971179239}
   _rigidbody2D: {fileID: 2368768620848697183}
   _collider2D: {fileID: 3168125611606894955}
@@ -67,7 +67,6 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  _characterDataId: 1000011
 --- !u!58 &3168125611606894955
 CircleCollider2D:
   m_ObjectHideFlags: 0

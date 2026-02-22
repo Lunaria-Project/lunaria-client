@@ -1,28 +1,17 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerObject : MovableObject
 {
-#if UNITY_EDITOR
-    [ValueDropdown("@DataIdDropDownList.GetCharacterDataIds()")]
-#endif
-    [SerializeField] private int _characterDataId;
+    public void Init(Vector2 position)
+    {
+        InitPositionAndScale(position, new Vector2(0, 86), 0.5f, 1);
+    }
 
     protected override void Update()
     {
         base.Update();
-        if (!GlobalManager.Instance.CanCharacterMove()) return;
+        if (!GlobalManager.Instance.CanPlayerMove()) return;
 
-        UpdateMoveDirection();
-    }
-
-    protected override int GetCharacterDataId()
-    {
-        return _characterDataId;
-    }
-
-    private void UpdateMoveDirection()
-    {
         var previousMoveDirection = MoveDirection;
         MoveDirection = Vector2.zero;
         var moveUp = Input.GetKey(KeyCode.W);
@@ -60,5 +49,10 @@ public class PlayerObject : MovableObject
         {
             MoveDirection *= GameSetting.Instance.SpeedUpRate;
         }
+    }
+
+    protected override int GetCharacterDataId()
+    {
+        return 1000011;
     }
 }

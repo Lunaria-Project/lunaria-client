@@ -8,16 +8,51 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     private BaseMap _currentMap;
     private PlayerObject _playerObject;
-    private List<MovableNpcObject> _npcObjects = new();
+    private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
+    private MapConfig _config;
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (_playerObject == null) return;
+        if (_config == null) return;
+
+        foreach (var npcObject in _npcObjects)
+        {
+            var distance = _playerObject.Collider.Distance(npcObject.Collider).distance;
+            npcObject.SetIsNearBy(distance <= _config.NpcDistance, distance);
+        }
+    }
 
     public void SetMap(MapType type)
     {
+        _config = ResourceManager.Instance.LoadMapConfig();
         LoadMap(type);
         TryLoadPlayer();
         TryLoadNpc(type);
         // 오브젝트가 스스로 위치 정하게도 해야함
         ShowPanel(type);
+    }
+
+    public void TryInteractNearestNpc()
+    {
+        if (!GlobalManager.Instance.CanPlayerMove()) return;
+
+        NpcCompassUI nearest = null;
+        var minDistance = float.MaxValue;
+        foreach (var npcObject in _npcObjects)
+        {
+            if (_config.NpcDistance < npcObject.DistanceToPlayer) continue;
+            if (npcObject.DistanceToPlayer < minDistance)
+            {
+                minDistance = npcObject.DistanceToPlayer;
+                nearest = npcObject.CompassUI;
+            }
+        }
+        if (nearest == null) return;
+        nearest.OnCompassUIClick();
     }
 
     private void LoadMap(MapType type)
@@ -45,7 +80,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             var playerPrefab = ResourceManager.Instance.LoadPlayerObject();
             _playerObject = Instantiate(playerPrefab, _mapParent);
         }
-        _playerObject.transform.position = _currentMap.PlayerInitPosition.position;
+        _playerObject.Init(_currentMap.PlayerInitPosition.position);
     }
 
     private void TryLoadNpc(MapType type)
@@ -54,7 +89,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
         var npcObjectIndex = 0;
         _npcDataIdHashSet.Clear();
-        _npcObjects.SetActiveAll(false);
         foreach (var data in GameData.Instance.DTMapNpcPositionData)
         {
             if (!RequirementManager.Instance.IsSatisfied(data.ShowRequirement, data.ShowRequirementValues)) continue;
@@ -69,16 +103,23 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             {
                 var npcPrefab = ResourceManager.Instance.LoadNpcObject();
                 var npcObject = Instantiate(npcPrefab, _mapParent);
-                npcObject.Init(data);
+                npcObject.Show(data);
                 _npcObjects.Add(npcObject);
             }
             else
             {
                 var npcObject = _npcObjects[npcObjectIndex];
-                npcObject.gameObject.SetActive(true);
-                npcObject.Init(data);
+                npcObject.Show(data);
             }
             npcObjectIndex++;
+        }
+
+        if (npcObjectIndex < _npcObjects.Count)
+        {
+            for (var i = npcObjectIndex; i < _npcObjects.Count; i++)
+            {
+                _npcObjects[i].Hide();
+            }
         }
     }
 
