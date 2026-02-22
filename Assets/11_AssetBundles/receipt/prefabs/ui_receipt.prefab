@@ -178,7 +178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000019022928}
+  m_AnchoredPosition: {x: 0, y: 0.0002720978}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7818122545384736694
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9447c9b4314f24e1bba1dec780a3bfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MyhomeMainPanel
-  _walletText: {fileID: 0}
+  _walletUI: {fileID: 0}
   _timeUI: {fileID: 0}
   _artifactUI: {fileID: 0}
 --- !u!1 &2113640813170596995
@@ -3713,7 +3713,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 906859174404640158}
   m_Direction: 3
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999718
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5496,7 +5496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3445768915040196717, guid: 4c03d05461cab46a0983904998e43744, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa3ee79ca27e14863ac28f819ccf98b9, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5505,7 +5505,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.6
+  m_PixelsPerUnitMultiplier: 130
 --- !u!1001 &1396186797118440913
 PrefabInstance:
   m_ObjectHideFlags: 0
