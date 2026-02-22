@@ -68,18 +68,14 @@ namespace Generated
         public int SelectionId { get; private set; }
         public RequirementType ShowRequirement { get; private set; }
         public List<int> ShowRequirementValues { get; private set; }
-        public RequirementType HideRequirement { get; private set; }
-        public List<int> HideRequirementValues { get; private set; }
         public string SelectionTitle { get; private set; }
         public int SelectionCutsceneId { get; private set; }
 
-        public CutsceneSelectionData(int selectionId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, string selectionTitle, int selectionCutsceneId)
+        public CutsceneSelectionData(int selectionId, RequirementType showRequirement, List<int> showRequirementValues, string selectionTitle, int selectionCutsceneId)
         {
             SelectionId = selectionId;
             ShowRequirement = showRequirement;
             ShowRequirementValues = showRequirementValues;
-            HideRequirement = hideRequirement;
-            HideRequirementValues = hideRequirementValues;
             SelectionTitle = selectionTitle;
             SelectionCutsceneId = selectionCutsceneId;
         }
@@ -180,19 +176,11 @@ namespace Generated
     public partial class MapNpcInfoData
     {
         public int NpcId { get; private set; }
-        public RequirementType ShowRequirement { get; private set; }
-        public List<int> ShowRequirementValues { get; private set; }
-        public RequirementType HideRequirement { get; private set; }
-        public List<int> HideRequirementValues { get; private set; }
         public int CharacterId { get; private set; }
 
-        public MapNpcInfoData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int characterId)
+        public MapNpcInfoData(int npcId, int characterId)
         {
             NpcId = npcId;
-            ShowRequirement = showRequirement;
-            ShowRequirementValues = showRequirementValues;
-            HideRequirement = hideRequirement;
-            HideRequirementValues = hideRequirementValues;
             CharacterId = characterId;
         }
     }
@@ -203,22 +191,18 @@ namespace Generated
         public string MenuName { get; private set; }
         public RequirementType ShowRequirement { get; private set; }
         public List<int> ShowRequirementValues { get; private set; }
-        public RequirementType HideRequirement { get; private set; }
-        public List<int> HideRequirementValues { get; private set; }
         public int Order { get; private set; }
         public int Priority { get; private set; }
         public bool ShowMenuPopup { get; private set; }
         public NpcMenuFunctionType FunctionType { get; private set; }
         public int FunctionValue { get; private set; }
 
-        public MapNpcMenuData(int npcId, string menuName, RequirementType showRequirement, List<int> showRequirementValues, RequirementType hideRequirement, List<int> hideRequirementValues, int order, int priority, bool showMenuPopup, NpcMenuFunctionType functionType, int functionValue)
+        public MapNpcMenuData(int npcId, string menuName, RequirementType showRequirement, List<int> showRequirementValues, int order, int priority, bool showMenuPopup, NpcMenuFunctionType functionType, int functionValue)
         {
             NpcId = npcId;
             MenuName = menuName;
             ShowRequirement = showRequirement;
             ShowRequirementValues = showRequirementValues;
-            HideRequirement = hideRequirement;
-            HideRequirementValues = hideRequirementValues;
             Order = order;
             Priority = priority;
             ShowMenuPopup = showMenuPopup;

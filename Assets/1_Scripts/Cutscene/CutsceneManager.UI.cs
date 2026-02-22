@@ -93,7 +93,6 @@ public partial class CutsceneManager
         {
             if (!GameData.Instance.TryGetCutsceneSelectionData(selectionId, out var selectionData)) continue;
             if (!RequirementManager.Instance.IsSatisfied(selectionData.ShowRequirement, selectionData.ShowRequirementValues)) continue;
-            if (RequirementManager.Instance.IsSatisfied(selectionData.HideRequirement, selectionData.HideRequirementValues)) continue;
 
             _selectionButtons.GetAt(index).SetActive(true);
             _selectionTexts.GetAt(index++).SetText(selectionData.SelectionTitle);

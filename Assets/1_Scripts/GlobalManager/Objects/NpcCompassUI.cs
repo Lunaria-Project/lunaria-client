@@ -92,7 +92,6 @@ public class NpcCompassUI : MonoBehaviour
         foreach (var npcData in npcDataList)
         {
             if (!RequirementManager.Instance.IsSatisfied(npcData.ShowRequirement, npcData.ShowRequirementValues)) continue;
-            if (RequirementManager.Instance.IsSatisfied(npcData.HideRequirement, npcData.HideRequirementValues)) continue;
             if (npcData.Priority <= currentPriority) continue;
             currentPriority = npcData.Priority;
             data = npcData;

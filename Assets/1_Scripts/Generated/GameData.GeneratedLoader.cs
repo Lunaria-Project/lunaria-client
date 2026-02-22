@@ -43,7 +43,7 @@ public partial class GameData
         _dtCutsceneSelectionData.Clear();
         foreach (var row in rows)
         {
-            var newData = new CutsceneSelectionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), GetLocalString((row[5] as string) ?? string.Empty, type), Convert.ToInt32(row[6]));
+            var newData = new CutsceneSelectionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), GetLocalString((row[3] as string) ?? string.Empty, type), Convert.ToInt32(row[4]));
             _dtCutsceneSelectionData.Add(newData.SelectionId, newData);
         }
     }
@@ -98,7 +98,7 @@ public partial class GameData
         _dtMapNpcInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[3], true), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]));
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]));
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }
@@ -109,7 +109,7 @@ public partial class GameData
         _dtMapNpcMenuData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[4], true), (row[5] as string).ParseIntList(), Convert.ToInt32(row[6]), Convert.ToInt32(row[7]), Convert.ToBoolean(row[8]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[9], true), Convert.ToInt32(row[10]));
+            var newData = new MapNpcMenuData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), Convert.ToInt32(row[5]), Convert.ToBoolean(row[6]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[7], true), Convert.ToInt32(row[8]));
             _dtMapNpcMenuData.Add(newData);
         }
     }

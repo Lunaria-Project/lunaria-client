@@ -23,7 +23,6 @@ public partial class GameData
         {
             if (data.NpcId != npcDataId) continue;
             if (!RequirementManager.Instance.IsSatisfied(data.ShowRequirement, data.ShowRequirementValues)) continue;
-            if (RequirementManager.Instance.IsSatisfied(data.HideRequirement, data.HideRequirementValues)) continue;
 
             result.Add(data);
         }
