@@ -114,6 +114,17 @@ public partial class GameData
         }
     }
 
+    private void LoadMapNpcPositionData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtMapNpcPositionData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new MapNpcPositionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (MapType)Enum.Parse(typeof(MapType), (string)row[3], true), (row[4] as string) ?? string.Empty);
+            _dtMapNpcPositionData.Add(newData.NpcId, newData);
+        }
+    }
+
     private void LoadRequirementInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -150,6 +161,7 @@ public partial class GameData
             case "Loading": LoadLoadingData(rows, type); break;
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;
+            case "MapNpcPosition": LoadMapNpcPositionData(rows, type); break;
             case "RequirementInfo": LoadRequirementInfoData(rows, type); break;
             case "ShopInfo": LoadShopInfoData(rows, type); break;
         }

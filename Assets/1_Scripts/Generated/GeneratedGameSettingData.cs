@@ -12,6 +12,8 @@ public class GameSetting : Singleton<GameSetting>
     public int StartGameTimeSeconds { get; private set; }
     public int EndGameTimeSeconds { get; private set; }
     public float SpeedUpRate { get; private set; }
+    public float MinSlimeGaugePer10Minutes { get; private set; }
+    public float MaxSlimeGaugePer10Minutes { get; private set; }
 
     public void InvokeLoadForSheet(SheetInfo sheetInfo)
     {
@@ -30,6 +32,8 @@ public class GameSetting : Singleton<GameSetting>
                 case "StartGameTimeSeconds": StartGameTimeSeconds = Convert.ToInt32(row[2]); break;
                 case "EndGameTimeSeconds": EndGameTimeSeconds = Convert.ToInt32(row[2]); break;
                 case "SpeedUpRate": SpeedUpRate = Convert.ToSingle(row[2]); break;
+                case "MinSlimeGaugePer10Minutes": MinSlimeGaugePer10Minutes = Convert.ToSingle(row[2]); break;
+                case "MaxSlimeGaugePer10Minutes": MaxSlimeGaugePer10Minutes = Convert.ToSingle(row[2]); break;
             }
         }
     }

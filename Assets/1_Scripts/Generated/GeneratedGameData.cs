@@ -211,6 +211,24 @@ namespace Generated
         }
     }
 
+    public partial class MapNpcPositionData
+    {
+        public int NpcId { get; private set; }
+        public RequirementType ShowRequirement { get; private set; }
+        public List<int> ShowRequirementValues { get; private set; }
+        public MapType MapType { get; private set; }
+        public string Positions { get; private set; }
+
+        public MapNpcPositionData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, MapType mapType, string positions)
+        {
+            NpcId = npcId;
+            ShowRequirement = showRequirement;
+            ShowRequirementValues = showRequirementValues;
+            MapType = mapType;
+            Positions = positions;
+        }
+    }
+
     public partial class RequirementInfoData
     {
         public RequirementType RequirementType { get; private set; }

@@ -42,6 +42,15 @@ namespace Generated
     }
 
     [SerializeEnum]
+    public enum MapType
+    {
+        None = 0,
+        Myhome = 1,
+        PowderShop = 2,
+        ShoppingSquare = 3,
+    }
+
+    [SerializeEnum]
     public enum NpcMenuFunctionType
     {
         None = 0,
@@ -58,6 +67,7 @@ namespace Generated
         ActivateDuration = 1,
         AlwaysFalse = 2,
         AlwaysTrue = 3,
+        MyhomeSlimeAppeared = 4,
     }
 
     [SerializeEnum]

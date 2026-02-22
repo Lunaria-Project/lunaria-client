@@ -1,11 +1,5 @@
+using Generated;
 using UnityEngine;
-
-public enum MapType
-{
-    Myhome,
-    ShoppingSquare,
-    PowderShop,
-}
 
 public class MapManager : SingletonMonoBehaviour<MapManager>
 {
