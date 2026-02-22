@@ -2,12 +2,11 @@ using System.Collections.Generic;
 
 public partial class UserData
 {
-    public Dictionary<int, long> ItemDictionary { get; private set; } = new();
     public int EquippedArtifactId { get; private set; }
 
     public long GetItemQuantity(int itemDataId)
     {
-        foreach (var (id, quantity) in ItemDictionary)
+        foreach (var (id, quantity) in _userDataInfo.ItemDictionary)
         {
             if (id != itemDataId) continue;
             if (!GameData.Instance.ContainsItemData(id)) continue;
@@ -19,7 +18,7 @@ public partial class UserData
     public List<(int ItemId, long Qunatity)> GetItemQuantities(Generated.ItemType itemType)
     {
         var items = new List<(int ItemId, long Qunatity)>();
-        foreach (var (id, quantity) in ItemDictionary)
+        foreach (var (id, quantity) in _userDataInfo.ItemDictionary)
         {
             if (!GameData.Instance.TryGetItemData(id, out var itemData)) continue;
             if (itemData.ItemType != itemType) continue;

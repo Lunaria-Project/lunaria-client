@@ -17,7 +17,6 @@ public static class StringExtension
                 list.Add(num);
             }
         }
-
         return list;
     }
 
@@ -37,7 +36,24 @@ public static class StringExtension
         if (float.TryParse(parts[0], out var x) && float.TryParse(parts[1], out var y)) return new Vector2(x, y);
         return Vector2.zero;
     }
-    
+
+    public static List<float> ParseFloatList(this string raw)
+    {
+        if (string.IsNullOrEmpty(raw)) return new List<float>();
+
+        var parts = raw.Split(',');
+        var list = new List<float>();
+
+        foreach (var part in parts)
+        {
+            if (float.TryParse(part.Trim(), out var num))
+            {
+                list.Add(num);
+            }
+        }
+        return list;
+    }
+
     public static string ToNDigits(this int value, int digits)
     {
         return value.ToString($"D{digits}");

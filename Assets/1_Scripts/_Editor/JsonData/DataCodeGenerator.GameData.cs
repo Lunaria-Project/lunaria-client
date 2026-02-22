@@ -17,6 +17,7 @@ public static partial class DataCodeGenerator
         ListString,
         Vector2,
         LocalString,
+        ListFloat,
     }
 
     private const string OutputNamespace = "Generated";
@@ -222,6 +223,11 @@ public static partial class DataCodeGenerator
                         args.Add($"GetLocalString((row[{i}] as string) ?? string.Empty, type)");
                         break;
                     }
+                    case ColumnType.ListFloat:
+                    {
+                        args.Add($"(row[{i}] as string).ParseFloatList()");
+                        break;
+                    }
                     default:
                     {
                         var arg = CastExpr(csType, $"row[{i}]");
@@ -337,6 +343,10 @@ public static partial class DataCodeGenerator
             else if (csType2 == TypeMap[_stringType])
             {
                 columnCsType = ColumnType.ListString;
+            }
+            else if (csType2 == TypeMap[_floatType])
+            {
+                columnCsType = ColumnType.ListFloat;
             }
         }
         else if (isVector2)

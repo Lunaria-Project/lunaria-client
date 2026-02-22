@@ -26,8 +26,7 @@ public class TitleMainPanel : Panel<TitleMainPanel>
 
     private async UniTask StartGame(UserDataInfo info)
     {
-        UserData.Instance.Init(info);
-        UserData.Instance.AddInitialItems();
+        UserData.Instance.Init(info, true);
         await SceneManager.LoadSceneAsync(1);
         MapManager.Instance.SetMap(MapType.Myhome);
         GlobalManager.Instance.StartDay();
@@ -47,6 +46,7 @@ public class TitleMainPanel : Panel<TitleMainPanel>
         {
             userDataInfo.AddItem(id.DataId, quantity);
         }
+        userDataInfo.SlimeGauge = userData.InitSlimeGauge;
         StartGame(userDataInfo).Forget();
 #endif
     }

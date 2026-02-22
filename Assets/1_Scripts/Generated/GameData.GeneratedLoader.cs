@@ -98,7 +98,7 @@ public partial class GameData
         _dtMapNpcInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]));
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (row[2] as string).ParseFloatList(), Convert.ToSingle(row[3]), (row[4] as string).ParseFloatList());
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }
@@ -120,8 +120,8 @@ public partial class GameData
         _dtMapNpcPositionData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcPositionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (MapType)Enum.Parse(typeof(MapType), (string)row[3], true), (row[4] as string) ?? string.Empty);
-            _dtMapNpcPositionData.Add(newData.NpcId, newData);
+            var newData = new MapNpcPositionData(Convert.ToInt32(row[0]), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[1], true), (row[2] as string).ParseIntList(), (MapType)Enum.Parse(typeof(MapType), (string)row[3], true), (row[4] as string).ParseFloatList());
+            _dtMapNpcPositionData.Add(newData);
         }
     }
 

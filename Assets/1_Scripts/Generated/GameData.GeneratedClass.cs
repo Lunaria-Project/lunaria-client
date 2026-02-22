@@ -75,12 +75,9 @@ public partial class GameData
     public IReadOnlyList<MapNpcMenuData> DTMapNpcMenuData => _dtMapNpcMenuData;
     private List<MapNpcMenuData> _dtMapNpcMenuData = new();
 
-    // MapNpcPositionData - MapNpcPositionData, key: NpcId
-    public IReadOnlyDictionary<int, MapNpcPositionData> DTMapNpcPositionData => _dtMapNpcPositionData;
-    public bool TryGetMapNpcPositionData(int key, out MapNpcPositionData result) => DTMapNpcPositionData.TryGetValue(key, out result);
-    public MapNpcPositionData GetMapNpcPositionData(int key) => DTMapNpcPositionData.TryGetValue(key, out var result) ? result : null;
-    public bool ContainsMapNpcPositionData(int key) => DTMapNpcPositionData.ContainsKey(key);
-    private readonly Dictionary<int, MapNpcPositionData> _dtMapNpcPositionData = new();
+    // MapNpcPositionData - MapNpcPositionData
+    public IReadOnlyList<MapNpcPositionData> DTMapNpcPositionData => _dtMapNpcPositionData;
+    private List<MapNpcPositionData> _dtMapNpcPositionData = new();
 
     // RequirementInfoData - RequirementInfoData, key: RequirementType
     public IReadOnlyDictionary<RequirementType, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;

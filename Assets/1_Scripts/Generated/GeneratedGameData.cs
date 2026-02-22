@@ -177,11 +177,17 @@ namespace Generated
     {
         public int NpcId { get; private set; }
         public int CharacterId { get; private set; }
+        public List<float> SpritePositionAndScale { get; private set; }
+        public float ColliderScale { get; private set; }
+        public List<float> CompassUIPosition { get; private set; }
 
-        public MapNpcInfoData(int npcId, int characterId)
+        public MapNpcInfoData(int npcId, int characterId, List<float> spritePositionAndScale, float colliderScale, List<float> compassUIPosition)
         {
             NpcId = npcId;
             CharacterId = characterId;
+            SpritePositionAndScale = spritePositionAndScale;
+            ColliderScale = colliderScale;
+            CompassUIPosition = compassUIPosition;
         }
     }
 
@@ -217,9 +223,9 @@ namespace Generated
         public RequirementType ShowRequirement { get; private set; }
         public List<int> ShowRequirementValues { get; private set; }
         public MapType MapType { get; private set; }
-        public string Positions { get; private set; }
+        public List<float> Positions { get; private set; }
 
-        public MapNpcPositionData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, MapType mapType, string positions)
+        public MapNpcPositionData(int npcId, RequirementType showRequirement, List<int> showRequirementValues, MapType mapType, List<float> positions)
         {
             NpcId = npcId;
             ShowRequirement = showRequirement;

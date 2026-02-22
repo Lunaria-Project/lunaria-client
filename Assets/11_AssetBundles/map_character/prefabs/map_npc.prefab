@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7422733350310678624}
-  - component: {fileID: 5983847348493533748}
-  - component: {fileID: 3168125611606894955}
-  - component: {fileID: 2368768620848697183}
-  - component: {fileID: 5725339903603900522}
+  - component: {fileID: 7045209932038004307}
+  - component: {fileID: 6290008457681138713}
+  - component: {fileID: 1534694921055629949}
+  - component: {fileID: 5412775150698776212}
   m_Layer: 0
-  m_Name: map_player
+  m_Name: map_npc
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,9 +34,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1571769428971179239}
+  - {fileID: 6361503131588351322}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5983847348493533748
+--- !u!114 &7045209932038004307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,14 +46,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2622211507977707728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd451b150dae481eac146cbe0a58a22, type: 3}
+  m_Script: {fileID: 11500000, guid: 8055d478e414a4416a38342b57f28c8b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerObject
+  m_EditorClassIdentifier: Assembly-CSharp::MovableNpcObject
   _transform: {fileID: 7422733350310678624}
   _sprite: {fileID: 6900653485525934237}
   _spriteTransform: {fileID: 1571769428971179239}
-  _rigidbody2D: {fileID: 2368768620848697183}
-  _collider2D: {fileID: 3168125611606894955}
+  _rigidbody2D: {fileID: 1534694921055629949}
+  _collider2D: {fileID: 6290008457681138713}
   _contactFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -67,8 +68,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  _characterDataId: 1000011
---- !u!58 &3168125611606894955
+  _compassUITransform: {fileID: 6361503131588351322}
+--- !u!58 &6290008457681138713
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,8 +104,8 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 20
---- !u!50 &2368768620848697183
+  m_Radius: 40
+--- !u!50 &1534694921055629949
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -131,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5725339903603900522
+--- !u!114 &5412775150698776212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,8 +171,8 @@ Transform:
   m_GameObject: {fileID: 5694423799846736862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 86, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7422733350310678624}
@@ -223,7 +224,7 @@ SpriteRenderer:
   m_SortingLayerID: -1502358903
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 381bf70126e0041b0aee5a859d9c633b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c065072be69c649da8fa7123c4d6194d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -234,3 +235,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5839407864117756963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6361503131588351322}
+  m_Layer: 0
+  m_Name: CompassUIParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6361503131588351322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5839407864117756963}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7422733350310678624}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

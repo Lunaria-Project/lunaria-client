@@ -1,20 +1,20 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class MovableNpcObject : MovableObject
 {
-#if UNITY_EDITOR
-    [ValueDropdown("@DataIdDropDownList.GetNpcDataIds()")]
-#endif
-    [SerializeField] private int _npcDataId;
     [SerializeField] private Transform _compassUITransform;
 
     public NpcInfo NpcInfo { get; private set; } = new();
+    private int _npcDataId;
 
-    protected override void Start()
+    public void Init(Generated.MapNpcPositionData positionData)
     {
+        _npcDataId = positionData.NpcId;
+        InitPosition(new Vector2(positionData.Positions.GetAt(0), positionData.Positions.GetAt(1)));
+        var infoData = GameData.Instance.GetMapNpcInfoData(_npcDataId);
+        InitSpritePosition(new Vector2(infoData.SpritePositionAndScale.GetAt(0), infoData.SpritePositionAndScale.GetAt(1)), infoData.SpritePositionAndScale.GetAt(2));
+        Transform.localScale = new Vector3(infoData.ColliderScale, infoData.ColliderScale, 1);
         NpcInfo.Init(_npcDataId, _compassUITransform, transform, Collider);
-        base.Start();
     }
 
     protected override int GetCharacterDataId()

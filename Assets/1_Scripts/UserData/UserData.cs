@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class UserDataInfo
 {
     public Dictionary<int, long> ItemDictionary = new();
+    public float SlimeGauge;
 
     public void AddItem(int itemId, long quantity)
     {
@@ -14,16 +15,24 @@ public class UserDataInfo
 
 public partial class UserData : Singleton<UserData>
 {
-    public void AddInitialItems()
+    public float SlimeGauge => _userDataInfo.SlimeGauge;
+    private UserDataInfo _userDataInfo;
+
+    public void Init(UserDataInfo info, bool addInitialItems)
     {
-        foreach (var (id, data) in GameData.Instance.DTInitialItemData)
+        _userDataInfo = info;
+        if (addInitialItems)
         {
-            ItemDictionary.TryAdd(id, data.Quantity);
+            foreach (var (id, data) in GameData.Instance.DTInitialItemData)
+            {
+                _userDataInfo.AddItem(id, data.Quantity);
+            }
         }
     }
 
-    public void Init(UserDataInfo info)
+    //TODO(지선): 10분마다 더해지도록 구현하기
+    public void AddSlimeGauge(float amount)
     {
-        ItemDictionary = info.ItemDictionary;
+        _userDataInfo.SlimeGauge += amount;
     }
 }

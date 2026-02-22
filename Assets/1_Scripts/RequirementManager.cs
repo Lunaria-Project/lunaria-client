@@ -17,6 +17,7 @@ public class RequirementManager : Singleton<RequirementManager>
                 var currentHHMM = currentTime.Hours * 100 + currentTime.MinutesForUI;
                 return startInclusiveTime <= currentHHMM && currentHHMM < endExclusiveTime;
             }
+            case RequirementType.MyhomeSlimeAppeared: return UserData.Instance.SlimeGauge >= 100f;
         }
         LogManager.LogErrorPack("대응되지 않은 타입", type);
         return false;

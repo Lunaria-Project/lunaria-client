@@ -129,6 +129,11 @@ public abstract class MovableObject : MapObject
 
         SpriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
     }
+    
+    protected void InitPosition(Vector2 position)
+    {
+        _rigidbody2D.position = position;
+    }
 
     private void UpdateMove(float dt)
     {
