@@ -8,7 +8,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 
     private readonly List<PopupBase> _popupList = new();
 
-    private void Update()
+    protected override void Update()
     {
         if (_popupList.Count <= 0) return;
 
@@ -33,7 +33,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
         return popup;
     }
 
-    public PopupBase ShowPopup(Type popupType)
+    public PopupBase ShowPopupWithEmptyParameter(Type popupType)
     {
         return ShowPopup(popupType, new PopupEmptyParameter());
     }
