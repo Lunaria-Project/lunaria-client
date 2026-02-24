@@ -10,10 +10,13 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     private PlayerObject _playerObject;
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
+    private bool _followPlayer;
 
     protected override void Update()
     {
         base.Update();
+
+        GlobalManager.Instance.UpdateCameraPosition(_playerObject.transform.position);
 
         if (_playerObject == null) return;
         if (_config == null) return;
@@ -121,6 +124,12 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
                 _npcObjects[i].Hide();
             }
         }
+    }
+
+    private void SetCamera(bool followPlayer)
+    {
+        _followPlayer = followPlayer;
+        GlobalManager.Instance.UpdateCameraPosition(followPlayer ? _playerObject.transform.position : Vector3.zero);
     }
 
     private void SetPanel(MapType type)

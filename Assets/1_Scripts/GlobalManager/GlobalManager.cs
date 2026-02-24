@@ -15,9 +15,9 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     public event Action OnEKeyDown;
 
     private bool _isDayRunning;
-    private bool _followPlayer;
 
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
+    private const int DefaultCameraSize = 700;
 
     protected override void Awake()
     {
@@ -139,14 +139,13 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     public void UpdateCameraPosition(Vector3 playerPosition)
     {
-        if (!_followPlayer) return;
         var cameraTransform = _globalCamara.transform;
         cameraTransform.position = new Vector3(playerPosition.x, playerPosition.y, cameraTransform.position.z);
     }
 
     private void SetCameraSize(float size)
     {
-        _globalCamara.orthographicSize = size;
+        _globalCamara.orthographicSize = DefaultCameraSize * size;
     }
 
     private void ResetCamaraPosition()
