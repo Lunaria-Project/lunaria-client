@@ -79,6 +79,8 @@ public class SlimeBlock : MonoBehaviour
 
     private void RefreshHealthObjects()
     {
+        _healthObjects.SetActiveAll(false);
+        if (_slimeType is SlimeType.ToxicLevel1 or SlimeType.ToxicLevel2 or SlimeType.ToxicLevel3) return;
         for (var i = 0; i < _healthObjects.Length; i++)
         {
             _healthObjects[i].SetActive(i < _remainTouchCount);
