@@ -1,4 +1,3 @@
-using Generated;
 using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>

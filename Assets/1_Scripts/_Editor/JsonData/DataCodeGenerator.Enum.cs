@@ -61,8 +61,7 @@ public static partial class DataCodeGenerator
                 var disp = (idxDisp >= 0 && idxDisp < row.Length) ? row[idxDisp]?.ToString() : null;
                 var rkey = (idxResKey >= 0 && idxResKey < row.Length) ? row[idxResKey]?.ToString() : null;
 
-                if (!byEnum.TryGetValue(enumName, out var list))
-                    byEnum[enumName] = list = new List<(string, string, string)>();
+                if (!byEnum.TryGetValue(enumName, out var list)) byEnum[enumName] = list = new List<(string, string, string)>();
 
                 list.Add((value.Trim(), string.IsNullOrWhiteSpace(disp) ? null : disp.Trim(),
                     string.IsNullOrWhiteSpace(rkey) ? null : rkey.Trim()));
@@ -70,9 +69,6 @@ public static partial class DataCodeGenerator
         }
 
         var sb = new StringBuilder();
-        sb.AppendLine($"namespace {OutputNamespace}");
-        sb.AppendLine("{");
-
         foreach (var (enumName, itemsRaw) in byEnum.OrderBy(k => k.Key, StringComparer.Ordinal))
         {
             // 결정적 순서: 멤버 이름 Ordinal 정렬(원하면 원본 순서 유지로 바꿔도 됨)
@@ -87,18 +83,18 @@ public static partial class DataCodeGenerator
                 .OrderBy(x => x.Name, StringComparer.Ordinal)
                 .ToList();
 
-            sb.AppendIndentedLine($"[SerializeEnum]", 1);
-            sb.AppendIndentedLine($"public enum {enumName}", 1);
-            sb.AppendIndentedLine("{", 1);
-            sb.AppendIndentedLine("None = 0,", 2);
+            sb.AppendIndentedLine($"[SerializeEnum]", 0);
+            sb.AppendIndentedLine($"public enum {enumName}", 0);
+            sb.AppendIndentedLine("{", 0);
+            sb.AppendIndentedLine("None = 0,", 1);
             var next = 1;
             foreach (var it in items)
             {
-                sb.AppendIndentedLine($"{it.Name} = {next},", 2);
+                sb.AppendIndentedLine($"{it.Name} = {next},", 1);
                 next++;
             }
 
-            sb.AppendIndentedLine("}", 1);
+            sb.AppendIndentedLine("}", 0);
             sb.AppendLine();
 
             // DisplayName 값이 실제로 하나라도 채워져 있어야 true
@@ -148,12 +144,11 @@ public static partial class DataCodeGenerator
                     sb.AppendLine();
                 }
 
-                sb.AppendIndentedLine("}", 1);
+                sb.AppendIndentedLine("}", 0);
                 sb.AppendLine();
             }
         }
 
-        sb.AppendLine("}");
         return sb.ToString();
 
         // 문자열에 \, "가 들어있으면 안 됨

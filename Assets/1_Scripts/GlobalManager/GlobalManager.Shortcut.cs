@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Generated;
 using UnityEngine.SceneManagement;
 
 public enum ShortcutType

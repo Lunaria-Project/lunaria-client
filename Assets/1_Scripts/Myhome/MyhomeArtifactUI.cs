@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using Generated;
 using UnityEngine;
 
 public class MyhomeArtifactUI : MonoBehaviour

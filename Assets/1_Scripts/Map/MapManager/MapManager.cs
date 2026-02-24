@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Generated;
 using UnityEngine;
 
 public class MapManager : SingletonMonoBehaviour<MapManager>

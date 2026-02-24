@@ -15,7 +15,7 @@ public partial class UserData
         return 0;
     }
 
-    public List<(int ItemId, long Qunatity)> GetItemQuantities(Generated.ItemType itemType)
+    public List<(int ItemId, long Qunatity)> GetItemQuantities(ItemType itemType)
     {
         var items = new List<(int ItemId, long Qunatity)>();
         foreach (var (id, quantity) in _userDataInfo.ItemDictionary)

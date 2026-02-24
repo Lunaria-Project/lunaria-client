@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Generated;
 
 public class RequirementManager : Singleton<RequirementManager>
 {
