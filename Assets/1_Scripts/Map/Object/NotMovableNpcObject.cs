@@ -10,11 +10,9 @@ public class NotMovableNpcObject : OldMapObject
     [SerializeField] private CircleCollider2D _collider2D;
     [SerializeField] private Transform _compassUITransform;
 
-    public NpcInfo NpcInfo { get; private set; } = new();
 
     protected override void Start()
     {
         base.Start();
-        NpcInfo.Init(_npcDataId, _compassUITransform, transform, _collider2D);
     }
 }

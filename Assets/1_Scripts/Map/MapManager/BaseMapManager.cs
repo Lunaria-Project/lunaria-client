@@ -8,11 +8,11 @@ public class BaseMapManager : MonoBehaviour
 
     //protected PlayerObject Player => _player;
     private MapConfig _config;
-    private readonly List<NpcInfo> _npcInfoList = new();
+    //private readonly List<NpcInfo> _npcInfoList = new();
 
     protected virtual void Start()
     {
-        _npcInfoList.Clear();
+        //_npcInfoList.Clear();
         foreach (var mapObject in _mapObjects)
         {
             //if (mapObject is OleMovableNpcObject movableNpcObject)
@@ -24,7 +24,7 @@ public class BaseMapManager : MonoBehaviour
             //    _npcInfoList.Add(notMovableNpcObject.NpcInfo);
             //}
         }
-        GlobalManager.Instance.OnChangeMap(_npcInfoList);
+        //GlobalManager.Instance.OnChangeMap(_npcInfoList);
         _config = ResourceManager.Instance.LoadMapConfig();
     }
 

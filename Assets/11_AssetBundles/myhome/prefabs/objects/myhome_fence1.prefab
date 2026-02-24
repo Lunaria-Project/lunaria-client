@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8039834460680580791}
-  - component: {fileID: 5837581273521335172}
+  - component: {fileID: 3369531521656187581}
   m_Layer: 0
-  m_Name: myhome_fence
+  m_Name: myhome_fence1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4582028582795738055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &5837581273521335172
+--- !u!114 &3369531521656187581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +43,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4253219198950801238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940adccee3cbc471f8ffc64efe29b5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c4d07d1df23a445ba7c0f326ba28155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 8039834460680580791}
-  _sprite: {fileID: 4590960734529882879}
-  _spriteTransform: {fileID: 0}
 --- !u!1 &4397094130553841169
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 4397094130553841169}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -110, y: 109, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -166,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 8733071776073785211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -110, y: 109, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,11 +5,11 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 {
     [SerializeField] private Transform _mapParent;
 
+    private MapConfig _config;
     private BaseMap _currentMap;
     private PlayerObject _playerObject;
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
-    private MapConfig _config;
 
     protected override void Update()
     {
@@ -32,7 +32,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         TryLoadPlayer();
         TryLoadNpc(type);
         // 오브젝트가 스스로 위치 정하게도 해야함
-        ShowPanel(type);
+        SetPanel(type);
+        SetCamera(true);
     }
 
     public void TryInteractNearestNpc()
@@ -122,7 +123,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         }
     }
 
-    private void ShowPanel(MapType type)
+    private void SetPanel(MapType type)
     {
         switch (type)
         {

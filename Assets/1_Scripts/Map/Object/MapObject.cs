@@ -9,7 +9,7 @@ public class MapObject : MonoBehaviour
     protected virtual void LateUpdate()
     {
         var pos = _transform.localPosition;
-        if (Mathf.Approximately(pos.z, pos.y)) return;
-        _transform.localPosition = new Vector3(pos.x, pos.y, pos.y);
+        if (Mathf.Approximately(pos.z, -pos.y)) return;
+        _transform.localPosition = new Vector3(pos.x, pos.y, -pos.y);
     }
 }

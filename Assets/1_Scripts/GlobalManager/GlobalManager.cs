@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
 using Lunaria;
 using UnityEngine;
@@ -18,7 +17,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     private bool _isDayRunning;
     private bool _followPlayer;
 
-    private readonly List<NpcInfo> _npcInfos = new();
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
 
     protected override void Awake()
@@ -133,8 +131,9 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     #region MapManager
 
-    public void OnChangeMap(IEnumerable<NpcInfo> npcInfo)
+    public void OnChangeMap(MapType type)
     {
+        MapManager.Instance.SetMap(type);
         SetDefaultCursor();
     }
 
