@@ -34,6 +34,7 @@ public abstract class MovableObject : MapObject
     {
         if (!GlobalManager.Instance.CanPlayerMove()) return;
         UpdateSprite(Time.deltaTime);
+        UpdateZPosition();
     }
 
     protected void FixedUpdate()
@@ -184,5 +185,12 @@ public abstract class MovableObject : MapObject
         }
 
         _spriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
+    }
+
+    private void UpdateZPosition()
+    {
+        var pos = Transform.localPosition;
+        if (Mathf.Approximately(pos.z, pos.y)) return;
+        Transform.localPosition = new Vector3(pos.x, pos.y, pos.y);
     }
 }

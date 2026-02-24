@@ -5,9 +5,9 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 {
     [SerializeField] private Transform _mapParent;
 
+    public NormalMap CurrentMap { get; private set; }
+    public PlayerObject PlayerObject { get; private set; }
     private MapConfig _config;
-    private BaseMap _currentMap;
-    private PlayerObject _playerObject;
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
     private bool _followPlayer;
@@ -16,14 +16,17 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     {
         base.Update();
 
-        GlobalManager.Instance.UpdateCameraPosition(_playerObject.transform.position);
+        if (_followPlayer)
+        {
+            GlobalManager.Instance.UpdateCameraPosition(PlayerObject.transform.position);
+        }
 
-        if (_playerObject == null) return;
+        if (PlayerObject == null) return;
         if (_config == null) return;
 
         foreach (var npcObject in _npcObjects)
         {
-            var distance = _playerObject.Collider.Distance(npcObject.Collider).distance;
+            var distance = PlayerObject.Collider.Distance(npcObject.Collider).distance;
             npcObject.SetIsNearBy(distance <= _config.NpcDistance, distance);
         }
     }
@@ -60,10 +63,10 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     private void LoadMap(MapType type)
     {
-        if (_currentMap != null)
+        if (CurrentMap != null)
         {
-            Destroy(_currentMap.gameObject);
-            _currentMap = null;
+            Destroy(CurrentMap.gameObject);
+            CurrentMap = null;
         }
 
         var prefab = ResourceManager.Instance.LoadMap(type);
@@ -72,23 +75,23 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             LogManager.LogError($"Map prefab not found: {type}");
             return;
         }
-        _currentMap = Instantiate(prefab, _mapParent);
+        CurrentMap = Instantiate(prefab, _mapParent);
     }
 
     private void TryLoadPlayer()
     {
-        if (_currentMap == null) return;
-        if (_playerObject == null)
+        if (CurrentMap == null) return;
+        if (PlayerObject == null)
         {
             var playerPrefab = ResourceManager.Instance.LoadPlayerObject();
-            _playerObject = Instantiate(playerPrefab, _mapParent);
+            PlayerObject = Instantiate(playerPrefab, _mapParent);
         }
-        _playerObject.Init(_currentMap.PlayerInitPosition.position);
+        PlayerObject.Init(CurrentMap.PlayerInitPosition.position);
     }
 
     private void TryLoadNpc(MapType type)
     {
-        if (_currentMap == null) return;
+        if (CurrentMap == null) return;
 
         var npcObjectIndex = 0;
         _npcDataIdHashSet.Clear();
@@ -129,7 +132,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     private void SetCamera(bool followPlayer)
     {
         _followPlayer = followPlayer;
-        GlobalManager.Instance.UpdateCameraPosition(followPlayer ? _playerObject.transform.position : Vector3.zero);
+        GlobalManager.Instance.UpdateCameraPosition(followPlayer ? PlayerObject.transform.position : Vector3.zero);
     }
 
     private void SetPanel(MapType type)

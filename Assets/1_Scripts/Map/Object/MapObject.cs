@@ -6,7 +6,7 @@ public class MapObject : MonoBehaviour
     
     protected Transform Transform => _transform;
 
-    protected virtual void LateUpdate()
+    protected virtual void Start()
     {
         var pos = _transform.localPosition;
         if (Mathf.Approximately(pos.z, pos.y)) return;

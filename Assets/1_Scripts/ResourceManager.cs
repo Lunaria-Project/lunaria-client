@@ -48,7 +48,7 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadSprite(resourceKey);
     }
 
-    public BaseMap LoadMap(MapType type)
+    public NormalMap LoadMap(MapType type)
     {
         var resourceKey = type switch
         {
@@ -58,7 +58,7 @@ public class ResourceManager : Singleton<ResourceManager>
             _                      => string.Empty,
         };
         if (string.IsNullOrEmpty(resourceKey)) return null;
-        return LoadPrefab<BaseMap>(resourceKey);
+        return LoadPrefab<NormalMap>(resourceKey);
     }
     
     public PlayerObject LoadPlayerObject()

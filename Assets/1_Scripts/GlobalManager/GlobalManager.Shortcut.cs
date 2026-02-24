@@ -56,18 +56,16 @@ public partial class GlobalManager
 
     private async UniTask GoToShoppingSquareAsync(ShopType type = ShopType.None)
     {
-        //ClearCompassUI();
         GameTimeManager.Instance.Pause();
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
 
-        await PopupManager.Instance.HideAllPopups();
-        await UniTask.WhenAll(SceneManager.LoadSceneAsync((int)SceneType.ShoppingSquare).ToUniTask(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
+        await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
 
-        if (type != ShopType.None)
+        OnChangeMap(MapType.ShoppingSquare);
+        if (type != ShopType.None && MapManager.Instance.CurrentMap is ShoppingSquareMap shoppingSquareMap)
         {
-            var mapManager = FindAnyObjectByType<ShoppingSquareMapManager>();
-            mapManager.InitWithShopType(type);
+            MapManager.Instance.PlayerObject.Init(shoppingSquareMap.PlayerInitPosition.position);
         }
         SetCameraSize(1);
 

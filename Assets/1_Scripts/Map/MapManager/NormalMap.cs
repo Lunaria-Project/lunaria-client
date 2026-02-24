@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseMap : MonoBehaviour
+public class NormalMap : MonoBehaviour
 {
     [SerializeField] private Transform _playerInitPosition;
 
