@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine.SceneManagement;
 
 public enum ShortcutType
 {
@@ -13,14 +12,6 @@ public enum ShortcutType
 
 public partial class GlobalManager
 {
-    private enum SceneType
-    {
-        Title = 0,
-        Myhome = 1,
-        ShoppingSquare = 2,
-        Shop = 3,
-    }
-
     private bool _isShortcutInvoking;
 
     public async UniTask ShortcutInvoke(ShortcutType type)
@@ -80,7 +71,8 @@ public partial class GlobalManager
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
-
+        
+        OnChangeMap(MapType.Myhome);
         SetCameraSize(1);
         ResetCamaraPosition();
 
@@ -103,6 +95,7 @@ public partial class GlobalManager
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
 
+        OnChangeMap(MapType.ShoppingSquare); //TODO
         SetCameraSize(0.6f);
         var mapManager = FindAnyObjectByType<ShopMapManager>();
         mapManager.Init(shopType);

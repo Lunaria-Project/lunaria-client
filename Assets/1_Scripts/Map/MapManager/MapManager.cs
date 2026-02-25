@@ -42,10 +42,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         SetCamera(true);
     }
 
-    public void TryInteractNearestNpc()
+    public bool TryInteractNearestNpc()
     {
-        if (!GlobalManager.Instance.CanPlayerMove()) return;
-
         NpcCompassUI nearest = null;
         var minDistance = float.MaxValue;
         foreach (var npcObject in _npcObjects)
@@ -57,8 +55,23 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
                 nearest = npcObject.CompassUI;
             }
         }
-        if (nearest == null) return;
+        if (nearest == null) return false;
         nearest.OnCompassUIClick();
+        return true;
+    }
+
+    public bool TryInteractNearestShop()
+    {
+        if (CurrentMap is ShoppingSquareMap shoppingSquareMap)
+        {
+            foreach (var shopObject in shoppingSquareMap.ShopObjects)
+            {
+                if (!shopObject.IsNearBy) continue;
+                shopObject.OnShopButtonClick();
+                return true;
+            }
+        }
+        return false;
     }
 
     private void LoadMap(MapType type)

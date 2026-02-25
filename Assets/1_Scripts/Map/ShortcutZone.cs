@@ -8,7 +8,7 @@ public class ShortcutZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag(GlobalManager.Instance.PlayerTagName)) return;
+        if (!other.CompareTag(StringManager.PlayerTagName)) return;
         if (_isInstantShortcut)
         {
             GlobalManager.Instance.ShortcutInvoke(_shortcutType).Forget();
@@ -21,7 +21,7 @@ public class ShortcutZone : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!GlobalManager.HasInstance) return;
-        if (!other.CompareTag(GlobalManager.Instance.PlayerTagName)) return;
+        if (!other.CompareTag(StringManager.PlayerTagName)) return;
         PopupManager.Instance.HideCurrentPopup(PopupManager.Type.Shortcut).Forget();
     }
 }

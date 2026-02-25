@@ -6,15 +6,15 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 {
     [SerializeField] private RectTransform _parentRectTransform;
 
-    private readonly List<PopupBase> _popupList = new();
+    public List<PopupBase> PopupList { get; private set; }= new();
 
     protected override void Update()
     {
-        if (_popupList.Count <= 0) return;
+        if (PopupList.Count <= 0) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            var currentPopup = _popupList.GetLast();
+            var currentPopup = PopupList.GetLast();
             if (currentPopup == null) return;
             if (!currentPopup.HideWithEscapeKey()) return;
 
@@ -38,20 +38,14 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
         return ShowPopup(popupType, new PopupEmptyParameter());
     }
 
-    public PopupBase GetCurrentPopup()
-    {
-        if (_popupList.Count <= 0) return null;
-        return _popupList.GetLast();
-    }
-
     public async UniTask HideCurrentPopup(Type type = Type.None)
     {
-        if (_popupList.Count <= 0) return;
+        if (PopupList.Count <= 0) return;
 
         if (type != Type.None)
         {
             PopupBase target = null;
-            foreach (var popupBase in _popupList)
+            foreach (var popupBase in PopupList)
             {
                 if (popupBase.PopupType != type) continue;
                 target = popupBase;
@@ -59,27 +53,27 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
             }
             if (target != null)
             {
-                _popupList.Remove(target);
+                PopupList.Remove(target);
                 HidePopupInternal(target);
             }
             return;
         }
 
-        HidePopupInternal(_popupList.GetLast());
-        _popupList.RemoveLast();
+        HidePopupInternal(PopupList.GetLast());
+        PopupList.RemoveLast();
         await UniTask.NextFrame();
     }
 
     public UniTask HideAllPopups()
     {
-        if (_popupList.Count <= 0) return UniTask.CompletedTask;
+        if (PopupList.Count <= 0) return UniTask.CompletedTask;
 
         return HideAllPopupsInternal();
     }
 
     public bool ContainsPopup(Type type)
     {
-        foreach (var popup in _popupList)
+        foreach (var popup in PopupList)
         {
             if (popup.PopupType != type) continue;
             return true;
@@ -89,13 +83,13 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 
     private async UniTask HideAllPopupsInternal()
     {
-        for (var index = _popupList.Count - 1; index >= 0; index--)
+        for (var index = PopupList.Count - 1; index >= 0; index--)
         {
-            var popup = _popupList[index];
+            var popup = PopupList[index];
             HidePopupInternal(popup);
         }
 
-        _popupList.Clear();
+        PopupList.Clear();
         await UniTask.NextFrame();
     }
 
@@ -111,7 +105,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
     {
         if (popup == null) return;
 
-        _popupList.Add(popup);
+        PopupList.Add(popup);
         popup.transform.SetAsLastSibling();
     }
 

@@ -1,25 +1,28 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class ShopZone : MonoBehaviour
+public class ShopObject : MapObject
 {
 #if UNITY_EDITOR
     [ValueDropdown("@DataIdDropDownList.GetShopDataIds()")]
 #endif
     [SerializeField] private int _shopDataId;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private GameObject _openedObject;
     [SerializeField] private GameObject _closedObject;
+    [SerializeField] private Collider2DTrigger _shopZoneTrigger;
 
+    public bool IsNearBy { get; private set; }
     private int _startTime;
     private int _endTime;
-    private bool _isNearBy;
+    private bool _isOpened;
 
     private void OnEnable()
     {
         GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
         GameTimeManager.Instance.OnIntervalChanged += OnIntervalChanged;
-        
         var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
         _startTime = shopInfoData.StartTime;
         _endTime = shopInfoData.EndTime;
@@ -28,37 +31,33 @@ public class ShopZone : MonoBehaviour
 
     private void OnDisable()
     {
-        if (!GameTimeManager.HasInstance) return;    
+        if (!GameTimeManager.HasInstance) return;
         GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        _isNearBy = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        _isNearBy = false;
+        IsNearBy = _shopZoneTrigger.IsTriggerIn;
     }
 
     private void OnIntervalChanged()
     {
         var currentTime = GameTimeManager.Instance.CurrentGameTime;
         var currentHHMM = currentTime.Hours * 100 + currentTime.MinutesForUI;
-        var isOpened = _startTime <= currentHHMM && currentHHMM < _endTime;
-        _openedObject.SetActive(isOpened);
-        _closedObject.SetActive(!isOpened);
+        _isOpened = _startTime <= currentHHMM && currentHHMM < _endTime;
+        _openedObject.SetActive(_isOpened);
+        _closedObject.SetActive(!_isOpened);
     }
 
-    public void OnClosedShopButtonClick()
+    public void OnShopButtonClick()
     {
-        GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO
-    }
+        if (!_isOpened)
+        {
+            GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO    
+            return;
+        }
 
-    public void OnOpenedShopButtonClick()
-    {
-        if (_isNearBy)
+        if (IsNearBy)
         {
             var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
             switch (shopInfoData.ShopType)

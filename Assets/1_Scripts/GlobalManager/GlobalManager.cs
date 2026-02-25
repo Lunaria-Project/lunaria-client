@@ -11,8 +11,6 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     public event Action OnApplicationPaused;
     public event Action OnApplicationResume;
-    public event Action OnQKeyDown;
-    public event Action OnEKeyDown;
 
     private bool _isDayRunning;
 
@@ -45,18 +43,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         base.Update();
         UpdateCursor();
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            OnQKeyDown?.Invoke();
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            OnEKeyDown?.Invoke();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MapManager.Instance.TryInteractNearestNpc();
-        }
+        UpdateKey();
     }
 
     private void OnApplicationFocus(bool hasFocus)
@@ -130,6 +117,26 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     #endregion
 
     #region MapManager
+
+    public bool CanPlayerMove()
+    {
+        if (CutsceneManager.Instance.IsPlaying) return false;
+        if (GameTimeManager.Instance.IsPaused) return false;
+        foreach (var popup in PopupManager.Instance.PopupList)
+        {
+            if (!CanPlayerMoveWithPopup(popup.PopupType)) return false;
+        }
+        return true;
+
+        bool CanPlayerMoveWithPopup(PopupManager.Type type)
+        {
+            return type switch
+            {
+                PopupManager.Type.Shortcut => true,
+                _                          => false,
+            };
+        }
+    }
 
     public void OnChangeMap(MapType type)
     {

@@ -5,6 +5,9 @@ public class ShoppingSquareMap : NormalMap
     [SerializeField] private Transform _powderShopPosition;
     [SerializeField] private Transform _beddingShopPosition;
     [SerializeField] private Transform _cottonCandyShopPosition;
+    [SerializeField] private ShopObject[] _shopObjects;
+    
+    public ShopObject[] ShopObjects => _shopObjects;
 
     public Vector2 GetPlayerPosition(ShopType type)
     {
