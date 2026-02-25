@@ -150,13 +150,13 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     private void ResetCamaraPosition()
     {
-        SetCamaraPosition(0, 0);
+        SetCamaraPosition(Vector2.zero);
     }
 
-    private void SetCamaraPosition(float x, float y)
+    private void SetCamaraPosition(Vector2 position)
     {
         var cameraTransform = _globalCamara.transform;
-        cameraTransform.position = new Vector3(x, y, cameraTransform.position.z);
+        cameraTransform.position = new Vector3(position.x, position.y, cameraTransform.position.z);
     }
 
     #endregion
