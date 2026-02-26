@@ -97,11 +97,14 @@ public partial class GlobalManager
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
 
-        OnChangeMap(MapType.ShoppingSquare); //TODO
+        var mapType = shopType switch
+        {
+            ShopType.PowderShop => MapType.PowderShop,
+            _                   => MapType.ShoppingSquare,
+        };
+        OnChangeMap(mapType);
         SetCameraSize(0.6f);
-        var mapManager = FindAnyObjectByType<ShopMapManager>();
-        mapManager.Init(shopType);
-        SetCamaraPosition(mapManager.GetCameraPosition(shopType).position);
+        ResetCamaraPosition();
 
         GameTimeManager.Instance.Resume();
         LoadingManager.Instance.HideLoading();
