@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class MovableObject : MapObject
 {
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _characterSpriteRenderer;
     [SerializeField] private Transform _spriteTransform;
 
     [Header("[Move]")]
@@ -13,7 +13,7 @@ public abstract class MovableObject : MapObject
 
     public CircleCollider2D Collider => _collider2D;
     public Vector2 MoveDirection { get; protected set; }
-    protected MapConfig Config;
+    private MapConfig Config;
 
     // move
     private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
@@ -59,9 +59,9 @@ public abstract class MovableObject : MapObject
             Config = ResourceManager.Instance.LoadMapConfig();
         }
         _spriteTransform.localPosition = spritePosition;
-        _spriteTransform.SetLocalScale(spriteScale);
+        _spriteTransform.localScale = Vector3.one * spriteScale;
         Transform.position = initPosition;
-        Transform.SetLocalScale(colliderScale);
+        _collider2D.radius = colliderScale;
         InitMove();
         InitSprite();
     }
@@ -141,7 +141,7 @@ public abstract class MovableObject : MapObject
         }
         if (_frontSprites.Count > 0)
         {
-            _spriteRenderer.sprite = _frontSprites[_spriteIndex];
+            _characterSpriteRenderer.sprite = _frontSprites[_spriteIndex];
         }
         _spriteFrameTime = 0;
     }
@@ -162,11 +162,11 @@ public abstract class MovableObject : MapObject
 
         if (moveDirection.x > 0)
         {
-            _spriteRenderer.flipX = false;
+            _characterSpriteRenderer.flipX = false;
         }
         else if (moveDirection.x < 0)
         {
-            _spriteRenderer.flipX = true;
+            _characterSpriteRenderer.flipX = true;
         }
 
         if (moveDirection == Vector2.zero)
@@ -185,7 +185,7 @@ public abstract class MovableObject : MapObject
             }
         }
 
-        _spriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
+        _characterSpriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
     }
 
     private void UpdateZPosition()

@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6493757454700176232}
-  m_Father: {fileID: 7422733350310678624}
+  m_Father: {fileID: 1571769428971179239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -136,7 +136,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1571769428971179239}
-  - {fileID: 7997587598561208801}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2719257390748217750
@@ -152,7 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcObject
   _transform: {fileID: 7422733350310678624}
+  _behindTrigger: {fileID: 0}
   _spriteRenderer: {fileID: 6900653485525934237}
+  _characterSpriteRenderer: {fileID: 6900653485525934237}
   _spriteTransform: {fileID: 1571769428971179239}
   _rigidbody2D: {fileID: 1534694921055629949}
   _collider2D: {fileID: 6290008457681138713}
@@ -276,7 +277,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 36.6, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7997587598561208801}
   m_Father: {fileID: 7422733350310678624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6900653485525934237

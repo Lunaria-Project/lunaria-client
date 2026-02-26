@@ -177,16 +177,18 @@ namespace Generated
     {
         public int NpcId { get; private set; }
         public int CharacterId { get; private set; }
+        public string ResourceKey { get; private set; }
         public List<float> SpritePositionAndScale { get; private set; }
-        public float ColliderScale { get; private set; }
+        public float ColliderRadius { get; private set; }
         public List<float> CompassUIPosition { get; private set; }
 
-        public MapNpcInfoData(int npcId, int characterId, List<float> spritePositionAndScale, float colliderScale, List<float> compassUIPosition)
+        public MapNpcInfoData(int npcId, int characterId, string resourceKey, List<float> spritePositionAndScale, float colliderRadius, List<float> compassUIPosition)
         {
             NpcId = npcId;
             CharacterId = characterId;
+            ResourceKey = resourceKey;
             SpritePositionAndScale = spritePositionAndScale;
-            ColliderScale = colliderScale;
+            ColliderRadius = colliderRadius;
             CompassUIPosition = compassUIPosition;
         }
     }

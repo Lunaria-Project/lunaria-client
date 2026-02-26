@@ -17,7 +17,7 @@ public class NpcObject : MovableObject
         var initPosition = new Vector2(positionData.Positions.GetAt(0), positionData.Positions.GetAt(1));
         var initSpritePosition = new Vector2(infoData.SpritePositionAndScale.GetAt(0), infoData.SpritePositionAndScale.GetAt(1));
         var initSpriteScale = infoData.SpritePositionAndScale.GetAt(2);
-        InitPositionAndScale(initPosition, initSpritePosition, initSpriteScale, infoData.ColliderScale);
+        InitPositionAndScale(initPosition, initSpritePosition, initSpriteScale, infoData.ColliderRadius);
         _compassUI.Init(new Vector2(infoData.CompassUIPosition.GetAt(0), infoData.CompassUIPosition.GetAt(1)), positionData.NpcId);
         _isShown = true;
     }

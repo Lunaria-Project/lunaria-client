@@ -98,7 +98,7 @@ public partial class GameData
         _dtMapNpcInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (row[2] as string).ParseFloatList(), Convert.ToSingle(row[3]), (row[4] as string).ParseFloatList());
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (row[2] as string) ?? string.Empty, (row[3] as string).ParseFloatList(), Convert.ToSingle(row[4]), (row[5] as string).ParseFloatList());
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }
