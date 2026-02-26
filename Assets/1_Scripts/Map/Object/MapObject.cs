@@ -1,3 +1,5 @@
+using System;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,6 +15,7 @@ public class MapObject : MonoBehaviour
     protected Transform Transform => _transform;
     private bool _isPlayerBehind;
     private static readonly Color TransparentColor = new Color(1, 1, 1, 0.5f);
+    private const float FadeDuration = 0.3f;
 
     protected virtual void Start()
     {
@@ -21,12 +24,18 @@ public class MapObject : MonoBehaviour
         _transform.localPosition = new Vector3(pos.x, pos.y, pos.y);
     }
 
+    private void OnDestroy()
+    {
+        _spriteRenderer.DOKill();
+    }
+
     protected virtual void Update()
     {
         if (_behindTrigger != null && _isPlayerBehind != _behindTrigger.IsTriggerIn)
         {
             _isPlayerBehind = _behindTrigger.IsTriggerIn;
-            _spriteRenderer.color = _isPlayerBehind ? TransparentColor : Color.white;
+            _spriteRenderer.DOKill();
+            _spriteRenderer.DOColor(_isPlayerBehind ? TransparentColor : Color.white, FadeDuration);
         }
     }
 }
