@@ -125,14 +125,14 @@ public partial class GameData
         }
     }
 
-    private void LoadMapObjectInfoData(List<object[]> rows, LocalType type)
+    private void LoadMapStaticNpcInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
-        _dtMapObjectInfoData.Clear();
+        _dtMapStaticNpcInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapObjectInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseFloatList(), Convert.ToSingle(row[3]), (row[4] as string).ParseFloatList());
-            _dtMapObjectInfoData.Add(newData.NpcId, newData);
+            var newData = new MapStaticNpcInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseFloatList(), Convert.ToSingle(row[3]), (row[4] as string).ParseFloatList());
+            _dtMapStaticNpcInfoData.Add(newData.NpcId, newData);
         }
     }
 
@@ -173,7 +173,7 @@ public partial class GameData
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;
             case "MapNpcPosition": LoadMapNpcPositionData(rows, type); break;
-            case "MapObjectInfo": LoadMapObjectInfoData(rows, type); break;
+            case "MapStaticNpcInfo": LoadMapStaticNpcInfoData(rows, type); break;
             case "RequirementInfo": LoadRequirementInfoData(rows, type); break;
             case "ShopInfo": LoadShopInfoData(rows, type); break;
         }

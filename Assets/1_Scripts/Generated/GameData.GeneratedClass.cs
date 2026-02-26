@@ -79,12 +79,12 @@ public partial class GameData
     public IReadOnlyList<MapNpcPositionData> DTMapNpcPositionData => _dtMapNpcPositionData;
     private List<MapNpcPositionData> _dtMapNpcPositionData = new();
 
-    // MapObjectInfoData - MapObjectInfoData, key: NpcId
-    public IReadOnlyDictionary<int, MapObjectInfoData> DTMapObjectInfoData => _dtMapObjectInfoData;
-    public bool TryGetMapObjectInfoData(int key, out MapObjectInfoData result) => DTMapObjectInfoData.TryGetValue(key, out result);
-    public MapObjectInfoData GetMapObjectInfoData(int key) => DTMapObjectInfoData.TryGetValue(key, out var result) ? result : null;
-    public bool ContainsMapObjectInfoData(int key) => DTMapObjectInfoData.ContainsKey(key);
-    private readonly Dictionary<int, MapObjectInfoData> _dtMapObjectInfoData = new();
+    // MapStaticNpcInfoData - MapStaticNpcInfoData, key: NpcId
+    public IReadOnlyDictionary<int, MapStaticNpcInfoData> DTMapStaticNpcInfoData => _dtMapStaticNpcInfoData;
+    public bool TryGetMapStaticNpcInfoData(int key, out MapStaticNpcInfoData result) => DTMapStaticNpcInfoData.TryGetValue(key, out result);
+    public MapStaticNpcInfoData GetMapStaticNpcInfoData(int key) => DTMapStaticNpcInfoData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsMapStaticNpcInfoData(int key) => DTMapStaticNpcInfoData.ContainsKey(key);
+    private readonly Dictionary<int, MapStaticNpcInfoData> _dtMapStaticNpcInfoData = new();
 
     // RequirementInfoData - RequirementInfoData, key: RequirementType
     public IReadOnlyDictionary<RequirementType, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
