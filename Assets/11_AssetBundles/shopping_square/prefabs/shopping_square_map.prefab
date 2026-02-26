@@ -541,6 +541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 2245165337941987085}
+  _behindTrigger: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
 --- !u!1 &770018422048479200
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +633,118 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &879050431542969938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4855064617776500186}
+  - component: {fileID: 7248638985260956503}
+  - component: {fileID: 5412281750815904055}
+  - component: {fileID: 810221424183108196}
+  m_Layer: 0
+  m_Name: BehindTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4855064617776500186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879050431542969938}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -100, y: 139, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3016750253074314312}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7248638985260956503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879050431542969938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e924846a3943f47b59dcca96987fca17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collider2DTrigger
+--- !u!60 &5412281750815904055
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879050431542969938}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -384.6113, y: -25.92279}
+      - {x: -389.40836, y: 169.53802}
+      - {x: 307.10117, y: 549.185}
+      - {x: 566.58093, y: 334.68176}
+      - {x: 92.894485, y: -20.039547}
+      - {x: 89.41166, y: -311.226}
+  m_UseDelaunayMesh: 0
+--- !u!114 &810221424183108196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879050431542969938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f6e6a644f5d42cb936db48b9e90420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderVisualizer
+  _gizmosColor: {r: 0.9433962, g: 0.4672481, b: 0.77675307, a: 0.65}
 --- !u!1 &914118261279545076
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +1072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 4421657537763278396}
+  _behindTrigger: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
 --- !u!1 &1241663499367884460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,8 +2257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopObject
   _transform: {fileID: 1862291152292326379}
-  _shopDataId: 1000026
+  _behindTrigger: {fileID: 0}
   _spriteRenderer: {fileID: 5426124837321986630}
+  _shopDataId: 1000026
   _openedObject: {fileID: 3602035479629628570}
   _closedObject: {fileID: 1241663499367884460}
   _shopZoneTrigger: {fileID: 7133634097128814068}
@@ -2724,6 +2841,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 6354850161686268989}
+  _behindTrigger: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
 --- !u!1 &3305598621277701226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,6 +2977,7 @@ Transform:
   m_Children:
   - {fileID: 3149857388834687497}
   - {fileID: 3487705919508425817}
+  - {fileID: 8817865531249590209}
   - {fileID: 5261361453832697540}
   - {fileID: 2018674598878130352}
   - {fileID: 6354850161686268989}
@@ -2876,8 +2996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopObject
   _transform: {fileID: 6719446207188226141}
-  _shopDataId: 1000024
+  _behindTrigger: {fileID: 7831208863020558381}
   _spriteRenderer: {fileID: 975235531443419757}
+  _shopDataId: 1000024
   _openedObject: {fileID: 1271748653999792705}
   _closedObject: {fileID: 1522117970803144842}
   _shopZoneTrigger: {fileID: 7338384599236334435}
@@ -3479,6 +3600,118 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4718866340334668844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8817865531249590209}
+  - component: {fileID: 7831208863020558381}
+  - component: {fileID: 3074617210933836403}
+  - component: {fileID: 3055216814195695776}
+  m_Layer: 0
+  m_Name: BehindTrigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8817865531249590209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718866340334668844}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -104, y: -17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6719446207188226141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7831208863020558381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718866340334668844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e924846a3943f47b59dcca96987fca17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collider2DTrigger
+--- !u!60 &3074617210933836403
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718866340334668844}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -258.93515, y: 54.24994}
+      - {x: -187.89322, y: 340.71762}
+      - {x: 317.93533, y: 588.188}
+      - {x: 464.73996, y: 373.6847}
+      - {x: 92.894485, y: -20.039547}
+      - {x: -75.26742, y: -42.539062}
+  m_UseDelaunayMesh: 0
+--- !u!114 &3055216814195695776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718866340334668844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f6e6a644f5d42cb936db48b9e90420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderVisualizer
+  _gizmosColor: {r: 0.9433962, g: 0.4672481, b: 0.77675307, a: 0.65}
 --- !u!1 &4762148085190928227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3961,8 +4194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopObject
   _transform: {fileID: 2641809409840440088}
-  _shopDataId: 1000025
+  _behindTrigger: {fileID: 0}
   _spriteRenderer: {fileID: 3893666695033781343}
+  _shopDataId: 1000025
   _openedObject: {fileID: 5370217053517030411}
   _closedObject: {fileID: 1049539852590651717}
   _shopZoneTrigger: {fileID: 3503490341520543324}
@@ -5258,6 +5492,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1491193805432572190}
+  - {fileID: 4855064617776500186}
   m_Father: {fileID: 5473403221025214919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3176242185101702377
@@ -5273,6 +5508,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 3016750253074314312}
+  _behindTrigger: {fileID: 7248638985260956503}
+  _spriteRenderer: {fileID: 990251789757218733}
 --- !u!1 &7501719822349067910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,3 +6592,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 456195889504351066}
+  _behindTrigger: {fileID: 0}
+  _spriteRenderer: {fileID: 0}

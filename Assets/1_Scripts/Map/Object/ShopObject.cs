@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,7 +8,6 @@ public class ShopObject : MapObject
     [ValueDropdown("@DataIdDropDownList.GetShopDataIds()")]
 #endif
     [SerializeField] private int _shopDataId;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private GameObject _openedObject;
     [SerializeField] private GameObject _closedObject;
     [SerializeField] private Collider2DTrigger _shopZoneTrigger;
@@ -35,8 +33,9 @@ public class ShopObject : MapObject
         GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         IsNearBy = _shopZoneTrigger.IsTriggerIn;
     }
 

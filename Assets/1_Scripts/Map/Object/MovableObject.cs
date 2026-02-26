@@ -30,8 +30,9 @@ public abstract class MovableObject : MapObject
 
     #region UnityEvent
 
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!GlobalManager.Instance.CanPlayerMove()) return;
         UpdateSprite(Time.deltaTime);
         UpdateZPosition();
