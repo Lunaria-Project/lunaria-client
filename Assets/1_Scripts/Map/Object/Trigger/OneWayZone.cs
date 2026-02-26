@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class OneWayZone : MapTrigger
+public class OneWayZone : Collider2DTrigger
 {
     [SerializeField] private Vector2 _moveDirection;
 
-    private void OnTriggerStay2D(Collider2D other)
+    protected override void OnTriggerStay2D(Collider2D other)
     {
+        base.OnTriggerStay2D(other);
         if (!other.TryGetComponent<MovableObject>(out var movableObject)) return;
         var moveDirection = movableObject.MoveDirection;
         if (moveDirection == Vector2.zero)
@@ -22,8 +23,9 @@ public class OneWayZone : MapTrigger
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
+        base.OnTriggerExit2D(other);
         if (!other.TryGetComponent<MovableObject>(out var movableObject)) return;
         movableObject.SetForceMoveDirection(Vector2.zero);
     }

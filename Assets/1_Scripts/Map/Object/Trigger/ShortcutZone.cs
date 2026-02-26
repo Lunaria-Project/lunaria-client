@@ -1,13 +1,14 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class ShortcutZone : MonoBehaviour
+public class ShortcutZone : Collider2DTrigger
 {
     [SerializeField] private ShortcutType _shortcutType;
     [SerializeField] private bool _isInstantShortcut;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         if (!other.CompareTag(StringManager.PlayerTagName)) return;
         if (_isInstantShortcut)
         {
@@ -18,8 +19,9 @@ public class ShortcutZone : MonoBehaviour
         PopupManager.Instance.ShowPopup(PopupManager.Type.Shortcut, parameter);
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
+        base.OnTriggerExit2D(other);
         if (!GlobalManager.HasInstance) return;
         if (!other.CompareTag(StringManager.PlayerTagName)) return;
         PopupManager.Instance.HideCurrentPopup(PopupManager.Type.Shortcut).Forget();
