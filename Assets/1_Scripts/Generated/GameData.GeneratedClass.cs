@@ -79,6 +79,13 @@ public partial class GameData
     public IReadOnlyList<MapNpcPositionData> DTMapNpcPositionData => _dtMapNpcPositionData;
     private List<MapNpcPositionData> _dtMapNpcPositionData = new();
 
+    // MapObjectInfoData - MapObjectInfoData, key: NpcId
+    public IReadOnlyDictionary<int, MapObjectInfoData> DTMapObjectInfoData => _dtMapObjectInfoData;
+    public bool TryGetMapObjectInfoData(int key, out MapObjectInfoData result) => DTMapObjectInfoData.TryGetValue(key, out result);
+    public MapObjectInfoData GetMapObjectInfoData(int key) => DTMapObjectInfoData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsMapObjectInfoData(int key) => DTMapObjectInfoData.ContainsKey(key);
+    private readonly Dictionary<int, MapObjectInfoData> _dtMapObjectInfoData = new();
+
     // RequirementInfoData - RequirementInfoData, key: RequirementType
     public IReadOnlyDictionary<RequirementType, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
     public bool TryGetRequirementInfoData(RequirementType key, out RequirementInfoData result) => DTRequirementInfoData.TryGetValue(key, out result);

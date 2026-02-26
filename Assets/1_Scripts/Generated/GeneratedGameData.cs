@@ -237,6 +237,24 @@ namespace Generated
         }
     }
 
+    public partial class MapObjectInfoData
+    {
+        public int NpcId { get; private set; }
+        public string ResourceKey { get; private set; }
+        public List<float> SpritePositionAndScale { get; private set; }
+        public float ColliderRadius { get; private set; }
+        public List<float> CompassUIPosition { get; private set; }
+
+        public MapObjectInfoData(int npcId, string resourceKey, List<float> spritePositionAndScale, float colliderRadius, List<float> compassUIPosition)
+        {
+            NpcId = npcId;
+            ResourceKey = resourceKey;
+            SpritePositionAndScale = spritePositionAndScale;
+            ColliderRadius = colliderRadius;
+            CompassUIPosition = compassUIPosition;
+        }
+    }
+
     public partial class RequirementInfoData
     {
         public RequirementType RequirementType { get; private set; }
