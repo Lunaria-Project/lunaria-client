@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Text;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 public static class LogManager
@@ -7,6 +8,13 @@ public static class LogManager
     [Conditional("UNITY_EDITOR")]
     public static void Log(string message)
     {
+        Debug.Log(message);
+    }
+
+    [Conditional("UNITY_EDITOR")]
+    public static void LogColor(string message, Color color)
+    {
+        message = $"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>{message}</color>";
         Debug.Log(message);
     }
 

@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public enum ShortcutType
 {
@@ -31,6 +32,7 @@ public partial class GlobalManager
 
     private UniTask ShortcutInvokeImpl(ShortcutType type)
     {
+        LogManager.LogColor($"GlobalManager.Shortcut: Invoke type({type})", Color.pink);
         switch (type)
         {
             case ShortcutType.Myhome: return GoToMyhomeAsync();
@@ -71,7 +73,7 @@ public partial class GlobalManager
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
         PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
-        
+
         OnChangeMap(MapType.Myhome);
         SetCameraSize(1);
         ResetCamaraPosition();
