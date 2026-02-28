@@ -103,7 +103,7 @@ public partial class GlobalManager
             _                   => MapType.ShoppingSquare,
         };
         OnChangeMap(mapType);
-        SetCameraSize(0.6f);
+        SetCameraSize(0.5f);
         ResetCamaraPosition();
 
         GameTimeManager.Instance.Resume();

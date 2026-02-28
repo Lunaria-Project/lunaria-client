@@ -45,7 +45,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         TryLoadPlayer();
         TryLoadNpc(type);
         SetPanel(type);
-        SetCamera(true);
+        SetCamera(type);
     }
 
     public bool TryInteractNearestNpc()
@@ -172,10 +172,14 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         }
     }
 
-    private void SetCamera(bool followPlayer)
+    private void SetCamera(MapType type)
     {
-        _followPlayer = followPlayer;
-        GlobalManager.Instance.UpdateCameraPosition(followPlayer ? PlayerObject.transform.position : Vector3.zero);
+        _followPlayer = type switch
+        {
+            MapType.ShoppingSquare => true,
+            _                      => false,
+        };
+        GlobalManager.Instance.UpdateCameraPosition(_followPlayer ? PlayerObject.transform.position : Vector3.zero);
     }
 
     private void SetPanel(MapType type)
