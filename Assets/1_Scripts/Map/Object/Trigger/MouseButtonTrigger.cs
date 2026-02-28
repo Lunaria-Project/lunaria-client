@@ -3,20 +3,26 @@ using UnityEngine;
 
 public class MouseButtonTrigger : MonoBehaviour
 {
-    private Action<bool> _onMouseUpDown; 
-    
-    public void SetOnMouseUpDown(Action<bool> onMouseUpDown)
+    private Action _onMouseDown;
+    private Action _onMouseUp;
+
+    public void SetOnMouseDown(Action onMouseDown)
     {
-        _onMouseUpDown = onMouseUpDown;
+        _onMouseDown = onMouseDown;
     }
 
-    protected virtual void OnMouseDown()
+    public void SetOnMouseUp(Action onMouseUp)
     {
-        _onMouseUpDown?.Invoke(true);
+        _onMouseUp = onMouseUp;
     }
 
-    protected virtual void OnMouseUp()
+    protected void OnMouseDown()
     {
-        _onMouseUpDown?.Invoke(false);
+        _onMouseDown?.Invoke();
+    }
+
+    protected void OnMouseUp()
+    {
+        _onMouseUp?.Invoke();
     }
 }

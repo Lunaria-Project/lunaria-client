@@ -40,6 +40,7 @@ public class NpcCompassUI : MonoBehaviour
 
     public void OnHide()
     {
+        _isNearByPlayer = false;
         GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
     }
 
@@ -54,11 +55,12 @@ public class NpcCompassUI : MonoBehaviour
             case CompassUIType.ShowTitleWhenNearby:
             {
                 if (!_isNearByPlayer) return;
+                var data = GameData.Instance.GetNpcMenuData(_npcDataId);
+                if (data == null) return;
+
                 gameObject.SetActive(true);
                 _titleBlock.SetActive(true);
-                
-                var menuData = GetNpcMenuData();
-                _content.SetText(menuData.MenuName);
+                _content.SetText(data.MenuName);
                 break;
             }
             case CompassUIType.ShowOnlyBubble:
@@ -73,23 +75,9 @@ public class NpcCompassUI : MonoBehaviour
 
     private void OnIntervalChanged()
     {
-        var npcData = GetNpcMenuData();
-        _currentType = GetCompassUIType(npcData.FunctionType);
+        var npcData = GameData.Instance.GetNpcMenuData(_npcDataId);
+        _currentType = GetCompassUIType(npcData?.FunctionType ?? NpcMenuFunctionType.None);
         Refresh();
-    }
-
-    private MapNpcMenuData GetNpcMenuData()
-    {
-        var menuDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_npcDataId);
-        var priority = int.MinValue;
-        MapNpcMenuData outData = default;
-        foreach (var data in menuDataList)
-        {
-            if (priority >= data.Priority) continue;
-            priority = data.Priority;
-            outData = data;
-        }
-        return outData;
     }
 
     public void OnCompassUIClick()
@@ -99,13 +87,14 @@ public class NpcCompassUI : MonoBehaviour
             GlobalManager.Instance.ShowToastMessage("좀 더 가까이 가주세염"); // TODO
             return;
         }
-        var data = GetNpcMenuData();
+        var data = GameData.Instance.GetNpcMenuData(_npcDataId);
+        if (data == null) return;
         if (!data.ShowMenuPopup)
         {
             NpcSelectionPopup.SelectNpcMenu(data.FunctionType, data.FunctionValue);
             return;
         }
-        PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId =  _npcDataId });
+        PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _npcDataId });
     }
 
     private static CompassUIType GetCompassUIType(NpcMenuFunctionType functionType)

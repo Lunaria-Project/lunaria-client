@@ -70,6 +70,11 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
                 PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);
                 break;
             }
+            default:
+            {
+                LogManager.LogErrorPack("Undefined NPC menu function type", type);
+                break;
+            }
         }
     }
 }

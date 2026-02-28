@@ -71,6 +71,7 @@ public static class DataIdDropDownList
         if (_npcDataIdCache.IsNullOrEmpty())
         {
             _npcDataIdCache = GetDropdownListFromGameData("MapNpcInfo", "NpcId");
+            _npcDataIdCache.AddRange(GetDropdownListFromGameData("MapStaticNpcMenu", "NpcId"));
         }
         return _npcDataIdCache;
     }

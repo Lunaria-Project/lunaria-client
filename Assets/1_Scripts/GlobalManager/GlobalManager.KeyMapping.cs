@@ -20,6 +20,7 @@ public partial class GlobalManager
         {
             if (!CanPlayerMove()) return;
             if (MapManager.Instance.TryInteractNearestNpc()) return;
+            if (MapManager.Instance.TryInteractNearestStaticNpc()) return;
             if (MapManager.Instance.TryInteractNearestShop()) return;
         }
     }

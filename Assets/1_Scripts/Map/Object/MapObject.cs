@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
@@ -37,5 +36,9 @@ public class MapObject : MonoBehaviour
             _spriteRenderer.DOKill();
             _spriteRenderer.DOColor(_isPlayerBehind ? TransparentColor : Color.white, FadeDuration);
         }
+    }
+
+    protected virtual void InitPositionAndScale(Vector2 initPosition, Vector2 spritePosition, float spriteScale, float colliderScale)
+    {
     }
 }

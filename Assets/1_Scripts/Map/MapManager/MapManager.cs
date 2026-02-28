@@ -11,6 +11,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
     private bool _followPlayer;
+    private Dictionary<MapType, NormalMap> _mapCache = new(); // TODO(지선): 나중에 구현하기
 
     protected override void Update()
     {
@@ -29,6 +30,12 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             var distance = PlayerObject.Collider.Distance(npcObject.Collider).distance;
             npcObject.SetIsNearBy(distance <= _config.NpcDistance, distance);
         }
+
+        foreach (var npcObject in CurrentMap.StaticNpcObjects)
+        {
+            var distance = PlayerObject.Collider.Distance(npcObject.Collider).distance;
+            npcObject.SetIsNearBy(distance);
+        }
     }
 
     public void SetMap(MapType type)
@@ -37,7 +44,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         LoadMap(type);
         TryLoadPlayer();
         TryLoadNpc(type);
-        // 오브젝트가 스스로 위치 정하게도 해야함
         SetPanel(type);
         SetCamera(true);
     }
@@ -60,6 +66,24 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         return true;
     }
 
+    public bool TryInteractNearestStaticNpc()
+    {
+        StaticNpcObject nearest = null;
+        var minDistance = float.MaxValue;
+        foreach (var npcObject in CurrentMap.StaticNpcObjects)
+        {
+            if (_config.NpcDistance < npcObject.DistanceToPlayer) continue;
+            if (npcObject.DistanceToPlayer < minDistance)
+            {
+                minDistance = npcObject.DistanceToPlayer;
+                nearest = npcObject;
+            }
+        }
+        if (nearest == null) return false;
+        nearest.OnNpcTouch();
+        return true;
+    }
+
     public bool TryInteractNearestShop()
     {
         if (CurrentMap is ShoppingSquareMap shoppingSquareMap)
@@ -78,6 +102,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     {
         if (CurrentMap != null)
         {
+            CurrentMap.Hide();
             Destroy(CurrentMap.gameObject);
             CurrentMap = null;
         }
@@ -89,6 +114,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             return;
         }
         CurrentMap = Instantiate(prefab, _mapParent);
+        CurrentMap.Init();
     }
 
     private void TryLoadPlayer()
@@ -118,19 +144,23 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
                 continue;
             }
             _npcDataIdHashSet.Add(data.NpcId);
-            if (_npcObjects.Count <= npcObjectIndex)
+
+            if (GameData.Instance.ContainsMapNpcInfoData(data.NpcId))
             {
-                var npcPrefab = ResourceManager.Instance.LoadNpcObject();
-                var npcObject = Instantiate(npcPrefab, _mapParent);
-                npcObject.Show(data);
-                _npcObjects.Add(npcObject);
+                if (_npcObjects.Count <= npcObjectIndex)
+                {
+                    var npcPrefab = ResourceManager.Instance.LoadNpcObject();
+                    var npcObject = Instantiate(npcPrefab, _mapParent);
+                    npcObject.Show(data);
+                    _npcObjects.Add(npcObject);
+                }
+                else
+                {
+                    var npcObject = _npcObjects[npcObjectIndex];
+                    npcObject.Show(data);
+                }
+                npcObjectIndex++;
             }
-            else
-            {
-                var npcObject = _npcObjects[npcObjectIndex];
-                npcObject.Show(data);
-            }
-            npcObjectIndex++;
         }
 
         if (npcObjectIndex < _npcObjects.Count)

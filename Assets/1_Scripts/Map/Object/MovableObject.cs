@@ -51,8 +51,10 @@ public abstract class MovableObject : MapObject
         _forceMoveDirection = direction;
     }
 
-    protected void InitPositionAndScale(Vector2 initPosition, Vector2 spritePosition, float spriteScale, float colliderScale)
+    protected override void InitPositionAndScale(Vector2 initPosition, Vector2 spritePosition, float spriteScale, float colliderScale)
     {
+        base.InitPositionAndScale(initPosition, spritePosition, spriteScale, colliderScale);
+
         _isFacingFront = true;
         if (Config == null)
         {
@@ -124,6 +126,8 @@ public abstract class MovableObject : MapObject
     private void InitSprite()
     {
         _spriteIndex = 0;
+        _frontSprites.Clear();
+        _backSprites.Clear();
         var characterData = GameData.Instance.GetCharacterInfoData(GetCharacterDataId());
         for (var i = 1; i < 10; i++)
         {

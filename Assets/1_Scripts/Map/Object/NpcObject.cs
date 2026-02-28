@@ -19,6 +19,7 @@ public class NpcObject : MovableObject
         var initSpriteScale = infoData.SpritePositionAndScale.GetAt(2);
         InitPositionAndScale(initPosition, initSpritePosition, initSpriteScale, infoData.ColliderRadius);
         _compassUI.Init(new Vector2(infoData.CompassUIPosition.GetAt(0), infoData.CompassUIPosition.GetAt(1)), positionData.NpcId);
+        DistanceToPlayer = float.MaxValue;
         _isShown = true;
     }
 
@@ -32,6 +33,7 @@ public class NpcObject : MovableObject
     public void Hide()
     {
         _isShown = false;
+        DistanceToPlayer = float.MaxValue;
         gameObject.SetActive(false);
         _compassUI.OnHide();
     }
