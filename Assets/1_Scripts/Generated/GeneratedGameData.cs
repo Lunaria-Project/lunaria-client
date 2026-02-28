@@ -177,16 +177,14 @@ namespace Generated
     {
         public int NpcId { get; private set; }
         public int CharacterId { get; private set; }
-        public string ResourceKey { get; private set; }
         public List<float> SpritePositionAndScale { get; private set; }
         public float ColliderRadius { get; private set; }
         public List<float> CompassUIPosition { get; private set; }
 
-        public MapNpcInfoData(int npcId, int characterId, string resourceKey, List<float> spritePositionAndScale, float colliderRadius, List<float> compassUIPosition)
+        public MapNpcInfoData(int npcId, int characterId, List<float> spritePositionAndScale, float colliderRadius, List<float> compassUIPosition)
         {
             NpcId = npcId;
             CharacterId = characterId;
-            ResourceKey = resourceKey;
             SpritePositionAndScale = spritePositionAndScale;
             ColliderRadius = colliderRadius;
             CompassUIPosition = compassUIPosition;
@@ -237,21 +235,27 @@ namespace Generated
         }
     }
 
-    public partial class MapStaticNpcInfoData
+    public partial class MapStaticNpcMenuData
     {
         public int NpcId { get; private set; }
-        public string ResourceKey { get; private set; }
-        public List<float> SpritePositionAndScale { get; private set; }
-        public float ColliderRadius { get; private set; }
-        public List<float> CompassUIPosition { get; private set; }
+        public string MenuName { get; private set; }
+        public RequirementType ShowRequirement { get; private set; }
+        public List<int> ShowRequirementValues { get; private set; }
+        public int Order { get; private set; }
+        public int Priority { get; private set; }
+        public NpcMenuFunctionType FunctionType { get; private set; }
+        public int FunctionValue { get; private set; }
 
-        public MapStaticNpcInfoData(int npcId, string resourceKey, List<float> spritePositionAndScale, float colliderRadius, List<float> compassUIPosition)
+        public MapStaticNpcMenuData(int npcId, string menuName, RequirementType showRequirement, List<int> showRequirementValues, int order, int priority, NpcMenuFunctionType functionType, int functionValue)
         {
             NpcId = npcId;
-            ResourceKey = resourceKey;
-            SpritePositionAndScale = spritePositionAndScale;
-            ColliderRadius = colliderRadius;
-            CompassUIPosition = compassUIPosition;
+            MenuName = menuName;
+            ShowRequirement = showRequirement;
+            ShowRequirementValues = showRequirementValues;
+            Order = order;
+            Priority = priority;
+            FunctionType = functionType;
+            FunctionValue = functionValue;
         }
     }
 

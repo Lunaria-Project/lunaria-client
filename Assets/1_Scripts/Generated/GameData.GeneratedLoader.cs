@@ -98,7 +98,7 @@ public partial class GameData
         _dtMapNpcInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (row[2] as string) ?? string.Empty, (row[3] as string).ParseFloatList(), Convert.ToSingle(row[4]), (row[5] as string).ParseFloatList());
+            var newData = new MapNpcInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (row[2] as string).ParseFloatList(), Convert.ToSingle(row[3]), (row[4] as string).ParseFloatList());
             _dtMapNpcInfoData.Add(newData.NpcId, newData);
         }
     }
@@ -125,14 +125,14 @@ public partial class GameData
         }
     }
 
-    private void LoadMapStaticNpcInfoData(List<object[]> rows, LocalType type)
+    private void LoadMapStaticNpcMenuData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
-        _dtMapStaticNpcInfoData.Clear();
+        _dtMapStaticNpcMenuData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MapStaticNpcInfoData(Convert.ToInt32(row[0]), (row[1] as string) ?? string.Empty, (row[2] as string).ParseFloatList(), Convert.ToSingle(row[3]), (row[4] as string).ParseFloatList());
-            _dtMapStaticNpcInfoData.Add(newData.NpcId, newData);
+            var newData = new MapStaticNpcMenuData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (RequirementType)Enum.Parse(typeof(RequirementType), (string)row[2], true), (row[3] as string).ParseIntList(), Convert.ToInt32(row[4]), Convert.ToInt32(row[5]), (NpcMenuFunctionType)Enum.Parse(typeof(NpcMenuFunctionType), (string)row[6], true), Convert.ToInt32(row[7]));
+            _dtMapStaticNpcMenuData.Add(newData);
         }
     }
 
@@ -173,7 +173,7 @@ public partial class GameData
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;
             case "MapNpcPosition": LoadMapNpcPositionData(rows, type); break;
-            case "MapStaticNpcInfo": LoadMapStaticNpcInfoData(rows, type); break;
+            case "MapStaticNpcMenu": LoadMapStaticNpcMenuData(rows, type); break;
             case "RequirementInfo": LoadRequirementInfoData(rows, type); break;
             case "ShopInfo": LoadShopInfoData(rows, type); break;
         }
