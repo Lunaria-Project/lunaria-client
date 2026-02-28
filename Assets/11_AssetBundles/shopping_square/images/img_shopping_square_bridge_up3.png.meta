@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 132c9acb9b93c4567bb87d9fda1b89ab
+guid: d3f074e1ea5964c218d739cce6569719
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2995055227835619851
-    second: bridge_up_0
-  - first:
-      213: -3338717678577367166
-    second: bridge_up_1
+      213: 675326299271537216
+    second: img_shopping_square_bridge_up3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bridge_up_0
+      name: img_shopping_square_bridge_up3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 79
-        height: 97
+        width: 218
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f56e26832d6f66d0800000000000000
-      internalID: -2995055227835619851
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bridge_up_1
-      rect:
-        serializedVersion: 2
-        x: 30
-        y: 33
-        width: 331
-        height: 404
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 287441be5fd7aa1d0800000000000000
-      internalID: -3338717678577367166
+      spriteID: 0422f8fe0bd3f5900800000000000000
+      internalID: 675326299271537216
       vertices: []
       indices: 
       edges: []
@@ -159,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      bridge_up_0: -2995055227835619851
-      bridge_up_1: -3338717678577367166
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: SpritePostprocessor_Applied

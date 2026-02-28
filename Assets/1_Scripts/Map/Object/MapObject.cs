@@ -7,7 +7,7 @@ public class MapObject : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
     [SerializeField, CanBeNull] private Collider2DTrigger _behindTrigger;
-    [SerializeField, ShowIf(nameof(_hasBehindTrigger))] private SpriteRenderer _spriteRenderer;
+    [SerializeField, ShowIf(nameof(_hasBehindTrigger))] private SpriteRenderer[] _spriteRenderers;
 
     private bool _hasBehindTrigger => _behindTrigger != null;
 
@@ -25,7 +25,10 @@ public class MapObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        _spriteRenderer.DOKill();
+        foreach (var spriteRenderer in _spriteRenderers)
+        {
+            spriteRenderer.DOKill();
+        }
     }
 
     protected virtual void Update()
@@ -33,12 +36,13 @@ public class MapObject : MonoBehaviour
         if (_behindTrigger != null && _isPlayerBehind != _behindTrigger.IsTriggerIn)
         {
             _isPlayerBehind = _behindTrigger.IsTriggerIn;
-            _spriteRenderer.DOKill();
-            _spriteRenderer.DOColor(_isPlayerBehind ? TransparentColor : Color.white, FadeDuration);
+            foreach (var spriteRenderer in _spriteRenderers)
+            {
+                spriteRenderer.DOKill();
+                spriteRenderer.DOColor(_isPlayerBehind ? TransparentColor : Color.white, FadeDuration);
+            }
         }
     }
 
-    protected virtual void InitPositionAndScale(Vector2 initPosition, Vector2 spritePosition, float spriteScale, float colliderScale)
-    {
-    }
+    protected virtual void InitPositionAndScale(Vector2 initPosition, Vector2 spritePosition, float spriteScale, float colliderScale) { }
 }

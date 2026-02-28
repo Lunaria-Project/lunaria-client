@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 267c065c6163e41bdb889490489e5b14
+guid: 425de76008fb1410698a109cd91253b0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3563585754444904169
-    second: img_myhome_background_0
+      213: -7908282752341330034
+    second: img_shopping_square_shop3_obj2_0
+  - first:
+      213: -2052343586995502643
+    second: img_shopping_square_shop3_obj2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: img_myhome_background_0
+      name: img_shopping_square_shop3_obj2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 2560
-        height: 1440
+        y: 21
+        width: 195
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7194ba313a99b8ec0800000000000000
-      internalID: -3563585754444904169
+      spriteID: e87b8539cb2204290800000000000000
+      internalID: -7908282752341330034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img_shopping_square_shop3_obj2_1
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 0
+        width: 195
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc10514a16c9483e0800000000000000
+      internalID: -2052343586995502643
       vertices: []
       indices: 
       edges: []
