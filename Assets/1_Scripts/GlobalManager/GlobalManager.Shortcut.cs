@@ -72,7 +72,7 @@ public partial class GlobalManager
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
-        PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
+        PanelManager.Instance.ShowPanel(PanelManager.Type.LunariaDefault);
 
         OnChangeMap(MapType.Myhome);
         SetCameraSize(1);
@@ -95,7 +95,7 @@ public partial class GlobalManager
         LoadingManager.Instance.ShowLoading(loadingType);
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
-        PanelManager.Instance.ShowPanel(PanelManager.Type.Shop);
+        PanelManager.Instance.ShowPanel(PanelManager.Type.LunariaDefault);
 
         var mapType = shopType switch
         {

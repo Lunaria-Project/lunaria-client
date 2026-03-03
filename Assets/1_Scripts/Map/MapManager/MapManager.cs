@@ -188,7 +188,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             case MapType.Myhome:
             {
-                PanelManager.Instance.ShowPanel(PanelManager.Type.MyhomeMain);
+                PanelManager.Instance.ShowPanel(PanelManager.Type.LunariaDefault);
                 break;
             }
         }

@@ -11,9 +11,8 @@ public partial class PanelManager
     {
         None = 0,
         TitleMain = 10,
-        MyhomeMain = 11,
+        LunariaDefault = 11,
         ShoppingSquareMain = 12,
         SlimeMinigame = 13,
-        Shop = 14,
     }
 }
