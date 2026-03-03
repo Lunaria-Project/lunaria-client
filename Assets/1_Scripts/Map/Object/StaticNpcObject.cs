@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Generated;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,8 +6,6 @@ public class StaticNpcObject : MapObject
 {
     [SerializeField] private MouseButtonTrigger _mouseButtonTrigger;
     [SerializeField] private CircleCollider2D _collider2D;
-    [SerializeField] private SpriteRenderer _npcSpriteRenderer;
-    [SerializeField] private Transform _spriteTransform;
 #if UNITY_EDITOR
     [ValueDropdown("@DataIdDropDownList.GetNpcDataIds()")]
 #endif

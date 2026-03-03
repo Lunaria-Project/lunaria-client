@@ -1,5 +1,87 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &652911974781793389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9186236963829273755}
+  - component: {fileID: 8794963434980502078}
+  - component: {fileID: 4180606095649336579}
+  m_Layer: 0
+  m_Name: PositionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9186236963829273755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652911974781793389}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.3, y: -34.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7422733350310678624}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8794963434980502078
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652911974781793389}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 60
+--- !u!114 &4180606095649336579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652911974781793389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f6e6a644f5d42cb936db48b9e90420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderVisualizer
+  _gizmosColor: {r: 0.52189827, g: 1, b: 0, a: 0.65}
 --- !u!1 &1467290671499749290
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +95,7 @@ GameObject:
   - component: {fileID: 2763117371703782103}
   - component: {fileID: 1105620821949266420}
   m_Layer: 0
-  m_Name: collider
+  m_Name: TouchCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,6 +226,7 @@ Transform:
   m_Children:
   - {fileID: 1571769428971179239}
   - {fileID: 1960512656300307484}
+  - {fileID: 9186236963829273755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &941965662502019963
@@ -160,9 +243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StaticNpcObject
   _transform: {fileID: 7422733350310678624}
   _behindTrigger: {fileID: 0}
-  _spriteRenderer: {fileID: 0}
+  _spriteRenderers: []
   _mouseButtonTrigger: {fileID: 2561964969256323786}
-  _collider2D: {fileID: 0}
+  _collider2D: {fileID: 8794963434980502078}
   _npcSpriteRenderer: {fileID: 6900653485525934237}
   _spriteTransform: {fileID: 1571769428971179239}
   _npcId: 0
