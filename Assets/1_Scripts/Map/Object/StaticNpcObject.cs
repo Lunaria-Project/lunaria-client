@@ -47,25 +47,7 @@ public class StaticNpcObject : MapObject
     public void OnNpcTouch()
     {
         if (_menuData == null) return;
-
-        switch (_menuData.FunctionType)
-        {
-            case NpcMenuFunctionType.PlayPowderPortalMinigame:
-            {
-                var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
-                if (artifactData.ArtifactType != ArtifactType.Bubblegun)
-                {
-                    GlobalManager.Instance.ShowToastMessage("버블건을 장착하자."); // TODO
-                    return;
-                }
-                PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);
-                break;
-            }
-            default:
-            {
-                LogManager.LogErrorPack("Undefined NPC menu function type", _menuData.FunctionType);
-                break;
-            }
-        }
+        if (_menuData.FunctionType == NpcMenuFunctionType.None) return;
+        GlobalManager.Instance.InvokeNpcFunction(_menuData.FunctionType, _menuData.FunctionValue);
     }
 }

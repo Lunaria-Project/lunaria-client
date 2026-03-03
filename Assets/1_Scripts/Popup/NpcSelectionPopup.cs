@@ -46,35 +46,7 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
             return;
         }
         var npcData = npcDataList.GetAt(index);
-        SelectNpcMenu(npcData.FunctionType, npcData.FunctionValue);
+        GlobalManager.Instance.InvokeNpcFunction(npcData.FunctionType, npcData.FunctionValue);
         OnHideButtonClick();
-    }
-
-    public static void SelectNpcMenu(NpcMenuFunctionType type, int value)
-    {
-        switch (type)
-        {
-            case NpcMenuFunctionType.PlayCutscene:
-            {
-                CutsceneManager.Instance.PlayCutscene(value).Forget();
-                break;
-            }
-            case NpcMenuFunctionType.PlaySlimeMinigame:
-            {
-                var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
-                if (artifactData.ArtifactType != ArtifactType.Bubblegun)
-                {
-                    GlobalManager.Instance.ShowToastMessage("버블건을 장착하자."); // TODO
-                    return;
-                }
-                PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);
-                break;
-            }
-            default:
-            {
-                LogManager.LogErrorPack("Undefined NPC menu function type", type);
-                break;
-            }
-        }
     }
 }

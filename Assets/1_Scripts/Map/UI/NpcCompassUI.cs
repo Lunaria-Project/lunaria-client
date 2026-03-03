@@ -91,7 +91,7 @@ public class NpcCompassUI : MonoBehaviour
         if (data == null) return;
         if (!data.ShowMenuPopup)
         {
-            NpcSelectionPopup.SelectNpcMenu(data.FunctionType, data.FunctionValue);
+            GlobalManager.Instance.InvokeNpcFunction(data.FunctionType, data.FunctionValue);
             return;
         }
         PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _npcDataId });
