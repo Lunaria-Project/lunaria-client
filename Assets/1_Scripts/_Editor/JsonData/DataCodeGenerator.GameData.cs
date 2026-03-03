@@ -200,7 +200,7 @@ public static partial class DataCodeGenerator
                 {
                     case ColumnType.Enum:
                     {
-                        args.Add($"({csType})Enum.Parse(typeof({csType}), (string)row[{i}], true)");
+                        args.Add($"((string)row[{i}]).ParseEnum<{csType}>()");
                         break;
                     }
                     case ColumnType.ListInt:

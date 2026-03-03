@@ -58,4 +58,9 @@ public static class StringExtension
     {
         return value.ToString($"D{digits}");
     }
+
+    public static T ParseEnum<T>(this string value) where T : struct, System.Enum
+    {
+        return string.IsNullOrEmpty(value) ? default : (T)System.Enum.Parse(typeof(T), value, true);
+    }
 }
