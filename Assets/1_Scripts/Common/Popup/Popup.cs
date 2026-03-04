@@ -25,7 +25,7 @@ public abstract class PopupBase : MonoBehaviour
         return _hideTaskCompletionSource.Task;
     }
 
-    public void OnHideButtonClick()
+    public virtual void OnHideButtonClick()
     {
         if (PopupManager.Instance == null) return;
         PopupManager.Instance.HideCurrentPopup(PopupType).Forget();

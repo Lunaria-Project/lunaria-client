@@ -263,7 +263,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2258529078348025617}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 565640858234605307}
+        m_TargetAssemblyTypeName: SlimeMinigameReadyPopup, Assembly-CSharp
+        m_MethodName: OnInfoButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7943556043245297523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
+  - component: {fileID: 565640858234605307}
   m_Layer: 5
   m_Name: slime_minigame_ready_popup
   m_TagString: Untagged
@@ -524,6 +537,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &565640858234605307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aabe9a23fbc5e4641bd20995307f604d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeMinigameStartPopup
+  _hideOnEscapeKey: 1
 --- !u!1 &2543024437557441078
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +937,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1228639825908137523}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 565640858234605307}
+        m_TargetAssemblyTypeName: SlimeMinigameReadyPopup, Assembly-CSharp
+        m_MethodName: OnHideButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4491178167315163168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,6 +1526,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615959972778016931}
     m_Modifications:
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 565640858234605307}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStartButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SlimeMinigameReadyPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 920352147265471699, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1508,29 +1574,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -70
       objectReference: {fileID: 0}
-    - target: {fileID: 2206578227953401187, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200.42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3482573977342181965, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_Pivot.x

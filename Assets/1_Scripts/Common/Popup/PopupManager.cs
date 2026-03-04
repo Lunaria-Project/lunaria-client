@@ -18,7 +18,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
             if (currentPopup == null) return;
             if (!currentPopup.HideWithEscapeKey()) return;
 
-            HideCurrentPopup().Forget();
+            currentPopup.OnHideButtonClick();
         }
     }
 
