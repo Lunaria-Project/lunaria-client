@@ -168,6 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
+  - component: {fileID: 8167363978604792011}
   m_Layer: 5
   m_Name: slime_minigame_result_popup
   m_TagString: Untagged
@@ -195,6 +196,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8167363978604792011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6a228b9467d43109f569a8015f44bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeMinigameResultPopup
+  _hideOnEscapeKey: 0
+  _scoreText: {fileID: 2853800504805722679}
+  _resultText: {fileID: 6771326973435384934}
+  _retryButton: {fileID: 2401384613382369786}
 --- !u!1 &3084591874031221302
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +541,6 @@ RectTransform:
   - {fileID: 1488442333119208020}
   - {fileID: 3028039984999322309}
   - {fileID: 2631699648402248282}
-  - {fileID: 130723824810516006}
   - {fileID: 2144354881634858852}
   m_Father: {fileID: 7199538454155864215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -968,6 +984,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7199538454155864215}
+  - component: {fileID: 8423726517420479665}
+  - component: {fileID: 3696044125032946483}
   m_Layer: 5
   m_Name: PanelBlock
   m_TagString: Untagged
@@ -995,6 +1013,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8423726517420479665
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229289058999228726}
+  m_CullTransparentMesh: 1
+--- !u!114 &3696044125032946483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229289058999228726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 521a39c30f99c4819887832eec37de9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1d6c579ed05104afcb492d218e96e9a8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6440445973220306963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,147 +1126,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7409153196185808632
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 130723824810516006}
-  - component: {fileID: 3994350942723873855}
-  - component: {fileID: 8897523906850244733}
-  - component: {fileID: 7619249011413014519}
-  - component: {fileID: 6161485278124367322}
-  m_Layer: 5
-  m_Name: Btn_cancel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &130723824810516006
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409153196185808632}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2112395308132116773}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -13, y: -13}
-  m_SizeDelta: {x: 70, y: 70}
-  m_Pivot: {x: 1, y: 1}
---- !u!222 &3994350942723873855
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409153196185808632}
-  m_CullTransparentMesh: 1
---- !u!114 &8897523906850244733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409153196185808632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a39c30f99c4819887832eec37de9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 49e4332e30c5348af8c2fe9527dafa5d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &7619249011413014519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409153196185808632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46df94abdaf44107881bc09702e2e87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 8897523906850244733}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6161485278124367322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409153196185808632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
-  m_IgnoreLayout: 1
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &8234422720279776455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1393,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112395308132116773}
     m_Modifications:
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8167363978604792011}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCloseButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SlimeMinigameResultPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1206523445999727730, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1493,6 +1436,34 @@ PrefabInstance:
     - target: {fileID: 1206523445999727730, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8167363978604792011}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRetryButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SlimeMinigameResultPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2989334108271495147, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1674,5 +1645,10 @@ PrefabInstance:
 --- !u!224 &2144354881634858852 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3482573977342181965, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+  m_PrefabInstance: {fileID: 3285043823708239145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2401384613382369786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 920352147265471699, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
   m_PrefabInstance: {fileID: 3285043823708239145}
   m_PrefabAsset: {fileID: 0}

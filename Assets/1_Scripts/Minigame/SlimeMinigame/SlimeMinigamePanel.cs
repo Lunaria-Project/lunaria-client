@@ -49,7 +49,31 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     protected override void OnShow(params object[] args)
     {
         GlobalManager.Instance.SetCursor(CursorType.BubbleGun);
+        if (UserData.Instance.SlimeGauge < 100)
+        {
+            LogManager.LogErrorPack("SlimeMinigamePanel: 슬라임 게이지가 부족합니다.", UserData.Instance.SlimeGauge);
+            HidePanel();
+            return;
+        }
+        Init();
+    }
 
+    protected override void OnHide()
+    {
+        foreach (var slime in _slimeBlocks)
+        {
+            slime.Hide();
+        }
+        GlobalManager.Instance.SetDefaultCursor();
+    }
+
+    protected override void OnRefresh()
+    {
+        _countText.SetText($"{_slimeCount.ToPrice()}방울"); // TODO
+    }
+
+    private void Init()
+    {
         _isInitialized = false;
         _remainTime = _config.MinigameSeconds;
         _minigameTime = _config.MinigameSeconds;
@@ -65,24 +89,11 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter { CountDownSeconds = 3 })
             .SetOnHideAction(() =>
             {
+                UserData.Instance.AddSlimeGauge(-100);
                 _isInitialized = true;
                 StartSlimeCoroutine();
                 Invoke(nameof(StopSlimeCoroutine), _config.MinigameSeconds);
             });
-    }
-
-    protected override void OnHide()
-    {
-        foreach (var slime in _slimeBlocks)
-        {
-            slime.Hide();
-        }
-        GlobalManager.Instance.SetDefaultCursor();
-    }
-
-    protected override void OnRefresh()
-    {
-        _countText.SetText($"{_slimeCount.ToPrice()}방울"); // TODO
     }
 
     private void StartSlimeCoroutine()
@@ -101,7 +112,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             StopCoroutine(coroutine);
         }
         _coroutines.Clear();
-        HidePanel();
+        OnShowResult();
     }
 
     private IEnumerator CoShowSlime()
@@ -126,6 +137,18 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             yield return slimeBlock.Show(slimeType, touchCount, score, scale, delaySeconds).ToCoroutine();
             yield return UniTask.WaitForSeconds(_config.GetHideDelayRandomSeconds());
         }
+    }
+
+    private void OnShowResult()
+    {
+        _isInitialized = false;
+        var parameter = new SlimeMinigameResultPopupParameter
+        {
+            Score = _slimeCount,
+            RetryAction = Init,
+            HideAction = HidePanel,
+        };
+        PopupManager.Instance.ShowPopup(PopupManager.Type.SlimeMinigameResult, parameter).GetTask();
     }
 
     private void OnTouchSlime(SlimeType type)
