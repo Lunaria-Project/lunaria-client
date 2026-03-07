@@ -14,5 +14,6 @@ public partial class PanelManager
         LunariaDefault = 11,
         ShoppingSquareMain = 12,
         SlimeMinigame = 13,
+        PowderPortalMinigame = 14,
     }
 }

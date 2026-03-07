@@ -8,5 +8,6 @@ public partial class PanelManager
         { Type.LunariaDefault, "lunaria_default_panel" },
         { Type.ShoppingSquareMain, "shopping_square_panel" },
         { Type.SlimeMinigame, "slime_minigame_panel" },
+        { Type.PowderPortalMinigame, "powder_portal_minigame_panel" },
     };
 }

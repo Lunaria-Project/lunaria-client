@@ -11,6 +11,9 @@ public partial class PopupManager
         SlimeMinigameInfo = 4,
         SlimeMinigameReady = 5,
         SlimeMinigameResult = 6,
+        PowderPortalMinigameInfo = 7,
+        PowderPortalMinigameReady = 8,
+        PowderPortalMinigameResult = 9,
     }
 
     private readonly Dictionary<Type, string> _popupResourceKey = new()
@@ -21,5 +24,8 @@ public partial class PopupManager
         { Type.SlimeMinigameInfo, "slime_minigame_info_popup" },
         { Type.SlimeMinigameReady, "slime_minigame_ready_popup" },
         { Type.SlimeMinigameResult, "slime_minigame_result_popup" },
+        { Type.PowderPortalMinigameInfo, "powder_portal_minigame_info_popup" },
+        { Type.PowderPortalMinigameReady, "powder_portal_minigame_ready_popup" },
+        { Type.PowderPortalMinigameResult, "powder_portal_minigame_result_popup" },
     };
 }
