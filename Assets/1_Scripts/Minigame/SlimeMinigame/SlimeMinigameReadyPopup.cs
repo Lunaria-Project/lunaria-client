@@ -19,6 +19,7 @@ public class SlimeMinigameReadyPopup : EmptyParamPopup
     public void OnInfoButtonClick()
     {
         OnHideButtonClick();
-        PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.SlimeMinigameInfo);
+        PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.SlimeMinigameInfo)
+            .SetOnHideAction(() => { PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.SlimeMinigameReady); });
     }
 }
