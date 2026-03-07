@@ -45,7 +45,7 @@ public class TitleMainPanel : Panel<TitleMainPanel>
         {
             userDataInfo.AddItem(id.DataId, quantity);
         }
-        userDataInfo.SlimeGauge = userData.InitSlimeGauge;
+        userDataInfo.SlimeGauge = Mathf.Min(userData.InitSlimeGauge, 100);
         StartGame(userDataInfo).Forget();
 #endif
     }

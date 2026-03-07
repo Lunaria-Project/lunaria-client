@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class UserDataInfo
@@ -34,5 +35,6 @@ public partial class UserData : Singleton<UserData>
     public void AddSlimeGauge(float amount)
     {
         _userDataInfo.SlimeGauge += amount;
+        _userDataInfo.SlimeGauge = Mathf.Clamp(_userDataInfo.SlimeGauge, 0, 100);
     }
 }
