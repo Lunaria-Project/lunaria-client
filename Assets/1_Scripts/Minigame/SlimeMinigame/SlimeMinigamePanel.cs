@@ -67,11 +67,6 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         GlobalManager.Instance.SetDefaultCursor();
     }
 
-    protected override void OnRefresh()
-    {
-        _countText.SetText($"{_slimeCount.ToPrice()}방울"); // TODO
-    }
-
     private void Init()
     {
         _isInitialized = false;
@@ -154,6 +149,6 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     private void OnTouchSlime(SlimeType type)
     {
         _slimeCount += _config.GetScore(type);
-        OnRefresh();
+        _countText.SetText($"{_slimeCount.ToPrice()}방울"); // TODO
     }
 }

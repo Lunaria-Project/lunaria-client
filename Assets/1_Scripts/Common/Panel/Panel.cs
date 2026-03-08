@@ -14,10 +14,6 @@ public class PanelBase : MonoBehaviour
     {
         return UniTask.FromResult(true);
     }
-    
-    public virtual void RefreshByManager()
-    {
-    }
 }
 
 public abstract class Panel<TPanelType> : PanelBase where TPanelType : Panel<TPanelType>
@@ -33,16 +29,9 @@ public abstract class Panel<TPanelType> : PanelBase where TPanelType : Panel<TPa
         OnHide();
         return await base.HideByManager();
     }
-
-    public override void RefreshByManager()
-    {
-        base.RefreshByManager();
-        OnRefresh();
-    }
     
     protected abstract void OnShow(params object[] args);
     protected abstract void OnHide();
-    protected abstract void OnRefresh();
     
     public void HidePanel()
     {

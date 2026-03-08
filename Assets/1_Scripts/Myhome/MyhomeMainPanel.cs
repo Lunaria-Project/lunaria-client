@@ -20,8 +20,6 @@ public class MyhomeMainPanel : Panel<MyhomeMainPanel>
         _artifactUI.OnHide();
     }
 
-    protected override void OnRefresh() { }
-
     private void OnShowUI()
     {
         _walletUI.Refresh();

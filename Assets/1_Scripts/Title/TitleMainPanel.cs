@@ -21,8 +21,6 @@ public class TitleMainPanel : Panel<TitleMainPanel>
 
     protected override void OnHide() { }
 
-    protected override void OnRefresh() { }
-
     private async UniTask StartGame(UserDataInfo info)
     {
         UserData.Instance.Init(info, true);

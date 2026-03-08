@@ -12,5 +12,4 @@ public class ShoppingSquarePanel : Panel<ShoppingSquarePanel>
     {
         _timeUI.OnHide();
     }
-    protected override void OnRefresh() { }
 }
