@@ -8,6 +8,7 @@ public partial class GlobalManager
 
     private void UpdateKey()
     {
+        if (!CanPlayerMove()) return;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             OnQKeyDown?.Invoke();
@@ -18,7 +19,6 @@ public partial class GlobalManager
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!CanPlayerMove()) return;
             if (MapManager.Instance.TryInteractNearestNpc()) return;
             if (MapManager.Instance.TryInteractNearestStaticNpc()) return;
             if (MapManager.Instance.TryInteractNearestShop()) return;
