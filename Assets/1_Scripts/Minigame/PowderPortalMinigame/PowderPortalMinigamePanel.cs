@@ -54,9 +54,9 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     {
         if (_isObjectMoving) return;
         var frontObject = _objectQueue.Peek();
-        if (frontObject.AnchoredPosition.x == 0) return;
+        if (frontObject.AnchoredPosition.x <= 0) return;
 
-        foreach (var objectSlot in _objectSlots)
+        foreach (var objectSlot in _objectQueue)
         {
             objectSlot.MoveToPosition(objectSlot.AnchoredPosition.x - _objectDistance);
         }
@@ -118,6 +118,7 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         //_scoreText.SetText(_score.ToString());
         _plusScoreTexts.SetActiveAll(false);
 
+        _objectQueue.Clear();
         var initPositionX = _objectDistance * 6;
         for (var i = 0; i < _objectSlots.Length; i++)
         {
