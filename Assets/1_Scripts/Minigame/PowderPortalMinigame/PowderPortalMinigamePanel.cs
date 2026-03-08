@@ -138,6 +138,7 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
 
         var isCorrect = frontSlot.CorrectDirection == direction;
         _score += _config.GetScore(isCorrect);
+        _score = Mathf.Max(_score, 0);
         //_scoreText.SetText(_score.ToString());
 
         var targetPosition = direction switch
