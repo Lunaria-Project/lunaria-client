@@ -16,6 +16,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
     private const int DefaultCameraSize = 700;
+    public bool IsMinigamePlaying;
 
     protected override void Awake()
     {
@@ -122,6 +123,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         if (CutsceneManager.Instance.IsPlaying) return false;
         if (GameTimeManager.Instance.IsPaused) return false;
+        if (IsMinigamePlaying) return false;
         foreach (var popup in PopupManager.Instance.PopupList)
         {
             if (!CanPlayerMoveWithPopup(popup.PopupType)) return false;

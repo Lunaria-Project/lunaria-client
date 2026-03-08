@@ -55,11 +55,13 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             HidePanel();
             return;
         }
+        GlobalManager.Instance.IsMinigamePlaying = true;
         Init();
     }
 
     protected override void OnHide()
     {
+        GlobalManager.Instance.IsMinigamePlaying = false;
         foreach (var slime in _slimeBlocks)
         {
             slime.Hide();
