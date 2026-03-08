@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 
 public class SpritePostprocessor : AssetPostprocessor
@@ -23,3 +24,4 @@ public class SpritePostprocessor : AssetPostprocessor
         importer.userData = AppliedFlag;
     }
 }
+#endif

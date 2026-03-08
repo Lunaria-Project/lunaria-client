@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using UnityEngine;
 
 public partial class GameData
 {
@@ -20,7 +21,11 @@ public partial class GameData
 
     private void LoadLocalString()
     {
+#if UNITY_EDITOR
         var jsonFilePath = Path.Combine(JsonDataRepositorySetting.GetRepoPath(), "data/LocalData/LocalData.json");
+#else
+        var jsonFilePath = Path.Combine(Application.streamingAssetsPath, "data/LocalData/LocalData.json");
+#endif
         if (string.IsNullOrEmpty(jsonFilePath) || !File.Exists(jsonFilePath))
         {
             LogManager.LogError($"JSON repo not found: {jsonFilePath}");

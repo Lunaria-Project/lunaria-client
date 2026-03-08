@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
 {
@@ -62,13 +64,12 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         var bundle = LoadBundle(entry.AssetBundleName);
         if (bundle == null) return false;
 
-        asset = bundle.LoadAsset<T>(entry.AssetPathInBundle);
+        asset = bundle.LoadAsset<T>(entry.AssetPathInUnity);
         if (asset == null)
         {
-            Debug.LogError($"Failed to load asset from bundle. Bundle: {entry.AssetBundleName}, Asset Path: {entry.AssetPathInBundle}, Type: {typeof(T).Name}");
+            Debug.LogError($"Failed to load asset from bundle. Bundle: {entry.AssetBundleName}, Path: {entry.AssetPathInUnity}");
             return false;
         }
-
         return true;
 #endif
     }
@@ -89,10 +90,24 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
     private AssetBundle LoadBundle(string assetBundleName)
     {
-        //TODO(지선) : 이후에 작업하기
-        return null;
+        if (_loadedBundleByName.TryGetValue(assetBundleName, out var cached))
+        {
+            return cached;
+        }
+
+        var bundlePath = Path.Combine(Application.streamingAssetsPath, AssetBundleFolderName, assetBundleName);
+        var bundle = AssetBundle.LoadFromFile(bundlePath);
+        if (bundle == null)
+        {
+            Debug.LogError($"Failed to load AssetBundle: {bundlePath}");
+            return null;
+        }
+
+        _loadedBundleByName[assetBundleName] = bundle;
+        return bundle;
     }
 
+#if UNITY_EDITOR
     public static void BuildIndex()
     {
         var index = new AssetBundleIndex();
@@ -135,16 +150,16 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
         Debug.Log($"AssetBundle Index built and saved: {indexFilePath}");
     }
+#endif
 
     public static string GetIndexFilePath()
     {
 #if UNITY_EDITOR
         var folderPath = Path.Combine(Application.dataPath, AssetBundleFolderName);
         var indexFileBundlePath = Path.Combine(folderPath, IndexBundleName);
-        var indexFilePath = Path.Combine(indexFileBundlePath, IndexFileName);
-        return indexFilePath;
+        return Path.Combine(indexFileBundlePath, IndexFileName);
+#else
+        return Path.Combine(Application.streamingAssetsPath, AssetBundleFolderName, IndexBundleName, IndexFileName);
 #endif
-        // TODO(지선)
-        return string.Empty;
     }
 }

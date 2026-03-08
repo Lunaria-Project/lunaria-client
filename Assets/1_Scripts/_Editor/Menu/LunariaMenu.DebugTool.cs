@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 
 public static partial class LunariaMenu
@@ -20,3 +21,4 @@ public static partial class LunariaMenu
         return true;
     }
 }
+#endif

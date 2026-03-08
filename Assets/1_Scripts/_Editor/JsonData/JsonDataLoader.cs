@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
@@ -18,14 +17,18 @@ public static class JsonDataLoader
     public static List<SheetInfo> LoadAllSheets()
     {
         var list = new List<SheetInfo>();
-        
+
+#if UNITY_EDITOR
         var repoPath = Path.Combine(JsonDataRepositorySetting.GetRepoPath(), "data");
+#else
+        var repoPath = Path.Combine(Application.streamingAssetsPath, "data");
+#endif
         if (string.IsNullOrEmpty(repoPath) || !Directory.Exists(repoPath))
         {
             LogManager.LogError($"JSON repo not found: {repoPath}");
             return list;
         }
-        
+
         foreach (var file in Directory.GetFiles(repoPath, "*.json", SearchOption.AllDirectories))
         {
             var text = File.ReadAllText(file);
@@ -53,7 +56,7 @@ public static class JsonDataLoader
 
             var relPath = Path.GetRelativePath(repoPath, file);
             var firstSep = relPath.IndexOf(Path.DirectorySeparatorChar);
-            var parentName= relPath.Substring(0, firstSep);
+            var parentName = relPath.Substring(0, firstSep);
             var sheetName = Path.GetFileNameWithoutExtension(file);
             list.Add(new SheetInfo
             {
@@ -68,4 +71,3 @@ public static class JsonDataLoader
         return list;
     }
 }
-#endif
