@@ -102,7 +102,7 @@ public class SlimeBlock : MonoBehaviour
 
         _scoreRectTransform.position = _rectTransform.position;
         DOTween.Kill(_scoreText);
-        DOTween.Sequence().SetId(this)
+        DOTween.Sequence().SetId(_scoreText)
             .Append(_scoreRectTransform.DOAnchorPos(_scoreRectTransform.anchoredPosition + Vector2.up * 50, 0.3f).SetEase(Ease.OutQuad))
             .OnComplete(() =>
             {
