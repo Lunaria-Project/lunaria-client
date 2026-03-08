@@ -66,7 +66,7 @@ public static class TimeUtil
     public static string GameTimeToStringForTopUI(GameTime @this)
     {
         Sb.Clear();
-        Sb.AppendFormat(TimeFormat, @this.HoursForUI, @this.MinutesForUI / 10f * 10);
+        Sb.AppendFormat(TimeFormat, @this.HoursForUI, @this.MinutesForUI / 10 * 10);
         return Sb.ToString();
     }
 

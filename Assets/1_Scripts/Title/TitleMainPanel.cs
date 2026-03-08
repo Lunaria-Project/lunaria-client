@@ -25,8 +25,8 @@ public class TitleMainPanel : Panel<TitleMainPanel>
     {
         UserData.Instance.Init(info, true);
         await SceneManager.LoadSceneAsync(1);
-        GlobalManager.Instance.OnChangeMap(MapType.Myhome);
         GlobalManager.Instance.StartDay();
+        GlobalManager.Instance.OnChangeMap(MapType.Myhome);
     }
 
     public void OnStartButtonClick()
