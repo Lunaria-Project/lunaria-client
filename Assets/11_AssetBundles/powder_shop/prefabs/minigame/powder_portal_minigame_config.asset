@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a9ec5f316b44d5c91ffd053e205e68, type: 3}
+  m_Name: powder_portal_minigame_config
+  m_EditorClassIdentifier: Assembly-CSharp::PowderPortalMinigameConfig
+  _minigameSeconds: 10
+  _spawnIntervalSeconds: 1.5
+  _visibleSlotCount: 5
+  _correctScore: 1
+  _wrongScore: -1
+  _advanceAnimDurationMillis: 200
+  _sendAnimDuration: 0.3
+  _leftSprite: {fileID: 21300000, guid: 62baa97493dc7440a8c44e9cae1d1dc1, type: 3}
+  _rightSprite: {fileID: 21300000, guid: 44e5885a5a8874a798b74c9e3fbb4161, type: 3}
+  _spaceSprite: {fileID: 21300000, guid: bc41155eafa894bb985fbc958cdc0016, type: 3}
+  _leftRate: 33
+  _rightRate: 33
+  _spaceRate: 34
