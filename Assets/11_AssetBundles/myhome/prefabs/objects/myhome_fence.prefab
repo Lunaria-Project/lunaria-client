@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 8039834460680580791}
+  _behindTrigger: {fileID: 0}
+  _spriteRenderers: []
 --- !u!1 &4397094130553841169
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,8 +218,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 88.40052, y: -109.74416}
-      - {x: 127.70526, y: -83.21597}
+    - - {x: 94.0369, y: -105.986595}
+      - {x: 107.03859, y: -56.91295}
       - {x: -68.32695, y: 36.50537}
       - {x: -109.03943, y: 11.310379}
   m_UseDelaunayMesh: 0
