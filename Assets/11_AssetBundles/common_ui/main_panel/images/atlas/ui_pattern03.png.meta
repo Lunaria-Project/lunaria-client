@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 20784e0b7d09944f78309c658dfff57f
+guid: 0321621e0e27f4466820320e15111774
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7926298165984295564
-    second: ui_myhome_frame_0
+      213: 2765452346989534130
+    second: ui_pattern03_0
+  - first:
+      213: 7923030879697126146
+    second: ui_pattern03_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,19 +43,19 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1
-  spriteBorder: {x: 53, y: 56, z: 53, w: 55}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -75,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +129,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_myhome_frame_0
+      name: ui_pattern03_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 122
-        height: 128
+        width: 99
+        height: 99
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c8af257cf2edffd60800000000000000
-      internalID: 7926298165984295564
+      spriteID: 2bbd491f14cd06620800000000000000
+      internalID: 2765452346989534130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_pattern03_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2034cc86b9244fd60800000000000000
+      internalID: 7923030879697126146
       vertices: []
       indices: 
       edges: []
@@ -152,7 +177,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui_myhome_frame_0: 7926298165984295564
+      ui_pattern03_0: 2765452346989534130
+      ui_pattern03_1: 7923030879697126146
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: SpritePostprocessor_Applied

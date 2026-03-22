@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 20784e0b7d09944f78309c658dfff57f
+guid: 14bc1d84a44a04658a02f05838036f3b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7926298165984295564
-    second: ui_myhome_frame_0
+      213: 102089623050347023
+    second: ui_inventory_bg01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,11 +48,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1
-  spriteBorder: {x: 53, y: 56, z: 53, w: 55}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 33, y: 35, z: 33, w: 35}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_myhome_frame_0
+      name: ui_inventory_bg01_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 122
-        height: 128
+        y: 1
+        width: 86
+        height: 85
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c8af257cf2edffd60800000000000000
-      internalID: 7926298165984295564
+      spriteID: f026b25a8f1ba6100800000000000000
+      internalID: 102089623050347023
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui_myhome_frame_0: 7926298165984295564
+      ui_inventory_bg01_0: 102089623050347023
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: SpritePostprocessor_Applied
