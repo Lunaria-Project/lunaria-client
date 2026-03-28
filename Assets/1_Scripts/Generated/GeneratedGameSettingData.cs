@@ -14,6 +14,8 @@ public class GameSetting : Singleton<GameSetting>
     public float SpeedUpRate { get; private set; }
     public float MinSlimeGaugePer10Minutes { get; private set; }
     public float MaxSlimeGaugePer10Minutes { get; private set; }
+    public int SlimeMinigameArtifactCutsceneId { get; private set; }
+    public int PowderMinigameArtifactCutsceneId { get; private set; }
 
     public void InvokeLoadForSheet(SheetInfo sheetInfo)
     {
@@ -34,6 +36,8 @@ public class GameSetting : Singleton<GameSetting>
                 case "SpeedUpRate": SpeedUpRate = Convert.ToSingle(row[2]); break;
                 case "MinSlimeGaugePer10Minutes": MinSlimeGaugePer10Minutes = Convert.ToSingle(row[2]); break;
                 case "MaxSlimeGaugePer10Minutes": MaxSlimeGaugePer10Minutes = Convert.ToSingle(row[2]); break;
+                case "SlimeMinigameArtifactCutsceneId": SlimeMinigameArtifactCutsceneId = Convert.ToInt32(row[2]); break;
+                case "PowderMinigameArtifactCutsceneId": PowderMinigameArtifactCutsceneId = Convert.ToInt32(row[2]); break;
             }
         }
     }

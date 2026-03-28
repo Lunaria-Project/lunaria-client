@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+
 public class SlimeMinigameReadyPopup : EmptyParamPopup
 {
     protected override void OnShow() { }
@@ -9,8 +11,12 @@ public class SlimeMinigameReadyPopup : EmptyParamPopup
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
         if (artifactData.ArtifactType != ArtifactType.Bubblegun)
         {
-            GlobalManager.Instance.ShowToastMessage("버블건을 장착하자."); // TODO(지선)
-            return;
+            if (!UserData.Instance.TrySetEquippedArtifact(ArtifactType.Bubblegun))
+            {
+                OnHideButtonClick();
+                CutsceneManager.Instance.PlayCutscene(GameSetting.Instance.SlimeMinigameArtifactCutsceneId).Forget();
+                return;
+            }
         }
         OnHideButtonClick();
         PanelManager.Instance.ShowPanel(PanelManager.Type.SlimeMinigame);

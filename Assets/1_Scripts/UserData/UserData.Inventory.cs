@@ -31,4 +31,18 @@ public partial class UserData
     {
         EquippedArtifactId = itemId;
     }
+
+    public bool TrySetEquippedArtifact(ArtifactType artifactType)
+    {
+        var items = GetItemQuantities(ItemType.Artifact);
+        foreach (var (id, quantity) in items)
+        {
+            if (quantity <= 0) continue;
+            var data = GameData.Instance.GetArtifactData(id);
+            if (data.ArtifactType != artifactType) continue;
+            EquippedArtifactId = id;
+            return true;
+        }
+        return false;
+    }
 }

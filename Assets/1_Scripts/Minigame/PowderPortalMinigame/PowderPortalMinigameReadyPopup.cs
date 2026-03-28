@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class PowderPortalMinigameReadyPopup : EmptyParamPopup
@@ -17,8 +18,12 @@ public class PowderPortalMinigameReadyPopup : EmptyParamPopup
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
         if (artifactData.ArtifactType != ArtifactType.Powder)
         {
-            GlobalManager.Instance.ShowToastMessage("파우더를 장착하자."); // TODO(지선)
-            return;
+            if (!UserData.Instance.TrySetEquippedArtifact(ArtifactType.Powder))
+            {
+                OnHideButtonClick();
+                CutsceneManager.Instance.PlayCutscene(GameSetting.Instance.PowderMinigameArtifactCutsceneId).Forget();
+                return;
+            }
         }
         OnHideButtonClick();
         PanelManager.Instance.ShowPanel(PanelManager.Type.PowderPortalMinigame);
