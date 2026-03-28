@@ -115,6 +115,22 @@ namespace Generated
         }
     }
 
+    public partial class LocalizationData
+    {
+        public string key { get; private set; }
+        public string ko { get; private set; }
+        public string en { get; private set; }
+        public string ja { get; private set; }
+
+        public LocalizationData(string key, string ko, string en, string ja)
+        {
+            key = key;
+            ko = ko;
+            en = en;
+            ja = ja;
+        }
+    }
+
     public partial class ArtifactData
     {
         public int Id { get; private set; }

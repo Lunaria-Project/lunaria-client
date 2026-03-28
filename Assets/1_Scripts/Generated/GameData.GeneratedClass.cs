@@ -36,6 +36,10 @@ public partial class GameData
     public IReadOnlyList<GameSettingData> DTGameSettingData => _dtGameSettingData;
     private List<GameSettingData> _dtGameSettingData = new();
 
+    // LocalizationData - LocalizationData
+    public IReadOnlyList<LocalizationData> DTLocalizationData => _dtLocalizationData;
+    private List<LocalizationData> _dtLocalizationData = new();
+
     // ArtifactData - ArtifactData, key: Id
     public IReadOnlyDictionary<int, ArtifactData> DTArtifactData => _dtArtifactData;
     public bool TryGetArtifactData(int key, out ArtifactData result) => DTArtifactData.TryGetValue(key, out result);

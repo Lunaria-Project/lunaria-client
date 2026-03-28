@@ -21,6 +21,7 @@ public partial class GameData : Singleton<GameData>
         
         const string EnumDataFileName = "Enum";
         const string GameSettingDataFileName = "GameSetting";
+        const string LocalizationDataFileName = "Localization";
 
         foreach (var sheetInfo in sheets)
         {
@@ -30,6 +31,12 @@ public partial class GameData : Singleton<GameData>
             if (isGameSettingData)
             {
                 GameSetting.Instance.InvokeLoadForSheet(sheetInfo);
+                continue;
+            }
+            var isLocalizationData = string.Equals(sheetInfo.SheetName, LocalizationDataFileName, StringComparison.OrdinalIgnoreCase);
+            if (isLocalizationData)
+            {
+                LoadLocalization(sheetInfo);
                 continue;
             }
             InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows, localType);

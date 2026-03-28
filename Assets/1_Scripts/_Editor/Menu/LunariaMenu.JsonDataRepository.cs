@@ -10,6 +10,7 @@ public static partial class LunariaMenu
         DataCodeGenerator.GenerateGameDataCode(sheets);
         DataCodeGenerator.GenerateEnumDataCode(sheets);
         DataCodeGenerator.GenerateGameSettingCode(sheets);
+        DataCodeGenerator.GenerateLocalizationCode(sheets);
     }
 
     [MenuItem("Lunaria/Json Data/[Reset DropDownList]", priority = 11)]
