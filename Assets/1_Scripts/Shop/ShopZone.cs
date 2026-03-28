@@ -53,7 +53,7 @@ public class ShopZone : MonoBehaviour
 
     public void OnClosedShopButtonClick()
     {
-        GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO
+        GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO(지선)
     }
 
     public void OnOpenedShopButtonClick()
@@ -71,14 +71,14 @@ public class ShopZone : MonoBehaviour
                 case ShopType.CottonCandyShop:
                 case ShopType.BeddingShop:
                 {
-                    GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO
+                    GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO(지선)
                     break;
                 }
             }
         }
         else
         {
-            GlobalManager.Instance.ShowToastMessage("상점 앞으로 가주세요."); // TODO
+            GlobalManager.Instance.ShowToastMessage("상점 앞으로 가주세요."); // TODO(지선)
         }
     }
 }

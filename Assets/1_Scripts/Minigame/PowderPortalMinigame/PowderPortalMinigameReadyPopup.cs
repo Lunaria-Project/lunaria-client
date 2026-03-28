@@ -6,7 +6,7 @@ public class PowderPortalMinigameReadyPopup : EmptyParamPopup
 
     protected override void OnShow()
     {
-        // TODO : 패밀리어 시스템 작업할 때 하기
+        // TODO(지선) : 패밀리어 시스템 작업할 때 하기
         _familiarButton.SetActive(false);
     }
 
@@ -17,7 +17,7 @@ public class PowderPortalMinigameReadyPopup : EmptyParamPopup
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
         if (artifactData.ArtifactType != ArtifactType.Powder)
         {
-            GlobalManager.Instance.ShowToastMessage("파우더를 장착하자."); // TODO
+            GlobalManager.Instance.ShowToastMessage("파우더를 장착하자."); // TODO(지선)
             return;
         }
         OnHideButtonClick();
@@ -33,6 +33,6 @@ public class PowderPortalMinigameReadyPopup : EmptyParamPopup
 
     public void OnFamiliarButtonClick()
     {
-        // TODO
+        // TODO(지선)
     }
 }

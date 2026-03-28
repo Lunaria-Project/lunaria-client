@@ -84,7 +84,7 @@ public class NpcCompassUI : MonoBehaviour
     {
         if (!_isNearByPlayer)
         {
-            GlobalManager.Instance.ShowToastMessage("좀 더 가까이 가주세염"); // TODO
+            GlobalManager.Instance.ShowToastMessage("좀 더 가까이 가주세염"); // TODO(지선)
             return;
         }
         var data = GameData.Instance.GetNpcMenuData(_npcDataId);

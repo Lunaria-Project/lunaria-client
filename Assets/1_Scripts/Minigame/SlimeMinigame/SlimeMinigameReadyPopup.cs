@@ -9,7 +9,7 @@ public class SlimeMinigameReadyPopup : EmptyParamPopup
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
         if (artifactData.ArtifactType != ArtifactType.Bubblegun)
         {
-            GlobalManager.Instance.ShowToastMessage("버블건을 장착하자."); // TODO
+            GlobalManager.Instance.ShowToastMessage("버블건을 장착하자."); // TODO(지선)
             return;
         }
         OnHideButtonClick();
