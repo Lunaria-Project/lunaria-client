@@ -1,6 +1,5 @@
 using Lunaria;
 using UnityEngine;
-using Generated;
 
 public class NpcCompassUI : MonoBehaviour
 {

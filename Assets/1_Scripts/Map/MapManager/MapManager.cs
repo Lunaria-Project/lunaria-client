@@ -11,7 +11,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
     private bool _followPlayer;
-    private Dictionary<MapType, NormalMap> _mapCache = new(); // TODO(지선): 나중에 구현하기
 
     protected override void Update()
     {
