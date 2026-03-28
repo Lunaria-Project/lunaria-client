@@ -29,9 +29,17 @@ public partial class UserData : Singleton<UserData>
                 _userDataInfo.AddItem(id, data.Quantity);
             }
         }
+
+        GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
+        GameTimeManager.Instance.OnIntervalChanged += OnIntervalChanged;
     }
 
-    //TODO(지선): 10분마다 더해지도록 구현하기
+    private void OnIntervalChanged()
+    {
+        var amount = UnityEngine.Random.Range(GameSetting.Instance.MinSlimeGaugePer10Minutes, GameSetting.Instance.MaxSlimeGaugePer10Minutes);
+        AddSlimeGauge(amount);
+    }
+
     public void AddSlimeGauge(float amount)
     {
         _userDataInfo.SlimeGauge += amount;
