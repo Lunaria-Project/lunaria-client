@@ -97,18 +97,25 @@ public static partial class LunariaMenu
     [MenuItem("Lunaria/Project/Delete Empty Folders")]
     private static void DeleteEmptyFolders()
     {
-        var deletedCount = DeleteEmptyFoldersRecursive("Assets");
-
-        if (deletedCount > 0)
+        var totalDeletedCount = 0;
+        int deletedCount;
+        do
         {
-            AssetDatabase.Refresh();
-        }
+            deletedCount = DeleteEmptyFoldersRecursive("Assets");
+            totalDeletedCount += deletedCount;
+            if (deletedCount > 0)
+            {
+                AssetDatabase.Refresh();
+            }
+        } while (deletedCount > 0);
 
-        LogManager.Log($"Delete empty folders complete. {deletedCount} folder(s) deleted.");
+        LogManager.Log($"Delete empty folders complete. {totalDeletedCount} folder(s) deleted.");
     }
 
     private static int DeleteEmptyFoldersRecursive(string path)
     {
+        if (path.Replace('\\', '/').StartsWith("Assets/Plugins")) return 0;
+
         var deletedCount = 0;
         var subDirectories = Directory.GetDirectories(path);
 
