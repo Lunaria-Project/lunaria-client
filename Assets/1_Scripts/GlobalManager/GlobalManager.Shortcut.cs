@@ -58,7 +58,8 @@ public partial class GlobalManager
         OnChangeMap(MapType.ShoppingSquare);
         if (type != ShopType.None && MapManager.Instance.CurrentMap is ShoppingSquareMap shoppingSquareMap)
         {
-            MapManager.Instance.PlayerObject.Init(shoppingSquareMap.PlayerInitPosition.position);
+            var position = shoppingSquareMap.GetPlayerPosition(type);
+            MapManager.Instance.PlayerObject.Init(position);
         }
         SetCameraSize(1);
 
