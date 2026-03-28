@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class MyhomeMainPanel : Panel<MyhomeMainPanel>
+public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
 {
     [SerializeField] TopWalletUI _walletUI;
     [SerializeField] TopTimeUI _timeUI;
