@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7121962919733483885}
   - component: {fileID: 1041933401455192053}
   - component: {fileID: 5873650831754998179}
+  - component: {fileID: 7550094405489207044}
   m_Layer: 5
   m_Name: Txt_description
   m_TagString: Untagged
@@ -67,10 +68,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBC29\uC744 \uB108\uBB34 \uC624\uB798 \uBE44\uC6CC\uB450\uC5C8\uB098?
     \uB048\uC801\uB048\uC801\uD55C \uC2AC\uB77C\uC784\uB4E4\uC774 \uB4F1\uC7A5\uD574\uC11C
-    \uBC29\uC744<br> \uC5B4\uC9C0\uB7FD\uD788\uAE30 \uC2DC\uC791\uD588\uC5B4! \uD558\uC9C0\uB9CC
+    \uBC29\uC744\\n\uC5B4\uC9C0\uB7FD\uD788\uAE30 \uC2DC\uC791\uD588\uC5B4! \uD558\uC9C0\uB9CC
     \uAC71\uC815\uB9C8 \uBC84\uBE14\uAC74\uACFC \uD568\uAED8\uB77C\uBA74 \uD55C\uBC29\uC5D0
-    \uC2A5\uC0AD! <br> \uC774 \uBC84\uB987\uC5C6\uB294 \uC824\uB9AC\uB4E4\uC5D0\uAC8C
-    \uAC74\uBC95\uC73C\uB85C \uC608\uC758\uB97C \uAC00\uB974\uCCD0\uC8FC\uC790! "
+    \uC2A5\uC0AD!\\n\uC774 \uBC84\uB987\uC5C6\uB294 \uC824\uB9AC\uB4E4\uC5D0\uAC8C
+    \uAC74\uBC95\uC73C\uB85C \uC608\uC758\uB97C \uAC00\uB974\uCCD0\uC8FC\uC790!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
   m_sharedMaterial: {fileID: 2515134537450242798, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
@@ -141,6 +142,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7550094405489207044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239947375367079206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameReadyPopup.Description
 --- !u!1 &1418590024374330573
 GameObject:
   m_ObjectHideFlags: 0

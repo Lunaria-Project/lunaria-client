@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5985900826415577335}
   - component: {fileID: 3768415814554699888}
   - component: {fileID: 7649160456844196699}
+  - component: {fileID: 2477643238765269019}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2477643238765269019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314107710990865205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.Guide1
 --- !u!1 &1705658293072257537
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +162,7 @@ GameObject:
   - component: {fileID: 8837717652507411161}
   - component: {fileID: 4377386602481787152}
   - component: {fileID: 8647020375457990500}
+  - component: {fileID: 1555551776440379394}
   m_Layer: 5
   m_Name: Txt_warning
   m_TagString: Untagged
@@ -274,6 +289,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1555551776440379394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705658293072257537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.BottomGuide
 --- !u!1 &1799264703915651238
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +313,7 @@ GameObject:
   - component: {fileID: 1441596065954155797}
   - component: {fileID: 3910101697451680232}
   - component: {fileID: 6936857690143385256}
+  - component: {fileID: 2773849014544050962}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -410,6 +439,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2773849014544050962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799264703915651238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.Guide2
 --- !u!1 &1898817849503438306
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +463,7 @@ GameObject:
   - component: {fileID: 5713592856915505026}
   - component: {fileID: 2774880329339368962}
   - component: {fileID: 4412711045808370955}
+  - component: {fileID: 3460103213398460792}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -546,6 +589,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3460103213398460792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898817849503438306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.TimeGuide
 --- !u!1 &2104908432194044823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1070,7 @@ GameObject:
   - component: {fileID: 7746646294357711617}
   - component: {fileID: 5611378414818572814}
   - component: {fileID: 8937071511639180834}
+  - component: {fileID: 6401178322131845389}
   m_Layer: 5
   m_Name: Txt_Title
   m_TagString: Untagged
@@ -1139,6 +1196,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6401178322131845389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914905787894645375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.Title
 --- !u!1 &3988482227198594818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,6 +1791,7 @@ GameObject:
   - component: {fileID: 4535057049771242894}
   - component: {fileID: 1241387330231879653}
   - component: {fileID: 6888716601648693176}
+  - component: {fileID: 4971683241992714077}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1847,6 +1918,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4971683241992714077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5077246292223551215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.Guide3
 --- !u!1 &5201942535673615615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,6 +2872,7 @@ GameObject:
   - component: {fileID: 8777663371716016225}
   - component: {fileID: 2082799690674661752}
   - component: {fileID: 7596235104827721448}
+  - component: {fileID: 8424702762163164386}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2913,6 +2998,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8424702762163164386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8799890487959725786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key: SlimeMinigameInfoPopup.RewardGuide
 --- !u!1 &8819091494621566638
 GameObject:
   m_ObjectHideFlags: 0

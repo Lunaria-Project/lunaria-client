@@ -121,13 +121,15 @@ namespace Generated
         public string ko { get; private set; }
         public string en { get; private set; }
         public string ja { get; private set; }
+        public bool UseInCode { get; private set; }
 
-        public LocalizationData(string key, string ko, string en, string ja)
+        public LocalizationData(string key, string ko, string en, string ja, bool useInCode)
         {
             key = key;
             ko = ko;
             en = en;
             ja = ja;
+            UseInCode = useInCode;
         }
     }
 

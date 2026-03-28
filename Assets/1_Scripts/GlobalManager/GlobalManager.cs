@@ -9,6 +9,8 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     [SerializeField] private Image _toastMessageBackground;
     [SerializeField] private Text _toastMessageText;
 
+    public GameData.LocalType LocalType = GameData.LocalType.Ko;
+
     public event Action OnApplicationPaused;
     public event Action OnApplicationResume;
 

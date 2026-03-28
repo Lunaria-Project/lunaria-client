@@ -151,6 +151,6 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     private void OnTouchSlime(SlimeType type)
     {
         _slimeCount += _config.GetScore(type);
-        _countText.SetText($"{_slimeCount.ToPrice()}방울"); // TODO
+        _countText.SetText(LocalizationKey.Minigame_Slime_Score.Format(_slimeCount.ToPrice()));
     }
 }

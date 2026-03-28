@@ -54,7 +54,7 @@ public partial class GameData
         _dtLocalizationData.Clear();
         foreach (var row in rows)
         {
-            var newData = new LocalizationData((row[0] as string) ?? string.Empty, (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty);
+            var newData = new LocalizationData((row[0] as string) ?? string.Empty, (row[1] as string) ?? string.Empty, (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty, Convert.ToBoolean(row[4]));
             _dtLocalizationData.Add(newData);
         }
     }

@@ -29,3 +29,12 @@ public partial class GameData
         }
     }
 }
+
+public static class LocalizationKey
+{
+    public static readonly LocalKey GameTime_Am = new("GameTime.Am");
+    public static readonly LocalKey GameTime_Pm = new("GameTime.Pm");
+    public static readonly LocalKey Minigame_Slime_Score = new("Minigame.Slime.Score");
+    public static readonly LocalKey FamiliarSelectPopup_BottomGuide = new("FamiliarSelectPopup.BottomGuide");
+    public static readonly LocalKey SlimeMinigameResultPopup_Description = new("SlimeMinigameResultPopup.Description");
+}

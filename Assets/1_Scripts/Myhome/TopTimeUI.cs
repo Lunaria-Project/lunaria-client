@@ -7,7 +7,7 @@ public class TopTimeUI : MonoBehaviour
     [SerializeField] float _defaultTimeBackgroundZRotation;
     [SerializeField] Text _currentTimeText;
     [SerializeField] Text _currentTimeAMPMText;
-    
+
     public void OnShow()
     {
         GameTimeManager.Instance.OnIntervalChanged -= OnTimeChanged;
@@ -34,7 +34,6 @@ public class TopTimeUI : MonoBehaviour
     {
         var currentGameTime = GameTimeManager.Instance.CurrentGameTime;
         _currentTimeText.SetText(TimeUtil.GameTimeToStringForTopUI(currentGameTime));
-        //TODO(지선): 로컬키
-        _currentTimeAMPMText.SetText(GameTimeManager.Instance.CurrentGameTime.IsAM ? "AM" : "PM");
+        _currentTimeAMPMText.SetText(GameTimeManager.Instance.CurrentGameTime.IsAM ? LocalizationKey.GameTime_Am : LocalizationKey.GameTime_Pm);
     }
 }

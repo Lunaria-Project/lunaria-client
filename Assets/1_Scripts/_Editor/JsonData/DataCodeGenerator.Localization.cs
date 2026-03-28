@@ -63,6 +63,18 @@ public static partial class DataCodeGenerator
         sb.AppendIndentedLine("}", 2);
         sb.AppendIndentedLine("}", 1);
         sb.AppendLine("}");
+        sb.AppendLine();
+        sb.AppendLine("public static class LocalizationKey");
+        sb.AppendLine("{");
+        foreach (var row in rows)
+        {
+            var useInCode = row.Length > 4 && row[4] is 1.0;
+            if (!useInCode) continue;
+            var key = (string)row[0];
+            var constName = key.Replace('.', '_');
+            sb.AppendIndentedLine($"public static readonly LocalKey {constName} = new(\"{key}\");", 1);
+        }
+        sb.AppendLine("}");
         return sb.ToString();
     }
 }

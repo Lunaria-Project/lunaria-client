@@ -24,7 +24,7 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
         _retryAction = parameter.RetryAction;
         _hideAction = parameter.HideAction;
 
-        _scoreText.SetText($@"{parameter.Score.ToPrice()}방울"); // TODO
+        _scoreText.SetText(LocalizationKey.Minigame_Slime_Score.Format(parameter.Score.ToPrice()));
         _resultText.SetText("여기 작업은 나중에");
         _retryButton.SetActive(RequirementManager.Instance.IsSatisfied(RequirementType.MyhomeSlimeAppeared, null));
     }
