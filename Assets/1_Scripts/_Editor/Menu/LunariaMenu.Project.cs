@@ -118,8 +118,25 @@ public static partial class LunariaMenu
         }
 
         var entries = Directory.GetFileSystemEntries(path);
-        if (entries.Length == 0)
+
+        var hasNonMetaEntry = false;
+        foreach (var entry in entries)
         {
+            if (!entry.EndsWith(".meta"))
+            {
+                hasNonMetaEntry = true;
+                break;
+            }
+        }
+
+        if (!hasNonMetaEntry)
+        {
+            foreach (var entry in entries)
+            {
+                File.Delete(entry);
+                LogManager.Log($"Deleted orphaned meta: {entry}"); 
+            }
+
             var metaPath = path + ".meta";
             Directory.Delete(path);
             LogManager.Log($"Deleted empty folder: {path}");
