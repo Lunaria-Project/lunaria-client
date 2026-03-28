@@ -35,16 +35,23 @@ public class MyhomeArtifactUI : MonoBehaviour
             return leftData.Order.CompareTo(rightData.Order);
         });
 
+        var equippedId = UserData.Instance.EquippedArtifactId;
+        var equippedItemIndex = _itemDataIds.IndexOf(equippedId);
+        if (equippedItemIndex < 0)
+        {
+            equippedItemIndex = 0;
+        }
+
         var selectedIndex = GetSelectedIndex();
         for (var i = 0; i < _cells.Length; i++)
         {
             _cells[i].SetSelected(true, i == selectedIndex);
         }
-        SetItem(selectedIndex, 0);
-        SetItem(selectedIndex + 1, 1);
-        SetItem(selectedIndex - 1, _itemDataIds.Count - 1);
+        SetItem(selectedIndex, equippedItemIndex);
+        SetItem(selectedIndex + 1, equippedItemIndex + 1);
+        SetItem(selectedIndex - 1, equippedItemIndex - 1);
         RefreshCellRotation(true);
-        UserData.Instance.SetEquippedArtifact(_itemDataIds.GetAt(0));
+        UserData.Instance.SetEquippedArtifact(_itemDataIds.GetAt(equippedItemIndex));
 
         GlobalManager.Instance.OnQKeyDown -= OnQKeyDown;
         GlobalManager.Instance.OnQKeyDown += OnQKeyDown;
