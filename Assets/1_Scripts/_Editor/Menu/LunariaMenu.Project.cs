@@ -93,5 +93,46 @@ public static partial class LunariaMenu
         AssetDatabase.Refresh();
         LogManager.Log($"Step2 complete. {renamedCount} file(s) renamed.");
     }
+
+    [MenuItem("Lunaria/Project/Delete Empty Folders")]
+    private static void DeleteEmptyFolders()
+    {
+        var deletedCount = DeleteEmptyFoldersRecursive("Assets");
+
+        if (deletedCount > 0)
+        {
+            AssetDatabase.Refresh();
+        }
+
+        LogManager.Log($"Delete empty folders complete. {deletedCount} folder(s) deleted.");
+    }
+
+    private static int DeleteEmptyFoldersRecursive(string path)
+    {
+        var deletedCount = 0;
+        var subDirectories = Directory.GetDirectories(path);
+
+        foreach (var subDir in subDirectories)
+        {
+            deletedCount += DeleteEmptyFoldersRecursive(subDir);
+        }
+
+        var entries = Directory.GetFileSystemEntries(path);
+        if (entries.Length == 0)
+        {
+            var metaPath = path + ".meta";
+            Directory.Delete(path);
+            LogManager.Log($"Deleted empty folder: {path}");
+
+            if (File.Exists(metaPath))
+            {
+                File.Delete(metaPath);
+            }
+
+            deletedCount++;
+        }
+
+        return deletedCount;
+    }
 }
 #endif
