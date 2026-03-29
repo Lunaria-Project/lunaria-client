@@ -83,17 +83,23 @@ public class NpcCompassUI : MonoBehaviour
     {
         if (!_isNearByPlayer)
         {
-            GlobalManager.Instance.ShowToastMessage("좀 더 가까이 가주세염"); // TODO(지선)
+            MapManager.Instance.MovePlayerAuto(_npcDataId, InteractNpc);
             return;
         }
-        var data = GameData.Instance.GetNpcMenuData(_npcDataId);
-        if (data == null) return;
-        if (!data.ShowMenuPopup)
+        InteractNpc();
+        return;
+
+        void InteractNpc()
         {
-            GlobalManager.Instance.InvokeNpcFunction(data.FunctionType, data.FunctionValue);
-            return;
+            var data = GameData.Instance.GetNpcMenuData(_npcDataId);
+            if (data == null) return;
+            if (!data.ShowMenuPopup)
+            {
+                GlobalManager.Instance.InvokeNpcFunction(data.FunctionType, data.FunctionValue);
+                return;
+            }
+            PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _npcDataId });
         }
-        PopupManager.Instance.ShowPopup(PopupManager.Type.NpcSelection, new NpcSelectionPopupParameter { NpcDataId = _npcDataId });
     }
 
     private static CompassUIType GetCompassUIType(NpcMenuFunctionType functionType)

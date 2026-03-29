@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 5228429884311082307}
   - component: {fileID: 2585402160477751633}
   - component: {fileID: 1195860914258529911}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1680,7 +1680,7 @@ GameObject:
   - component: {fileID: 1344758175111197546}
   - component: {fileID: 7826205049715236331}
   - component: {fileID: 5260511687946905771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2006,7 +2006,7 @@ GameObject:
   - component: {fileID: 4947203592622086987}
   - component: {fileID: 7287141523796644058}
   - component: {fileID: 1892320866883801869}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2441,7 +2441,7 @@ GameObject:
   - component: {fileID: 621863763451298168}
   - component: {fileID: 826773655077278438}
   - component: {fileID: 5099685107840358711}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3361,7 +3361,7 @@ GameObject:
   - component: {fileID: 7696187998490877298}
   - component: {fileID: 43867625127307831}
   - component: {fileID: 8997500923318505039}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3460,7 +3460,7 @@ GameObject:
   - component: {fileID: 4205158194773704427}
   - component: {fileID: 4917761923783517930}
   - component: {fileID: 7708479360962680561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4196,7 +4196,7 @@ GameObject:
   - component: {fileID: 3456814013526541551}
   - component: {fileID: 204036247269368511}
   - component: {fileID: 2325327915921387888}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4583,7 +4583,7 @@ GameObject:
   - component: {fileID: 1092746456134933043}
   - component: {fileID: 4214916342701560945}
   - component: {fileID: 6555922934320735362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5177,7 +5177,7 @@ GameObject:
   - component: {fileID: 3487705919508425817}
   - component: {fileID: 2886664426948325903}
   - component: {fileID: 896981463747257168}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5245,7 +5245,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -95.79224, y: -169.11139}
+    - - {x: -52.59247, y: -188.01129}
       - {x: -122.24646, y: -252.531}
       - {x: -215.92065, y: -219.12817}
       - {x: -213.08917, y: -201.12671}
@@ -5264,7 +5264,7 @@ PolygonCollider2D:
       - {x: 359.72406, y: 57.577972}
       - {x: 154.2858, y: -102.46147}
       - {x: 37.52112, y: -124.126526}
-      - {x: -60.2976, y: -183.65906}
+      - {x: -52.862175, y: -187.37677}
   m_UseDelaunayMesh: 0
 --- !u!114 &896981463747257168
 MonoBehaviour:
@@ -5494,7 +5494,7 @@ GameObject:
   - component: {fileID: 7360170044387527724}
   - component: {fileID: 9100095907724537593}
   - component: {fileID: 4869328801727832333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5737,7 +5737,7 @@ GameObject:
   - component: {fileID: 1595779696374507349}
   - component: {fileID: 2022322310808327659}
   - component: {fileID: 8197397214825698423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6347,7 +6347,7 @@ GameObject:
   - component: {fileID: 486253013898922566}
   - component: {fileID: 9012736585723138914}
   - component: {fileID: 3193218139984364428}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6689,6 +6689,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShoppingSquareMap
   _playerInitPosition: {fileID: 3978743682271872679}
   _staticNpcObjects: []
+  _boundsMin: {fileID: 0}
+  _boundsMax: {fileID: 0}
   _powderShopPosition: {fileID: 7698374761508168905}
   _beddingShopPosition: {fileID: 4915145556361288529}
   _cottonCandyShopPosition: {fileID: 2018674598878130352}
@@ -7176,7 +7178,7 @@ GameObject:
   - component: {fileID: 8950329364558627593}
   - component: {fileID: 3598234955831340303}
   - component: {fileID: 8825977683838316660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

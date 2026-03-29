@@ -6,12 +6,14 @@ public class NpcObject : MovableObject
 
     public NpcCompassUI CompassUI => _compassUI;
     public float DistanceToPlayer { get; private set; }
+    public int NpcDataId { get; private set; }
     private int _characterDataId;
     private bool _isShown;
 
     public void Show(Generated.MapNpcPositionData positionData)
     {
         gameObject.SetActive(true);
+        NpcDataId = positionData.NpcId;
         _characterDataId = GameData.Instance.GetMapNpcInfoData(positionData.NpcId).CharacterId;
         var infoData = GameData.Instance.GetMapNpcInfoData(positionData.NpcId);
         var initPosition = new Vector2(positionData.Positions.GetAt(0), positionData.Positions.GetAt(1));

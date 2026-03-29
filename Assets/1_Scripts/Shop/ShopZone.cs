@@ -58,10 +58,21 @@ public class ShopZone : MonoBehaviour
 
     public void OnOpenedShopButtonClick()
     {
+        var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
+        var shopType = shopInfoData.ShopType;
         if (_isNearBy)
         {
-            var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
-            switch (shopInfoData.ShopType)
+            InteractShop();
+        }
+        else
+        {
+            MapManager.Instance.MovePlayerAuto(shopType, InteractShop);
+        }
+        return;
+
+        void InteractShop()
+        {
+            switch (shopType)
             {
                 case ShopType.PowderShop:
                 {
@@ -75,10 +86,6 @@ public class ShopZone : MonoBehaviour
                     break;
                 }
             }
-        }
-        else
-        {
-            GlobalManager.Instance.ShowToastMessage("상점 앞으로 가주세요."); // TODO(지선)
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     public NormalMap CurrentMap { get; private set; }
     public PlayerObject PlayerObject { get; private set; }
+    public PathGrid PathGrid { get; private set; }
     private MapConfig _config;
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
@@ -27,7 +29,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         foreach (var npcObject in _npcObjects)
         {
             var distance = PlayerObject.Collider.Distance(npcObject.Collider).distance;
-            npcObject.SetIsNearBy(distance <= _config.NpcDistance, distance);
+            var isNearBy = distance <= _config.NpcDistance;
+            npcObject.SetIsNearBy(isNearBy, distance);
         }
 
         foreach (var npcObject in CurrentMap.StaticNpcObjects)
@@ -41,10 +44,27 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     {
         _config = ResourceManager.Instance.LoadMapConfig();
         LoadMap(type);
+        BuildPathGrid();
         TryLoadPlayer();
         TryLoadNpc(type);
         SetPanel(type);
         SetCamera(type);
+    }
+
+    public void MovePlayerAuto(int npcDataId, Action onArrived)
+    {
+        var npcObject = FindNpcObject(npcDataId);
+        if (npcObject == null) return;
+
+        PlayerObject.StartAutoMove(npcObject.transform.position, onArrived);
+    }
+
+    public void MovePlayerAuto(ShopType shopType, Action onArrived)
+    {
+        if(CurrentMap is not ShoppingSquareMap shoppingSquareMap) return;
+
+        var position = shoppingSquareMap.GetPlayerPosition(shopType);
+        PlayerObject.StartAutoMove(position, onArrived);
     }
 
     public bool TryInteractNearestNpc()
@@ -95,6 +115,27 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             }
         }
         return false;
+    }
+
+    private NpcObject FindNpcObject(int npcDataId)
+    {
+        foreach (var npcObject in _npcObjects)
+        {
+            if (npcObject.NpcDataId == npcDataId) return npcObject;
+        }
+        return null;
+    }
+
+    private void BuildPathGrid()
+    {
+        PathGrid = null;
+        if (CurrentMap == null || !CurrentMap.HasBounds) return;
+        PathGrid = new PathGrid(
+            CurrentMap.MapBounds,
+            _config.PathCellSize,
+            _config.PathCheckRadius,
+            _config.PathObstacleLayer
+        );
     }
 
     private void LoadMap(MapType type)

@@ -50,16 +50,27 @@ public class ShopObject : MapObject
 
     public void OnShopButtonClick()
     {
-        if (!_isOpened)
-        {
-            GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO(지선)    
-            return;
-        }
-
+        var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
+        var shopType = shopInfoData.ShopType;
         if (IsNearBy)
         {
-            var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
-            switch (shopInfoData.ShopType)
+            InteractShop();
+        }
+        else
+        {
+            MapManager.Instance.MovePlayerAuto(shopType, InteractShop);
+        }
+        return;
+
+        void InteractShop()
+        {
+            if (!_isOpened)
+            {
+                GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO(지선)    
+                return;
+            }
+
+            switch (shopType)
             {
                 case ShopType.PowderShop:
                 {
@@ -73,10 +84,6 @@ public class ShopObject : MapObject
                     break;
                 }
             }
-        }
-        else
-        {
-            GlobalManager.Instance.ShowToastMessage("상점 앞으로 가주세요."); // TODO(지선)
         }
     }
 }

@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 1135797092390113960}
   - component: {fileID: 726861285686014645}
   - component: {fileID: 2529106160768688534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TouchCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,6 +510,8 @@ MonoBehaviour:
   _playerInitPosition: {fileID: 3613675444838409039}
   _staticNpcObjects:
   - {fileID: 2403880033029290777}
+  _boundsMin: {fileID: 0}
+  _boundsMax: {fileID: 0}
 --- !u!1 &7154087469727878076
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +613,7 @@ GameObject:
   - component: {fileID: 5890752821740423297}
   - component: {fileID: 2197276468120626196}
   - component: {fileID: 861556331187683028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

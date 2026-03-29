@@ -12,12 +12,18 @@ public class PlayerObject : MovableObject
         base.Update();
         if (!GlobalManager.Instance.CanPlayerMove()) return;
 
-        var previousMoveDirection = MoveDirection;
-        MoveDirection = Vector2.zero;
         var moveUp = Input.GetKey(KeyCode.W);
         var moveDown = Input.GetKey(KeyCode.S);
         var moveRight = Input.GetKey(KeyCode.D);
         var moveLeft = Input.GetKey(KeyCode.A);
+        if (moveUp || moveDown || moveRight || moveLeft)
+        {
+            StopAutoMove();
+        }
+        if (IsAutoMoving) return;
+
+        var previousMoveDirection = MoveDirection;
+        MoveDirection = Vector2.zero;
         if (moveUp && moveDown)
         {
             MoveDirection += previousMoveDirection.y > 0 ? Vector2.up : Vector2.down;

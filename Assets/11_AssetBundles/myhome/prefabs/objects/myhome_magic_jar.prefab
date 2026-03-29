@@ -170,8 +170,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -109.6185, y: 0.5527344}
-      - {x: -5.4410467, y: 65.22511}
-      - {x: 118.92253, y: -4.851757}
+      - {x: 58.60064, y: 101.17833}
+      - {x: 176.223, y: 34.472076}
       - {x: 2.161882, y: -72.46875}
   m_UseDelaunayMesh: 0
 --- !u!114 &4223034512867326722
@@ -234,3 +234,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapObject
   _transform: {fileID: 6236632513559342967}
+  _behindTrigger: {fileID: 0}
+  _spriteRenderers: []
