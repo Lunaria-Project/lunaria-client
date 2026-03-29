@@ -389,7 +389,7 @@ public static partial class DataCodeGenerator
             _longType => $"Convert.ToInt64({srcExpr})",
             _floatType => $"Convert.ToSingle({srcExpr})",
             _doubleType => $"Convert.ToDouble({srcExpr})",
-            _boolType => $"Convert.ToBoolean({srcExpr})",
+            _boolType => $"(({srcExpr} as string) ?? string.Empty).ParseBool()",
             _stringType => $"({srcExpr} as string) ?? string.Empty",
             _ => $"{srcExpr}"
         };

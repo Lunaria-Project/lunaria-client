@@ -26,7 +26,8 @@ public enum ItemType
 {
     None = 0,
     Artifact = 1,
-    MainCoin = 2,
+    Glue = 2,
+    MainCoin = 3,
 }
 
 [SerializeEnum]

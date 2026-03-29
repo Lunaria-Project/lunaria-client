@@ -63,4 +63,12 @@ public static class StringExtension
     {
         return string.IsNullOrEmpty(value) ? default : (T)System.Enum.Parse(typeof(T), value, true);
     }
+
+    public static bool ParseBool(this string value)
+    {
+        if (string.IsNullOrEmpty(value)) return false;
+        if (int.TryParse(value, out var intVal)) return intVal != 0;
+        if (bool.TryParse(value, out var boolVal)) return boolVal;
+        return false;
+    }
 }
