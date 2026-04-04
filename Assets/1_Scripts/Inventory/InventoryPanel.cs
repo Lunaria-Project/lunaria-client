@@ -7,6 +7,7 @@ public class InventoryPanel : Panel<InventoryPanel>
     [SerializeField] private InventoryCell[] _cells;
     [SerializeField] private TabGroup _tabGroup;
     [SerializeField] private GameObject _emptyBlock;
+    [SerializeField] private InventoryInfoCell _infoCell;
 
     [SerializeField] TopWalletUI _walletUI;
     [SerializeField] TopTimeUI _timeUI;
@@ -18,6 +19,10 @@ public class InventoryPanel : Panel<InventoryPanel>
     private void Awake()
     {
         _tabGroup.SetTabChangedAction(OnTabChanged);
+        foreach (var cell in _cells)
+        {
+            cell.SetClickAction(OnCellClick);
+        }
     }
 
     protected override void OnShow(params object[] args)
@@ -40,10 +45,17 @@ public class InventoryPanel : Panel<InventoryPanel>
         RefreshCells();
     }
 
+    private void OnCellClick(int index)
+    {
+        if (index < 0 || index >= _filteredItems.Count) return;
+        _infoCell.SetData(_filteredItems[index].ItemId);
+    }
+
     private void OnTabChanged(int tabIndex)
     {
         _filterTabType = tabIndex == 0 ? InventoryTabType.None : (InventoryTabType)tabIndex;
         RefreshCells();
+        OnCellClick(0);
     }
 
     private void RefreshCells()
@@ -69,7 +81,7 @@ public class InventoryPanel : Panel<InventoryPanel>
             if (i < _filteredItems.Count)
             {
                 var item = _filteredItems[i];
-                _cells[i].SetData(item.ItemId, item.Quantity);
+                _cells[i].SetData(i, item.ItemId, item.Quantity);
             }
             else
             {

@@ -1,3 +1,4 @@
+using System;
 using Lunaria;
 using UnityEngine;
 
@@ -9,9 +10,17 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private GameObject _unlockedObject;
 
     public int ItemDataId { get; private set; }
+    private int _index;
+    private Action<int> _onClickAction;
 
-    public void SetData(int itemId, long quantity)
+    public void SetClickAction(Action<int> onClickAction)
     {
+        _onClickAction = onClickAction;
+    }
+
+    public void SetData(int index, int itemId, long quantity)
+    {
+        _index = index;
         ItemDataId = itemId;
 
         var itemData = GameData.Instance.GetItemData(itemId);
@@ -23,6 +32,7 @@ public class InventoryCell : MonoBehaviour
 
     public void SeyEmpty()
     {
+        _index = -1;
         ItemDataId = 0;
         _image.SetActive(false);
         _quantity.SetActive(false);
@@ -33,5 +43,10 @@ public class InventoryCell : MonoBehaviour
         SeyEmpty();
         _lockedObject.SetActive(isLocked);
         _unlockedObject.SetActive(!isLocked);
+    }
+
+    public void OnClickButton()
+    {
+        _onClickAction?.Invoke(_index);
     }
 }
