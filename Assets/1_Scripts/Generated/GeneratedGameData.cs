@@ -157,6 +157,18 @@ namespace Generated
         }
     }
 
+    public partial class InventoryTabData
+    {
+        public ItemType ItemType { get; private set; }
+        public InventoryTabType InventoryTabType { get; private set; }
+
+        public InventoryTabData(ItemType itemType, InventoryTabType inventoryTabType)
+        {
+            ItemType = itemType;
+            InventoryTabType = inventoryTabType;
+        }
+    }
+
     public partial class ItemData
     {
         public int Id { get; private set; }

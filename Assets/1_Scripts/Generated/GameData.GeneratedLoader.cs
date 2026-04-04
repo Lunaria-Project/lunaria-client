@@ -81,6 +81,17 @@ public partial class GameData
         }
     }
 
+    private void LoadInventoryTabData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtInventoryTabData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new InventoryTabData(((string)row[0]).ParseEnum<ItemType>(), ((string)row[1]).ParseEnum<InventoryTabType>());
+            _dtInventoryTabData.Add(newData.ItemType, newData);
+        }
+    }
+
     private void LoadItemData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -180,6 +191,7 @@ public partial class GameData
             case "Localization": LoadLocalizationData(rows, type); break;
             case "Artifact": LoadArtifactData(rows, type); break;
             case "InitialItem": LoadInitialItemData(rows, type); break;
+            case "InventoryTab": LoadInventoryTabData(rows, type); break;
             case "Item": LoadItemData(rows, type); break;
             case "Loading": LoadLoadingData(rows, type); break;
             case "MapNpcInfo": LoadMapNpcInfoData(rows, type); break;

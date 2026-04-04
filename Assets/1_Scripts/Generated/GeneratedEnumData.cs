@@ -22,6 +22,15 @@ public enum CutsceneCommand
 }
 
 [SerializeEnum]
+public enum InventoryTabType
+{
+    None = 0,
+    Equipment = 1,
+    Material = 2,
+    Quest = 3,
+}
+
+[SerializeEnum]
 public enum ItemType
 {
     None = 0,

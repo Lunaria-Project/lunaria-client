@@ -54,6 +54,13 @@ public partial class GameData
     public bool ContainsInitialItemData(int key) => DTInitialItemData.ContainsKey(key);
     private readonly Dictionary<int, InitialItemData> _dtInitialItemData = new();
 
+    // InventoryTabData - InventoryTabData, key: ItemType
+    public IReadOnlyDictionary<ItemType, InventoryTabData> DTInventoryTabData => _dtInventoryTabData;
+    public bool TryGetInventoryTabData(ItemType key, out InventoryTabData result) => DTInventoryTabData.TryGetValue(key, out result);
+    public InventoryTabData GetInventoryTabData(ItemType key) => DTInventoryTabData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsInventoryTabData(ItemType key) => DTInventoryTabData.ContainsKey(key);
+    private readonly Dictionary<ItemType, InventoryTabData> _dtInventoryTabData = new();
+
     // ItemData - ItemData, key: Id
     public IReadOnlyDictionary<int, ItemData> DTItemData => _dtItemData;
     public bool TryGetItemData(int key, out ItemData result) => DTItemData.TryGetValue(key, out result);
