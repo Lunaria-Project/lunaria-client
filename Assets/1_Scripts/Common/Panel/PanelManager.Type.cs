@@ -15,5 +15,6 @@ public partial class PanelManager
         ShoppingSquareMain = 12,
         SlimeMinigame = 13,
         PowderPortalMinigame = 14,
+        Inventory = 15,
     }
 }

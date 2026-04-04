@@ -7,6 +7,7 @@ public class UserDataInfo
 {
     public List<(int ItemId, long Quantity)> ItemList = new();
     public float SlimeGauge;
+    public int UnlockedInventorySlotCount;
     public int EquippedArtifactId;
 
     public void AddItem(int itemId, long quantity)
@@ -25,6 +26,8 @@ public partial class UserData : Singleton<UserData>
 {
     public float SlimeGauge => _userDataInfo.SlimeGauge;
     public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
+    public int UnlockedInventorySlotCount => _userDataInfo.UnlockedInventorySlotCount;
+    public List<(int ItemId, long Quantity)> ItemList => _userDataInfo.ItemList;
     
     private UserDataInfo _userDataInfo;
 
@@ -33,6 +36,7 @@ public partial class UserData : Singleton<UserData>
         _userDataInfo = info;
         if (addInitialItems)
         {
+            _userDataInfo.UnlockedInventorySlotCount = GameSetting.Instance.InitialInventoryUnlockedSlotCount;
             foreach (var (id, data) in GameData.Instance.DTInitialItemData)
             {
                 _userDataInfo.AddItem(id, data.Quantity);

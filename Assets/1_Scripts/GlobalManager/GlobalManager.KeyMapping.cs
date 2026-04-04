@@ -17,6 +17,10 @@ public partial class GlobalManager
         {
             OnEKeyDown?.Invoke();
         }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            PanelManager.Instance.ShowPanel(PanelManager.Type.Inventory);
+        }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             if (MapManager.Instance.TryInteractNearestNpc()) return;

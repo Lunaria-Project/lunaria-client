@@ -25,6 +25,18 @@ public partial class UserData
         return items;
     }
 
+    public void SortInventory()
+    {
+        _userDataInfo.ItemList.Sort((a, b) =>
+        {
+            var aItemData = GameData.Instance.GetItemData(a.ItemId);
+            var bItemData = GameData.Instance.GetItemData(b.ItemId);
+            var typeCompare = ((int)aItemData.ItemType).CompareTo((int)bItemData.ItemType);
+            if (typeCompare != 0) return typeCompare;
+            return aItemData.Order.CompareTo(bItemData.Order);
+        });
+    }
+
     public void SetEquippedArtifact(int itemId)
     {
         _userDataInfo.EquippedArtifactId = itemId;
