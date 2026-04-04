@@ -5,18 +5,27 @@ using UnityEngine;
 [Serializable]
 public class UserDataInfo
 {
-    public Dictionary<int, long> ItemDictionary = new();
+    public List<(int ItemId, long Quantity)> ItemList = new();
     public float SlimeGauge;
+    public int EquippedArtifactId;
 
     public void AddItem(int itemId, long quantity)
     {
-        ItemDictionary.TryAdd(itemId, quantity);
+        for (var i = 0; i < ItemList.Count; i++)
+        {
+            if (ItemList[i].ItemId != itemId) continue;
+            ItemList[i] = (itemId, ItemList[i].Quantity + quantity);
+            return;
+        }
+        ItemList.Add((itemId, quantity));
     }
 }
 
 public partial class UserData : Singleton<UserData>
 {
     public float SlimeGauge => _userDataInfo.SlimeGauge;
+    public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
+    
     private UserDataInfo _userDataInfo;
 
     public void Init(UserDataInfo info, bool addInitialItems)

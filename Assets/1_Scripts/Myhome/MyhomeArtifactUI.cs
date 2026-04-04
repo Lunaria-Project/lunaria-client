@@ -23,7 +23,7 @@ public class MyhomeArtifactUI : MonoBehaviour
         {
             if (quantity <= 0)
             {
-                LogManager.LogErrorPack("UserData.ItemDictionary에 개수가 0개인 아이템이 있습니다.", id);
+                LogManager.LogErrorPack("UserData.ItemList에 개수가 0개인 아이템이 있습니다.", id);
                 continue;
             }
             _itemDataIds.Add(id);
