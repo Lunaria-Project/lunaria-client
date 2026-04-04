@@ -98,7 +98,7 @@ public partial class GameData
         _dtItemData.Clear();
         foreach (var row in rows)
         {
-            var newData = new ItemData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), (row[2] as string) ?? string.Empty, ((string)row[3]).ParseEnum<ItemType>(), Convert.ToInt32(row[4]));
+            var newData = new ItemData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty, type), GetLocalString((row[2] as string) ?? string.Empty, type), (row[3] as string) ?? string.Empty, ((string)row[4]).ParseEnum<ItemType>(), Convert.ToInt32(row[5]));
             _dtItemData.Add(newData.Id, newData);
         }
     }

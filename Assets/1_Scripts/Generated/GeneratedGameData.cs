@@ -173,14 +173,16 @@ namespace Generated
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
+        public string Description { get; private set; }
         public string IconResourceKey { get; private set; }
         public ItemType ItemType { get; private set; }
         public int Order { get; private set; }
 
-        public ItemData(int id, string name, string iconResourceKey, ItemType itemType, int order)
+        public ItemData(int id, string name, string description, string iconResourceKey, ItemType itemType, int order)
         {
             Id = id;
             Name = name;
+            Description = description;
             IconResourceKey = iconResourceKey;
             ItemType = itemType;
             Order = order;
