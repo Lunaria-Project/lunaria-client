@@ -11,18 +11,13 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
     {
         _timeUI.OnShow();
         _artifactUI.OnShow();
-        OnShowUI();
+        _walletUI.Refresh();
     }
 
     protected override void OnHide()
     {
         _timeUI.OnHide();
         _artifactUI.OnHide();
-    }
-
-    private void OnShowUI()
-    {
-        _walletUI.Refresh();
     }
 
     public void OnShoppingSquareButtonClick()
