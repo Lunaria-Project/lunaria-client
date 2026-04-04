@@ -747,6 +747,7 @@ namespace PolyAndCode.UI.effect
         /// </summary>
         private void ApplyGradientshader()
         {
+            if (CanvasUpdateRegistry.IsRebuildingGraphics()) return;
             var material = new Material(gradientShader);
             graphic.material = material;
             //Set it to check material changed conditions in ModifyMesh
@@ -782,6 +783,7 @@ namespace PolyAndCode.UI.effect
         /// </summary>
         public void SetVerticesDirty()
         {
+            if (CanvasUpdateRegistry.IsRebuildingGraphics()) return;
             graphic.SetVerticesDirty();
         }
 
