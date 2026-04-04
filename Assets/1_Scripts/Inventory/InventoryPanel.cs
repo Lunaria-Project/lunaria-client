@@ -37,7 +37,11 @@ public class InventoryPanel : Panel<InventoryPanel>
         _walletUI.Refresh();
     }
 
-    protected override void OnHide() { }
+    protected override void OnHide()
+    {
+        _timeUI.OnHide();
+        _artifactUI.OnHide();
+    }
 
     public void OnSortButtonClick()
     {
