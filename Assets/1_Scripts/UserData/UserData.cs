@@ -6,9 +6,11 @@ using UnityEngine;
 public class UserDataInfo
 {
     public List<(int ItemId, long Quantity)> ItemList = new();
-    public float SlimeGauge;
     public int UnlockedInventorySlotCount;
+    public int UnlockedQuickSlotCount;
+    public int[] QuickSlotItemIds = new int[5];
     public int EquippedArtifactId;
+    public float SlimeGauge;
 
     public void AddItem(int itemId, long quantity)
     {
@@ -24,10 +26,12 @@ public class UserDataInfo
 
 public partial class UserData : Singleton<UserData>
 {
-    public float SlimeGauge => _userDataInfo.SlimeGauge;
-    public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
-    public int UnlockedInventorySlotCount => _userDataInfo.UnlockedInventorySlotCount;
     public List<(int ItemId, long Quantity)> ItemList => _userDataInfo.ItemList;
+    public int UnlockedInventorySlotCount => _userDataInfo.UnlockedInventorySlotCount;
+    public int UnlockedQuickSlotCount => _userDataInfo.UnlockedQuickSlotCount;
+    public int[] QuickSlotItemIds => _userDataInfo.QuickSlotItemIds;
+    public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
+    public float SlimeGauge => _userDataInfo.SlimeGauge;
     
     private UserDataInfo _userDataInfo;
 
@@ -37,6 +41,7 @@ public partial class UserData : Singleton<UserData>
         if (addInitialItems)
         {
             _userDataInfo.UnlockedInventorySlotCount = GameSetting.Instance.InitialInventoryUnlockedSlotCount;
+            _userDataInfo.UnlockedQuickSlotCount = GameSetting.Instance.InitialQuickSlotCount;
             foreach (var (id, data) in GameData.Instance.DTInitialItemData)
             {
                 _userDataInfo.AddItem(id, data.Quantity);

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public partial class UserData
+public partial class UserData // Inventory
 {
     public long GetItemQuantity(int itemDataId)
     {
@@ -37,6 +37,8 @@ public partial class UserData
         });
     }
 
+    #region Artifact
+
     public void SetEquippedArtifact(int itemId)
     {
         _userDataInfo.EquippedArtifactId = itemId;
@@ -55,4 +57,39 @@ public partial class UserData
         }
         return false;
     }
+
+    #endregion
+
+    #region QuickSlot
+
+    public void SetQuickSlot(int slotIndex, int itemId)
+    {
+        if (slotIndex < 0 || slotIndex >= _userDataInfo.QuickSlotItemIds.Length) return;
+        if (slotIndex >= _userDataInfo.UnlockedQuickSlotCount) return;
+
+        var prevItemId = _userDataInfo.QuickSlotItemIds[slotIndex];
+
+        for (var i = 0; i < _userDataInfo.QuickSlotItemIds.Length; i++)
+        {
+            if (_userDataInfo.QuickSlotItemIds[i] != itemId) continue;
+            _userDataInfo.QuickSlotItemIds[i] = prevItemId;
+            break;
+        }
+
+        _userDataInfo.QuickSlotItemIds[slotIndex] = itemId;
+    }
+
+    public void ClearQuickSlot(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= _userDataInfo.QuickSlotItemIds.Length) return;
+        _userDataInfo.QuickSlotItemIds[slotIndex] = 0;
+    }
+
+    public int GetQuickSlotItemId(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= _userDataInfo.QuickSlotItemIds.Length) return 0;
+        return _userDataInfo.QuickSlotItemIds[slotIndex];
+    }
+
+    #endregion
 }

@@ -12,17 +12,32 @@ public class InventoryPanel : Panel<InventoryPanel>
     [SerializeField] TopWalletUI _walletUI;
     [SerializeField] TopTimeUI _timeUI;
     [SerializeField] MyhomeArtifactUI _artifactUI;
+    
+    [SerializeField] private InventoryQuickBlock _quickBlock;
+    [SerializeField] private Image _dragImage;
+    [SerializeField] private RectTransform _dragImageRect;
 
     private readonly List<(int ItemId, long Quantity)> _filteredItems = new();
     private InventoryTabType _filterTabType;
+    private bool _isDragging;
+    private int _draggingItemId;
 
-    private void Awake()
+    protected void Awake()
     {
         _tabGroup.SetTabChangedAction(OnTabChanged);
         foreach (var cell in _cells)
         {
             cell.SetClickAction(OnCellClick);
+            cell.SetDragAction(OnCellBeginDrag, OnCellEndDrag);
         }
+        _quickBlock.SetClickAction(OnQuickSlotClick);
+        _quickBlock.SetDragAction(OnQuickSlotBeginDrag, OnCellEndDrag, OnQuickSlotDrop);
+    }
+
+    protected void Update()
+    {
+        if (!_isDragging) return;
+        _dragImageRect.position = Input.mousePosition;
     }
 
     protected override void OnShow(params object[] args)
@@ -35,18 +50,14 @@ public class InventoryPanel : Panel<InventoryPanel>
         _timeUI.OnShow();
         _artifactUI.OnShow();
         _walletUI.Refresh();
+        
+        _quickBlock.Init();
     }
 
     protected override void OnHide()
     {
         _timeUI.OnHide();
         _artifactUI.OnHide();
-    }
-
-    public void OnSortButtonClick()
-    {
-        UserData.Instance.SortInventory();
-        RefreshCells();
     }
 
     private void OnCellClick(int index)
@@ -109,5 +120,45 @@ public class InventoryPanel : Panel<InventoryPanel>
                 _filteredItems.Add(item);
             }
         }
+    }
+
+    private void OnCellBeginDrag(InventoryCell cell)
+    {
+        _draggingItemId = cell.ItemDataId;
+        var itemData = GameData.Instance.GetItemData(_draggingItemId);
+        _dragImage.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
+        _dragImage.SetActive(true);
+        _isDragging = true;
+    }
+
+    private void OnQuickSlotBeginDrag(int itemId)
+    {
+        _draggingItemId = itemId;
+        var itemData = GameData.Instance.GetItemData(_draggingItemId);
+        _dragImage.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
+        _dragImage.SetActive(true);
+        _isDragging = true;
+    }
+
+    private void OnCellEndDrag()
+    {
+        _dragImage.SetActive(false);
+        _isDragging = false;
+        _draggingItemId = 0;
+    }
+
+    private void OnQuickSlotDrop(int slotIndex)
+    {
+        if (_draggingItemId == 0) return;
+        UserData.Instance.SetQuickSlot(slotIndex, _draggingItemId);
+        _quickBlock.Refresh();
+    }
+
+    private void OnQuickSlotClick(int slotIndex)
+    {
+        var itemId = UserData.Instance.GetQuickSlotItemId(slotIndex);
+        if (itemId == 0) return;
+        UserData.Instance.ClearQuickSlot(slotIndex);
+        _quickBlock.Refresh();
     }
 }
