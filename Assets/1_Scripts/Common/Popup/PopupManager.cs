@@ -6,7 +6,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 {
     [SerializeField] private RectTransform _parentRectTransform;
 
-    public List<PopupBase> PopupList { get; private set; }= new();
+    public List<PopupBase> PopupList { get; private set; } = new();
 
     protected override void Update()
     {
@@ -111,10 +111,18 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 
     private PopupBase CreatePopupInstance(Type popupType)
     {
-        if (!_popupResourceKey.TryGetValue(popupType, out var popupResourceKey)) return null;
+        if (!_popupResourceKey.TryGetValue(popupType, out var popupResourceKey))
+        {
+            LogManager.LogError($"팝업 리소스키가 없습니다 {popupType}");
+            return null;
+        }
 
         var popupPrefab = ResourceManager.Instance.LoadPopupPrefab(popupResourceKey);
-        if (popupPrefab == null) return null;
+        if (popupPrefab == null)
+        {
+            LogManager.LogError($"팝업 리소스키 없습니다 {popupType}");
+            return null;
+        }
 
         var popup = Instantiate(popupPrefab, _parentRectTransform);
         popup.gameObject.SetActive(true);
