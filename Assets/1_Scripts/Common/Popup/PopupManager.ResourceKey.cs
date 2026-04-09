@@ -14,6 +14,7 @@ public partial class PopupManager
         PowderPortalMinigameInfo = 7,
         PowderPortalMinigameReady = 8,
         PowderPortalMinigameResult = 9,
+        SystemButton = 10,
     }
 
     private readonly Dictionary<Type, string> _popupResourceKey = new()
@@ -27,5 +28,6 @@ public partial class PopupManager
         { Type.PowderPortalMinigameInfo, "powder_portal_minigame_info_popup" },
         { Type.PowderPortalMinigameReady, "powder_portal_minigame_ready_popup" },
         { Type.PowderPortalMinigameResult, "powder_portal_minigame_result_popup" },
+        { Type.SystemButton, "system_button_popup" },
     };
 }
