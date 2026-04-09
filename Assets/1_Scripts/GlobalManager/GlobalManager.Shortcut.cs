@@ -21,13 +21,13 @@ public partial class GlobalManager
         _isShortcutInvoking = true;
         try
         {
+            ClearPreviousShortcut();
             await ShortcutInvokeImpl(type);
         }
         finally
         {
             _isShortcutInvoking = false;
         }
-
     }
 
     private UniTask ShortcutInvokeImpl(ShortcutType type)
@@ -109,6 +109,8 @@ public partial class GlobalManager
 
         GameTimeManager.Instance.Resume(this);
         LoadingManager.Instance.HideLoading();
+
+        _currentShopType = shopType;
     }
 
     #endregion

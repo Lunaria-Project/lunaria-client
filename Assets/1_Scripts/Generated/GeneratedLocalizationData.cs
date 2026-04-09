@@ -37,4 +37,6 @@ public static class LocalizationKey
     public static readonly LocalKey Minigame_Slime_Score = new("Minigame.Slime.Score");
     public static readonly LocalKey FamiliarSelectPopup_BottomGuide = new("FamiliarSelectPopup.BottomGuide");
     public static readonly LocalKey SlimeMinigameResultPopup_Description = new("SlimeMinigameResultPopup.Description");
+    public static readonly LocalKey ShopEndPopup_Description = new("ShopEndPopup.Description");
+    public static readonly LocalKey ConfirmButton = new("ConfirmButton");
 }

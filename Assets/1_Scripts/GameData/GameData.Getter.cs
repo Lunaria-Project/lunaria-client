@@ -69,4 +69,15 @@ public partial class GameData
         }
         return result;
     }
+
+    public ShopInfoData GetShopInfoDataByShopType(ShopType shopType)
+    {
+        foreach (var (_, data) in _dtShopInfoData)
+        {
+            if (data.ShopType != shopType) continue;
+            return data;
+        }
+        LogManager.LogError($"GameData: ShopInfoData not found for {shopType}");
+        return null;
+    }
 }

@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lunaria;
 using UnityEngine;
@@ -13,16 +14,18 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     public event Action OnApplicationPaused;
     public event Action OnApplicationResume;
+    public bool IsMinigamePlaying;
 
     private bool _isDayRunning;
-
+    private ShopType _currentShopType;
     private readonly Color _transparentColor = new Color(1, 1, 1, 0);
     private const int DefaultCameraSize = 700;
-    public bool IsMinigamePlaying;
 
     protected override void Awake()
     {
         base.Awake();
+        GameTimeManager.Instance.OnIntervalChanged -= OnIntervalChanged;
+        GameTimeManager.Instance.OnIntervalChanged += OnIntervalChanged;
         GameTimeManager.Instance.OnEndDay -= OnEndDay;
         GameTimeManager.Instance.OnEndDay += OnEndDay;
         OnApplicationResume -= HideUserCursor;
@@ -168,6 +171,46 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         var cameraTransform = _globalCamara.transform;
         cameraTransform.position = new Vector3(position.x, position.y, cameraTransform.position.z);
+    }
+
+    #endregion
+
+    #region Shortcut
+
+    private void OnIntervalChanged()
+    {
+        if (_currentShopType == ShopType.None) return;
+
+        var shopInfoData = GameData.Instance.GetShopInfoDataByShopType(_currentShopType);
+        var currentTime = GameTimeManager.Instance.CurrentGameTime;
+        var currentHHMM = currentTime.Hours * 100 + currentTime.MinutesForUI;
+        if (currentHHMM < shopInfoData.EndTime) return;
+
+        var shortcutType = _currentShopType switch
+        {
+            ShopType.PowderShop      => ShortcutType.ShoppingSquareByPowderShop,
+            ShopType.BeddingShop     => ShortcutType.ShoppingSquareByBeddingShop,
+            ShopType.CottonCandyShop => ShortcutType.ShoppingSquareByCottonCandyShop,
+            _                        => ShortcutType.ShoppingSquare,
+        };
+
+        GameTimeManager.Instance.Pause(this);
+        var parameter = new SystemOneButtonParameter()
+        {
+            Description = LocalizationKey.ShopEndPopup_Description,
+            ConfirmButtonText = LocalizationKey.ConfirmButton,
+            OnConfirm = () =>
+            {
+                ShortcutInvoke(shortcutType).Forget();
+                GameTimeManager.Instance.Resume(this);
+            },
+        };
+        PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
+    }
+
+    private void ClearPreviousShortcut()
+    {
+        _currentShopType = ShopType.None;
     }
 
     #endregion
