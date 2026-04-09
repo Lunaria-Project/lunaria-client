@@ -45,17 +45,21 @@ public class InventoryPanel : Panel<InventoryPanel>
         var maxSlotCount = GameSetting.Instance.MaxInventorySlotCount;
         LogManager.Assert(_cells.Length >= maxSlotCount, $"InventoryPanel: Cell count({_cells.Length}) must be >= MaxInventorySlotCount({maxSlotCount})");
 
+        GameTimeManager.Instance.Pause();
+
         _tabGroup.Init();
 
         _timeUI.OnShow();
         _artifactUI.OnShow();
         _walletUI.Refresh();
-        
+
         _quickBlock.Init();
     }
 
     protected override void OnHide()
     {
+        GameTimeManager.Instance.Resume();
+
         _timeUI.OnHide();
         _artifactUI.OnHide();
     }
