@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
 {
@@ -9,10 +11,10 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
 
     public GameTime CurrentGameTime => _currentGameTime;
     public bool IsInitialized => _isInitialized;
-    public bool IsPaused => _isPaused;
+    public bool IsPaused => _pauseLockers.Count > 0;
 
+    private readonly HashSet<Object> _pauseLockers = new();
     private GameTime _currentGameTime;
-    private bool _isPaused;
     private bool _isInitialized;
     private double _currentDaySeconds;
     private int _currentIntervalIndex = -1;
@@ -20,7 +22,7 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
 
     private void Update()
     {
-        if (!_isInitialized || _isPaused) return;
+        if (!_isInitialized || IsPaused) return;
         if (GameSetting.Instance.SecondsPerGameHour <= 0) return;
         if (CutsceneManager.Instance.IsPlaying) return;
 
@@ -46,6 +48,7 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
     public void Clear()
     {
         _isInitialized = false;
+        _pauseLockers.Clear();
         _currentGameTime = GameTime.Invalid;
         _currentDaySeconds = 0;
         _currentIntervalIndex = -1;
@@ -67,18 +70,18 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
         _currentIntervalIndex = TimeUtil.GetTenMinuteIntervalIndex(_currentGameTime.TotalSeconds);
 
         _isInitialized = true;
-        _isPaused = false;
+        _pauseLockers.Clear();
     }
 
-    public void Pause()
+    public void Pause(Object locker)
     {
         if (!_isInitialized) return;
-        _isPaused = true;
+        _pauseLockers.Add(locker);
     }
 
-    public void Resume()
+    public void Resume(Object locker)
     {
         if (!_isInitialized) return;
-        _isPaused = false;
+        _pauseLockers.Remove(locker);
     }
 }

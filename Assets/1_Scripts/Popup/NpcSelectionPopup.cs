@@ -15,7 +15,7 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
 
     protected override void OnShow(NpcSelectionPopupParameter parameter)
     {
-        GameTimeManager.Instance.Pause();
+        GameTimeManager.Instance.Pause(this);
 
         _npcDataId = parameter.NpcDataId;
 
@@ -33,7 +33,7 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
 
     protected override void OnHide()
     {
-        GameTimeManager.Instance.Resume();
+        GameTimeManager.Instance.Resume(this);
     }
 
     public void OnSelectionButtonClick(int index)

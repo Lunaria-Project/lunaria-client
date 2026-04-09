@@ -49,7 +49,7 @@ public partial class GlobalManager
 
     private async UniTask GoToShoppingSquareAsync(ShopType type = ShopType.None)
     {
-        GameTimeManager.Instance.Pause();
+        GameTimeManager.Instance.Pause(this);
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
@@ -63,13 +63,13 @@ public partial class GlobalManager
         }
         SetCameraSize(1);
 
-        GameTimeManager.Instance.Resume();
+        GameTimeManager.Instance.Resume(this);
         LoadingManager.Instance.HideLoading();
     }
 
     private async UniTask GoToMyhomeAsync()
     {
-        GameTimeManager.Instance.Pause();
+        GameTimeManager.Instance.Pause(this);
         LoadingManager.Instance.ShowLoading(LoadingType.Normal);
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
@@ -79,13 +79,13 @@ public partial class GlobalManager
         SetCameraSize(1);
         ResetCamaraPosition();
 
-        GameTimeManager.Instance.Resume();
+        GameTimeManager.Instance.Resume(this);
         LoadingManager.Instance.HideLoading();
     }
 
     private async UniTask GoToShopAsync(ShopType shopType)
     {
-        GameTimeManager.Instance.Pause();
+        GameTimeManager.Instance.Pause(this);
         var loadingType = shopType switch
         {
             ShopType.CottonCandyShop => LoadingType.CottonCandyShop,
@@ -107,7 +107,7 @@ public partial class GlobalManager
         SetCameraSize(0.5f);
         ResetCamaraPosition();
 
-        GameTimeManager.Instance.Resume();
+        GameTimeManager.Instance.Resume(this);
         LoadingManager.Instance.HideLoading();
     }
 
