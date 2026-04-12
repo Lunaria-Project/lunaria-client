@@ -2,17 +2,13 @@ using System.Collections.Generic;
 using Lunaria;
 using UnityEngine;
 
-public class InventoryPanel : Panel<InventoryPanel>
+public class InventoryPopup : EmptyParamPopup
 {
     [SerializeField] private InventoryCell[] _cells;
     [SerializeField] private TabGroup _tabGroup;
     [SerializeField] private GameObject _emptyBlock;
     [SerializeField] private InventoryInfoCell _infoCell;
 
-    [SerializeField] TopWalletUI _walletUI;
-    [SerializeField] TopTimeUI _timeUI;
-    [SerializeField] MyhomeArtifactUI _artifactUI;
-    
     [SerializeField] private InventoryQuickBlock _quickBlock;
     [SerializeField] private Image _dragImage;
     [SerializeField] private RectTransform _dragImageRect;
@@ -40,28 +36,20 @@ public class InventoryPanel : Panel<InventoryPanel>
         _dragImageRect.position = Input.mousePosition;
     }
 
-    protected override void OnShow(params object[] args)
+    protected override void OnShow()
     {
         var maxSlotCount = GameSetting.Instance.MaxInventorySlotCount;
-        LogManager.Assert(_cells.Length >= maxSlotCount, $"InventoryPanel: Cell count({_cells.Length}) must be >= MaxInventorySlotCount({maxSlotCount})");
+        LogManager.Assert(_cells.Length >= maxSlotCount, $"InventoryPopup: Cell count({_cells.Length}) must be >= MaxInventorySlotCount({maxSlotCount})");
 
         GameTimeManager.Instance.Pause(this);
 
         _tabGroup.Init();
-
-        _timeUI.OnShow();
-        _artifactUI.OnShow();
-        _walletUI.Refresh();
-
         _quickBlock.Init();
     }
 
     protected override void OnHide()
     {
         GameTimeManager.Instance.Resume(this);
-
-        _timeUI.OnHide();
-        _artifactUI.OnHide();
     }
 
     private void OnCellClick(int index)
@@ -83,7 +71,7 @@ public class InventoryPanel : Panel<InventoryPanel>
         var unlockedSlotCount = UserData.Instance.UnlockedInventorySlotCount;
 
         FilterItems();
-        LogManager.Assert(_filteredItems.Count <= unlockedSlotCount, $"InventoryPanel: FilteredItem count({_filteredItems.Count}) exceeds UnlockedSlotCount({unlockedSlotCount})");
+        LogManager.Assert(_filteredItems.Count <= unlockedSlotCount, $"InventoryPopup: FilteredItem count({_filteredItems.Count}) exceeds UnlockedSlotCount({unlockedSlotCount})");
 
         _emptyBlock.SetActive(_filterTabType != InventoryTabType.None && _filteredItems.Count == 0);
 

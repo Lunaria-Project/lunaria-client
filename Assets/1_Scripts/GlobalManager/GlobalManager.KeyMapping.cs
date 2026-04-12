@@ -19,7 +19,7 @@ public partial class GlobalManager
         }
         else if (Input.GetKeyDown(KeyCode.I))
         {
-            PanelManager.Instance.ShowPanel(PanelManager.Type.Inventory);
+            PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.Inventory);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
