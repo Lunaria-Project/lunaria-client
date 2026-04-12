@@ -17,6 +17,7 @@ public class InventoryPopup : EmptyParamPopup
     private InventoryTabType _filterTabType;
     private bool _isDragging;
     private int _draggingItemId;
+    private int _selectedItemId;
 
     protected void Awake()
     {
@@ -55,7 +56,10 @@ public class InventoryPopup : EmptyParamPopup
     private void OnCellClick(int index)
     {
         if (index < 0 || index >= _filteredItems.Count) return;
-        _infoCell.SetData(_filteredItems[index].ItemId);
+
+        _selectedItemId = _filteredItems[index].ItemId;
+        _infoCell.SetData(_selectedItemId);
+        RefreshCells();
     }
 
     private void OnTabChanged(int tabIndex)
@@ -88,7 +92,7 @@ public class InventoryPopup : EmptyParamPopup
             if (i < _filteredItems.Count)
             {
                 var item = _filteredItems[i];
-                _cells[i].SetData(i, item.ItemId, item.Quantity);
+                _cells[i].SetData(i, item.ItemId, item.Quantity, _selectedItemId == item.ItemId);
             }
             else
             {

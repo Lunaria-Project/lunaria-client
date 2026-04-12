@@ -45,7 +45,7 @@ public class InventoryQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
         }
 
-        _cell.SetData(_slotIndex, itemId, quantity);
+        _cell.SetData(_slotIndex, itemId, quantity, false); // TODO(지선): 선택된 상태는 어떻게 처리할지 고민
     }
 
     public void SetLocked(bool isLocked)

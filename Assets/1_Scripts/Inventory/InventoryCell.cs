@@ -7,6 +7,7 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     [SerializeField] private Image _image;
     [SerializeField] private Text _quantity;
+    [SerializeField] private GameObject _selectedObject;
     [SerializeField] private GameObject _lockedObject;
     [SerializeField] private GameObject _unlockedObject;
 
@@ -27,7 +28,7 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _onEndDragAction = onEndDrag;
     }
 
-    public void SetData(int index, int itemId, long quantity)
+    public void SetData(int index, int itemId, long quantity, bool isSelected)
     {
         _index = index;
         ItemDataId = itemId;
@@ -37,6 +38,8 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _image.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
         _quantity.SetActive(true);
         _quantity.SetText(quantity.ToPrice());
+        
+        _selectedObject.SetActive(isSelected);
     }
 
     public void SeyEmpty()
@@ -45,6 +48,7 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         ItemDataId = 0;
         _image.SetActive(false);
         _quantity.SetActive(false);
+        _selectedObject.SetActive(false);
     }
 
     public void SetLocked(bool isLocked)
