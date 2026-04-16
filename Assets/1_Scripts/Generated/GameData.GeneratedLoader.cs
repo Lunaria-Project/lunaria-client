@@ -158,6 +158,28 @@ public partial class GameData
         }
     }
 
+    private void LoadMinigameInfoData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtMinigameInfoData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new MinigameInfoData(((string)row[0]).ParseEnum<MinigameType>(), Convert.ToInt32(row[1]));
+            _dtMinigameInfoData.Add(newData.MinigameType, newData);
+        }
+    }
+
+    private void LoadMinigameRewardData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtMinigameRewardData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new MinigameRewardData(((string)row[0]).ParseEnum<MinigameType>(), Convert.ToInt32(row[1]), (row[2] as string).ParseIntList(), (row[3] as string).ParseIntList());
+            _dtMinigameRewardData.Add(newData);
+        }
+    }
+
     private void LoadRequirementInfoData(List<object[]> rows, LocalType type)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -175,8 +197,19 @@ public partial class GameData
         _dtShopInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new ShopInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), ((string)row[3]).ParseEnum<ShopType>());
+            var newData = new ShopInfoData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), ((string)row[3]).ParseEnum<ShopType>(), ((string)row[4]).ParseEnum<MinigameType>());
             _dtShopInfoData.Add(newData.ShopId, newData);
+        }
+    }
+
+    private void LoadShopProductData(List<object[]> rows, LocalType type)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtShopProductData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new ShopProductData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), ((string)row[5]).ParseEnum<RequirementType>(), (row[6] as string).ParseIntList(), Convert.ToInt32(row[7]), Convert.ToInt32(row[8]));
+            _dtShopProductData.Add(newData);
         }
     }
 
@@ -198,8 +231,11 @@ public partial class GameData
             case "MapNpcMenu": LoadMapNpcMenuData(rows, type); break;
             case "MapNpcPosition": LoadMapNpcPositionData(rows, type); break;
             case "MapStaticNpcMenu": LoadMapStaticNpcMenuData(rows, type); break;
+            case "MinigameInfo": LoadMinigameInfoData(rows, type); break;
+            case "MinigameReward": LoadMinigameRewardData(rows, type); break;
             case "RequirementInfo": LoadRequirementInfoData(rows, type); break;
             case "ShopInfo": LoadShopInfoData(rows, type); break;
+            case "ShopProduct": LoadShopProductData(rows, type); break;
         }
     }
 }

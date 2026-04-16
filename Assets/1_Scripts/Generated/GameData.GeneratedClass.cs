@@ -94,6 +94,17 @@ public partial class GameData
     public IReadOnlyList<MapStaticNpcMenuData> DTMapStaticNpcMenuData => _dtMapStaticNpcMenuData;
     private List<MapStaticNpcMenuData> _dtMapStaticNpcMenuData = new();
 
+    // MinigameInfoData - MinigameInfoData, key: MinigameType
+    public IReadOnlyDictionary<MinigameType, MinigameInfoData> DTMinigameInfoData => _dtMinigameInfoData;
+    public bool TryGetMinigameInfoData(MinigameType key, out MinigameInfoData result) => DTMinigameInfoData.TryGetValue(key, out result);
+    public MinigameInfoData GetMinigameInfoData(MinigameType key) => DTMinigameInfoData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsMinigameInfoData(MinigameType key) => DTMinigameInfoData.ContainsKey(key);
+    private readonly Dictionary<MinigameType, MinigameInfoData> _dtMinigameInfoData = new();
+
+    // MinigameRewardData - MinigameRewardData
+    public IReadOnlyList<MinigameRewardData> DTMinigameRewardData => _dtMinigameRewardData;
+    private List<MinigameRewardData> _dtMinigameRewardData = new();
+
     // RequirementInfoData - RequirementInfoData, key: RequirementType
     public IReadOnlyDictionary<RequirementType, RequirementInfoData> DTRequirementInfoData => _dtRequirementInfoData;
     public bool TryGetRequirementInfoData(RequirementType key, out RequirementInfoData result) => DTRequirementInfoData.TryGetValue(key, out result);
@@ -107,4 +118,8 @@ public partial class GameData
     public ShopInfoData GetShopInfoData(int key) => DTShopInfoData.TryGetValue(key, out var result) ? result : null;
     public bool ContainsShopInfoData(int key) => DTShopInfoData.ContainsKey(key);
     private readonly Dictionary<int, ShopInfoData> _dtShopInfoData = new();
+
+    // ShopProductData - ShopProductData
+    public IReadOnlyList<ShopProductData> DTShopProductData => _dtShopProductData;
+    private List<ShopProductData> _dtShopProductData = new();
 }

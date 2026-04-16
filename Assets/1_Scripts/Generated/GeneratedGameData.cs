@@ -291,6 +291,34 @@ namespace Generated
         }
     }
 
+    public partial class MinigameInfoData
+    {
+        public MinigameType MinigameType { get; private set; }
+        public int DurationHours { get; private set; }
+
+        public MinigameInfoData(MinigameType minigameType, int durationHours)
+        {
+            MinigameType = minigameType;
+            DurationHours = durationHours;
+        }
+    }
+
+    public partial class MinigameRewardData
+    {
+        public MinigameType MinigameType { get; private set; }
+        public int ScoreValue { get; private set; }
+        public List<int> RewardIds { get; private set; }
+        public List<int> RewardQuantities { get; private set; }
+
+        public MinigameRewardData(MinigameType minigameType, int scoreValue, List<int> rewardIds, List<int> rewardQuantities)
+        {
+            MinigameType = minigameType;
+            ScoreValue = scoreValue;
+            RewardIds = rewardIds;
+            RewardQuantities = rewardQuantities;
+        }
+    }
+
     public partial class RequirementInfoData
     {
         public RequirementType RequirementType { get; private set; }
@@ -307,13 +335,41 @@ namespace Generated
         public int StartTime { get; private set; }
         public int EndTime { get; private set; }
         public ShopType ShopType { get; private set; }
+        public MinigameType MinigameType { get; private set; }
 
-        public ShopInfoData(int shopId, int startTime, int endTime, ShopType shopType)
+        public ShopInfoData(int shopId, int startTime, int endTime, ShopType shopType, MinigameType minigameType)
         {
             ShopId = shopId;
             StartTime = startTime;
             EndTime = endTime;
             ShopType = shopType;
+            MinigameType = minigameType;
+        }
+    }
+
+    public partial class ShopProductData
+    {
+        public int ShopId { get; private set; }
+        public int ProductItemId { get; private set; }
+        public int RandomMinStockQuantity { get; private set; }
+        public int RandomMaxStockQuantity { get; private set; }
+        public int MaxPurchasableQuantity { get; private set; }
+        public RequirementType SaleRequirementType { get; private set; }
+        public List<int> SaleRequirementValues { get; private set; }
+        public int PriceItemId { get; private set; }
+        public int PriceQuantity { get; private set; }
+
+        public ShopProductData(int shopId, int productItemId, int randomMinStockQuantity, int randomMaxStockQuantity, int maxPurchasableQuantity, RequirementType saleRequirementType, List<int> saleRequirementValues, int priceItemId, int priceQuantity)
+        {
+            ShopId = shopId;
+            ProductItemId = productItemId;
+            RandomMinStockQuantity = randomMinStockQuantity;
+            RandomMaxStockQuantity = randomMaxStockQuantity;
+            MaxPurchasableQuantity = maxPurchasableQuantity;
+            SaleRequirementType = saleRequirementType;
+            SaleRequirementValues = saleRequirementValues;
+            PriceItemId = priceItemId;
+            PriceQuantity = priceQuantity;
         }
     }
 }

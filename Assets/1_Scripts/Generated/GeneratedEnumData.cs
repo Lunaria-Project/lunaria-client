@@ -35,8 +35,13 @@ public enum ItemType
 {
     None = 0,
     Artifact = 1,
-    Glue = 2,
-    MainCoin = 3,
+    ArtifactSkin = 2,
+    ColoredPowder = 3,
+    FamiliarRecovery = 4,
+    Glue = 5,
+    MainCoin = 6,
+    PlayerRecovery = 7,
+    Powder = 8,
 }
 
 [SerializeEnum]
@@ -56,6 +61,14 @@ public enum MapType
     Myhome = 1,
     PowderShop = 2,
     ShoppingSquare = 3,
+}
+
+[SerializeEnum]
+public enum MinigameType
+{
+    None = 0,
+    PowderPortal = 1,
+    Slime = 2,
 }
 
 [SerializeEnum]
