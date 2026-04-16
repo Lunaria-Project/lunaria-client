@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using Lunaria;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private GameObject _selectedObject;
     [SerializeField] private GameObject _lockedObject;
     [SerializeField] private GameObject _unlockedObject;
+    [SerializeField, CanBeNull] private GameObject _newObject;
 
     public int ItemDataId { get; private set; }
     private int _index;
@@ -39,8 +41,12 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _image.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
         _quantityTextObjects.SetActiveAll(true);
         _quantityTexts.SetTexts(quantity.ToPrice());
-        
+
         _selectedObject.SetActive(isSelected);
+        if (_newObject != null)
+        {
+            _newObject.SetActive(!UserData.Instance.CheckedNewItemIds.Contains(itemId));
+        }
     }
 
     public void SeyEmpty()
@@ -50,6 +56,10 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _image.SetActive(false);
         _quantityTextObjects.SetActiveAll(false);
         _selectedObject.SetActive(false);
+        if (_newObject != null)
+        {
+            _newObject.SetActive(false);
+        }
     }
 
     public void SetLocked(bool isLocked)
@@ -65,9 +75,7 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _onBeginDragAction?.Invoke(this);
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-    }
+    public void OnDrag(PointerEventData eventData) { }
 
     public void OnEndDrag(PointerEventData eventData)
     {

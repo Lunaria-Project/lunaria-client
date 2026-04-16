@@ -11,6 +11,7 @@ public class UserDataInfo
     public int[] QuickSlotItemIds = new int[5];
     public int EquippedArtifactId;
     public float SlimeGauge;
+    public HashSet<int> CheckedNewItemIds = new();
 
     public void AddItem(int itemId, long quantity)
     {
@@ -32,6 +33,12 @@ public partial class UserData : Singleton<UserData>
     public int[] QuickSlotItemIds => _userDataInfo.QuickSlotItemIds;
     public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
     public float SlimeGauge => _userDataInfo.SlimeGauge;
+    public HashSet<int> CheckedNewItemIds => _userDataInfo.CheckedNewItemIds;
+
+    public void CheckNewItem(int itemId)
+    {
+        _userDataInfo.CheckedNewItemIds.Add(itemId);
+    }
     
     private UserDataInfo _userDataInfo;
 

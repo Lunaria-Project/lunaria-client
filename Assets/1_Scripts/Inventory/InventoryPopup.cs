@@ -53,6 +53,7 @@ public class InventoryPopup : EmptyParamPopup
         if (index < 0 || index >= _filteredItems.Count) return;
 
         _selectedItemId = _filteredItems[index].ItemId;
+        UserData.Instance.CheckNewItem(_selectedItemId);
         _infoCell.SetData(_selectedItemId);
         RefreshCells();
     }
