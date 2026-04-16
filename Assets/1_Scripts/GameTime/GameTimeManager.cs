@@ -73,6 +73,29 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
         _pauseLockers.Clear();
     }
 
+    public void AddHours(int hours)
+    {
+        if (!_isInitialized) return;
+
+        _currentDaySeconds += hours * TimeUtil.MinutesPerHour * TimeUtil.SecondsPerMinute;
+
+        var currentDaySecondsToInt = Mathf.FloorToInt((float)_currentDaySeconds);
+        _currentGameTime.SetTime(currentDaySecondsToInt);
+
+        var tenMinuteIndex = TimeUtil.GetTenMinuteIntervalIndex(currentDaySecondsToInt);
+        if (_currentIntervalIndex != tenMinuteIndex)
+        {
+            _currentIntervalIndex = tenMinuteIndex;
+            OnIntervalChanged?.Invoke();
+        }
+
+        OnTimeSecondsChanged?.Invoke();
+
+        if (_currentDaySeconds <= GameSetting.Instance.EndGameTimeSeconds) return;
+        Clear();
+        OnEndDay?.Invoke();
+    }
+
     public void Pause(Object locker)
     {
         if (!_isInitialized) return;
