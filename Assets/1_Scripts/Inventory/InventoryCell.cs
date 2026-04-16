@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image _image;
-    [SerializeField] private Text _quantity;
+    [SerializeField] private GameObject[] _quantityTextObjects;
+    [SerializeField] private Text[] _quantityTexts;
     [SerializeField] private GameObject _selectedObject;
     [SerializeField] private GameObject _lockedObject;
     [SerializeField] private GameObject _unlockedObject;
@@ -36,8 +37,8 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         var itemData = GameData.Instance.GetItemData(itemId);
         _image.SetActive(true);
         _image.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
-        _quantity.SetActive(true);
-        _quantity.SetText(quantity.ToPrice());
+        _quantityTextObjects.SetActiveAll(true);
+        _quantityTexts.SetTexts(quantity.ToPrice());
         
         _selectedObject.SetActive(isSelected);
     }
@@ -47,7 +48,7 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _index = -1;
         ItemDataId = 0;
         _image.SetActive(false);
-        _quantity.SetActive(false);
+        _quantityTextObjects.SetActiveAll(false);
         _selectedObject.SetActive(false);
     }
 

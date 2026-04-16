@@ -2716,7 +2716,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryCell
   _image: {fileID: 7121174157367824802}
-  _quantity: {fileID: 3837734889489040979}
+  _quantityTextObjects:
+  - {fileID: 2676940188438108320}
+  - {fileID: 1826814570848975597}
+  _quantityTexts:
+  - {fileID: 231981150182197712}
+  - {fileID: 929916428714880362}
   _selectedObject: {fileID: 622515289716369424}
   _lockedObject: {fileID: 1882354896793047677}
   _unlockedObject: {fileID: 7307094249797759262}
