@@ -93,12 +93,14 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
             return;
         }
         GlobalManager.Instance.IsMinigamePlaying = true;
+        GameTimeManager.Instance.Pause(this);
         Init();
     }
 
     protected override void OnHide()
     {
         GlobalManager.Instance.IsMinigamePlaying = false;
+        GameTimeManager.Instance.Resume(this);
         _isInitialized = false;
         foreach (var slot in _objectSlots)
         {
