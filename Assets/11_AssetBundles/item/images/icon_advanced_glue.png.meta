@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 42658f55fbb03420a99f54733ed65e39
+guid: 341facb847b5a48bdb7de9df70efe9da
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1550970084324025301
-    second: icon_powderfrog_0
+      213: -6739574312482466185
+    second: icon_advanced_glue_0
+  - first:
+      213: 7203565079011731928
+    second: icon_advanced_glue_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon_powderfrog_0
+      name: icon_advanced_glue_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 22
-        width: 165
-        height: 150
+        x: 3
+        y: 129
+        width: 27
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b2cdb9afce8d97ae0800000000000000
-      internalID: -1550970084324025301
+      spriteID: 776922fded83872a0800000000000000
+      internalID: -6739574312482466185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_advanced_glue_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 21
+        width: 164
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d927e2f54438f360800000000000000
+      internalID: 7203565079011731928
       vertices: []
       indices: 
       edges: []
