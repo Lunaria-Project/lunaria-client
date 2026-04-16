@@ -376,8 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowderPortalMinigameResultPopup
   _hideOnEscapeKey: 1
+  _rewardImage: {fileID: 9131491688878133440}
+  _rewardQuantityText: {fileID: 2853800504805722679}
   _scoreText: {fileID: 2853800504805722679}
-  _retryButton: {fileID: 0}
+  _retryButton: {fileID: 2401384613382369786}
 --- !u!1 &2126799407005347506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,5 +2560,10 @@ PrefabInstance:
 --- !u!224 &2144354881634858852 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3482573977342181965, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+  m_PrefabInstance: {fileID: 3285043823708239145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2401384613382369786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 920352147265471699, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
   m_PrefabInstance: {fileID: 3285043823708239145}
   m_PrefabAsset: {fileID: 0}
