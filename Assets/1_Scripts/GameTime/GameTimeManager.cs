@@ -20,7 +20,7 @@ public class GameTimeManager : SingletonMonoBehaviour<GameTimeManager>
     private int _currentIntervalIndex = -1;
     private int _timeSpeedMultiplier;
 
-    private void Update()
+    protected override void Update()
     {
         if (!_isInitialized || IsPaused) return;
         if (GameSetting.Instance.SecondsPerGameHour <= 0) return;

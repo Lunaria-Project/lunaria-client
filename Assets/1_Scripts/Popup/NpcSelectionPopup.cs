@@ -15,8 +15,6 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
 
     protected override void OnShow(NpcSelectionPopupParameter parameter)
     {
-        GameTimeManager.Instance.Pause(this);
-
         _npcDataId = parameter.NpcDataId;
 
         var npcDataList = GameData.Instance.GetActivatedMapNpcMenuDataListByNpcId(_npcDataId);
@@ -31,10 +29,7 @@ public class NpcSelectionPopup : Popup<NpcSelectionPopupParameter>
         _selectionTexts.GetAt(count).SetText("대화 마치기"); //TODO
     }
 
-    protected override void OnHide()
-    {
-        GameTimeManager.Instance.Resume(this);
-    }
+    protected override void OnHide() { }
 
     public void OnSelectionButtonClick(int index)
     {

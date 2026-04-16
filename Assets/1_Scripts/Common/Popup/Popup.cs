@@ -44,12 +44,14 @@ public abstract class PopupBase : MonoBehaviour
     {
         PopupType = type;
         _hideTaskCompletionSource = new UniTaskCompletionSource();
+        GameTimeManager.Instance.Pause(this);
         OnShowInternal(parameterObject);
     }
 
     internal void HideInternal()
     {
         OnHideInternal();
+        GameTimeManager.Instance.Resume(this);
         TaskUtil.SetResult(ref _hideTaskCompletionSource);
         _onHideAction?.Invoke();
         _onHideAction = null;

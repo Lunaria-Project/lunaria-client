@@ -42,16 +42,11 @@ public class InventoryPopup : EmptyParamPopup
         var maxSlotCount = GameSetting.Instance.MaxInventorySlotCount;
         LogManager.Assert(_cells.Length >= maxSlotCount, $"InventoryPopup: Cell count({_cells.Length}) must be >= MaxInventorySlotCount({maxSlotCount})");
 
-        GameTimeManager.Instance.Pause(this);
-
         _tabGroup.Init();
         _quickBlock.Init();
     }
 
-    protected override void OnHide()
-    {
-        GameTimeManager.Instance.Resume(this);
-    }
+    protected override void OnHide() { }
 
     private void OnCellClick(int index)
     {
