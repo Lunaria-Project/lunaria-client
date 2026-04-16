@@ -117,7 +117,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(bundleName);
             foreach (var assetPath in assetPaths)
             {
-                if (!assetPath.Contains(AssetBundlePath)) break;
+                if (!assetPath.Contains(AssetBundlePath)) continue;
                 var mainType = AssetDatabase.GetMainAssetTypeAtPath(assetPath);
                 if (mainType == null) continue;
 
@@ -147,6 +147,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
         var indexFilePath = GetIndexFilePath();
         File.WriteAllBytes(indexFilePath, encryptedBytes);
+        AssetDatabase.Refresh();
 
         Debug.Log($"AssetBundle Index built and saved: {indexFilePath}");
     }
