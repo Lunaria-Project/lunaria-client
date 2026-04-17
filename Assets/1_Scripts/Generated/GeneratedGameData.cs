@@ -351,20 +351,18 @@ namespace Generated
     {
         public int ShopId { get; private set; }
         public int ProductItemId { get; private set; }
-        public int RandomMinStockQuantity { get; private set; }
-        public int RandomMaxStockQuantity { get; private set; }
+        public int RefreshAmount { get; private set; }
         public int MaxPurchasableQuantity { get; private set; }
         public RequirementType SaleRequirementType { get; private set; }
         public List<int> SaleRequirementValues { get; private set; }
         public int PriceItemId { get; private set; }
         public int PriceQuantity { get; private set; }
 
-        public ShopProductData(int shopId, int productItemId, int randomMinStockQuantity, int randomMaxStockQuantity, int maxPurchasableQuantity, RequirementType saleRequirementType, List<int> saleRequirementValues, int priceItemId, int priceQuantity)
+        public ShopProductData(int shopId, int productItemId, int refreshAmount, int maxPurchasableQuantity, RequirementType saleRequirementType, List<int> saleRequirementValues, int priceItemId, int priceQuantity)
         {
             ShopId = shopId;
             ProductItemId = productItemId;
-            RandomMinStockQuantity = randomMinStockQuantity;
-            RandomMaxStockQuantity = randomMaxStockQuantity;
+            RefreshAmount = refreshAmount;
             MaxPurchasableQuantity = maxPurchasableQuantity;
             SaleRequirementType = saleRequirementType;
             SaleRequirementValues = saleRequirementValues;
