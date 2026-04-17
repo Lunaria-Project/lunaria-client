@@ -350,6 +350,7 @@ namespace Generated
     public partial class ShopProductData
     {
         public int ShopId { get; private set; }
+        public int ProductId { get; private set; }
         public int ProductItemId { get; private set; }
         public int RefreshAmount { get; private set; }
         public int MaxPurchasableQuantity { get; private set; }
@@ -358,9 +359,10 @@ namespace Generated
         public int PriceItemId { get; private set; }
         public int PriceQuantity { get; private set; }
 
-        public ShopProductData(int shopId, int productItemId, int refreshAmount, int maxPurchasableQuantity, RequirementType saleRequirementType, List<int> saleRequirementValues, int priceItemId, int priceQuantity)
+        public ShopProductData(int shopId, int productId, int productItemId, int refreshAmount, int maxPurchasableQuantity, RequirementType saleRequirementType, List<int> saleRequirementValues, int priceItemId, int priceQuantity)
         {
             ShopId = shopId;
+            ProductId = productId;
             ProductItemId = productItemId;
             RefreshAmount = refreshAmount;
             MaxPurchasableQuantity = maxPurchasableQuantity;

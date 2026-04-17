@@ -119,7 +119,10 @@ public partial class GameData
     public bool ContainsShopInfoData(int key) => DTShopInfoData.ContainsKey(key);
     private readonly Dictionary<int, ShopInfoData> _dtShopInfoData = new();
 
-    // ShopProductData - ShopProductData
-    public IReadOnlyList<ShopProductData> DTShopProductData => _dtShopProductData;
-    private List<ShopProductData> _dtShopProductData = new();
+    // ShopProductData - ShopProductData, key: ProductId
+    public IReadOnlyDictionary<int, ShopProductData> DTShopProductData => _dtShopProductData;
+    public bool TryGetShopProductData(int key, out ShopProductData result) => DTShopProductData.TryGetValue(key, out result);
+    public ShopProductData GetShopProductData(int key) => DTShopProductData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsShopProductData(int key) => DTShopProductData.ContainsKey(key);
+    private readonly Dictionary<int, ShopProductData> _dtShopProductData = new();
 }

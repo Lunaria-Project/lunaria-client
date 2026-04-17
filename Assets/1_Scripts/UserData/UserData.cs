@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ItemInfo
+{
+    public int ItemId;
+    public int Quantity;
+}
+
 [Serializable]
 public class UserDataInfo
 {
@@ -12,6 +18,8 @@ public class UserDataInfo
     public int EquippedArtifactId;
     public float SlimeGauge;
     public HashSet<int> CheckedNewItemIds = new();
+    public int CurrentDay;
+    public Dictionary<int, Dictionary<ShopType, List<ItemInfo>>> ShopPurchaseRecords = new();
 
     public void AddItem(int itemId, long quantity)
     {
@@ -34,6 +42,7 @@ public partial class UserData : Singleton<UserData>
     public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
     public float SlimeGauge => _userDataInfo.SlimeGauge;
     public HashSet<int> CheckedNewItemIds => _userDataInfo.CheckedNewItemIds;
+    public int CurrentDay => _userDataInfo.CurrentDay;
 
     public void CheckNewItem(int itemId)
     {
@@ -69,5 +78,10 @@ public partial class UserData : Singleton<UserData>
     {
         _userDataInfo.SlimeGauge += amount;
         _userDataInfo.SlimeGauge = Mathf.Clamp(_userDataInfo.SlimeGauge, 0, 100);
+    }
+
+    public void AddDay()
+    {
+        _userDataInfo.CurrentDay++;
     }
 }

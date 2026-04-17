@@ -31,7 +31,11 @@ public class TitleMainPanel : Panel<TitleMainPanel>
 
     public void OnStartButtonClick()
     {
-        StartGame(new UserDataInfo()).Forget();
+        var userDataInfo = new UserDataInfo
+        {
+            CurrentDay = 1,
+        };
+        StartGame(userDataInfo).Forget();
     }
 
     public void OnStartWithCheatButtonClick()
@@ -44,6 +48,7 @@ public class TitleMainPanel : Panel<TitleMainPanel>
             userDataInfo.AddItem(id.DataId, quantity);
         }
         userDataInfo.SlimeGauge = Mathf.Min(userData.InitSlimeGauge, 100);
+        userDataInfo.CurrentDay = 1;
         StartGame(userDataInfo).Forget();
 #endif
     }

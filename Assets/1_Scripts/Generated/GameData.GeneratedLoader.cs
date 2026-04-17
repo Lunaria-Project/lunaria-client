@@ -208,8 +208,8 @@ public partial class GameData
         _dtShopProductData.Clear();
         foreach (var row in rows)
         {
-            var newData = new ShopProductData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), ((string)row[4]).ParseEnum<RequirementType>(), (row[5] as string).ParseIntList(), Convert.ToInt32(row[6]), Convert.ToInt32(row[7]));
-            _dtShopProductData.Add(newData);
+            var newData = new ShopProductData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), Convert.ToInt32(row[4]), ((string)row[5]).ParseEnum<RequirementType>(), (row[6] as string).ParseIntList(), Convert.ToInt32(row[7]), Convert.ToInt32(row[8]));
+            _dtShopProductData.Add(newData.ProductId, newData);
         }
     }
 

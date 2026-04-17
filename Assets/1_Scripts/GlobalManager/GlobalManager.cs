@@ -95,6 +95,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         _isDayRunning = false;
         // TODO(지선): 여기서 영수증이 나오게 작업 필요
         LogManager.Log("하루 끝");
+        UserData.Instance.AddDay();
         StartDay();
     }
 

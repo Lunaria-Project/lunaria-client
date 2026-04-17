@@ -80,4 +80,16 @@ public partial class GameData
         LogManager.LogError($"GameData: ShopInfoData not found for {shopType}");
         return null;
     }
+
+    public List<ShopProductData> GetShopProductDataListByShopType(ShopType shopType)
+    {
+        var result = new List<ShopProductData>();
+        var shopId = GetShopInfoDataByShopType(shopType).ShopId;
+        foreach (var (_, data) in _dtShopProductData)
+        {
+            if (data.ShopId != shopId) continue;
+            result.Add(data);
+        }
+        return result;
+    }
 }
