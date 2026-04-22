@@ -53,7 +53,8 @@ public class ShopPopup : Popup<ShopPopupParameter>
         if (showInfoBlock)
         {
             var itemId = GameData.Instance.GetShopProductData(_selectedProductId).ProductItemId;
-            _infoCell.SetData(itemId);
+            var canPurchase = UserData.Instance.CanPurchaseShopProduct(_shopType, _selectedProductId);
+            _infoCell.SetData(itemId, canPurchase);
         }
     }
 
@@ -61,11 +62,15 @@ public class ShopPopup : Popup<ShopPopupParameter>
     {
         _selectedProductId = productId;
         var itemId = GameData.Instance.GetShopProductData(productId).ProductItemId;
-        _infoCell.SetData(itemId);
+        var canPurchase = UserData.Instance.CanPurchaseShopProduct(_shopType, productId);
+        _infoCell.SetData(itemId, canPurchase);
     }
 
     public void OnPurchaseButtonClick()
     {
-        // TODO: 구매 로직 (재화 차감, 아이템 지급, RecordShopPurchase 호출, Refresh)
+        if (_selectedProductId == 0) return;
+        if (!UserData.Instance.PurchaseShopProduct(_shopType, _selectedProductId)) return;
+
+        Refresh();
     }
 }

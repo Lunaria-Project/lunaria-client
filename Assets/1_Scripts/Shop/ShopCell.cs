@@ -48,6 +48,7 @@ public class ShopCell : MonoBehaviour
         var isSoldOut = remaining <= 0 || (hasMaxLimit && purchasable <= 0);
         _soldOutObject.SetActive(isSoldOut);
         _priceObject.SetActive(!isSoldOut);
+        _remainingStockObject.SetActive(!isSoldOut);
     }
 
     public void OnClickButton()
