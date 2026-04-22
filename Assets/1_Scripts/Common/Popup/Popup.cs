@@ -7,10 +7,22 @@ public struct PopupEmptyParameter : IPopupParameter { }
 
 public abstract class PopupBase : MonoBehaviour
 {
+    public enum PopupBackground
+    {
+        None,
+        Dim0,
+        Dim25,
+        Dim50,
+        Dim75,
+        Dim90,
+    }
+
     [SerializeField] private bool _hideOnEscapeKey = false;
     [SerializeField] private bool _pauseTime = true;
+    [SerializeField] private PopupBackground _popupBackground = PopupBackground.None;
 
     public PopupManager.Type PopupType { get; private set; }
+    public PopupBackground Background => _popupBackground;
 
     private UniTaskCompletionSource _hideTaskCompletionSource = null;
     private Action _onHideAction = null;

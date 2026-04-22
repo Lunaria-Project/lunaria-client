@@ -1,12 +1,20 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 {
     [SerializeField] private RectTransform _parentRectTransform;
+    [SerializeField] private Image _backgroundImage;
 
-    public List<PopupBase> PopupList { get; private set; } = new();
+    private List<PopupBase> PopupList { get; set; } = new();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        UpdateBackground();
+    }
 
     protected override void Update()
     {
@@ -29,6 +37,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 
         PushPopup(popup);
         popup.ShowInternal(popupType, parameter);
+        UpdateBackground();
 
         return popup;
     }
@@ -55,12 +64,14 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
             {
                 PopupList.Remove(target);
                 HidePopupInternal(target);
+                UpdateBackground();
             }
             return;
         }
 
         HidePopupInternal(PopupList.GetLast());
         PopupList.RemoveLast();
+        UpdateBackground();
         await UniTask.NextFrame();
     }
 
@@ -90,7 +101,63 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
         }
 
         PopupList.Clear();
+        UpdateBackground();
         await UniTask.NextFrame();
+    }
+
+    private void UpdateBackground()
+    {
+        if (PopupList.Count <= 0)
+        {
+            _backgroundImage.gameObject.SetActive(false);
+            return;
+        }
+
+        var topPopup = PopupList.GetLast();
+        var background = topPopup.Background;
+
+        switch (EnumSwitch.Exhaustive(background))
+        {
+            case PopupBase.PopupBackground.None:
+            {
+                _backgroundImage.gameObject.SetActive(false);
+                return;
+            }
+            case PopupBase.PopupBackground.Dim0:
+            {
+                ApplyBackgroundAlpha(0f);
+                return;
+            }
+            case PopupBase.PopupBackground.Dim25:
+            {
+                ApplyBackgroundAlpha(0.25f);
+                return;
+            }
+            case PopupBase.PopupBackground.Dim50:
+            {
+                ApplyBackgroundAlpha(0.5f);
+                return;
+            }
+            case PopupBase.PopupBackground.Dim75:
+            {
+                ApplyBackgroundAlpha(0.75f);
+                return;
+            }
+            case PopupBase.PopupBackground.Dim90:
+            {
+                ApplyBackgroundAlpha(0.9f);
+                return;
+            }
+        }
+        return;
+
+        void ApplyBackgroundAlpha(float alpha)
+        {
+            _backgroundImage.gameObject.SetActive(true);
+            var color = _backgroundImage.color;
+            color.a = alpha;
+            _backgroundImage.color = color;
+        }
     }
 
     private void HidePopupInternal(PopupBase popup)
