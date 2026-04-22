@@ -8,12 +8,13 @@ public struct PopupEmptyParameter : IPopupParameter { }
 public abstract class PopupBase : MonoBehaviour
 {
     [SerializeField] private bool _hideOnEscapeKey = false;
+    [SerializeField] private bool _pauseTime = true;
 
     public PopupManager.Type PopupType { get; private set; }
 
     private UniTaskCompletionSource _hideTaskCompletionSource = null;
     private Action _onHideAction = null;
-    
+
     public void SetOnHideAction(Action onHideAction)
     {
         _onHideAction = onHideAction;
@@ -30,7 +31,7 @@ public abstract class PopupBase : MonoBehaviour
         if (PopupManager.Instance == null) return;
         PopupManager.Instance.HideCurrentPopup(PopupType).Forget();
     }
-    
+
     public virtual bool HideWithEscapeKey()
     {
         return _hideOnEscapeKey;
@@ -44,7 +45,10 @@ public abstract class PopupBase : MonoBehaviour
     {
         PopupType = type;
         _hideTaskCompletionSource = new UniTaskCompletionSource();
-        GameTimeManager.Instance.Pause(this);
+        if (_pauseTime)
+        {
+            GameTimeManager.Instance.Pause(this);
+        }
         OnShowInternal(parameterObject);
     }
 

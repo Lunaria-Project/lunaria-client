@@ -130,20 +130,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         if (CutsceneManager.Instance.IsPlaying) return false;
         if (GameTimeManager.Instance.IsPaused) return false;
         if (IsMinigamePlaying) return false;
-        foreach (var popup in PopupManager.Instance.PopupList)
-        {
-            if (!CanPlayerMoveWithPopup(popup.PopupType)) return false;
-        }
         return true;
-
-        bool CanPlayerMoveWithPopup(PopupManager.Type type)
-        {
-            return type switch
-            {
-                PopupManager.Type.Shortcut => true,
-                _                          => false,
-            };
-        }
     }
 
     public void OnChangeMap(MapType type)
