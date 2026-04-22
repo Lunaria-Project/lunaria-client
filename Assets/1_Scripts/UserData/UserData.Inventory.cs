@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 
 public partial class UserData // Inventory
 {
+    public event Action<int> OnItemQuantityChanged;
+
     public long GetItemQuantity(int itemDataId)
     {
         foreach (var (id, quantity) in _userDataInfo.ItemList)
