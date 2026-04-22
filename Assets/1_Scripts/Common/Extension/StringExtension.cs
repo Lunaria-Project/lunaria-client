@@ -12,9 +12,14 @@ public static class StringExtension
 
         foreach (var part in parts)
         {
-            if (int.TryParse(part.Trim(), out var num))
+            var trimmed = part.Trim();
+            if (int.TryParse(trimmed, out var intNum))
             {
-                list.Add(num);
+                list.Add(intNum);
+            }
+            else if (float.TryParse(trimmed, out var floatNum))
+            {
+                list.Add((int)floatNum);
             }
         }
         return list;
