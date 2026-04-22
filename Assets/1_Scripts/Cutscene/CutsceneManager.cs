@@ -4,9 +4,10 @@ using Generated;
 public partial class CutsceneManager : SingletonMonoBehaviour<CutsceneManager>
 {
     public bool IsPlaying { get; private set; }
-    
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start();
         EndCutscene();
     }
 
@@ -43,7 +44,7 @@ public partial class CutsceneManager : SingletonMonoBehaviour<CutsceneManager>
 
     private async UniTask PlayCutsceneImpl(CutsceneData data)
     {
-        switch (data.CutsceneCommand)
+        switch (EnumSwitch.Exhaustive(data.CutsceneCommand))
         {
             case CutsceneCommand.ShowDialog:
             {
@@ -84,7 +85,13 @@ public partial class CutsceneManager : SingletonMonoBehaviour<CutsceneManager>
                 await PlayCutscene(selectionData.SelectionCutsceneId);
                 break;
             }
-            default:
+            case CutsceneCommand.ShowShopPopup:
+            {
+                var shopType = data.StringValues.GetAt(0).ParseEnum<ShopType>();
+                PopupManager.Instance.ShowPopup(PopupManager.Type.PowderShop, new ShopPopupParameter { ShopType = shopType });
+                break;
+            }
+            case CutsceneCommand.None:
             {
                 LogManager.LogErrorPack("CutsceneManager: Invalid CutsceneCommand", data.CutsceneCommand);
                 break;

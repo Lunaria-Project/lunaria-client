@@ -1,4 +1,3 @@
-using Lunaria;
 using UnityEngine;
 
 public struct ShopPopupParameter : IPopupParameter
@@ -36,8 +35,7 @@ public class ShopPopup : Popup<ShopPopupParameter>
     private void Refresh()
     {
         var products = GameData.Instance.GetShopProductDataListByShopType(_shopType);
-        LogManager.Assert(_cells.Length >= products.Count,
-            $"ShopPopup: Cell count({_cells.Length}) must be >= product count({products.Count}) for {_shopType}");
+        LogManager.Assert(_cells.Length >= products.Count, $"ShopPopup: Cell count({_cells.Length}) must be >= product count({products.Count}) for {_shopType}");
 
         _cells.SetActiveAll(false);
         for (var i = 0; i < products.Count && i < _cells.Length; i++)

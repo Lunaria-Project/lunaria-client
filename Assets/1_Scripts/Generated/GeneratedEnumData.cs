@@ -18,7 +18,8 @@ public enum CutsceneCommand
     Selection = 3,
     ShowDialog = 4,
     ShowFullIllustration = 5,
-    ShowSpotIllustration = 6,
+    ShowShopPopup = 6,
+    ShowSpotIllustration = 7,
 }
 
 [SerializeEnum]
