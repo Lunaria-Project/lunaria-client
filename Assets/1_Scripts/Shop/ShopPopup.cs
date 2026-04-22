@@ -48,7 +48,9 @@ public class ShopPopup : Popup<ShopPopupParameter>
         {
             _selectedProductId = products[0].ProductId;
         }
-        if (_selectedProductId != 0)
+        var showInfoBlock = _selectedProductId != 0;
+        _infoCell.gameObject.SetActive(showInfoBlock);
+        if (showInfoBlock)
         {
             var itemId = GameData.Instance.GetShopProductData(_selectedProductId).ProductItemId;
             _infoCell.SetData(itemId);
