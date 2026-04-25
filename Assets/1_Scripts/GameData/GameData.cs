@@ -7,9 +7,10 @@ public partial class GameData : Singleton<GameData>
         Ko, En, Ja,
     }
     
+    public LocalType CurrentLocalType { get; private set; } = LocalType.Ko;
+    
     public void LoadGameData()
     {
-        var localType = LocalType.Ko;
         var sheets = JsonDataLoader.LoadAllSheets();
         if (sheets.IsNullOrEmpty())
         {
@@ -39,7 +40,7 @@ public partial class GameData : Singleton<GameData>
                 LoadLocalization(sheetInfo);
                 continue;
             }
-            InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows, localType);
+            InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows, CurrentLocalType);
         }
     }
 }

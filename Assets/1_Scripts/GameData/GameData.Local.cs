@@ -36,7 +36,7 @@ public partial class GameData
         _localStringDictionaryCache = JsonConvert.DeserializeObject<Dictionary<string, LocalString>>(jsonText);
     }
 
-    private string GetLocalString(string key, LocalType type)
+    public string GetLocalString(string key, LocalType type)
     {
         if (_localStringDictionaryCache.TryGetValue(key, out var value))
         {

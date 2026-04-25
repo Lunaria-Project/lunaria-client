@@ -9,16 +9,19 @@ using UnityEngine;
 public static partial class DataCodeGenerator
 {
     private const string EnumDataPath = "Assets/1_Scripts/Generated/GeneratedEnumData.cs";
+    private const string EnumExtensionPath = "Assets/1_Scripts/Generated/GeneratedEnumData.Extension.cs";
     private const string EnumDataFileName = "Enum";
 
     public static void GenerateEnumDataCode(List<SheetInfo> sheets)
     {
         try
         {
-            var enumCode = GenerateEnumCode(sheets);
+            var (enumCode, extensionCode) = GenerateEnumCode(sheets);
             WriteFile(EnumDataPath, enumCode);
+            WriteFile(EnumExtensionPath, extensionCode);
 
             LogManager.Log($"[GameDataCodeGenerator] Generated: {EnumDataPath}");
+            LogManager.Log($"[GameDataCodeGenerator] Generated: {EnumExtensionPath}");
         }
         catch (Exception e)
         {
@@ -27,7 +30,7 @@ public static partial class DataCodeGenerator
         }
     }
 
-    private static string GenerateEnumCode(List<SheetInfo> sheets)
+    private static (string enumCode, string extensionCode) GenerateEnumCode(List<SheetInfo> sheets)
     {
         var enumSheets = sheets
             .Where(s => string.Equals(s.FileName, "EnumData", StringComparison.OrdinalIgnoreCase))
@@ -68,7 +71,8 @@ public static partial class DataCodeGenerator
             }
         }
 
-        var sb = new StringBuilder();
+        var enumSb = new StringBuilder();
+        var extensionMethodsSb = new StringBuilder();
         foreach (var (enumName, itemsRaw) in byEnum.OrderBy(k => k.Key, StringComparer.Ordinal))
         {
             // 결정적 순서: 멤버 이름 Ordinal 정렬(원하면 원본 순서 유지로 바꿔도 됨)
@@ -83,73 +87,79 @@ public static partial class DataCodeGenerator
                 .OrderBy(x => x.Name, StringComparer.Ordinal)
                 .ToList();
 
-            sb.AppendIndentedLine($"[SerializeEnum]", 0);
-            sb.AppendIndentedLine($"public enum {enumName}", 0);
-            sb.AppendIndentedLine("{", 0);
-            sb.AppendIndentedLine("None = 0,", 1);
+            enumSb.AppendIndentedLine($"[SerializeEnum]", 0);
+            enumSb.AppendIndentedLine($"public enum {enumName}", 0);
+            enumSb.AppendIndentedLine("{", 0);
+            enumSb.AppendIndentedLine("None = 0,", 1);
             var next = 1;
             foreach (var it in items)
             {
-                sb.AppendIndentedLine($"{it.Name} = {next},", 1);
+                enumSb.AppendIndentedLine($"{it.Name} = {next},", 1);
                 next++;
             }
 
-            sb.AppendIndentedLine("}", 0);
-            sb.AppendLine();
+            enumSb.AppendIndentedLine("}", 0);
+            enumSb.AppendLine();
 
             // DisplayName 값이 실제로 하나라도 채워져 있어야 true
             var hasDisplay = items.Any(i => !string.IsNullOrWhiteSpace(i.DisplayName));
             // ResourceKey 값이 실제로 하나라도 채워져 있어야 true
             var hasResKey = items.Any(i => !string.IsNullOrWhiteSpace(i.ResourceKey));
 
+            if (!hasDisplay && !hasResKey) continue;
 
-            if (hasDisplay || hasResKey)
+            var maxLeftLen = items.Max(it => $"{enumName}.{it.Name}".Length);
+
+            if (hasDisplay)
             {
-                sb.AppendIndentedLine($"public static class {enumName}Extensions", 1);
-                sb.AppendIndentedLine("{", 1);
-
-                if (hasDisplay)
+                extensionMethodsSb.AppendIndentedLine($"public static string GetDisplayName(this {enumName} value)", 1);
+                extensionMethodsSb.AppendIndentedLine("{", 1);
+                extensionMethodsSb.AppendIndentedLine("var key = value switch", 2);
+                extensionMethodsSb.AppendIndentedLine("{", 2);
+                foreach (var it in items)
                 {
-                    sb.AppendIndentedLine($"public static string GetDisplayName(this {enumName} value)", 2);
-                    sb.AppendIndentedLine("{", 2);
-                    sb.AppendIndentedLine("switch (value)", 3);
-                    sb.AppendIndentedLine("{", 3);
-                    foreach (var it in items)
-                    {
-                        var text = it.DisplayName ?? it.Name;
-                        sb.AppendIndentedLine($"case {enumName}.{it.Name}: return \"{Escape(text)}\";", 4);
-                    }
-
-                    sb.AppendIndentedLine("default: return value.ToString();", 4);
-                    sb.AppendIndentedLine("}", 3);
-                    sb.AppendIndentedLine("}", 2);
-                    sb.AppendLine();
+                    var text = it.DisplayName ?? it.Name;
+                    var left = $"{enumName}.{it.Name}".PadRight(maxLeftLen);
+                    extensionMethodsSb.AppendIndentedLine($"{left} => \"{Escape(text)}\",", 3);
                 }
 
-                if (hasResKey)
-                {
-                    sb.AppendIndentedLine($"public static string GetResourceKey(this {enumName} value)", 2);
-                    sb.AppendIndentedLine("{", 2);
-                    sb.AppendIndentedLine("switch (value)", 3);
-                    sb.AppendIndentedLine("{", 3);
-                    foreach (var it in items)
-                    {
-                        var text = it.ResourceKey ?? string.Empty;
-                        sb.AppendIndentedLine($"case {enumName}.{it.Name}: return \"{Escape(text)}\";", 4);
-                    }
+                extensionMethodsSb.AppendIndentedLine($"{"_".PadRight(maxLeftLen)} => value.ToString(),", 3);
+                extensionMethodsSb.AppendIndentedLine("};", 2);
+                extensionMethodsSb.AppendIndentedLine("return GameData.Instance.GetLocalString(key, GameData.Instance.CurrentLocalType);", 2);
+                extensionMethodsSb.AppendIndentedLine("}", 1);
+                extensionMethodsSb.AppendLine();
+            }
 
-                    sb.AppendIndentedLine("default: return string.Empty;", 4);
-                    sb.AppendIndentedLine("}", 3);
-                    sb.AppendIndentedLine("}", 2);
-                    sb.AppendLine();
+            if (hasResKey)
+            {
+                extensionMethodsSb.AppendIndentedLine($"public static string GetResourceKey(this {enumName} value)", 1);
+                extensionMethodsSb.AppendIndentedLine("{", 1);
+                extensionMethodsSb.AppendIndentedLine("return value switch", 2);
+                extensionMethodsSb.AppendIndentedLine("{", 2);
+                foreach (var it in items)
+                {
+                    var text = it.ResourceKey ?? string.Empty;
+                    var left = $"{enumName}.{it.Name}".PadRight(maxLeftLen);
+                    extensionMethodsSb.AppendIndentedLine($"{left} => \"{Escape(text)}\",", 3);
                 }
 
-                sb.AppendIndentedLine("}", 0);
-                sb.AppendLine();
+                extensionMethodsSb.AppendIndentedLine($"{"_".PadRight(maxLeftLen)} => string.Empty,", 3);
+                extensionMethodsSb.AppendIndentedLine("};", 2);
+                extensionMethodsSb.AppendIndentedLine("}", 1);
+                extensionMethodsSb.AppendLine();
             }
         }
 
-        return sb.ToString();
+        var extensionSb = new StringBuilder();
+        if (extensionMethodsSb.Length > 0)
+        {
+            extensionSb.AppendIndentedLine("public static class GeneratedEnumExtensions", 0);
+            extensionSb.AppendIndentedLine("{", 0);
+            extensionSb.Append(extensionMethodsSb);
+            extensionSb.AppendIndentedLine("}", 0);
+        }
+
+        return (enumSb.ToString(), extensionSb.ToString());
 
         // 문자열에 \, "가 들어있으면 안 됨
         static string Escape(string s) => s.Replace("\\", "\\\\").Replace("\"", "\\\"");
