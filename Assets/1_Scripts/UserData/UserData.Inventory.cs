@@ -70,6 +70,9 @@ public partial class UserData // Inventory
         if (slotIndex < 0 || slotIndex >= _userDataInfo.QuickSlotItemIds.Length) return;
         if (slotIndex >= _userDataInfo.UnlockedQuickSlotCount) return;
 
+        if (!GameData.Instance.TryGetItemData(itemId, out var itemData)) return;
+        if (itemData.ItemType == ItemType.Artifact) return;
+
         var prevItemId = _userDataInfo.QuickSlotItemIds[slotIndex];
 
         for (var i = 0; i < _userDataInfo.QuickSlotItemIds.Length; i++)
