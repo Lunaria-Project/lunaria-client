@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public partial class GameData
@@ -22,10 +23,19 @@ public partial class GameData
     private void LoadLocalString()
     {
 #if UNITY_EDITOR
-        var jsonFilePath = Path.Combine(JsonDataRepositorySetting.GetRepoPath(), "data/LocalData/LocalData.json");
+        var localDataPath = Path.Combine(JsonDataRepositorySetting.GetRepoPath(), "data/LocalData/LocalData.json");
+        var localizationPath = Path.Combine(JsonDataRepositorySetting.GetRepoPath(), "data/GameData/Localization.json");
 #else
-        var jsonFilePath = Path.Combine(Application.streamingAssetsPath, "data/LocalData/LocalData.json");
+        var localDataPath = Path.Combine(Application.streamingAssetsPath, "data/LocalData/LocalData.json");
+        var localizationPath = Path.Combine(Application.streamingAssetsPath, "data/GameData/Localization.json");
 #endif
+        _localStringDictionaryCache.Clear();
+        MergeLocalDataDictionary(localDataPath);
+        MergeLocalizationRows(localizationPath);
+    }
+
+    private void MergeLocalDataDictionary(string jsonFilePath)
+    {
         if (string.IsNullOrEmpty(jsonFilePath) || !File.Exists(jsonFilePath))
         {
             LogManager.LogError($"JSON repo not found: {jsonFilePath}");
@@ -33,7 +43,38 @@ public partial class GameData
         }
 
         var jsonText = File.ReadAllText(jsonFilePath);
-        _localStringDictionaryCache = JsonConvert.DeserializeObject<Dictionary<string, LocalString>>(jsonText);
+        var dictionary = JsonConvert.DeserializeObject<Dictionary<string, LocalString>>(jsonText);
+        if (dictionary == null) return;
+        foreach (var pair in dictionary)
+        {
+            _localStringDictionaryCache[pair.Key] = pair.Value;
+        }
+    }
+
+    private void MergeLocalizationRows(string jsonFilePath)
+    {
+        if (string.IsNullOrEmpty(jsonFilePath) || !File.Exists(jsonFilePath))
+        {
+            LogManager.LogError($"JSON repo not found: {jsonFilePath}");
+            return;
+        }
+
+        var jsonText = File.ReadAllText(jsonFilePath);
+        var root = JObject.Parse(jsonText);
+        var rows = (JArray)root["rows"];
+        if (rows == null) return;
+        foreach (var rowToken in rows)
+        {
+            var row = (JArray)rowToken;
+            var key = (string)row[0];
+            if (string.IsNullOrEmpty(key)) continue;
+            _localStringDictionaryCache[key] = new LocalString
+            {
+                ko = (string)row[1],
+                en = (string)row[2],
+                ja = (string)row[3],
+            };
+        }
     }
 
     public string GetLocalString(string key)
