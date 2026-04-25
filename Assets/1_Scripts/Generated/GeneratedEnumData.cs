@@ -36,13 +36,15 @@ public enum ItemType
 {
     None = 0,
     Artifact = 1,
-    ArtifactSkin = 2,
-    ColoredPowder = 3,
-    FamiliarRecovery = 4,
-    Glue = 5,
-    MainCoin = 6,
-    PlayerRecovery = 7,
-    Powder = 8,
+    FamiliarCall = 2,
+    FamiliarHpRecovery = 3,
+    FamiliarTiredRecovery = 4,
+    MainCoin = 5,
+    Material = 6,
+    PlayerHpRecovery = 7,
+    Quest = 8,
+    RefinedMaterial = 9,
+    Ride = 10,
 }
 
 [SerializeEnum]

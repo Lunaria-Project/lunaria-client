@@ -54,7 +54,7 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
             foreach (var (id, _) in _rewards)
             {
                 var itemData = GameData.Instance.GetItemData(id);
-                if (itemData.ItemType != ItemType.Glue) continue;
+                if (itemData.ItemType != ItemType.Material) continue;
                 return itemData;
             }
             return null;
