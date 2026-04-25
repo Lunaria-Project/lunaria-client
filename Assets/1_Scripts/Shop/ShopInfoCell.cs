@@ -7,7 +7,6 @@ public class ShopInfoCell : MonoBehaviour
     [SerializeField] private Text _titleText;
     [SerializeField] private Text _tagText;
     [SerializeField] private Text _descriptionText;
-    [SerializeField] private GameObject _purchaseButton;
 
     public void SetData(int itemId, bool canPurchase)
     {
@@ -16,6 +15,5 @@ public class ShopInfoCell : MonoBehaviour
         _titleText.SetText(itemData.Name);
         _descriptionText.SetText(itemData.Description);
         _tagText.SetText(itemData.ItemType.GetDisplayName());
-        _purchaseButton.SetActive(canPurchase);
     }
 }
