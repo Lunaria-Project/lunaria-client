@@ -66,7 +66,13 @@ public static class StringExtension
 
     public static T ParseEnum<T>(this string value) where T : struct, System.Enum
     {
-        return string.IsNullOrEmpty(value) ? default : (T)System.Enum.Parse(typeof(T), value, true);
+        if (string.IsNullOrEmpty(value)) return default;
+
+        if (System.Enum.TryParse<T>(value, true, out var result)) return result;
+
+        var validNames = string.Join(", ", System.Enum.GetNames(typeof(T)));
+        LogManager.LogError($"[ParseEnum] '{value}'을(를) {typeof(T).Name}으로 변환 실패. 유효한 값: [{validNames}]");
+        return default;
     }
 
     public static bool ParseBool(this string value)
