@@ -20,15 +20,6 @@ public abstract class MovableObject : MapObject
     private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
     private Vector2 _forceMoveDirection;
 
-    // auto move
-    public bool IsAutoMoving => _isAutoMoving;
-    private bool _isAutoMoving;
-    private Vector2 _autoMoveTargetPosition;
-    private Action _onAutoMoveArrived;
-    private List<Vector2> _autoMovePath;
-    private int _autoMovePathIndex;
-    private bool _wasForceMoving;
-
     // sprite animation
     private bool _isFacingFront;
     private float _spriteFrameTime;
@@ -44,7 +35,6 @@ public abstract class MovableObject : MapObject
     {
         base.Update();
         if (!GlobalManager.Instance.CanPlayerMove()) return;
-        UpdateAutoMove();
         UpdateSprite(Time.deltaTime);
         UpdateZPosition();
     }
@@ -144,88 +134,6 @@ public abstract class MovableObject : MapObject
         if (Mathf.Approximately(pos.z, pos.y)) return;
         Transform.localPosition = new Vector3(pos.x, pos.y, pos.y);
     }
-
-    #region AutoMove
-
-    public void StartAutoMove(Vector2 targetPosition, Action onArrived)
-    {
-        StopAutoMove();
-
-        var grid = MapManager.Instance.PathGrid;
-        var path = grid != null ? AStarPathfinder.FindPath(grid, (Vector2)Transform.position, targetPosition) : null;
-
-        _isAutoMoving = true;
-        _autoMoveTargetPosition = targetPosition;
-        _onAutoMoveArrived = onArrived;
-        _autoMovePath = path;
-        _autoMovePathIndex = 0;
-    }
-
-    public void StopAutoMove()
-    {
-        if (!_isAutoMoving) return;
-        _isAutoMoving = false;
-        _autoMoveTargetPosition = Vector2.zero;
-        _autoMovePath = null;
-        _autoMovePathIndex = 0;
-        _prevAutoMoveDirection = Vector2.zero;
-        _wasForceMoving = false;
-    }
-
-    private void Repath()
-    {
-        var grid = MapManager.Instance.PathGrid;
-        var path = grid != null ? AStarPathfinder.FindPath(grid, (Vector2)Transform.position, _autoMoveTargetPosition) : null;
-        _autoMovePath = path;
-        _autoMovePathIndex = 0;
-        _prevAutoMoveDirection = Vector2.zero;
-    }
-
-    private Vector2 _prevAutoMoveDirection;
-
-    private void UpdateAutoMove()
-    {
-        if (!_isAutoMoving) return;
-
-        if (_forceMoveDirection != Vector2.zero)
-        {
-            _wasForceMoving = true;
-            return;
-        }
-
-        if (_wasForceMoving)
-        {
-            _wasForceMoving = false;
-            Repath();
-            return;
-        }
-
-        var target = (_autoMovePath != null && _autoMovePath.Count > 0)
-            ? _autoMovePath[_autoMovePathIndex]
-            : _autoMoveTargetPosition;
-
-        var direction = target - (Vector2)Transform.position;
-        var arrived = direction.magnitude <= 0.1f
-            || (_prevAutoMoveDirection != Vector2.zero && Vector2.Dot(direction, _prevAutoMoveDirection) < 0);
-
-        if (arrived)
-        {
-            if (_autoMovePath != null && _autoMovePathIndex < _autoMovePath.Count - 1)
-            {
-                _autoMovePathIndex++;
-                _prevAutoMoveDirection = Vector2.zero;
-                return;
-            }
-            StopAutoMove();
-            _onAutoMoveArrived?.Invoke();
-            _onAutoMoveArrived = null;
-            return;
-        }
-        _prevAutoMoveDirection = direction;
-        MoveDirection = direction.normalized;
-    }
-
-    #endregion
 
     #region Sprite
 

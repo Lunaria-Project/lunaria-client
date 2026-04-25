@@ -83,7 +83,7 @@ public class NpcCompassUI : MonoBehaviour
     {
         if (!_isNearByPlayer)
         {
-            MapManager.Instance.MovePlayerAuto(_npcDataId, InteractNpc);
+            // TODO(지선)직선으로만 이동 + InteractNpc
             return;
         }
         InteractNpc();

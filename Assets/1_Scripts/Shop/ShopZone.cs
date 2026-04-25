@@ -66,7 +66,7 @@ public class ShopZone : MonoBehaviour
         }
         else
         {
-            MapManager.Instance.MovePlayerAuto(shopType, InteractShop);
+            // TODO(지선)직선으로만 이동 + InteractShop
         }
         return;
 
