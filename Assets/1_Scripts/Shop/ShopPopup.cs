@@ -28,9 +28,7 @@ public class ShopPopup : Popup<ShopPopupParameter>
         Refresh();
     }
 
-    protected override void OnHide()
-    {
-    }
+    protected override void OnHide() { }
 
     private void Refresh()
     {
@@ -69,6 +67,32 @@ public class ShopPopup : Popup<ShopPopupParameter>
     public void OnPurchaseButtonClick()
     {
         if (_selectedProductId == 0) return;
+        var product = GameData.Instance.GetShopProductData(_selectedProductId);
+        var itemId = product.ProductItemId;
+
+        var purchasedToday = UserData.Instance.GetPurchasedCountToday(_shopType, itemId);
+        if (product.RefreshAmount - purchasedToday <= 0)
+        {
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_PurchasedAllTodayGuide.ToString());
+            return;
+        }
+
+        if (product.MaxPurchasableQuantity > 0)
+        {
+            var purchasedTotal = UserData.Instance.GetPurchasedCountTotal(_shopType, itemId);
+            if (product.MaxPurchasableQuantity - purchasedTotal <= 0)
+            {
+                GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_PurchasedAllGuide.ToString());
+                return;
+            }
+        }
+
+        if (UserData.Instance.GetItemQuantity(product.PriceItemId) < product.PriceQuantity)
+        {
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_InsufficientPriceItem.ToString());
+            return;
+        }
+
         if (!UserData.Instance.PurchaseShopProduct(_shopType, _selectedProductId)) return;
 
         Refresh();

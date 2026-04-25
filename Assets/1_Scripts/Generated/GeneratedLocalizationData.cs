@@ -39,4 +39,7 @@ public static class LocalizationKey
     public static readonly LocalKey SlimeMinigameResultPopup_Description = new("SlimeMinigameResultPopup.Description");
     public static readonly LocalKey ShopEndPopup_Description = new("ShopEndPopup.Description");
     public static readonly LocalKey ConfirmButton = new("ConfirmButton");
+    public static readonly LocalKey ShopPopup_PurchasedAllTodayGuide = new("ShopPopup.PurchasedAllTodayGuide");
+    public static readonly LocalKey ShopPopup_PurchasedAllGuide = new("ShopPopup.PurchasedAllGuide");
+    public static readonly LocalKey ShopPopup_InsufficientPriceItem = new("ShopPopup.InsufficientPriceItem");
 }
