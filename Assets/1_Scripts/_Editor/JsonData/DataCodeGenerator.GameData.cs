@@ -220,7 +220,7 @@ public static partial class DataCodeGenerator
                     }
                     case ColumnType.LocalString:
                     {
-                        args.Add($"GetLocalString((row[{i}] as string) ?? string.Empty, type)");
+                        args.Add($"GetLocalString((row[{i}] as string) ?? string.Empty)");
                         break;
                     }
                     case ColumnType.ListFloat:
@@ -237,7 +237,7 @@ public static partial class DataCodeGenerator
                 }
             }
 
-            sb.AppendIndentedLine($"private void Load{className}(List<object[]> rows, LocalType type)", 1);
+            sb.AppendIndentedLine($"private void Load{className}(List<object[]> rows)", 1);
             sb.AppendIndentedLine("{", 1);
             sb.AppendIndentedLine("if (rows.IsNullOrEmpty()) return;", 2);
             sb.AppendIndentedLine($"{fieldName}.Clear();", 2);
@@ -260,14 +260,14 @@ public static partial class DataCodeGenerator
             sb.AppendLine();
         }
 
-        sb.AppendIndentedLine("private void InvokeLoadForSheet(string sheetName, List<object[]> rows, LocalType type)", 1);
+        sb.AppendIndentedLine("private void InvokeLoadForSheet(string sheetName, List<object[]> rows)", 1);
         sb.AppendIndentedLine("{", 1);
         sb.AppendIndentedLine("switch (sheetName)", 2);
         sb.AppendIndentedLine("{", 2);
         foreach (var sheet in sheets.Select(s => s.SheetName).Distinct())
         {
             if (!CanGenerateCode(sheet)) continue;
-            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}Data(rows, type); break;", 3);
+            sb.AppendIndentedLine($"case \"{sheet}\": Load{sheet}Data(rows); break;", 3);
         }
 
         sb.AppendIndentedLine("}", 2);

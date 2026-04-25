@@ -228,6 +228,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             case MapType.Myhome:
             case MapType.PowderShop:
+            case MapType.CottonCandyShop:
             {
                 PanelManager.Instance.ShowPanel(PanelManager.Type.LunariaDefault, type);
                 break;

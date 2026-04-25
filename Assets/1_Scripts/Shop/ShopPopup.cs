@@ -73,7 +73,7 @@ public class ShopPopup : Popup<ShopPopupParameter>
         var purchasedToday = UserData.Instance.GetPurchasedCountToday(_shopType, itemId);
         if (product.RefreshAmount - purchasedToday <= 0)
         {
-            GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_PurchasedAllTodayGuide.ToString());
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_PurchasedAllTodayGuide.Text());
             return;
         }
 
@@ -82,14 +82,14 @@ public class ShopPopup : Popup<ShopPopupParameter>
             var purchasedTotal = UserData.Instance.GetPurchasedCountTotal(_shopType, itemId);
             if (product.MaxPurchasableQuantity - purchasedTotal <= 0)
             {
-                GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_PurchasedAllGuide.ToString());
+                GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_PurchasedAllGuide.Text());
                 return;
             }
         }
 
         if (UserData.Instance.GetItemQuantity(product.PriceItemId) < product.PriceQuantity)
         {
-            GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_InsufficientPriceItem.ToString());
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_InsufficientPriceItem.Text());
             return;
         }
 

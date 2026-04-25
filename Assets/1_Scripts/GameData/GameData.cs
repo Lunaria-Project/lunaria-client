@@ -40,7 +40,7 @@ public partial class GameData : Singleton<GameData>
                 LoadLocalization(sheetInfo);
                 continue;
             }
-            InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows, CurrentLocalType);
+            InvokeLoadForSheet(sheetInfo.SheetName, sheetInfo.Rows);
         }
     }
 }

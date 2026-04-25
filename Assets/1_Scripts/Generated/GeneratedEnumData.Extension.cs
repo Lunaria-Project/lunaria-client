@@ -16,7 +16,7 @@ public static class GeneratedEnumExtensions
             ItemType.Ride                  => "EnumData.Enum.ItemType.9",
             _                              => value.ToString(),
         };
-        return GameData.Instance.GetLocalString(key, GameData.Instance.CurrentLocalType);
+        return GameData.Instance.GetLocalString(key);
     }
 
 }

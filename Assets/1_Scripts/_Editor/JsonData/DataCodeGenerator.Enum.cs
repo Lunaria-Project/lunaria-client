@@ -125,7 +125,7 @@ public static partial class DataCodeGenerator
 
                 extensionMethodsSb.AppendIndentedLine($"{"_".PadRight(maxLeftLen)} => value.ToString(),", 3);
                 extensionMethodsSb.AppendIndentedLine("};", 2);
-                extensionMethodsSb.AppendIndentedLine("return GameData.Instance.GetLocalString(key, GameData.Instance.CurrentLocalType);", 2);
+                extensionMethodsSb.AppendIndentedLine("return GameData.Instance.GetLocalString(key);", 2);
                 extensionMethodsSb.AppendIndentedLine("}", 1);
                 extensionMethodsSb.AppendLine();
             }

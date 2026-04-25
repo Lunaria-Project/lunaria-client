@@ -15,4 +15,9 @@ public readonly struct LocalKey
         };
         return string.Format(template, args);
     }
+
+    public string Text()
+    {
+        return GameData.Instance.GetLocalString(Value);
+    }
 }

@@ -80,6 +80,10 @@ public class ShopZone : MonoBehaviour
                     break;
                 }
                 case ShopType.CottonCandyShop:
+                {
+                    GlobalManager.Instance.ShortcutInvoke(ShortcutType.CottonCandyShop).Forget();
+                    break;
+                }
                 case ShopType.BeddingShop:
                 {
                     GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO(지선)

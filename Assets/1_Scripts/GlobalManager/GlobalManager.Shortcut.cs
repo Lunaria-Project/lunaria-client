@@ -6,6 +6,7 @@ public enum ShortcutType
     Myhome,
     ShoppingSquare,
     PowderShop,
+    CottonCandyShop,
     ShoppingSquareByPowderShop,
     ShoppingSquareByBeddingShop,
     ShoppingSquareByCottonCandyShop,
@@ -38,6 +39,7 @@ public partial class GlobalManager
             case ShortcutType.Myhome: return GoToMyhomeAsync();
             case ShortcutType.ShoppingSquare: return GoToShoppingSquareAsync();
             case ShortcutType.PowderShop: return GoToShopAsync(ShopType.PowderShop);
+            case ShortcutType.CottonCandyShop: return GoToShopAsync(ShopType.CottonCandyShop);
             case ShortcutType.ShoppingSquareByPowderShop: return GoToShoppingSquareAsync(ShopType.PowderShop);
             case ShortcutType.ShoppingSquareByBeddingShop: return GoToShoppingSquareAsync(ShopType.BeddingShop);
             case ShortcutType.ShoppingSquareByCottonCandyShop: return GoToShoppingSquareAsync(ShopType.CottonCandyShop);
@@ -97,8 +99,9 @@ public partial class GlobalManager
 
         var mapType = shopType switch
         {
-            ShopType.PowderShop => MapType.PowderShop,
-            _                   => MapType.ShoppingSquare,
+            ShopType.PowderShop      => MapType.PowderShop,
+            ShopType.CottonCandyShop => MapType.CottonCandyShop,
+            _                        => MapType.ShoppingSquare,
         };
         OnChangeMap(mapType);
         SetCameraSize(0.5f);

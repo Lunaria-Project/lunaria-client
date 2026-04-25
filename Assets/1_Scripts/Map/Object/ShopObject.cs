@@ -66,7 +66,7 @@ public class ShopObject : MapObject
         {
             if (!_isOpened)
             {
-                GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO(지선)    
+                GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShoppingSquare_ClosedShop.ToString());
                 return;
             }
 
@@ -78,6 +78,10 @@ public class ShopObject : MapObject
                     break;
                 }
                 case ShopType.CottonCandyShop:
+                {
+                    GlobalManager.Instance.ShortcutInvoke(ShortcutType.CottonCandyShop).Forget();
+                    break;
+                }
                 case ShopType.BeddingShop:
                 {
                     GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO(지선)

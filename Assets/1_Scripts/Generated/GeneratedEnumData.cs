@@ -61,9 +61,10 @@ public enum LoadingType
 public enum MapType
 {
     None = 0,
-    Myhome = 1,
-    PowderShop = 2,
-    ShoppingSquare = 3,
+    CottonCandyShop = 1,
+    Myhome = 2,
+    PowderShop = 3,
+    ShoppingSquare = 4,
 }
 
 [SerializeEnum]
