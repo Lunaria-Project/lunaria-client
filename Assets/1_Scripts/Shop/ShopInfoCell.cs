@@ -5,6 +5,7 @@ public class ShopInfoCell : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private Text _titleText;
+    [SerializeField] private Text _tagText;
     [SerializeField] private Text _descriptionText;
     [SerializeField] private GameObject _purchaseButton;
 
@@ -14,6 +15,7 @@ public class ShopInfoCell : MonoBehaviour
         _image.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
         _titleText.SetText(itemData.Name);
         _descriptionText.SetText(itemData.Description);
+        _tagText.SetText(itemData.ItemType.GetDisplayName());
         _purchaseButton.SetActive(canPurchase);
     }
 }

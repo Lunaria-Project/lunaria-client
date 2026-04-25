@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 7186948309252471348}
   - component: {fileID: 8193230033963560462}
   m_Layer: 5
-  m_Name: filter
+  m_Name: TagItemType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -840,6 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopInfoCell
   _image: {fileID: 7518611053733987061}
   _titleText: {fileID: 8926338833007003044}
+  _tagText: {fileID: 3644421111403173194}
   _descriptionText: {fileID: 3180694547614046512}
   _purchaseButton: {fileID: 828652703820296105}
 --- !u!114 &3846831724883995857
