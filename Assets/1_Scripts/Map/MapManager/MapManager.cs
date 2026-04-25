@@ -61,7 +61,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     public void MovePlayerAuto(ShopType shopType, Action onArrived)
     {
-        if(CurrentMap is not ShoppingSquareMap shoppingSquareMap) return;
+        if (CurrentMap is not ShoppingSquareMap shoppingSquareMap) return;
 
         var position = shoppingSquareMap.GetPlayerPosition(shopType);
         PlayerObject.StartAutoMove(position, onArrived);
@@ -227,8 +227,14 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         switch (type)
         {
             case MapType.Myhome:
+            case MapType.PowderShop:
             {
-                PanelManager.Instance.ShowPanel(PanelManager.Type.LunariaDefault);
+                PanelManager.Instance.ShowPanel(PanelManager.Type.LunariaDefault, type);
+                break;
+            }
+            case MapType.ShoppingSquare:
+            {
+                PanelManager.Instance.ShowPanel(PanelManager.Type.ShoppingSquareMain);
                 break;
             }
         }

@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
 {
-    [SerializeField] TopWalletUI _walletUI;
-    [SerializeField] TopTimeUI _timeUI;
-    [SerializeField] MyhomeArtifactUI _artifactUI;
+    [SerializeField] private TopWalletUI _walletUI;
+    [SerializeField] private TopTimeUI _timeUI;
+    [SerializeField] private MyhomeArtifactUI _artifactUI;
     [SerializeField] private InventoryQuickBlock _quickBlock;
+    [SerializeField] private GameObject _shoppingSquareButton;
 
     protected void Awake()
     {
@@ -15,11 +16,15 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
 
     protected override void OnShow(params object[] args)
     {
+        var mapType = (MapType)args.GetAtWithError(0);
+
         _timeUI.OnShow();
         _artifactUI.OnShow();
         _walletUI.Refresh();
-        
+
         _quickBlock.Init();
+
+        _shoppingSquareButton.SetActive(mapType == MapType.Myhome);
     }
 
     protected override void OnHide()
