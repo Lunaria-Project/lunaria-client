@@ -81,12 +81,8 @@ public class NpcCompassUI : MonoBehaviour
 
     public void OnCompassUIClick()
     {
-        if (!_isNearByPlayer)
-        {
-            // TODO(지선): compass ui 위치가 아닌 npc 위치로 이동하도록 수정 필요
-            MapManager.Instance.MovePlayerAuto(_npcDataId, InteractNpc);
-            return;
-        }
+        if (!_isNearByPlayer) return;
+        
         InteractNpc();
         return;
 

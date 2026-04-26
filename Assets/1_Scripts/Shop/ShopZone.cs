@@ -50,46 +50,4 @@ public class ShopZone : MonoBehaviour
         _openedObject.SetActive(isOpened);
         _closedObject.SetActive(!isOpened);
     }
-
-    public void OnClosedShopButtonClick()
-    {
-        GlobalManager.Instance.ShowToastMessage("상점이 준비중이에요!"); // TODO(지선)
-    }
-
-    public void OnOpenedShopButtonClick()
-    {
-        var shopInfoData = GameData.Instance.GetShopInfoData(_shopDataId);
-        var shopType = shopInfoData.ShopType;
-        if (_isNearBy)
-        {
-            InteractShop();
-        }
-        else
-        {
-            MapManager.Instance.MovePlayerAuto(shopType, InteractShop);
-        }
-        return;
-
-        void InteractShop()
-        {
-            switch (shopType)
-            {
-                case ShopType.PowderShop:
-                {
-                    GlobalManager.Instance.ShortcutInvoke(ShortcutType.PowderShop).Forget();
-                    break;
-                }
-                case ShopType.CottonCandyShop:
-                {
-                    GlobalManager.Instance.ShortcutInvoke(ShortcutType.CottonCandyShop).Forget();
-                    break;
-                }
-                case ShopType.BeddingShop:
-                {
-                    GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO(지선)
-                    break;
-                }
-            }
-        }
-    }
 }
