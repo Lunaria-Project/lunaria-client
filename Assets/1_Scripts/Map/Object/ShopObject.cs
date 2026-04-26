@@ -55,11 +55,9 @@ public class ShopObject : MapObject
         if (IsNearBy)
         {
             InteractShop();
+            return;
         }
-        else
-        {
-            MapManager.Instance.MovePlayerAuto(shopType, InteractShop);
-        }
+        MapManager.Instance.MovePlayerAuto(shopType, InteractShop);
         return;
 
         void InteractShop()
