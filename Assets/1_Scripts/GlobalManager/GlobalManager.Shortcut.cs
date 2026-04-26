@@ -1,15 +1,16 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+[SerializeEnum]
 public enum ShortcutType
 {
-    Myhome,
-    ShoppingSquare,
-    PowderShop,
-    CottonCandyShop,
-    ShoppingSquareByPowderShop,
-    ShoppingSquareByBeddingShop,
-    ShoppingSquareByCottonCandyShop,
+    Myhome = 1,
+    ShoppingSquare = 2,
+    PowderShop = 3,
+    CottonCandyShop = 4,
+    ShoppingSquareByPowderShop = 5,
+    ShoppingSquareByBeddingShop = 6,
+    ShoppingSquareByCottonCandyShop = 7,
 }
 
 public partial class GlobalManager
