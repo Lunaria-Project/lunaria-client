@@ -20,6 +20,11 @@ public abstract class MovableObject : MapObject
     private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[8];
     private Vector2 _forceMoveDirection;
 
+    // auto move
+    protected bool IsAutoMoving { get; private set; }
+    private Vector2 _autoMoveTargetPosition;
+    private Action _onAutoMoveArrived;
+
     // sprite animation
     private bool _isFacingFront;
     private float _spriteFrameTime;
@@ -35,6 +40,7 @@ public abstract class MovableObject : MapObject
     {
         base.Update();
         if (!GlobalManager.Instance.CanPlayerMove()) return;
+        UpdateAutoMove();
         UpdateSprite(Time.deltaTime);
         UpdateZPosition();
     }
@@ -124,6 +130,42 @@ public abstract class MovableObject : MapObject
 
             deltaPosition = slide;
         }
+    }
+
+    #endregion
+
+    #region AutoMove
+
+    public void StartAutoMove(Vector2 targetPosition, Action onArrived)
+    {
+        StopAutoMove();
+        IsAutoMoving = true;
+        _autoMoveTargetPosition = targetPosition;
+        _onAutoMoveArrived = onArrived;
+    }
+
+    protected void StopAutoMove()
+    {
+        if (!IsAutoMoving) return;
+        IsAutoMoving = false;
+        _autoMoveTargetPosition = Vector2.zero;
+        _onAutoMoveArrived = null;
+        MoveDirection = Vector2.zero;
+    }
+
+    private void UpdateAutoMove()
+    {
+        if (!IsAutoMoving) return;
+
+        var direction = _autoMoveTargetPosition - (Vector2)Transform.position;
+        if (direction.magnitude <= 10f)
+        {
+            var callback = _onAutoMoveArrived;
+            StopAutoMove();
+            callback?.Invoke();
+            return;
+        }
+        MoveDirection = direction.normalized;
     }
 
     #endregion

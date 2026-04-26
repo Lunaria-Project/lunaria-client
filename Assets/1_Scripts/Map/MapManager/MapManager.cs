@@ -49,6 +49,21 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         SetCamera(type);
     }
 
+    public void MovePlayerAuto(int npcDataId, Action onArrived)
+    {
+        var npcObject = FindNpcObject(npcDataId);
+        if (npcObject == null) return;
+        PlayerObject.StartAutoMove(npcObject.transform.position, onArrived);
+    }
+
+    public void MovePlayerAuto(ShopType shopType, Action onArrived)
+    {
+        if (CurrentMap is not ShoppingSquareMap shoppingSquareMap) return;
+
+        var position = shoppingSquareMap.GetPlayerPosition(shopType);
+        PlayerObject.StartAutoMove(position, onArrived);
+    }
+
     public bool TryInteractNearestNpc()
     {
         NpcCompassUI nearest = null;

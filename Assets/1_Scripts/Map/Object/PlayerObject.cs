@@ -16,6 +16,11 @@ public class PlayerObject : MovableObject
         var moveDown = Input.GetKey(KeyCode.S);
         var moveRight = Input.GetKey(KeyCode.D);
         var moveLeft = Input.GetKey(KeyCode.A);
+        if (moveUp || moveDown || moveRight || moveLeft)
+        {
+            StopAutoMove();
+        }
+        if (IsAutoMoving) return;
 
         var previousMoveDirection = MoveDirection;
         MoveDirection = Vector2.zero;
