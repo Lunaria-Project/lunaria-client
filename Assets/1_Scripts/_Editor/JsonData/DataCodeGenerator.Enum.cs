@@ -75,16 +75,14 @@ public static partial class DataCodeGenerator
         var extensionMethodsSb = new StringBuilder();
         foreach (var (enumName, itemsRaw) in byEnum.OrderBy(k => k.Key, StringComparer.Ordinal))
         {
-            // 결정적 순서: 멤버 이름 Ordinal 정렬(원하면 원본 순서 유지로 바꿔도 됨)
             var items = itemsRaw
-                .GroupBy(x => x.Name, StringComparer.Ordinal) // 중복행 방지
+                .GroupBy(x => x.Name, StringComparer.Ordinal)
                 .Select(g =>
                 (
                     Name: g.Key,
                     DisplayName: g.Select(x => x.DisplayName).FirstOrDefault(v => !string.IsNullOrEmpty(v)),
                     ResourceKey: g.Select(x => x.ResourceKey).FirstOrDefault(v => !string.IsNullOrEmpty(v))
                 ))
-                .OrderBy(x => x.Name, StringComparer.Ordinal)
                 .ToList();
 
             enumSb.AppendIndentedLine($"[SerializeEnum]", 0);
