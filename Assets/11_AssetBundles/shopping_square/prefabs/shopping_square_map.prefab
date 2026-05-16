@@ -6689,8 +6689,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShoppingSquareMap
   _playerInitPosition: {fileID: 3978743682271872679}
   _staticNpcObjects: []
-  _boundsMin: {fileID: 0}
-  _boundsMax: {fileID: 0}
   _powderShopPosition: {fileID: 7698374761508168905}
   _beddingShopPosition: {fileID: 4915145556361288529}
   _cottonCandyShopPosition: {fileID: 2018674598878130352}
@@ -6896,7 +6894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd627766ca5944f8a309ca2b15ca7ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShortcutZone
-  _shortcutType: 0
+  _shortcutType: 1
   _isInstantShortcut: 0
 --- !u!60 &2290900168995659751
 PolygonCollider2D:
