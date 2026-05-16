@@ -278,8 +278,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565640858234605307}
-        m_TargetAssemblyTypeName: SlimeMinigameReadyPopup, Assembly-CSharp
+      - m_Target: {fileID: 3676481186356137175}
+        m_TargetAssemblyTypeName: MinigameReadyPopup, Assembly-CSharp
         m_MethodName: OnInfoButtonClick
         m_Mode: 1
         m_Arguments:
@@ -523,7 +523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
-  - component: {fileID: 565640858234605307}
+  - component: {fileID: 3676481186356137175}
   m_Layer: 5
   m_Name: slime_minigame_ready_popup
   m_TagString: Untagged
@@ -551,7 +551,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &565640858234605307
+--- !u!114 &3676481186356137175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -560,10 +560,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104908432194044823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aabe9a23fbc5e4641bd20995307f604d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0548f5ae8020d4a3f84cf8fecc08073b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SlimeMinigameStartPopup
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameReadyPopup
   _hideOnEscapeKey: 1
+  _pauseTime: 1
+  _popupBackground: 0
+  _minigameType: 0
+  _familiarButton: {fileID: 0}
 --- !u!1 &2543024437557441078
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,8 +956,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565640858234605307}
-        m_TargetAssemblyTypeName: SlimeMinigameReadyPopup, Assembly-CSharp
+      - m_Target: {fileID: 3676481186356137175}
+        m_TargetAssemblyTypeName: MinigameReadyPopup, Assembly-CSharp
         m_MethodName: OnHideButtonClick
         m_Mode: 1
         m_Arguments:
@@ -1551,7 +1555,7 @@ PrefabInstance:
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 565640858234605307}
+      objectReference: {fileID: 3676481186356137175}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1562,7 +1566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SlimeMinigameReadyPopup, Assembly-CSharp
+      value: MinigameReadyPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1761,7 +1765,8 @@ PrefabInstance:
       value: -44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 920352147265471699, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}

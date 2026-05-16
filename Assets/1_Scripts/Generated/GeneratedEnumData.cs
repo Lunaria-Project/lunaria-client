@@ -73,6 +73,7 @@ public enum MinigameType
     None = 0,
     Slime = 1,
     PowderPortal = 2,
+    CottonCandy = 3,
 }
 
 [SerializeEnum]

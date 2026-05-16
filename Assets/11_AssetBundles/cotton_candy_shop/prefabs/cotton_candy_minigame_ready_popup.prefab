@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761013695434237257}
+      - m_Target: {fileID: 3082411863255931222}
         m_TargetAssemblyTypeName: MinigameReadyPopup, Assembly-CSharp
         m_MethodName: OnInfoButtonClick
         m_Mode: 1
@@ -522,9 +522,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
-  - component: {fileID: 761013695434237257}
+  - component: {fileID: 3082411863255931222}
   m_Layer: 5
-  m_Name: powder_portal_minigame_ready_popup
+  m_Name: cotton_candy_minigame_ready_popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,7 +550,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &761013695434237257
+--- !u!114 &3082411863255931222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -955,7 +955,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761013695434237257}
+      - m_Target: {fileID: 3082411863255931222}
         m_TargetAssemblyTypeName: MinigameReadyPopup, Assembly-CSharp
         m_MethodName: OnHideButtonClick
         m_Mode: 1
@@ -1554,7 +1554,7 @@ PrefabInstance:
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 761013695434237257}
+      objectReference: {fileID: 3082411863255931222}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1602,7 +1602,7 @@ PrefabInstance:
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 761013695434237257}
+      objectReference: {fileID: 3082411863255931222}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

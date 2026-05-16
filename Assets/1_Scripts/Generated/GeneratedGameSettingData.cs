@@ -16,6 +16,7 @@ public class GameSetting : Singleton<GameSetting>
     public float MaxSlimeGaugePer10Minutes { get; private set; }
     public int SlimeMinigameArtifactCutsceneId { get; private set; }
     public int PowderMinigameArtifactCutsceneId { get; private set; }
+    public int CottonCandyMinigameArtifactCutsceneId { get; private set; }
     public int InitialInventoryUnlockedSlotCount { get; private set; }
     public int MaxInventorySlotCount { get; private set; }
     public int InitialQuickSlotCount { get; private set; }
@@ -42,6 +43,7 @@ public class GameSetting : Singleton<GameSetting>
                 case "MaxSlimeGaugePer10Minutes": MaxSlimeGaugePer10Minutes = Convert.ToSingle(row[2]); break;
                 case "SlimeMinigameArtifactCutsceneId": SlimeMinigameArtifactCutsceneId = Convert.ToInt32(row[2]); break;
                 case "PowderMinigameArtifactCutsceneId": PowderMinigameArtifactCutsceneId = Convert.ToInt32(row[2]); break;
+                case "CottonCandyMinigameArtifactCutsceneId": CottonCandyMinigameArtifactCutsceneId = Convert.ToInt32(row[2]); break;
                 case "InitialInventoryUnlockedSlotCount": InitialInventoryUnlockedSlotCount = Convert.ToInt32(row[2]); break;
                 case "MaxInventorySlotCount": MaxInventorySlotCount = Convert.ToInt32(row[2]); break;
                 case "InitialQuickSlotCount": InitialQuickSlotCount = Convert.ToInt32(row[2]); break;
