@@ -17,6 +17,7 @@ public partial class PopupManager
         SystemButton = 10,
         Inventory = 11,
         PowderShop = 12,
+        CottonCandyMinigameInfo = 13,
     }
 
     private readonly Dictionary<Type, string> _popupResourceKey = new()
@@ -33,5 +34,6 @@ public partial class PopupManager
         { Type.SystemButton, "system_button_popup" },
         { Type.Inventory, "inventory_popup" },
         { Type.PowderShop, "powder_shop_popup" },
+        { Type.CottonCandyMinigameInfo, "cotton_candy_minigame_info_popup" },
     };
 }

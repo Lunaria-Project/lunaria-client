@@ -1,4 +1,4 @@
-public class PowderPortalMinigameInfoPopup : EmptyParamPopup
+public class OnlyUIPopup : EmptyParamPopup
 {
     protected override void OnShow() { }
 
