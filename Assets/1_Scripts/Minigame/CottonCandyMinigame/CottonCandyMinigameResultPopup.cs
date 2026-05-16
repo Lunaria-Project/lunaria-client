@@ -3,14 +3,14 @@ using Generated;
 using Lunaria;
 using UnityEngine;
 
-public struct PowderPortalMinigameResultPopupParameter : IPopupParameter
+public struct CottonCandyMinigameResultPopupParameter : IPopupParameter
 {
     public int Score { get; init; }
     public Action RetryAction { get; init; }
     public Action HideAction { get; init; }
 }
 
-public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultPopupParameter>
+public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPopupParameter>
 {
     [SerializeField] private Image _rewardImage;
     [SerializeField] private Text _rewardQuantityText;
@@ -21,7 +21,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
     private Action _hideAction;
     private (int Id, long Quantity) _reward;
 
-    protected override void OnShow(PowderPortalMinigameResultPopupParameter parameter)
+    protected override void OnShow(CottonCandyMinigameResultPopupParameter parameter)
     {
         _retryAction = parameter.RetryAction;
         _hideAction = parameter.HideAction;
@@ -40,7 +40,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
         {
             foreach (var data in GameData.Instance.DTMinigameRewardData)
             {
-                if (data.MinigameType != MinigameType.PowderPortal) continue;
+                if (data.MinigameType != MinigameType.CottonCandy) continue;
                 return data;
             }
             return null;
@@ -51,7 +51,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
     {
         UserData.Instance.AddReward(_reward.Id, _reward.Quantity);
 
-        var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal);
+        var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.CottonCandy);
         GameTimeManager.Instance.AddHours(infoData.DurationHours);
     }
 

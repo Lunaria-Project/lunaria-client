@@ -960,9 +960,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
-  - component: {fileID: 4564324641084014338}
+  - component: {fileID: 1951094547878984828}
   m_Layer: 5
-  m_Name: powder_portal_minigame_result_popup
+  m_Name: cotton_candy_minigame_result_popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -988,7 +988,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4564324641084014338
+--- !u!114 &1951094547878984828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -997,16 +997,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104908432194044823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81fcc9ee8a6704d979172eebf40a5520, type: 3}
+  m_Script: {fileID: 11500000, guid: 595224f0886d64d3ca1ce0255a724c32, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowderPortalMinigameResultPopup
+  m_EditorClassIdentifier: Assembly-CSharp::CottonCandyMinigameResultPopup
   _hideOnEscapeKey: 1
   _pauseTime: 1
   _popupBackground: 0
   _rewardImage: {fileID: 9131491688878133440}
   _rewardQuantityText: {fileID: 2853800504805722679}
   _scoreText: {fileID: 2853800504805722679}
-  _retryButton: {fileID: 2401384613382369786}
+  _retryButton: {fileID: 0}
 --- !u!1 &2126799407005347506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4185,18 +4185,18 @@ PrefabInstance:
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4564324641084014338}
+      objectReference: {fileID: 1951094547878984828}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCloseButtonClick
+      value: OnHideButtonClick
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PowderPortalMinigameResultPopup, Assembly-CSharp
+      value: CottonCandyMinigameResultPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4229,7 +4229,7 @@ PrefabInstance:
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4564324641084014338}
+      objectReference: {fileID: 1951094547878984828}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4240,7 +4240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PowderPortalMinigameResultPopup, Assembly-CSharp
+      value: CottonCandyMinigameResultPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4455,18 +4455,18 @@ PrefabInstance:
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4564324641084014338}
+      objectReference: {fileID: 1951094547878984828}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCloseButtonClick
+      value: OnHideButtonClick
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PowderPortalMinigameResultPopup, Assembly-CSharp
+      value: CottonCandyMinigameResultPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4499,7 +4499,7 @@ PrefabInstance:
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4564324641084014338}
+      objectReference: {fileID: 1951094547878984828}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4510,7 +4510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PowderPortalMinigameResultPopup, Assembly-CSharp
+      value: CottonCandyMinigameResultPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4704,10 +4704,5 @@ PrefabInstance:
 --- !u!224 &2144354881634858852 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3482573977342181965, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
-  m_PrefabInstance: {fileID: 3285043823708239145}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2401384613382369786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 920352147265471699, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
   m_PrefabInstance: {fileID: 3285043823708239145}
   m_PrefabAsset: {fileID: 0}
