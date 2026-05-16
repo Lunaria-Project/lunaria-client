@@ -106,6 +106,7 @@ public class NpcCompassUI : MonoBehaviour
             NpcMenuFunctionType.PlayFixedCutscene        => CompassUIType.ShowTitleWhenNearby,
             NpcMenuFunctionType.PlaySlimeMinigame        => CompassUIType.ShowOnlyBubble,
             NpcMenuFunctionType.PlayPowderPortalMinigame => CompassUIType.ShowOnlyBubble,
+            NpcMenuFunctionType.PlayCottonCandyMinigame  => CompassUIType.ShowOnlyBubble,
             _                                            => CompassUIType.None,
         };
     }
