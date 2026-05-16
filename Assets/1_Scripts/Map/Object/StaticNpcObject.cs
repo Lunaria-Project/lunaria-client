@@ -14,6 +14,7 @@ public class StaticNpcObject : MapObject
     public CircleCollider2D Collider => _collider2D;
     public float DistanceToPlayer { get; private set; }
     private MapStaticNpcMenuData _menuData;
+    private bool _isNearBy;
 
     private void Awake()
     {
@@ -38,15 +39,17 @@ public class StaticNpcObject : MapObject
         _menuData = GameData.Instance.GetStaticNpcMenuData(_npcId);
     }
 
-    public void SetIsNearBy(float distance)
+    public void SetIsNearBy(bool isNearBy, float distance)
     {
         if (_menuData == null) return;
+        _isNearBy = isNearBy;
         DistanceToPlayer = distance;
     }
 
     public void OnNpcTouch()
     {
         if (_menuData == null) return;
+        if (!_isNearBy) return;
         if (_menuData.FunctionType == NpcMenuFunctionType.None) return;
         GlobalManager.Instance.InvokeNpcFunction(_menuData.FunctionType, _menuData.FunctionValue);
     }

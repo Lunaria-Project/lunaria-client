@@ -35,7 +35,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         foreach (var npcObject in CurrentMap.StaticNpcObjects)
         {
             var distance = PlayerObject.Collider.Distance(npcObject.Collider).distance;
-            npcObject.SetIsNearBy(distance);
+            var isNearBy = distance <= _config.NpcDistance;
+            npcObject.SetIsNearBy(isNearBy, distance);
         }
     }
 
