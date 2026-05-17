@@ -8,6 +8,7 @@ public enum CursorType
     DefaultEmpty,
     Default,
     BubbleGun,
+    Stick,
 }
 
 public partial class GlobalManager

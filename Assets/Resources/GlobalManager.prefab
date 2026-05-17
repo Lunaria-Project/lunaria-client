@@ -532,12 +532,14 @@ MonoBehaviour:
   _globalCamara: {fileID: 1130869067960686095}
   _toastMessageBackground: {fileID: 7883865002795120395}
   _toastMessageText: {fileID: 3772651649979687527}
+  LocalType: 0
+  IsMinigamePlaying: 0
   _cursorRectTransform: {fileID: 5652934829353137213}
   _cursorImageRectTransform: {fileID: 608641743687087475}
   _cursorImage: {fileID: 4142743670795488218}
   _spriteDuration: 0.2
   _cursorPrefix:
-    _keyData: 000000000100000002000000
+    _keyData: 00000000010000000200000003000000
     _valueData:
     - Sprites:
       - {fileID: 21300000, guid: 4b36e9d53f2fd495089f89257cd39fd1, type: 3}
@@ -551,7 +553,10 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 582275ce054c344df97ae3f5da8b81a6, type: 3}
       Offset: {x: 40, y: -50}
       Scale: 1.5
-  PlayerTagName: Player
+    - Sprites:
+      - {fileID: 21300000, guid: 75b54ed2452c44fff83ccc9ce0d4d3fa, type: 3}
+      Offset: {x: 0, y: 0}
+      Scale: 1.5
 --- !u!1 &8641716565095121702
 GameObject:
   m_ObjectHideFlags: 0
