@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Lunaria/Minigame/PowderPortalConfig")]
 public class PowderPortalMinigameConfig : ScriptableObject
 {
-    [SerializeField] private int _minigameSeconds = 60;
     [SerializeField] private float _spawnIntervalSeconds = 1.5f;
     [SerializeField] private int _visibleSlotCount = 5;
     [SerializeField] private int _correctScore = 10;
@@ -22,7 +21,6 @@ public class PowderPortalMinigameConfig : ScriptableObject
     [SerializeField] private int _rightRate = 33;
     [SerializeField] private int _spaceRate = 34;
 
-    public int MinigameSeconds => _minigameSeconds;
     public int VisibleSlotCount => _visibleSlotCount;
     public int CorrectScore => _correctScore;
     public int WrongScore => _wrongScore;

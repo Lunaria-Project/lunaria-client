@@ -295,11 +295,13 @@ namespace Generated
     {
         public MinigameType MinigameType { get; private set; }
         public int DurationHours { get; private set; }
+        public int MinigameSeconds { get; private set; }
 
-        public MinigameInfoData(MinigameType minigameType, int durationHours)
+        public MinigameInfoData(MinigameType minigameType, int durationHours, int minigameSeconds)
         {
             MinigameType = minigameType;
             DurationHours = durationHours;
+            MinigameSeconds = minigameSeconds;
         }
     }
 

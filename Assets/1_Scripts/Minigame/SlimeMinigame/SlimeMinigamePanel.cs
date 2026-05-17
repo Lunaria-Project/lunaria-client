@@ -73,9 +73,10 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 
     private void Init()
     {
+        var minigameSeconds = GameData.Instance.GetMinigameInfoData(MinigameType.Slime).MinigameSeconds;
         _isInitialized = false;
-        _remainTime = _config.MinigameSeconds;
-        _minigameTime = _config.MinigameSeconds;
+        _remainTime = minigameSeconds;
+        _minigameTime = minigameSeconds;
         _slimeCount = 0;
         _remainTimeImage.fillAmount = 0;
         _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
@@ -91,7 +92,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
                 UserData.Instance.AddSlimeGauge(-100);
                 _isInitialized = true;
                 StartSlimeCoroutine();
-                Invoke(nameof(StopSlimeCoroutine), _config.MinigameSeconds);
+                Invoke(nameof(StopSlimeCoroutine), minigameSeconds);
             });
     }
 

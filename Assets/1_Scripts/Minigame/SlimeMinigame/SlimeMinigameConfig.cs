@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Lunaria/Minigame/SlimeConfig")]
 public class SlimeMinigameConfig : ScriptableObject
 {
-    [SerializeField] private int _minigameSeconds = 60;
     [SerializeField] private int _slimeShowCount = 3;
     [SerializeField] private float _showDelayMinSeconds = 0.5f;
     [SerializeField] private float _showDelayMaxSeconds = 2.5f;
@@ -19,7 +18,6 @@ public class SlimeMinigameConfig : ScriptableObject
     [SerializeField] private float _slime3Size = 1f;
     [SerializeField] private float _slime4Size = 1.2f;
 
-    public int MinigameSeconds => _minigameSeconds;
     public int SlimeShowCount => _slimeShowCount;
 
     public float GetShowDelayRandomSeconds(SlimeType type)

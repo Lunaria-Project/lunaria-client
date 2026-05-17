@@ -113,8 +113,9 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         _isInitialized = false;
         _isObjectMoving = false;
         _score = 0;
-        _remainTime = _config.MinigameSeconds;
-        _minigameTime = _config.MinigameSeconds;
+        var minigameSeconds = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal).MinigameSeconds;
+        _remainTime = minigameSeconds;
+        _minigameTime = minigameSeconds;
         _remainTimeImage.fillAmount = 0;
         _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
         //_scoreText.SetText(_score.ToString());
