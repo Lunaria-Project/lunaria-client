@@ -49,6 +49,14 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     protected override void OnShow(params object[] args)
     {
         GlobalManager.Instance.SetCursor(CursorType.BubbleGun);
+        var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
+        var requiredArtifactType = GameData.Instance.GetMinigameInfoData(MinigameType.Slime).EquippedArtifactType;
+        if (artifactData.ArtifactType != requiredArtifactType)
+        {
+            LogManager.LogErrorPack($"SlimeMinigamePanel: {requiredArtifactType.GetDisplayName()}이(가) 장착되지 않았습니다.", artifactData.ArtifactType);
+            HidePanel();
+            return;
+        }
         if (UserData.Instance.SlimeGauge < 100)
         {
             LogManager.LogErrorPack("SlimeMinigamePanel: 슬라임 게이지가 부족합니다.", UserData.Instance.SlimeGauge);

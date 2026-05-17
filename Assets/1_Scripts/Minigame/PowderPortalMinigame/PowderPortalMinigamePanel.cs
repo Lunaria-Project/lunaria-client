@@ -86,9 +86,10 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     protected override void OnShow(params object[] args)
     {
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
-        if (artifactData.ArtifactType != ArtifactType.Powder)
+        var requiredArtifactType = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal).EquippedArtifactType;
+        if (artifactData.ArtifactType != requiredArtifactType)
         {
-            LogManager.LogErrorPack("PowderPortalMinigamePanel: 파우더가 장착되지 않았습니다.", artifactData.ArtifactType);
+            LogManager.LogErrorPack($"PowderPortalMinigamePanel: {requiredArtifactType.GetDisplayName()}이(가) 장착되지 않았습니다.", artifactData.ArtifactType);
             HidePanel();
             return;
         }

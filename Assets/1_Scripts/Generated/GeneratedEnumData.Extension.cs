@@ -1,5 +1,19 @@
 public static class GeneratedEnumExtensions
 {
+    public static string GetDisplayName(this ArtifactType value)
+    {
+        var key = value switch
+        {
+            ArtifactType.Stick     => "EnumData.Enum.ArtifactType.1",
+            ArtifactType.Powder    => "EnumData.Enum.ArtifactType.2",
+            ArtifactType.Bubblegun => "EnumData.Enum.ArtifactType.3",
+            ArtifactType.Grinder   => "EnumData.Enum.ArtifactType.4",
+            ArtifactType.Pendant   => "EnumData.Enum.ArtifactType.5",
+            _                      => value.ToString(),
+        };
+        return GameData.Instance.GetLocalString(key);
+    }
+
     public static string GetDisplayName(this ItemType value)
     {
         var key = value switch

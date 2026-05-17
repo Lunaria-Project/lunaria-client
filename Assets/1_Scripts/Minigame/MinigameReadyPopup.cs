@@ -18,17 +18,6 @@ public class MinigameReadyPopup : EmptyParamPopup
 
     protected override void OnHide() { }
 
-    private ArtifactType GetRequiredArtifactType()
-    {
-        return _minigameType switch
-        {
-            MinigameType.Slime        => ArtifactType.Bubblegun,
-            MinigameType.PowderPortal => ArtifactType.Powder,
-            MinigameType.CottonCandy  => ArtifactType.Stick,
-            _                         => ArtifactType.None,
-        };
-    }
-
     private int GetArtifactCutsceneId()
     {
         return _minigameType switch
@@ -75,7 +64,7 @@ public class MinigameReadyPopup : EmptyParamPopup
 
     public void OnStartButtonClick()
     {
-        var requiredArtifactType = GetRequiredArtifactType();
+        var requiredArtifactType = GameData.Instance.GetMinigameInfoData(_minigameType).EquippedArtifactType;
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
         if (artifactData.ArtifactType != requiredArtifactType)
         {
