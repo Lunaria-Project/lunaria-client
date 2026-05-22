@@ -759,6 +759,13 @@ namespace PolyAndCode.UI.effect
         /// </summary>
         protected override void OnEnable()
         {
+            //No Graphic(Image/Text/RawImage...) on this GameObject -> disable self only
+            if (graphic == null)
+            {
+                enabled = false;
+                return;
+            }
+
             //To make the gradient update under masks
             //Comment if you are not planning to use gradient under masks at all
             if (isMaskingSupported)
