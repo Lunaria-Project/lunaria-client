@@ -48,6 +48,30 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadSprite(resourceKey);
     }
 
+    public Sprite LoadCottonCandyMinigameSprite(int layerIndex, CottonCandyColor color, CottonCandyShape shape)
+    {
+        var colorName = color.ToString().ToLowerInvariant();
+        var resourceKey = shape switch
+        {
+            CottonCandyShape.Circle => $"ui_cotton_{GetCottonCandyLayerOrdinal(layerIndex)}_{colorName}",
+            CottonCandyShape.Cat    => $"ui_cotton_cat_{colorName}",
+            CottonCandyShape.Star   => $"ui_cotton_star_{colorName}",
+            _                       => null,
+        };
+        return LoadSprite(resourceKey);
+    }
+
+    private static string GetCottonCandyLayerOrdinal(int layerIndex)
+    {
+        return layerIndex switch
+        {
+            0 => "1st",
+            1 => "2nd",
+            2 => "3rd",
+            _ => null,
+        };
+    }
+
     public NormalMap LoadMap(MapType type)
     {
         var resourceKey = type switch

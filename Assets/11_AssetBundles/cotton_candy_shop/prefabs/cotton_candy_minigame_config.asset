@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82552418c986e4c2c99e4281b943a93b, type: 3}
+  m_Name: cotton_candy_minigame_config
+  m_EditorClassIdentifier: Assembly-CSharp::CottonCandyMinigameConfig
+  _customerSpawnMinSeconds: 3
+  _customerSpawnMaxSeconds: 5
+  _orderQuantityMin: 1
+  _orderQuantityMax: 3
+  _scoreRewardMin: 1
+  _scoreRewardMax: 10
+  _rotationCountMin: 1
+  _rotationCountMax: 10
+  _burntColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

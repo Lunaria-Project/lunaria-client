@@ -234,6 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2712752664040237530}
+  - component: {fileID: 4876679592971837844}
   m_Layer: 5
   m_Name: item _cotton_minigame_guest
   m_TagString: Untagged
@@ -264,6 +265,20 @@ RectTransform:
   m_AnchoredPosition: {x: -136, y: -143}
   m_SizeDelta: {x: 248.4016, y: 248.4016}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4876679592971837844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7522856033900027265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd7941099731474eb25c5f72409f167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CottonCandyCustomer
+  _root: {fileID: 7522856033900027265}
+  _orderBlock: {fileID: 6476972350574866832}
 --- !u!1001 &38936058937429273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -558,3 +573,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6244488625712712599, guid: 6be41f2d53ceb450e9db3d9083d5ff68, type: 3}
   m_PrefabInstance: {fileID: 38936058937429273}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6476972350574866832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6442540189022813321, guid: 6be41f2d53ceb450e9db3d9083d5ff68, type: 3}
+  m_PrefabInstance: {fileID: 38936058937429273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b960f77759d4e410c8fd78f97e8c30a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CottonCandyOrderBlock
