@@ -82,4 +82,12 @@ public static class StringExtension
         if (bool.TryParse(value, out var boolVal)) return boolVal;
         return false;
     }
+
+    public static Color ToColor(this string hex)
+    {
+        if (ColorUtility.TryParseHtmlString(hex, out var color)) return color;
+
+        LogManager.LogError($"[ToColor] '{hex}'을(를) Color로 변환 실패");
+        return Color.white;
+    }
 }
