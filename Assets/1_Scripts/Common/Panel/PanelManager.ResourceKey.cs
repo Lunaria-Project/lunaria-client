@@ -9,5 +9,6 @@ public partial class PanelManager
         { Type.ShoppingSquareMain, "shopping_square_panel" },
         { Type.SlimeMinigame, "slime_minigame_panel" },
         { Type.PowderPortalMinigame, "powder_portal_minigame_panel" },
+        { Type.CottonCandyMinigame, "cotton_candy_minigame_panel" },
     };
 }
