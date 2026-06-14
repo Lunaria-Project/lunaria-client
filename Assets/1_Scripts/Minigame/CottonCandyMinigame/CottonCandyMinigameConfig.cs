@@ -15,6 +15,7 @@ public class CottonCandyMinigameConfig : ScriptableObject
     [SerializeField] private int _rotationCountMin = 1;
     [SerializeField] private int _rotationCountMax = 10;
     [SerializeField] private Color _burntColor = new(0.2f, 0.2f, 0.2f, 1f);
+    [SerializeField] private float _acceptTurns = 0.5f;
 
     public float CustomerSpawnMinSeconds => _customerSpawnMinSeconds;
     public float CustomerSpawnMaxSeconds => _customerSpawnMaxSeconds;
@@ -26,4 +27,5 @@ public class CottonCandyMinigameConfig : ScriptableObject
     public int RotationCountMin => _rotationCountMin;
     public int RotationCountMax => _rotationCountMax;
     public Color BurntColor => _burntColor;
+    public float AcceptTurns => _acceptTurns;
 }

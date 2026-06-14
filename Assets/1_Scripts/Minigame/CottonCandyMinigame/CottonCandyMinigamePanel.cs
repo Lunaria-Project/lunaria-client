@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
@@ -15,6 +16,11 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
         UpdateTime();
         if (!_isInitialized) return;
         _customerBlock.UpdateCustomer(Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnDiscardButtonClick();
+        }
     }
 
     protected override void OnShow(params object[] args)
@@ -55,10 +61,7 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
         InitUI();
 
         PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter { CountDownSeconds = 3 })
-            .SetOnHideAction(() =>
-            {
-                _isInitialized = true;
-            });
+            .SetOnHideAction(() => { ShowReady().Forget(); });
     }
 
     private void UpdateTime()
@@ -91,12 +94,13 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
             ScoreReward = _random.Next(_config.ScoreRewardMin, _config.ScoreRewardMax + 1),
             Layers = new CottonCandyLayerOrder[CottonCandyMinigameConfig.LayerCount],
         };
+        var topLayerIndex = order.Layers.Length - 1;
         for (var i = 0; i < order.Layers.Length; i++)
         {
             order.Layers[i] = new CottonCandyLayerOrder
             {
                 Color = (CottonCandyColor)_random.Next(1, 6),
-                Shape = (CottonCandyShape)_random.Next(1, 4),
+                Shape = i == topLayerIndex ? (CottonCandyShape)_random.Next(1, 4) : CottonCandyShape.Circle,
                 Direction = (CottonCandyRotationDirection)_random.Next(0, 2),
                 RotationCount = _random.Next(_config.RotationCountMin, _config.RotationCountMax + 1),
             };
@@ -116,14 +120,21 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
         return $"  Order: qty={order.Quantity}, score={order.ScoreReward},{layers}";
     }
 
-    // TODO: 임시 - 버튼으로 맨 앞 손님 주문 완료
-    public void OnCompleteOrderButtonClick()
+    public void OnSubmitButtonClick()
     {
         if (!_isInitialized) return;
+        if (!_cottonCandyBlock.IsComplete) return;
         if (!_customerBlock.TryServeFrontCustomer(out var scoreReward)) return;
 
         _score += scoreReward;
         SetScoreText();
-        LogManager.Log($"[CottonCandyMinigame] 주문 완료: +{scoreReward}, 총점={_score}");
+        LogManager.Log($"[CottonCandyMinigame] 솜사탕 제출: +{scoreReward}, 총점={_score}");
+    }
+
+    public void OnDiscardButtonClick()
+    {
+        if (!_isInitialized) return;
+        _cottonCandyBlock.ResetMaking();
+        TryStartMaking();
     }
 }

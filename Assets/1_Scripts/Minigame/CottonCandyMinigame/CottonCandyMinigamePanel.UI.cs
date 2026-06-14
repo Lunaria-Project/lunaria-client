@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Lunaria;
 using UnityEngine;
 
@@ -9,12 +10,20 @@ public partial class CottonCandyMinigamePanel
     [SerializeField] private CottonCandyOrderBlock currentOrderBlock;
     [SerializeField] private CottonCandyMakeButton[] _colorButtons;
     [SerializeField] private CottonCandyMakeButton[] _shapeButtons;
+    [SerializeField] private CottonCandyBlock _cottonCandyBlock;
     [SerializeField] private CottonCandyMinigameCustomerBlock _customerBlock;
     [SerializeField] private CottonCandyMinigameConfig _config;
+    [SerializeField] private int _waitReadyMillis;
+    [SerializeField] private GameObject _closedObject;
+    [SerializeField] private GameObject _openedObject;
+
+    private CottonCandyColor _selectedColor;
+    private CottonCandyShape _selectedShape;
 
     protected void Awake()
     {
         _customerBlock.SetOnCurrentCustomerChangedAction(OnCurrentCustomerChanged);
+        _cottonCandyBlock.SetOnTierAdvancedAction(DeselectColorButtons);
         foreach (var button in _colorButtons)
         {
             button.SetOnClickAction(OnColorButtonClick);
@@ -32,7 +41,19 @@ public partial class CottonCandyMinigamePanel
         SetScoreText();
         currentOrderBlock.Hide();
         DeselectAllButtons();
+        _cottonCandyBlock.Init(_config);
         _customerBlock.Init(_config);
+        _openedObject.SetActive(false);
+        _closedObject.SetActive(true);
+    }
+
+    private async UniTask ShowReady()
+    {
+        _closedObject.SetActive(false);
+        _openedObject.SetActive(true);
+        await UniTask.Delay(_waitReadyMillis);
+        _openedObject.SetActive(false);
+        _isInitialized = true;
     }
 
     private void SetScoreText()
@@ -51,28 +72,44 @@ public partial class CottonCandyMinigamePanel
         customer.SetOrder(order);
         currentOrderBlock.SetOrder(order);
         DeselectAllButtons();
+        _cottonCandyBlock.SetOrder(order);
     }
 
     private void DeselectAllButtons()
+    {
+        DeselectColorButtons();
+        foreach (var button in _shapeButtons)
+        {
+            button.SetSelected(false);
+        }
+        _selectedShape = CottonCandyShape.None;
+    }
+
+    private void DeselectColorButtons()
     {
         foreach (var button in _colorButtons)
         {
             button.SetSelected(false);
         }
-        foreach (var button in _shapeButtons)
-        {
-            button.SetSelected(false);
-        }
+        _selectedColor = CottonCandyColor.None;
     }
 
-    // TODO: 임시 - 색/모양 선택 로그 (제작 로직 연결 예정)
+    private void TryStartMaking()
+    {
+        if (_selectedColor == CottonCandyColor.None) return;
+        if (_selectedShape == CottonCandyShape.None) return;
+        _cottonCandyBlock.StartMaking();
+    }
+
     private void OnColorButtonClick(CottonCandyMakeButton clicked)
     {
         foreach (var button in _colorButtons)
         {
             button.SetSelected(button == clicked);
         }
-        LogManager.Log($"[CottonCandyMinigame] 색 선택: {(CottonCandyColor)clicked.Value}");
+        _selectedColor = (CottonCandyColor)clicked.Value;
+        LogManager.Log($"[CottonCandyMinigame] 색 선택: {_selectedColor}");
+        TryStartMaking();
     }
 
     private void OnShapeButtonClick(CottonCandyMakeButton clicked)
@@ -81,6 +118,8 @@ public partial class CottonCandyMinigamePanel
         {
             button.SetSelected(button == clicked);
         }
-        LogManager.Log($"[CottonCandyMinigame] 모양 선택: {(CottonCandyShape)clicked.Value}");
+        _selectedShape = (CottonCandyShape)clicked.Value;
+        LogManager.Log($"[CottonCandyMinigame] 모양 선택: {_selectedShape}");
+        TryStartMaking();
     }
 }
