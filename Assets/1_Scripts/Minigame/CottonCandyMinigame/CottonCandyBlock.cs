@@ -64,9 +64,10 @@ public class CottonCandyBlock : MonoBehaviour
         ResetMaking();
     }
 
-    public void StartMaking()
+    public void StartMaking(CottonCandyColor color, CottonCandyShape shape)
     {
         if (_state != CottonCandyMakeState.SelectingColorShape) return;
+        _tiers.GetAt(_currentTier).SetSprite(ResourceManager.Instance.LoadCottonCandyMinigameSprite(_currentTier, color, shape));
         SetState(CottonCandyMakeState.Making);
     }
 
@@ -79,11 +80,6 @@ public class CottonCandyBlock : MonoBehaviour
             return;
         }
         _order = order;
-        for (var i = 0; i < tierCount; i++)
-        {
-            var layer = order.Layers[i];
-            _tiers.GetAt(i).SetSprite(ResourceManager.Instance.LoadCottonCandyMinigameSprite(i, layer.Color, layer.Shape));
-        }
         ResetMaking();
     }
 

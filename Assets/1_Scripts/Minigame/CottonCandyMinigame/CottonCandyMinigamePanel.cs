@@ -135,6 +135,6 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
     {
         if (!_isInitialized) return;
         _cottonCandyBlock.ResetMaking();
-        TryStartMaking();
+        DeselectAllButtons();
     }
 }

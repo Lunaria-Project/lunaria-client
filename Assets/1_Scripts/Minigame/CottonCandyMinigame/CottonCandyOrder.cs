@@ -1,11 +1,11 @@
 public enum CottonCandyColor
 {
     None = 0,
-    Pink = 1,
-    Yellow = 2,
-    Blue = 3,
-    Purple = 4,
-    White = 5,
+    White = 1,
+    Purple = 2,
+    Yellow = 3,
+    Blue = 4,
+    Pink = 5,
 }
 
 public enum CottonCandyShape

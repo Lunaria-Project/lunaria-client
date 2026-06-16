@@ -98,7 +98,7 @@ public partial class CottonCandyMinigamePanel
     {
         if (_selectedColor == CottonCandyColor.None) return;
         if (_selectedShape == CottonCandyShape.None) return;
-        _cottonCandyBlock.StartMaking();
+        _cottonCandyBlock.StartMaking(_selectedColor, _selectedShape);
     }
 
     private void OnColorButtonClick(CottonCandyMakeButton clicked)
