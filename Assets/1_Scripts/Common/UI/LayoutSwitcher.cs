@@ -51,6 +51,16 @@ namespace Lunaria
                     SetLayout(layout.Key);
                 }
             }
+
+            if (GUILayout.Button("LayoutName 복사"))
+            {
+                var sb = new System.Text.StringBuilder();
+                foreach (var layout in _layouts)
+                {
+                    sb.AppendLine($"private const string {layout.Key}LayoutKey = \"{layout.Key}\";");
+                }
+                GUIUtility.systemCopyBuffer = sb.ToString().TrimEnd();
+            }
         }
 #endif
     }
