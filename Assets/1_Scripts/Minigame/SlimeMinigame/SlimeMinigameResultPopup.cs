@@ -13,9 +13,12 @@ public struct SlimeMinigameResultPopupParameter : IPopupParameter
 
 public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
 {
+    [SerializeField] private LayoutSwitcher _layoutSwitcher;
+    [SerializeField] private Text _titleText;
     [SerializeField] private Image _rewardImage;
-    [SerializeField] private Text _scoreText;
+    [SerializeField] private Text[] _scoreTexts;
     [SerializeField] private Text _resultText;
+    [SerializeField] private Text _buttonText;
     [SerializeField] private GameObject _retryButton;
 
     private Action _retryAction;
@@ -41,12 +44,20 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
             }
         }
 
-        var rewardData = GetGlueRewardData();
+        var hasReward = rewardScore != 0;
+        _layoutSwitcher.SetLayout(hasReward ? "Normal" : "NoReward");
 
-        _rewardImage.SetSprite(ResourceManager.Instance.LoadSprite(rewardData.IconResourceKey));
-        _scoreText.SetText(LocalizationKey.Minigame_Slime_Score.Format(parameter.Score.ToPrice()));
-        _resultText.SetText(LocalizationKey.SlimeMinigameResultPopup_Description.Format(rewardData.Name));
+        _titleText.SetText(hasReward ? LocalizationKey.SlimeMinigameResultPopup_Title.Text() : LocalizationKey.SlimeMinigameResultPopup_NoRewardTitle.Text());
+        _scoreTexts.SetTexts(LocalizationKey.Minigame_Slime_Score.Format(parameter.Score.ToPrice()));
+        _buttonText.SetText(hasReward ? LocalizationKey.MinigameResultPopup_RewardButton.Text() : LocalizationKey.MinigameResultPopup_NoRewardButton.Text());
         _retryButton.SetActive(RequirementManager.Instance.IsSatisfied(RequirementType.MyhomeSlimeAppeared, null));
+
+        if (hasReward)
+        {
+            var rewardData = GetGlueRewardData();
+            _rewardImage.SetSprite(ResourceManager.Instance.LoadSprite(rewardData.IconResourceKey));
+            _resultText.SetText(LocalizationKey.SlimeMinigameResultPopup_Description.Format(rewardData.Name));
+        }
         return;
 
         ItemData GetGlueRewardData()

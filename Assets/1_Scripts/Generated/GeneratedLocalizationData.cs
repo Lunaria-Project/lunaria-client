@@ -36,7 +36,11 @@ public static class LocalizationKey
     public static readonly LocalKey GameTime_Pm = new("GameTime.Pm");
     public static readonly LocalKey Minigame_Slime_Score = new("Minigame.Slime.Score");
     public static readonly LocalKey FamiliarSelectPopup_BottomGuide = new("FamiliarSelectPopup.BottomGuide");
+    public static readonly LocalKey SlimeMinigameResultPopup_NoRewardTitle = new("SlimeMinigameResultPopup.NoRewardTitle");
+    public static readonly LocalKey SlimeMinigameResultPopup_Title = new("SlimeMinigameResultPopup.Title");
     public static readonly LocalKey SlimeMinigameResultPopup_Description = new("SlimeMinigameResultPopup.Description");
+    public static readonly LocalKey MinigameResultPopup_RewardButton = new("MinigameResultPopup.RewardButton");
+    public static readonly LocalKey MinigameResultPopup_NoRewardButton = new("MinigameResultPopup.NoRewardButton");
     public static readonly LocalKey ShopEndPopup_Description = new("ShopEndPopup.Description");
     public static readonly LocalKey ConfirmButton = new("ConfirmButton");
     public static readonly LocalKey ShopPopup_PurchasedAllTodayGuide = new("ShopPopup.PurchasedAllTodayGuide");
