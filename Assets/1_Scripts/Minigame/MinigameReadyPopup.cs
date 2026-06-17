@@ -83,7 +83,8 @@ public class MinigameReadyPopup : EmptyParamPopup
             }
         }
         OnHideButtonClick();
-        PanelManager.Instance.ShowPanel(GetMinigamePanelType());
+        PanelManager.Instance.ShowPanel(GetMinigamePanelType())
+            .SetOnHideAction(() => { MapManager.Instance.RefreshNpc(); });
     }
 
     public void OnInfoButtonClick()

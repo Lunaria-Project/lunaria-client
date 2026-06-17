@@ -12,6 +12,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     private readonly List<NpcObject> _npcObjects = new();
     private readonly HashSet<int> _npcDataIdHashSet = new();
     private bool _followPlayer;
+    private MapType _currentMapType;
 
     protected override void Update()
     {
@@ -42,12 +43,19 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     public void SetMap(MapType type)
     {
+        _currentMapType = type;
         _config = ResourceManager.Instance.LoadMapConfig();
         LoadMap(type);
         TryLoadPlayer();
         TryLoadNpc(type);
         SetPanel(type);
         SetCamera(type);
+    }
+
+    public void RefreshNpc()
+    {
+        if (CurrentMap == null) return;
+        TryLoadNpc(_currentMapType);
     }
 
     public void MovePlayerAuto(int npcDataId, Action onArrived)
