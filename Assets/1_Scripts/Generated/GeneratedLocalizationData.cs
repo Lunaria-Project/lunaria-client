@@ -39,6 +39,11 @@ public static class LocalizationKey
     public static readonly LocalKey SlimeMinigameResultPopup_NoRewardTitle = new("SlimeMinigameResultPopup.NoRewardTitle");
     public static readonly LocalKey SlimeMinigameResultPopup_Title = new("SlimeMinigameResultPopup.Title");
     public static readonly LocalKey SlimeMinigameResultPopup_Description = new("SlimeMinigameResultPopup.Description");
+    public static readonly LocalKey SlimeMinigameResultPopup_NoRewardDescription = new("SlimeMinigameResultPopup.NoRewardDescription");
+    public static readonly LocalKey MinigameResultPopup_Title = new("MinigameResultPopup.Title");
+    public static readonly LocalKey MinigameResultPopup_NoRewardTitle = new("MinigameResultPopup.NoRewardTitle");
+    public static readonly LocalKey PowderMinigameResultPopup_Description = new("PowderMinigameResultPopup.Description");
+    public static readonly LocalKey PowderMinigameResultPopup_NoRewardDescription = new("PowderMinigameResultPopup.NoRewardDescription");
     public static readonly LocalKey MinigameResultPopup_RewardButton = new("MinigameResultPopup.RewardButton");
     public static readonly LocalKey MinigameResultPopup_NoRewardButton = new("MinigameResultPopup.NoRewardButton");
     public static readonly LocalKey ShopEndPopup_Description = new("ShopEndPopup.Description");

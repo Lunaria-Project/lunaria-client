@@ -21,6 +21,9 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
     [SerializeField] private Text _buttonText;
     [SerializeField] private GameObject _retryButton;
 
+    private const string NormalLayoutKey = "Normal";
+    private const string NoRewardLayoutKey = "NoReward";
+
     private Action _retryAction;
     private Action _hideAction;
     private readonly List<(int, long)> _rewards = new();
@@ -45,7 +48,7 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
         }
 
         var hasReward = rewardScore != 0;
-        _layoutSwitcher.SetLayout(hasReward ? "Normal" : "NoReward");
+        _layoutSwitcher.SetLayout(hasReward ? NormalLayoutKey : NoRewardLayoutKey);
 
         _titleText.SetText(hasReward ? LocalizationKey.SlimeMinigameResultPopup_Title.Text() : LocalizationKey.SlimeMinigameResultPopup_NoRewardTitle.Text());
         _scoreTexts.SetTexts(LocalizationKey.Minigame_Slime_Score.Format(parameter.Score.ToPrice()));
@@ -57,6 +60,10 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
             var rewardData = GetGlueRewardData();
             _rewardImage.SetSprite(ResourceManager.Instance.LoadSprite(rewardData.IconResourceKey));
             _resultText.SetText(LocalizationKey.SlimeMinigameResultPopup_Description.Format(rewardData.Name));
+        }
+        else
+        {
+            _resultText.SetText(LocalizationKey.SlimeMinigameResultPopup_NoRewardDescription.Text());
         }
         return;
 
