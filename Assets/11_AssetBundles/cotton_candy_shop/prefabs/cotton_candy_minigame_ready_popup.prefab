@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7121962919733483885}
   - component: {fileID: 1041933401455192053}
   - component: {fileID: 5873650831754998179}
-  - component: {fileID: 6904762653899544746}
   m_Layer: 5
   m_Name: Txt_description
   m_TagString: Untagged
@@ -141,19 +140,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6904762653899544746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239947375367079206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
-  _key: PowderMinigameReadyPopup.Description
 --- !u!1 &1418590024374330573
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +553,8 @@ MonoBehaviour:
   _popupBackground: 0
   _minigameType: 3
   _familiarButton: {fileID: 2224648291170994858}
+  _titleText: {fileID: 8713054495554383210}
+  _descriptionText: {fileID: 5873650831754998179}
 --- !u!1 &2543024437557441078
 GameObject:
   m_ObjectHideFlags: 0

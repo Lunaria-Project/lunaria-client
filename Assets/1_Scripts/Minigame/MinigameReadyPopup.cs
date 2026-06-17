@@ -1,14 +1,21 @@
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using Lunaria;
 using UnityEngine;
 
 public class MinigameReadyPopup : EmptyParamPopup
 {
     [SerializeField] private MinigameType _minigameType;
     [SerializeField, CanBeNull] private GameObject _familiarButton;
+    [SerializeField] private Text _titleText;
+    [SerializeField] private Text _descriptionText;
 
     protected override void OnShow()
     {
+        var infoData = GameData.Instance.GetMinigameInfoData(_minigameType);
+        _titleText.SetText(infoData.Title);
+        _descriptionText.SetText(infoData.Description);
+
         if (_familiarButton != null)
         {
             // TODO(지선) : 패밀리어 시스템 작업할 때 하기

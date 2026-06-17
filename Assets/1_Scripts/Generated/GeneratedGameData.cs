@@ -297,13 +297,17 @@ namespace Generated
         public int DurationHours { get; private set; }
         public int MinigameSeconds { get; private set; }
         public ArtifactType EquippedArtifactType { get; private set; }
+        public string Title { get; private set; }
+        public string Description { get; private set; }
 
-        public MinigameInfoData(MinigameType minigameType, int durationHours, int minigameSeconds, ArtifactType equippedArtifactType)
+        public MinigameInfoData(MinigameType minigameType, int durationHours, int minigameSeconds, ArtifactType equippedArtifactType, string title, string description)
         {
             MinigameType = minigameType;
             DurationHours = durationHours;
             MinigameSeconds = minigameSeconds;
             EquippedArtifactType = equippedArtifactType;
+            Title = title;
+            Description = description;
         }
     }
 
