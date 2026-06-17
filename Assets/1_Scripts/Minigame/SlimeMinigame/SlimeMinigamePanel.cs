@@ -44,6 +44,14 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         _remainTime -= Time.deltaTime;
         _remainTimeImage.fillAmount = (_minigameTime - _remainTime) / _minigameTime;
         _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            CancelInvoke(nameof(StopSlimeCoroutine));
+            StopSlimeCoroutine();
+        }
+#endif
     }
 
     protected override void OnShow(params object[] args)

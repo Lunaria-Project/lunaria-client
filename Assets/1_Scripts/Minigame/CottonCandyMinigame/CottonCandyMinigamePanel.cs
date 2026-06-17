@@ -21,6 +21,13 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
         {
             OnDiscardButtonClick();
         }
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            _remainTime = 0f;
+        }
+#endif
     }
 
     protected override void OnShow(params object[] args)

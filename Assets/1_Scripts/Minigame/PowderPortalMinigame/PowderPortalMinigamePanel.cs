@@ -35,6 +35,13 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         UpdateTimer();
         UpdateObjectPosition().Forget();
         UpdateInput();
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            _remainTime = 0f;
+        }
+#endif
     }
 
     private void UpdateTimer()
