@@ -51,6 +51,10 @@ public class ResourceManager : Singleton<ResourceManager>
     public Sprite LoadCottonCandyMinigameSprite(int layerIndex, CottonCandyColor color, CottonCandyShape shape)
     {
         var colorName = color.ToString().ToLowerInvariant();
+        if (layerIndex < 2)
+        {
+            shape = CottonCandyShape.Circle;
+        }
         var resourceKey = shape switch
         {
             CottonCandyShape.Circle => $"ui_cotton_{GetCottonCandyLayerOrdinal(layerIndex)}_{colorName}",

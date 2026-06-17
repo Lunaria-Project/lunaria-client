@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Lunaria;
 using UnityEngine;
 
@@ -41,6 +42,7 @@ public class CottonCandyBlock : MonoBehaviour
     private float _prevAngle;
     private bool _wasOnRail;
     private Action _onTierAdvanced;
+    private readonly List<(CottonCandyColor Color, CottonCandyShape Shape)> _madeLayers = new();
 
     private bool IsMaking => _state is CottonCandyMakeState.Making or CottonCandyMakeState.TierComplete;
     public bool IsComplete => _state == CottonCandyMakeState.Complete;
@@ -67,7 +69,9 @@ public class CottonCandyBlock : MonoBehaviour
     public void StartMaking(CottonCandyColor color, CottonCandyShape shape)
     {
         if (_state != CottonCandyMakeState.SelectingColorShape) return;
+        _madeLayers.Add((color, shape));
         _tiers.GetAt(_currentTier).SetSprite(ResourceManager.Instance.LoadCottonCandyMinigameSprite(_currentTier, color, shape));
+        LogManager.LogColor("[CottonCandyMinigame] 선택 완료: " + color + " " + shape, Color.pink);
         SetState(CottonCandyMakeState.Making);
     }
 
@@ -83,12 +87,26 @@ public class CottonCandyBlock : MonoBehaviour
         ResetMaking();
     }
 
+    public bool MatchesOrder()
+    {
+        if (_order == null) return false;
+        if (_madeLayers.Count != _order.Layers.Length) return false;
+        for (var i = 0; i < _order.Layers.Length; i++)
+        {
+            var layer = _order.Layers.GetAt(i);
+            if (_madeLayers[i].Color != layer.Color) return false;
+            if (_madeLayers[i].Shape != layer.Shape) return false;
+        }
+        return true;
+    }
+
     public void ResetMaking()
     {
         _currentTier = 0;
         _progress = 0f;
         _stepTurns = 0f;
         _wasOnRail = false;
+        _madeLayers.Clear();
         foreach (var tier in _tiers)
         {
             tier.transform.localScale = Vector3.zero;
@@ -99,7 +117,7 @@ public class CottonCandyBlock : MonoBehaviour
 
     private void SetState(CottonCandyMakeState state)
     {
-        LogManager.Log($"[CottonCandyMinigame] 상태: {_state} → {state}");
+        LogManager.LogColor($"[CottonCandyMinigame] 상태: {_state} → {state}", Color.yellow);
         _state = state;
 
         switch (state)
@@ -188,7 +206,6 @@ public class CottonCandyBlock : MonoBehaviour
 
     private void OnTierComplete()
     {
-        LogManager.Log($"[CottonCandyMinigame] 단 {_currentTier} 완성");
         if (_currentTier >= _tiers.Length - 1)
         {
             SetState(CottonCandyMakeState.Complete);

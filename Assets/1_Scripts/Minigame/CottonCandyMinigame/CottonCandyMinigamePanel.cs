@@ -105,7 +105,7 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
                 RotationCount = _random.Next(_config.RotationCountMin, _config.RotationCountMax + 1),
             };
         }
-        LogManager.Log(FormatOrder(order));
+        LogManager.LogColor(FormatOrder(order), Color.pink);
         return order;
     }
 
@@ -117,18 +117,23 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
             var l = order.Layers[i];
             layers += $" L{i}={{{l.Color}, {l.Shape}, {l.Direction}, {l.RotationCount}}}";
         }
-        return $"  Order: qty={order.Quantity}, score={order.ScoreReward},{layers}";
+        return $"[CottonCandyMinigame] Order: qty={order.Quantity}, score={order.ScoreReward},{layers}";
     }
 
     public void OnSubmitButtonClick()
     {
         if (!_isInitialized) return;
         if (!_cottonCandyBlock.IsComplete) return;
+
+        var isMatch = _cottonCandyBlock.MatchesOrder();
         if (!_customerBlock.TryServeFrontCustomer(out var scoreReward)) return;
 
-        _score += scoreReward;
-        SetScoreText();
-        LogManager.Log($"[CottonCandyMinigame] 솜사탕 제출: +{scoreReward}, 총점={_score}");
+        if (isMatch)
+        {
+            _score += scoreReward;
+            SetScoreText();
+        }
+        LogManager.Log($"[CottonCandyMinigame] 솜사탕 제출: 일치={isMatch}, +{(isMatch ? scoreReward : 0)}, 총점={_score}");
     }
 
     public void OnDiscardButtonClick()
