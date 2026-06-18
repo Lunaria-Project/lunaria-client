@@ -35,7 +35,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
         _scoreText.SetText(parameter.Score.ToString());
 
         var minigameRewardData = GetMinigameRewardData();
-        var hasReward = minigameRewardData != null;
+        var hasReward = parameter.Score > 0;
         _layoutSwitcher.SetLayout(hasReward ? NormalLayoutKey : NoRewardLayoutKey);
 
         _titleText.SetText(hasReward ? LocalizationKey.MinigameResultPopup_Title.Text() : LocalizationKey.MinigameResultPopup_NoRewardTitle.Text());
@@ -71,7 +71,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
 
     protected override bool OnHideByEscapeKey()
     {
-        OnHideButtonClick();
+        OnCloseButtonClick();
         return false;
     }
 
