@@ -47,7 +47,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
         _reward = (minigameRewardData.RewardIds.GetAt(0), minigameRewardData.RewardQuantities.GetAt(0));
         var itemData = GameData.Instance.GetItemData(_reward.Id);
         _rewardImage.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
-        _rewardQuantityText.SetText($"X{_reward.Quantity}"); //TODO(지선)
+        _rewardQuantityText.SetText(LocalizationKey.ItemCount1.Format(_reward.Quantity));
         return;
 
         MinigameRewardData GetMinigameRewardData()
@@ -68,7 +68,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
         var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal);
         GameTimeManager.Instance.AddHours(infoData.DurationHours);
     }
-    
+
     protected override bool OnHideByEscapeKey()
     {
         OnHideButtonClick();

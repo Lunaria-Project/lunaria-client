@@ -52,4 +52,5 @@ public static class LocalizationKey
     public static readonly LocalKey ShopPopup_PurchasedAllGuide = new("ShopPopup.PurchasedAllGuide");
     public static readonly LocalKey ShopPopup_InsufficientPriceItem = new("ShopPopup.InsufficientPriceItem");
     public static readonly LocalKey ShoppingSquare_ClosedShop = new("ShoppingSquare.ClosedShop");
+    public static readonly LocalKey ItemCount1 = new("ItemCount1");
 }
