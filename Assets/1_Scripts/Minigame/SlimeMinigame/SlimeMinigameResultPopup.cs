@@ -79,6 +79,12 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
         }
     }
 
+    protected override bool OnHideByEscapeKey()
+    {
+        OnHideButtonClick();
+        return false;
+    }
+
     protected override void OnHide()
     {
         UserData.Instance.AddRewards(_rewards);

@@ -55,6 +55,12 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
         GameTimeManager.Instance.AddHours(infoData.DurationHours);
     }
 
+    protected override bool OnHideByEscapeKey()
+    {
+        OnHideButtonClick();
+        return false;
+    }
+
     public void OnRetryButtonClick()
     {
         _retryAction?.Invoke();

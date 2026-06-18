@@ -68,6 +68,12 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
         var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal);
         GameTimeManager.Instance.AddHours(infoData.DurationHours);
     }
+    
+    protected override bool OnHideByEscapeKey()
+    {
+        OnHideButtonClick();
+        return false;
+    }
 
     public void OnRetryButtonClick()
     {

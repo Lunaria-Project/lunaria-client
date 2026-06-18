@@ -49,9 +49,19 @@ public abstract class PopupBase : MonoBehaviour
         return _hideOnEscapeKey;
     }
 
+    protected virtual bool OnHideByEscapeKey()
+    {
+        return true;
+    }
+
     protected abstract void OnShowInternal(object parameterObject);
 
     protected abstract void OnHideInternal();
+
+    internal bool OnHideByEscapeKeyInternal()
+    {
+        return OnHideByEscapeKey();
+    }
 
     internal void ShowInternal(PopupManager.Type type, object parameterObject)
     {

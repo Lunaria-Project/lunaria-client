@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa6a228b9467d43109f569a8015f44bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeMinigameResultPopup
-  _hideOnEscapeKey: 0
+  _hideOnEscapeKey: 1
   _pauseTime: 1
   _popupBackground: 0
   _layoutSwitcher: {fileID: 3328998870228133126}
@@ -355,7 +355,6 @@ MonoBehaviour:
   - {fileID: 2853800504805722679}
   - {fileID: 1464437871639469816}
   _resultText: {fileID: 6771326973435384934}
-  _descriptionText: {fileID: 6771326973435384934}
   _buttonText: {fileID: 8036653595998263483}
   _retryButton: {fileID: 2401384613382369786}
 --- !u!114 &3328998870228133126
