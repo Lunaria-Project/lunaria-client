@@ -75,4 +75,13 @@ public static class TimeUtil
         var totalMinutes = Mathf.FloorToInt((float)totalSecondsInDay / SecondsPerMinute);
         return totalMinutes / MinutesPerInterval;
     }
+
+    public static string SecondsToMinuteSecondString(int timeSeconds)
+    {
+        Sb.Clear();
+        var minutes = timeSeconds / SecondsPerMinute;
+        var seconds = timeSeconds % SecondsPerMinute;
+        Sb.AppendFormat(TimeFormat, minutes, seconds);
+        return Sb.ToString();
+    }
 }

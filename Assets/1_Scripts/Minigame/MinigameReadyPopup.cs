@@ -90,7 +90,7 @@ public class MinigameReadyPopup : EmptyParamPopup
     public void OnInfoButtonClick()
     {
         OnHideButtonClick();
-        PopupManager.Instance.ShowPopupWithEmptyParameter(GetInfoPopupType())
+        PopupManager.Instance.ShowPopup(GetInfoPopupType(), new MinigameInfoPopupParameter { MinigameType = _minigameType })
             .SetOnHideAction(() => { PopupManager.Instance.ShowPopupWithEmptyParameter(GetReadyPopupType()); });
     }
 

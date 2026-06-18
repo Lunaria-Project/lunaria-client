@@ -611,6 +611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766861252014419180}
   - component: {fileID: 5544130082014182707}
+  - component: {fileID: 1711749535421449161}
   m_Layer: 5
   m_Name: powder_portal_minigame_info_popup
   m_TagString: Untagged
@@ -653,6 +654,22 @@ MonoBehaviour:
   _hideOnEscapeKey: 1
   _pauseTime: 1
   _popupBackground: 0
+--- !u!114 &1711749535421449161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661e2b42897274df98766803d77aacb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameInfoPopup
+  _hideOnEscapeKey: 1
+  _pauseTime: 1
+  _popupBackground: 0
+  _timeText: {fileID: 6400155690124074275}
 --- !u!1 &2149739362469337460
 GameObject:
   m_ObjectHideFlags: 0
