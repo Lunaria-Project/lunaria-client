@@ -57,7 +57,7 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
 
     protected override bool OnHideByEscapeKey()
     {
-        OnHideButtonClick();
+        OnCloseButtonClick();
         return false;
     }
 

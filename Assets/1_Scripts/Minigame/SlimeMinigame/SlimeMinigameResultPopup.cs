@@ -81,7 +81,7 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
 
     protected override bool OnHideByEscapeKey()
     {
-        OnHideButtonClick();
+        OnCloseButtonClick();
         return false;
     }
 
