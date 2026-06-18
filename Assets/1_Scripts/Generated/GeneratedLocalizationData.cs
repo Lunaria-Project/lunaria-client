@@ -53,4 +53,6 @@ public static class LocalizationKey
     public static readonly LocalKey ShopPopup_InsufficientPriceItem = new("ShopPopup.InsufficientPriceItem");
     public static readonly LocalKey ShoppingSquare_ClosedShop = new("ShoppingSquare.ClosedShop");
     public static readonly LocalKey ItemCount1 = new("ItemCount1");
+    public static readonly LocalKey CottonCandyMinigameResultPopup_NoRewardDescription = new("CottonCandyMinigameResultPopup.NoRewardDescription");
+    public static readonly LocalKey CottonCandyMinigameResultPopup_Description = new("CottonCandyMinigameResultPopup.Description");
 }

@@ -12,10 +12,17 @@ public struct CottonCandyMinigameResultPopupParameter : IPopupParameter
 
 public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPopupParameter>
 {
+    [SerializeField] private LayoutSwitcher _layoutSwitcher;
+    [SerializeField] private Text _titleText;
+    [SerializeField] private Text _descriptionText;
+    [SerializeField] private Text _buttonText;
     [SerializeField] private Image _rewardImage;
     [SerializeField] private Text _rewardQuantityText;
     [SerializeField] private Text _scoreText;
     [SerializeField] private GameObject _retryButton; //TODO(지선)
+
+    private const string NormalLayoutKey = "Normal";
+    private const string NoRewardLayoutKey = "NoReward";
 
     private Action _retryAction;
     private Action _hideAction;
@@ -28,7 +35,14 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
         _scoreText.SetText(parameter.Score.ToString());
 
         var minigameRewardData = GetMinigameRewardData();
-        if (minigameRewardData == null) return;
+        var hasReward = parameter.Score > 0;
+        _layoutSwitcher.SetLayout(hasReward ? NormalLayoutKey : NoRewardLayoutKey);
+
+        _titleText.SetText(hasReward ? LocalizationKey.MinigameResultPopup_Title.Text() : LocalizationKey.MinigameResultPopup_NoRewardTitle.Text());
+        _descriptionText.SetText(hasReward ? LocalizationKey.CottonCandyMinigameResultPopup_Description.Text() : LocalizationKey.CottonCandyMinigameResultPopup_NoRewardDescription.Text());
+        _buttonText.SetText(hasReward ? LocalizationKey.MinigameResultPopup_RewardButton.Text() : LocalizationKey.MinigameResultPopup_NoRewardButton.Text());
+
+        if (!hasReward) return;
 
         _reward = (minigameRewardData.RewardIds.GetAt(0), minigameRewardData.RewardQuantities.GetAt(0));
         var itemData = GameData.Instance.GetItemData(_reward.Id);
