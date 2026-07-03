@@ -83,6 +83,13 @@ public static partial class LunariaMenu
         UIEditor.ChangeScript<UnityEngine.UI.Image, Lunaria.Image>(source);
     }
 
+    [MenuItem("CONTEXT/Image/Image => ImageAnimation", false)]
+    private static void ChangeToImageAnimation(MenuCommand menuCommand)
+    {
+        var source = menuCommand.context as UnityEngine.UI.Image;
+        UIEditor.ChangeScript<UnityEngine.UI.Image, ImageAnimation>(source);
+    }
+
     [MenuItem("CONTEXT/Button/Button => Lunaria.Button", false)]
     private static void ChangeToLunariaButton(MenuCommand menuCommand)
     {
