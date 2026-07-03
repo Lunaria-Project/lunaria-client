@@ -27,8 +27,7 @@ public class CottonCandyBlock : MonoBehaviour
 
     [SerializeField] private RectTransform _discCenter;
     [SerializeField] private RectTransform _cottonCandy;
-    [SerializeField] private float _railInnerRadius;
-    [SerializeField] private float _railOuterRadius;
+    [SerializeField] private PointerOverImageDetector _railDetector;
     [SerializeField] private Rail[] _rails;
     [SerializeField] private Image[] _tiers;
     [SerializeField] private GameObject _spacebarIndicator;
@@ -39,17 +38,26 @@ public class CottonCandyBlock : MonoBehaviour
     private int _currentTier;
     private float _progress;
     private float _stepTurns;
+    private float _currentStepTurns;
     private float _prevAngle;
     private bool _wasOnRail;
     private Action _onTierAdvanced;
+    private Action _onStateChanged;
     private readonly List<(CottonCandyColor Color, CottonCandyShape Shape)> _madeLayers = new();
 
     private bool IsMaking => _state is CottonCandyMakeState.Making or CottonCandyMakeState.TierComplete;
     public bool IsComplete => _state == CottonCandyMakeState.Complete;
+    public CottonCandyMakeState State => _state;
+    public bool IsLastTier => _currentTier >= _tiers.Length - 1;
 
     public void SetOnTierAdvancedAction(Action action)
     {
         _onTierAdvanced = action;
+    }
+
+    public void SetOnStateChangedAction(Action action)
+    {
+        _onStateChanged = action;
     }
 
     protected void Update()
@@ -105,6 +113,7 @@ public class CottonCandyBlock : MonoBehaviour
         _currentTier = 0;
         _progress = 0f;
         _stepTurns = 0f;
+        _currentStepTurns = 0f;
         _wasOnRail = false;
         _madeLayers.Clear();
         foreach (var tier in _tiers)
@@ -152,6 +161,7 @@ public class CottonCandyBlock : MonoBehaviour
         }
 
         UpdateRails();
+        _onStateChanged?.Invoke();
         return;
 
         void UpdateRails()
@@ -168,7 +178,7 @@ public class CottonCandyBlock : MonoBehaviour
 
     private void UpdateRotation(Vector2 mousePos)
     {
-        if (_state != CottonCandyMakeState.Making || !IsCursorOnCurrentRail(mousePos))
+        if (_state != CottonCandyMakeState.Making || !_railDetector.IsPointerOver)
         {
             _wasOnRail = false;
             return;
@@ -188,14 +198,16 @@ public class CottonCandyBlock : MonoBehaviour
         var requiredSign = _order.Layers.GetAt(_currentTier).Direction == CottonCandyRotationDirection.CounterClockwise ? 1f : -1f;
         _stepTurns += deltaTurns * requiredSign;
 
-        if (_stepTurns <= -_config.AcceptTurns)
+        if (_stepTurns <= _currentStepTurns - _config.AcceptTurns)
         {
             SetState(CottonCandyMakeState.Failed);
             return;
         }
 
+        _currentStepTurns = Mathf.Max(_currentStepTurns, _stepTurns);
+
         var rotationCount = Mathf.Max(1, _order.Layers.GetAt(_currentTier).RotationCount);
-        _progress = Mathf.Clamp01(Mathf.Max(0f, _stepTurns) / rotationCount);
+        _progress = Mathf.Clamp01(_currentStepTurns / rotationCount);
         _tiers.GetAt(_currentTier).transform.localScale = Vector3.one * _progress;
 
         if (_progress >= 1f)
@@ -206,7 +218,7 @@ public class CottonCandyBlock : MonoBehaviour
 
     private void OnTierComplete()
     {
-        if (_currentTier >= _tiers.Length - 1)
+        if (IsLastTier)
         {
             SetState(CottonCandyMakeState.Complete);
             return;
@@ -222,16 +234,11 @@ public class CottonCandyBlock : MonoBehaviour
         _currentTier++;
         _progress = 0f;
         _stepTurns = 0f;
+        _currentStepTurns = 0f;
         SetState(CottonCandyMakeState.SelectingColorShape);
         _onTierAdvanced?.Invoke();
     }
 
-
-    private bool IsCursorOnCurrentRail(Vector2 mousePos)
-    {
-        var distance = Vector2.Distance(mousePos, _discCenter.position);
-        return distance >= _railInnerRadius && distance <= _railOuterRadius;
-    }
 
     private float GetAngle(Vector2 mousePos)
     {

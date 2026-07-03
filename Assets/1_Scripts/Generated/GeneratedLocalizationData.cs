@@ -55,4 +55,6 @@ public static class LocalizationKey
     public static readonly LocalKey ItemCount1 = new("ItemCount1");
     public static readonly LocalKey CottonCandyMinigameResultPopup_NoRewardDescription = new("CottonCandyMinigameResultPopup.NoRewardDescription");
     public static readonly LocalKey CottonCandyMinigameResultPopup_Description = new("CottonCandyMinigameResultPopup.Description");
+    public static readonly LocalKey CottonCandyMinigame_Step1 = new("CottonCandyMinigame.Step1");
+    public static readonly LocalKey CottonCandyMinigame_Step2 = new("CottonCandyMinigame.Step2");
 }

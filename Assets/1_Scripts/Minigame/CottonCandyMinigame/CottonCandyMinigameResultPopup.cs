@@ -18,7 +18,6 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
     [SerializeField] private Text _buttonText;
     [SerializeField] private Image _rewardImage;
     [SerializeField] private Text _rewardQuantityText;
-    [SerializeField] private Text _scoreText;
     [SerializeField] private GameObject _retryButton; //TODO(지선)
 
     private const string NormalLayoutKey = "Normal";
@@ -32,7 +31,6 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
     {
         _retryAction = parameter.RetryAction;
         _hideAction = parameter.HideAction;
-        _scoreText.SetText(parameter.Score.ToString());
 
         var minigameRewardData = GetMinigameRewardData();
         var hasReward = parameter.Score > 0;
@@ -44,7 +42,7 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
 
         if (!hasReward) return;
 
-        _reward = (minigameRewardData.RewardIds.GetAt(0), minigameRewardData.RewardQuantities.GetAt(0));
+        _reward = (minigameRewardData.RewardIds.GetAt(0), minigameRewardData.RewardQuantities.GetAt(0) * parameter.Score);
         var itemData = GameData.Instance.GetItemData(_reward.Id);
         _rewardImage.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
         _rewardQuantityText.SetText(LocalizationKey.ItemCount1.Format(_reward.Quantity));

@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CottonCandyMinigameConfig
   _customerSpawnMinSeconds: 3
   _customerSpawnMaxSeconds: 5
+  _customerMoveSpeed: 500
   _orderQuantityMin: 1
-  _orderQuantityMax: 3
+  _orderQuantityMax: 1
   _scoreRewardMin: 1
   _scoreRewardMax: 10
   _rotationCountMin: 1
-  _rotationCountMax: 10
+  _rotationCountMax: 3
   _burntColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  _acceptTurns: 0.5

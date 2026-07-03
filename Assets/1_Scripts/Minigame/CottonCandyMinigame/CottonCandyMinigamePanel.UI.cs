@@ -8,7 +8,9 @@ public partial class CottonCandyMinigamePanel
     [SerializeField] private Text[] _remainTimeTexts;
     [SerializeField] private Text _scoreText;
     [SerializeField] private CottonCandyOrderBlock currentOrderBlock;
+    [SerializeField] private GameObject _colorObject;
     [SerializeField] private CottonCandyMakeButton[] _colorButtons;
+    [SerializeField] private GameObject _shapeBlock;
     [SerializeField] private CottonCandyMakeButton[] _shapeButtons;
     [SerializeField] private CottonCandyBlock _cottonCandyBlock;
     [SerializeField] private CottonCandyMinigameCustomerBlock _customerBlock;
@@ -16,6 +18,8 @@ public partial class CottonCandyMinigamePanel
     [SerializeField] private int _waitReadyMillis;
     [SerializeField] private GameObject _closedObject;
     [SerializeField] private GameObject _openedObject;
+    [SerializeField] private GameObject _coverObject;
+    [SerializeField] private Text _coverText;
 
     private CottonCandyColor _selectedColor;
     private CottonCandyShape _selectedShape;
@@ -24,6 +28,7 @@ public partial class CottonCandyMinigamePanel
     {
         _customerBlock.SetOnCurrentCustomerChangedAction(OnCurrentCustomerChanged);
         _cottonCandyBlock.SetOnTierAdvancedAction(DeselectColorButtons);
+        _cottonCandyBlock.SetOnStateChangedAction(OnBlockStateChanged);
         foreach (var button in _colorButtons)
         {
             button.SetOnClickAction(OnColorButtonClick);
@@ -75,6 +80,41 @@ public partial class CottonCandyMinigamePanel
         _cottonCandyBlock.SetOrder(order);
     }
 
+    private void OnBlockStateChanged()
+    {
+        switch (_cottonCandyBlock.State)
+        {
+            case CottonCandyMakeState.BeforeOrder:
+            {
+                _colorObject.SetActive(false);
+                _shapeBlock.SetActive(false);
+                _coverObject.SetActive(true);
+                _coverText.SetText(string.Empty);
+                break;
+            }
+            case CottonCandyMakeState.SelectingColorShape:
+            {
+                var isLastTier = _cottonCandyBlock.IsLastTier;
+                _colorObject.SetActive(true);
+                _shapeBlock.SetActive(isLastTier);
+                _coverObject.SetActive(true);
+                _coverText.SetText(isLastTier ? LocalizationKey.CottonCandyMinigame_Step2 : LocalizationKey.CottonCandyMinigame_Step1);
+                break;
+            }
+            case CottonCandyMakeState.Making:
+            {
+                _coverObject.SetActive(false);
+                break;
+            }
+            case CottonCandyMakeState.Complete:
+            {
+                _coverObject.SetActive(true);
+                _coverText.SetText(string.Empty);
+                break;
+            }
+        }
+    }
+
     private void DeselectAllButtons()
     {
         DeselectColorButtons();
@@ -97,8 +137,10 @@ public partial class CottonCandyMinigamePanel
     private void TryStartMaking()
     {
         if (_selectedColor == CottonCandyColor.None) return;
-        if (_selectedShape == CottonCandyShape.None) return;
-        _cottonCandyBlock.StartMaking(_selectedColor, _selectedShape);
+
+        var isLastTier = _cottonCandyBlock.IsLastTier;
+        if (isLastTier && _selectedShape == CottonCandyShape.None) return;
+        _cottonCandyBlock.StartMaking(_selectedColor, isLastTier ? _selectedShape : CottonCandyShape.Circle);
     }
 
     private void OnColorButtonClick(CottonCandyMakeButton clicked)
