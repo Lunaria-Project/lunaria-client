@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 343bffda5bd1546ebbbf8af043f55570
+guid: d72af35248991d742a1d0c89c17daf8a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7324832027934138810
-    second: ui_gradient_0
+      213: 937156493784593839
+    second: fx_distort_03_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,9 +40,9 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_gradient_0
+      name: fx_distort_03_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2
-        height: 100
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab12b68bbe707a560800000000000000
-      internalID: 7324832027934138810
+      spriteID: fa53bf6add2710d00800000000000000
+      internalID: 937156493784593839
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui_gradient_0: 7324832027934138810
+      fx_distort_03_0: 937156493784593839
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: SpritePostprocessor_Applied
