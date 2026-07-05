@@ -29,7 +29,7 @@ public class SystemButtonPopup : Popup<SystemButtonPopupParameter>
 
     protected override void OnShow(SystemButtonPopupParameter parameter)
     {
-        _descriptionText.SetText(parameter.Description);
+        _descriptionText.SetText(parameter.Description.Text());
         _confirmButtonText.SetText(parameter.ConfirmButtonText);
         _onConfirm = parameter.OnConfirm;
 

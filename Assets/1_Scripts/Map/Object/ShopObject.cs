@@ -64,7 +64,7 @@ public class ShopObject : MapObject
         {
             if (!_isOpened)
             {
-                GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShoppingSquare_ClosedShop.ToString());
+                GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShoppingSquare_ClosedShop.Text());
                 return;
             }
 

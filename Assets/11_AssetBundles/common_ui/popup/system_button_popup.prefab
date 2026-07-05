@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SystemOneButtonPopup
   _hideOnEscapeKey: 0
+  _pauseTime: 1
+  _popupBackground: 0
   _descriptionText: {fileID: 8226272429016806950}
   _confirmButtonText: {fileID: 1452426284169206816}
   _cancelButtonText: {fileID: 4402144193195126589}
@@ -542,7 +544,6 @@ GameObject:
   - component: {fileID: 4115195503701038016}
   - component: {fileID: 3374447516187131604}
   - component: {fileID: 8226272429016806950}
-  - component: {fileID: 8235025897760299333}
   m_Layer: 5
   m_Name: Txt_Title
   m_TagString: Untagged
@@ -669,19 +670,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8235025897760299333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4003504945962592493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
-  _key: FamiliarSelectPopup.Title
 --- !u!1 &5689855455978432637
 GameObject:
   m_ObjectHideFlags: 0
