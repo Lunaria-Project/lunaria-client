@@ -48,15 +48,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Dtex:
-        m_Texture: {fileID: 2800000, guid: d57627878cb39be4ca950ce49340d48b, type: 3}
-        m_Scale: {x: 0.1, y: 0.3}
+        m_Texture: {fileID: 2800000, guid: d72af35248991d742a1d0c89c17daf8a, type: 3}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3fa4be25eeef4744aa3b9ba1de72a91a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 75c5af5333f73bf44b9af394f1f33a8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -73,7 +73,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SubTex:
         m_Texture: {fileID: 2800000, guid: 9bdfa4860356079429d7ec121a66d783, type: 3}
-        m_Scale: {x: 1, y: 5}
+        m_Scale: {x: 0.2, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -85,7 +85,7 @@ Material:
     - _Culling: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Di: 0.313
+    - _Di: 0.3
     - _DsEdgeMul: 0
     - _DsEdgeRange: 0
     - _Dsi: 0
@@ -94,7 +94,7 @@ Material:
     - _DstexSpdX: 0
     - _DstexSpdY: 0
     - _DtexSpdX: 0.1
-    - _DtexSpdY: 0.3
+    - _DtexSpdY: 0.05
     - _Fade: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -106,7 +106,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SBDi: 0
-    - _SBMix: 0.5
+    - _SBMix: 0.409
     - _SBtexSpdX: 0
     - _SBtexSpdY: 0
     - _SmoothnessTextureChannel: 0
