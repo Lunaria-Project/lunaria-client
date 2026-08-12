@@ -272,7 +272,10 @@ public class UIEffectController : BaseMeshEffect
             }
             default:
             {
-                Debug.LogError("Unknown graphic type (Image/Text가 아닌 Graphic 컴포넌트에 이 스크립트가 붙어있는지 확인해주세요.)", _graphic.gameObject);
+                if (_graphic.isActiveAndEnabled)
+                {
+                    Debug.LogError("Unknown graphic type (Image/Text가 아닌 Graphic 컴포넌트에 이 스크립트가 붙어있는지 확인해주세요.)", _graphic.gameObject);   
+                }
                 _graphicType = GraphicType.None;
                 MainTextureUV = new Vector4(0, 0, 1, 1);
                 break;
