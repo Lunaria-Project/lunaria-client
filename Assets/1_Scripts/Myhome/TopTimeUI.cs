@@ -6,7 +6,10 @@ public class TopTimeUI : MonoBehaviour
     [SerializeField] RectTransform _timeBackground;
     [SerializeField] float _defaultTimeBackgroundZRotation;
     [SerializeField] Text _currentTimeText;
-    [SerializeField] Text _currentTimeAMPMText;
+    [SerializeField] LayoutSwitcher _layoutSwitcher;
+    
+    private const string DayLayoutKey = "Day";
+    private const string NightLayoutKey = "Night";
 
     public void OnShow()
     {
@@ -34,6 +37,6 @@ public class TopTimeUI : MonoBehaviour
     {
         var currentGameTime = GameTimeManager.Instance.CurrentGameTime;
         _currentTimeText.SetText(TimeUtil.GameTimeToStringForTopUI(currentGameTime));
-        _currentTimeAMPMText.SetText(GameTimeManager.Instance.CurrentGameTime.IsAM ? LocalizationKey.GameTime_Am : LocalizationKey.GameTime_Pm);
+        _layoutSwitcher.SetLayout(GameTimeManager.Instance.CurrentGameTime.IsAM ? DayLayoutKey : NightLayoutKey);
     }
 }
