@@ -48,7 +48,7 @@ Canvas:
   m_GameObject: {fileID: 2604677774846562460}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1130869067960686095}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -519,7 +519,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 116.6, y: -130}
+  m_AnchoredPosition: {x: 17.500008, y: -17.5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!96 &3156426694135100375
@@ -569,7 +569,7 @@ TrailRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1554420431
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 3000
   m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:

@@ -242,6 +242,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1553302656 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1130869067960686095, guid: 6f155e2b8e66e422abf2ce0940713d72, type: 3}
+  m_PrefabInstance: {fileID: 971334386830506083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &971334386830506083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -741,6 +746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopupManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6255241934496181449, guid: 54872e29f20b1493a8f35736647c45dd, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1553302656}
     - target: {fileID: 6471582365591980989, guid: 54872e29f20b1493a8f35736647c45dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -798,6 +807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PanelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6152200946360585682, guid: b82bb4900cd5e4cbf8090f97153e63d5, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1553302656}
     - target: {fileID: 7641599438315993095, guid: b82bb4900cd5e4cbf8090f97153e63d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
