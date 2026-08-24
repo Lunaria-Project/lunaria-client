@@ -9,11 +9,16 @@ public class TopWalletUI : MonoBehaviour
 #endif
     [SerializeField] int _itemDataId;
     [SerializeField] Text _walletText;
+    [SerializeField] LayoutSwitcher _layoutSwitcher;
+
+    private const string SingleLayoutKey = "Single";
+    private const string MultipleLayoutKey = "Multiple";
 
     protected void OnEnable()
     {
         UserData.Instance.OnItemQuantityChanged -= OnItemQuantityChanged;
         UserData.Instance.OnItemQuantityChanged += OnItemQuantityChanged;
+        _layoutSwitcher.SetLayout(SingleLayoutKey); // TODO(지선): 임시
     }
 
     protected void OnDisable()

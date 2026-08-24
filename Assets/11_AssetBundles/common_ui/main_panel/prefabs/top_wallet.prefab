@@ -597,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TopWalletUI
   _itemDataId: 1000006
   _walletText: {fileID: 1219605713516858190}
+  _layoutSwitcher: {fileID: 4417040716473108321}
 --- !u!114 &4417040716473108321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,10 +611,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lunaria.LayoutSwitcher
   _layouts:
-  - Key: OnlyWallet
+  - Key: Single
     Objects:
     - {fileID: 450472650636625666}
-  - Key: Whole
+  - Key: Multiple
     Objects:
     - {fileID: 5723961706204525090}
 --- !u!1 &1642867411255149344
