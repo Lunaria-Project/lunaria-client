@@ -2,13 +2,13 @@ using Lunaria;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class TopWalletUI : MonoBehaviour
+public class WalletUI : MonoBehaviour
 {
 #if UNITY_EDITOR
     [ValueDropdown("@DataIdDropDownList.GetItemDataIds()")]
 #endif
     [SerializeField] int _itemDataId;
-    [SerializeField] Text _walletText;
+    [SerializeField] Text[] _walletTexts;
     [SerializeField] LayoutSwitcher _layoutSwitcher;
 
     private const string SingleLayoutKey = "Single";
@@ -28,7 +28,7 @@ public class TopWalletUI : MonoBehaviour
 
     public void Refresh()
     {
-        _walletText.SetText(UserData.Instance.GetItemQuantity(_itemDataId).ToPrice());
+        _walletTexts.SetTexts(UserData.Instance.GetMainCoinCount().ToPrice());
     }
 
     private void OnItemQuantityChanged(int itemId)

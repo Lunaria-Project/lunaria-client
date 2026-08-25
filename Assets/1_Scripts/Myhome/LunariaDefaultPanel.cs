@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
 {
-    [SerializeField] private TopWalletUI _walletUI;
+    [SerializeField] private WalletUI _walletUI;
     [SerializeField] private TopTimeUI _timeUI;
     [SerializeField] private MyhomeArtifactUI _artifactUI;
     [SerializeField] private InventoryQuickBlock _quickBlock;
