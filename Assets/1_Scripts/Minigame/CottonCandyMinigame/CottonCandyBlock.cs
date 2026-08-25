@@ -25,6 +25,7 @@ public class CottonCandyBlock : MonoBehaviour
         public GameObject OffObject;
     }
 
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private RectTransform _discCenter;
     [SerializeField] private RectTransform _cottonCandy;
     [SerializeField] private PointerOverImageDetector _railDetector;
@@ -62,15 +63,20 @@ public class CottonCandyBlock : MonoBehaviour
 
     protected void Update()
     {
-        var mousePos = (Vector2)Input.mousePosition;
-        _cottonCandy.position = mousePos;
-        UpdateRotation(mousePos);
+        if (GlobalManager.Instance.TryGetMouseWorldPosition(_cottonCandy, out var mouseWorldPosition))
+        {
+            _cottonCandy.position = mouseWorldPosition;
+            UpdateRotation(mouseWorldPosition);
+        }
         UpdateNextRailInput();
     }
 
     public void Init(CottonCandyMinigameConfig config)
     {
         _config = config;
+        _canvas.overrideSorting = true;
+        _canvas.sortingLayerName = NameContainer.SortingLayer.UI;
+
         ResetMaking();
     }
 
@@ -176,7 +182,7 @@ public class CottonCandyBlock : MonoBehaviour
         }
     }
 
-    private void UpdateRotation(Vector2 mousePos)
+    private void UpdateRotation(Vector2 mouseWorldPosition)
     {
         if (_state != CottonCandyMakeState.Making || !_railDetector.IsPointerOver)
         {
@@ -184,7 +190,7 @@ public class CottonCandyBlock : MonoBehaviour
             return;
         }
 
-        var angle = GetAngle(mousePos);
+        var angle = GetAngle(mouseWorldPosition);
         if (!_wasOnRail)
         {
             _wasOnRail = true;
@@ -240,9 +246,9 @@ public class CottonCandyBlock : MonoBehaviour
     }
 
 
-    private float GetAngle(Vector2 mousePos)
+    private float GetAngle(Vector2 mouseWorldPosition)
     {
-        var dir = mousePos - (Vector2)_discCenter.position;
+        var dir = mouseWorldPosition - (Vector2)_discCenter.position;
         return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
     }
 }

@@ -34,7 +34,8 @@ public class InventoryPopup : EmptyParamPopup
     protected void Update()
     {
         if (!_isDragging) return;
-        _dragImageRect.position = Input.mousePosition;
+        if (!GlobalManager.Instance.TryGetMouseWorldPosition(_dragImageRect, out var dragWorldPosition)) return;
+        _dragImageRect.position = dragWorldPosition;
     }
 
     protected override void OnShow()

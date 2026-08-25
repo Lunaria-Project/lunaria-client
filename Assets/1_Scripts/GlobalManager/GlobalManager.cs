@@ -145,6 +145,11 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         cameraTransform.position = new Vector3(playerPosition.x, playerPosition.y, cameraTransform.position.z);
     }
 
+    public bool TryGetMouseWorldPosition(RectTransform rectTransform, out Vector3 worldPosition)
+    {
+        return RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, Input.mousePosition, _globalCamara, out worldPosition);
+    }
+
     private void SetCameraSize(float size)
     {
         _globalCamara.orthographicSize = DefaultCameraSize * size;

@@ -66,7 +66,7 @@ public partial class GlobalManager
     {
         if (_currentCursorSprites.IsNullOrEmpty()) return;
 
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_cursorRectTransform, Input.mousePosition, _globalCamara, out var cursorWorldPosition))
+        if (TryGetMouseWorldPosition(_cursorRectTransform, out var cursorWorldPosition))
         {
             _cursorRectTransform.position = cursorWorldPosition;
         }
