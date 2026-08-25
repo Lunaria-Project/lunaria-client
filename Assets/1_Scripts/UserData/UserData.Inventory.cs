@@ -16,6 +16,22 @@ public partial class UserData // Inventory
         return 0;
     }
 
+    public long GetItemQuantity(ItemType itemType)
+    {
+        foreach (var (id, quantity) in _userDataInfo.ItemList)
+        {
+            if (!GameData.Instance.TryGetItemData(id, out var itemData)) continue;
+            if (itemData.ItemType != itemType) continue;
+            return quantity;
+        }
+        return 0;
+    }
+    
+    public long GetMainCoinCount()
+    {
+        return GetItemQuantity(ItemType.MainCoin);
+    }
+
     public List<(int ItemId, long Qunatity)> GetItemQuantities(ItemType itemType)
     {
         var items = new List<(int ItemId, long Qunatity)>();

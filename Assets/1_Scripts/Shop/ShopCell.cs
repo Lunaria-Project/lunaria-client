@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class ShopCell : MonoBehaviour
 {
-    [SerializeField] private Image _iconImage;
-    [SerializeField] private GameObject _priceObject;
+    [SerializeField] private Image[] _iconImages;
     [SerializeField] private Text _priceText;
-    [SerializeField] private GameObject _soldOutObject;
-    [SerializeField] private GameObject _remainingStockObject;
     [SerializeField] private Text _remainingStockText;
-    [SerializeField] private GameObject _maxPurchasableObject;
-    [SerializeField] private Text _maxPurchasableText;
+    [SerializeField] private LayoutSwitcher _layoutSwitcher;
 
     private int _productId;
     private Action<int> _onClickAction;
+
+    private const string DefaultLayoutKey = "Default";
+    private const string BargainLayoutKey = "Bargain"; // TODO(지선)
+    private const string AlmostSoldOutLayoutKey = "AlmostSoldOut"; // TODO(지선)
+    private const string SoldOutLayoutKey = "SoldOut";
+    private const string OwnedLayoutKey = "Owned";
 
     public void SetClickAction(Action<int> onClickAction)
     {
@@ -28,27 +30,27 @@ public class ShopCell : MonoBehaviour
         var product = GameData.Instance.GetShopProductData(productId);
         var itemId = product.ProductItemId;
         var itemData = GameData.Instance.GetItemData(itemId);
-        _iconImage.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
+        _iconImages.SetSprites(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
 
         _priceText.SetText(product.PriceQuantity.ToPrice());
 
         var purchasedToday = UserData.Instance.GetPurchasedCountToday(shopType, itemId);
         var remaining = Mathf.Max(0, product.RefreshAmount - purchasedToday);
-        _remainingStockText.SetText(remaining.ToString());
+        _remainingStockText.SetText(remaining.ToPrice());
 
         var hasMaxLimit = product.MaxPurchasableQuantity > 0;
-        var purchasedTotal = UserData.Instance.GetPurchasedCountTotal(shopType, itemId);
-        var purchasable = Mathf.Max(0, product.MaxPurchasableQuantity - purchasedTotal);
-        _maxPurchasableObject.SetActive(hasMaxLimit);
         if (hasMaxLimit)
         {
-            _maxPurchasableText.SetText(purchasable.ToString());
+            _layoutSwitcher.SetLayout(OwnedLayoutKey);
         }
-
-        var isSoldOut = remaining <= 0 || (hasMaxLimit && purchasable <= 0);
-        _soldOutObject.SetActive(isSoldOut);
-        _priceObject.SetActive(!isSoldOut);
-        _remainingStockObject.SetActive(!isSoldOut);
+        else if (remaining <= 0)
+        {
+            _layoutSwitcher.SetLayout(SoldOutLayoutKey);
+        }
+        else
+        {
+            _layoutSwitcher.SetLayout(DefaultLayoutKey);
+        }
     }
 
     public void OnClickButton()

@@ -87,7 +87,7 @@ public class ShopPopup : Popup<ShopPopupParameter>
             }
         }
 
-        if (UserData.Instance.GetItemQuantity(product.PriceItemId) < product.PriceQuantity)
+        if (UserData.Instance.GetMainCoinCount() < product.PriceQuantity)
         {
             GlobalManager.Instance.ShowToastMessage(LocalizationKey.ShopPopup_InsufficientPriceItem.Text());
             return;
