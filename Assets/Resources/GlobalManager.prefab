@@ -495,7 +495,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8902570070041077392}
   - component: {fileID: 3156426694135100375}
-  - component: {fileID: 5669001996884741668}
   m_Layer: 5
   m_Name: trail
   m_TagString: Untagged
@@ -641,55 +640,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &5669001996884741668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858582394623579625}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64417bfdaf208cf49b3fd744d3faec32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIEffectController
-  MainTextureTiling: {x: 1, y: 1}
-  MainTextureOffset: {x: 0, y: 0}
-  MainTextureFlowSpeedX: 0
-  MainTextureFlowSpeedY: 0
-  MainTextureColor: {r: 1, g: 1, b: 1, a: 1}
-  MainTextureUV: {x: 0, y: 0, z: 1, w: 1}
-  SubTextureTiling: {x: 1, y: 1}
-  SubTextureOffset: {x: 0, y: 0}
-  SubTextureMix: 0.944
-  SubTextureFlowSpeedX: 0.2
-  SubTextureFlowSpeedY: 0.5
-  SubTextureColor: {r: 1, g: 1, b: 1, a: 1}
-  AlphaTextureTiling: {x: 1, y: 1}
-  AlphaTextureOffset: {x: 0, y: 0}
-  AlphaTextureIntensity: 1
-  AlphaTextureFlowSpeedX: 0
-  AlphaTextureFlowSpeedY: 0
-  DistortionTextureTiling: {x: 1, y: 1}
-  DistortionTextureOffset: {x: 0, y: 0}
-  DistortionIntensity: 0
-  DistortionSubTextureIntensity: 0
-  DistortionDissolveTextureIntensity: 0
-  DistortionTextureFlowSpeedX: 0
-  DistortionTextureFlowSpeedY: 0
-  DissolveTextureTiling: {x: 1, y: 1}
-  DissolveTextureOffset: {x: 0, y: 0}
-  DissolveIntensity: 0
-  DissolveEdgeRange: 0
-  DissolveEdgeMultiplier: 0
-  DissolveEdgeColor: {r: 1, g: 1, b: 1, a: 1}
-  DissolveTextureFlowSpeedX: 0
-  DissolveTextureFlowSpeedY: 0
-  DissolveAlphaTextureIntensity: 0
-  DissolveAlphaTextureTiling: {x: 1, y: 1}
-  DissolveAlphaTextureOffset: {x: 0, y: 0}
-  UseUnscaledTime: 0
-  UseUpdate: 1
 --- !u!1 &7228846397727955745
 GameObject:
   m_ObjectHideFlags: 0
