@@ -144,7 +144,6 @@ public class InventoryPopup : EmptyParamPopup
     {
         if (_draggingItemId == 0) return;
         UserData.Instance.SetQuickSlot(slotIndex, _draggingItemId);
-        _quickBlock.Refresh();
     }
 
     private void OnQuickSlotClick(int slotIndex)
@@ -152,6 +151,5 @@ public class InventoryPopup : EmptyParamPopup
         var itemId = UserData.Instance.GetQuickSlotItemId(slotIndex);
         if (itemId == 0) return;
         UserData.Instance.ClearQuickSlot(slotIndex);
-        _quickBlock.Refresh();
     }
 }

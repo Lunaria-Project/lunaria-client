@@ -5,6 +5,8 @@ public class InventoryQuickBlock : MonoBehaviour
 {
     [SerializeField] private InventoryQuickSlot[] _quickSlots;
 
+    private bool _isInitialized;
+
     public void SetClickAction(Action<int> onClickAction)
     {
         foreach (var quickSlot in _quickSlots)
@@ -21,6 +23,18 @@ public class InventoryQuickBlock : MonoBehaviour
         }
     }
 
+    protected void OnEnable()
+    {
+        UserData.Instance.OnQuickSlotChanged -= Refresh;
+        UserData.Instance.OnQuickSlotChanged += Refresh;
+        Refresh();
+    }
+
+    protected void OnDisable()
+    {
+        UserData.Instance.OnQuickSlotChanged -= Refresh;
+    }
+
     public void Init()
     {
         var maxSlotCount = GameSetting.Instance.MaxQuickSlotCount;
@@ -31,11 +45,15 @@ public class InventoryQuickBlock : MonoBehaviour
             _quickSlots[i].gameObject.SetActive(i < maxSlotCount);
             _quickSlots[i].SetSlotIndex(i);
         }
+
+        _isInitialized = true;
         Refresh();
     }
 
     public void Refresh()
     {
+        if (!_isInitialized) return;
+
         var unlockedCount = UserData.Instance.UnlockedQuickSlotCount;
         var maxSlotCount = GameSetting.Instance.MaxQuickSlotCount;
 

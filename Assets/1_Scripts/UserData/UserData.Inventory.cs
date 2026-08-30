@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public partial class UserData // Inventory
 {
     public event Action<int> OnItemQuantityChanged;
+    public event Action OnQuickSlotChanged;
 
     public long GetItemQuantity(int itemDataId)
     {
@@ -99,12 +100,14 @@ public partial class UserData // Inventory
         }
 
         _userDataInfo.QuickSlotItemIds[slotIndex] = itemId;
+        OnQuickSlotChanged?.Invoke();
     }
 
     public void ClearQuickSlot(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= _userDataInfo.QuickSlotItemIds.Length) return;
         _userDataInfo.QuickSlotItemIds[slotIndex] = 0;
+        OnQuickSlotChanged?.Invoke();
     }
 
     public int GetQuickSlotItemId(int slotIndex)
