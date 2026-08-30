@@ -10,10 +10,13 @@ public class SlimeBlock : MonoBehaviour
     [SerializeField] private GameObject _touchButton;
     [SerializeField] private RectTransform _slimeImageRectTransform;
     [SerializeField] private Image _slimeImage;
+    [SerializeField] private GameObject[] _healthGroupObjects;
     [SerializeField] private GameObject[] _healthObjects;
+    [SerializeField] private GameObject[] _healthEffectObjects;
     [SerializeField] private Vector2 _showPosition = Vector2.up;
     [SerializeField] private RectTransform _scoreRectTransform;
     [SerializeField] private Text _scoreText;
+    [SerializeField] private Canvas _canvas;
 
     private readonly Color _minusColor = Color.red;
     private readonly Color _plusColor = Color.green;
@@ -25,6 +28,8 @@ public class SlimeBlock : MonoBehaviour
     private int _remainTouchCount;
     private int _score;
 
+    private bool IsToxicSlime => _slimeType is SlimeType.ToxicLevel1 or SlimeType.ToxicLevel2 or SlimeType.ToxicLevel3;
+
     public void SetOnTouchSlime(Action<SlimeType> onTouchSlime)
     {
         _onTouchSlime = onTouchSlime;
@@ -33,10 +38,14 @@ public class SlimeBlock : MonoBehaviour
     public void Init()
     {
         IsShowing = false;
+        _healthGroupObjects.SetActiveAll(false);
         _healthObjects.SetActiveAll(false);
+        _healthEffectObjects.SetActiveAll(false);
         _touchButton.SetActive(false);
         _scoreText.SetActive(false);
         _slimeImageRectTransform.SetActive(false);
+        _canvas.overrideSorting = true;
+        _canvas.sortingLayerName = NameContainer.SortingLayer.UI;
     }
 
     public async UniTask Show(SlimeType type, int touchCount, int score, float scale, float showTime)
@@ -52,6 +61,12 @@ public class SlimeBlock : MonoBehaviour
 
         _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(type));
         _slimeImageRectTransform.SetLocalScale(scale);
+        _healthGroupObjects.SetActiveAll(false);
+        _healthEffectObjects.SetActiveAll(false);
+        for (var i = 0; i < touchCount; i++)
+        {
+            _healthGroupObjects[i].SetActive(true);
+        }
         RefreshHealthObjects();
 
         DOTween.Kill(this);
@@ -73,6 +88,7 @@ public class SlimeBlock : MonoBehaviour
         DOTween.Kill(this);
         IsShowing = false;
         _touchButton.SetActive(false);
+        _healthGroupObjects.SetActiveAll(false);
         _healthObjects.SetActiveAll(false);
         _slimeImageRectTransform.SetActive(false);
     }
@@ -80,17 +96,29 @@ public class SlimeBlock : MonoBehaviour
     private void RefreshHealthObjects()
     {
         _healthObjects.SetActiveAll(false);
-        if (_slimeType is SlimeType.ToxicLevel1 or SlimeType.ToxicLevel2 or SlimeType.ToxicLevel3) return;
+        if (IsToxicSlime) return;
         for (var i = 0; i < _healthObjects.Length; i++)
         {
             _healthObjects[i].SetActive(i < _remainTouchCount);
         }
     }
 
+    private void ShowHealthEffect(int index)
+    {
+        if (IsToxicSlime) return;
+
+        var healthEffectObject = _healthEffectObjects.GetAt(index);
+        if (healthEffectObject == null) return;
+
+        healthEffectObject.SetActive(false);
+        healthEffectObject.SetActive(true);
+    }
+
     public void OnTouchButtonClick()
     {
         _remainTouchCount--;
         RefreshHealthObjects();
+        ShowHealthEffect(_remainTouchCount);
         if (_remainTouchCount > 0) return;
 
         _onTouchSlime.Invoke(_slimeType);
