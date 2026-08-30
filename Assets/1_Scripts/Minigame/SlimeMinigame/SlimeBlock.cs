@@ -17,6 +17,8 @@ public class SlimeBlock : MonoBehaviour
     [SerializeField] private RectTransform _scoreRectTransform;
     [SerializeField] private Text _scoreText;
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private GameObject _destroyEffect;
+    [SerializeField] private GameObject _toxicDestroyEffect;
 
     private readonly Color _minusColor = Color.red;
     private readonly Color _plusColor = Color.green;
@@ -41,6 +43,8 @@ public class SlimeBlock : MonoBehaviour
         _healthGroupObjects.SetActiveAll(false);
         _healthObjects.SetActiveAll(false);
         _healthEffectObjects.SetActiveAll(false);
+        _destroyEffect.SetActive(false);
+        _toxicDestroyEffect.SetActive(false);
         _touchButton.SetActive(false);
         _scoreText.SetActive(false);
         _slimeImageRectTransform.SetActive(false);
@@ -63,6 +67,8 @@ public class SlimeBlock : MonoBehaviour
         _slimeImageRectTransform.SetLocalScale(scale);
         _healthGroupObjects.SetActiveAll(false);
         _healthEffectObjects.SetActiveAll(false);
+        _destroyEffect.SetActive(false);
+        _toxicDestroyEffect.SetActive(false);
         for (var i = 0; i < touchCount; i++)
         {
             _healthGroupObjects[i].SetActive(true);
@@ -114,6 +120,13 @@ public class SlimeBlock : MonoBehaviour
         healthEffectObject.SetActive(true);
     }
 
+    private void ShowDestroyEffect()
+    {
+        var destroyEffect = IsToxicSlime ? _toxicDestroyEffect : _destroyEffect;
+        destroyEffect.SetActive(false);
+        destroyEffect.SetActive(true);
+    }
+
     public void OnTouchButtonClick()
     {
         _remainTouchCount--;
@@ -123,6 +136,7 @@ public class SlimeBlock : MonoBehaviour
 
         _onTouchSlime.Invoke(_slimeType);
         Hide();
+        ShowDestroyEffect();
 
         _scoreText.SetActive(true);
         _scoreText.SetText(_score.ToString());
