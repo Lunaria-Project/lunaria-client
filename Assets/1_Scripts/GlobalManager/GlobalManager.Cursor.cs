@@ -20,6 +20,13 @@ public partial class GlobalManager
         public Sprite[] Sprites;
         public Vector2 Offset;
         public float Scale;
+        public CursorLayout Layout;
+    }
+    
+    public enum CursorLayout
+    {
+        A,
+        B,
     }
 
     [Header("Cursor")]
@@ -28,10 +35,16 @@ public partial class GlobalManager
     [SerializeField] private Image _cursorImage;
     [SerializeField] private float _spriteDuration = 0.2f;
     [SerializeField] private SerializedCursorData _cursorPrefix = new();
+    [SerializeField] private LayoutSwitcher _layoutSwitcher;
+    [SerializeField] private GameObject _starEffect;
+    [SerializeField] private float _starEffectIdleDuration = 0.1f;
 
     private readonly List<Sprite> _currentCursorSprites = new();
     private int _currentCursorIndex;
     private float _lastSpriteChangeTime;
+
+    private const string ALayoutKey = "A";
+    private const string BLayoutKey = "B";
 
     public void SetDefaultCursor()
     {
@@ -59,6 +72,9 @@ public partial class GlobalManager
         _cursorRectTransform.SetActive(true);
         _cursorImageRectTransform.anchoredPosition = data.Offset;
         _cursorImageRectTransform.SetLocalScale(data.Scale);
+        
+        _layoutSwitcher.SetLayout(data.Layout.ToString());
+        
         UpdateCursor();
     }
 
