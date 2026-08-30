@@ -42,6 +42,8 @@ public partial class GlobalManager
     private readonly List<Sprite> _currentCursorSprites = new();
     private int _currentCursorIndex;
     private float _lastSpriteChangeTime;
+    private Vector3 _lastMousePosition;
+    private float _mouseIdleTime;
 
     private const string ALayoutKey = "A";
     private const string BLayoutKey = "B";
@@ -87,6 +89,8 @@ public partial class GlobalManager
             _cursorRectTransform.position = cursorWorldPosition;
         }
 
+        UpdateStarEffect();
+
         if (Time.unscaledTime - _lastSpriteChangeTime < _spriteDuration) return;
 
         _lastSpriteChangeTime = Time.unscaledTime;
@@ -97,6 +101,26 @@ public partial class GlobalManager
             _currentCursorIndex = 0;
         }
         _cursorImage.SetSprite(_currentCursorSprites.GetAt(_currentCursorIndex));
+    }
+
+    private void UpdateStarEffect()
+    {
+        var mousePosition = Input.mousePosition;
+        if (mousePosition != _lastMousePosition)
+        {
+            _lastMousePosition = mousePosition;
+            _mouseIdleTime = 0f;
+            _starEffect.SetActive(true);
+            return;
+        }
+
+        if (_mouseIdleTime >= _starEffectIdleDuration) return;
+
+        _mouseIdleTime += Time.unscaledDeltaTime;
+        if (_mouseIdleTime >= _starEffectIdleDuration)
+        {
+            _starEffect.SetActive(false);
+        }
     }
 
     private void HideUserCursor()
