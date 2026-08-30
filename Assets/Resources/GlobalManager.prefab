@@ -57,6 +57,8 @@ MonoBehaviour:
   - Key: B
     Objects:
     - {fileID: 7228846397727955745}
+  - Key: C
+    Objects: []
 --- !u!1 &458000817073648015
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6595940034995386349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4917,7 +4919,7 @@ ParticleSystemRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458000817073648015}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -10726,9 +10728,10 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 75b54ed2452c44fff83ccc9ce0d4d3fa, type: 3}
       Offset: {x: 150, y: -140}
       Scale: 5
-      Layout: 0
+      Layout: 2
   _layoutSwitcher: {fileID: 8014047551660981801}
   _starEffect: {fileID: 83942693430896862}
+  _starEffectIdleDuration: 0.1
 --- !u!1 &8641716565095121702
 GameObject:
   m_ObjectHideFlags: 0

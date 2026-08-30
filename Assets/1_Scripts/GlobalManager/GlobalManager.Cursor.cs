@@ -27,6 +27,7 @@ public partial class GlobalManager
     {
         A,
         B,
+        C,
     }
 
     [Header("Cursor")]
