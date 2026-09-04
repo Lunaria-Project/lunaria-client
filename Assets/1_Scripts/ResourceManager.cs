@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>
@@ -25,6 +26,12 @@ public class ResourceManager : Singleton<ResourceManager>
     public MapConfig LoadMapConfig()
     {
         return LoadScriptableObject<MapConfig>("map_config");
+    }
+
+    public SkeletonDataAsset LoadCharacterSkeletonData(string resourceKey)
+    {
+        var skeletonDataResourceKey = $"{resourceKey}_skeletondata";
+        return LoadScriptableObject<SkeletonDataAsset>(skeletonDataResourceKey);
     }
 
     public Sprite LoadCutsceneCharacterSprite(string resourceKey)

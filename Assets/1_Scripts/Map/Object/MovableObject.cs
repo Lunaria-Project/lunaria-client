@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Spine.Unity;
 using UnityEngine;
 
 public abstract class MovableObject : MapObject
 {
     [SerializeField] private SpriteRenderer _characterSpriteRenderer;
+    [SerializeField, CanBeNull] private SkeletonAnimation _skeletonAnimation;
     [SerializeField] private Transform _spriteTransform;
 
     [Header("[Move]")]
@@ -33,6 +36,11 @@ public abstract class MovableObject : MapObject
     private readonly List<Sprite> _backSprites = new();
     private const string _frontSpriteFormat = "{0}_front_{1:D2}";
     private const string _backSpriteFormat = "{0}_back_{1:D2}";
+
+    // skeleton animation
+    private bool _useSkeletonAnimation;
+    private const string _walkAnimationName = "animation";
+    private const int _walkTrackIndex = 0;
 
     #region UnityEvent
 
@@ -181,10 +189,25 @@ public abstract class MovableObject : MapObject
 
     private void InitSprite()
     {
+        var characterData = GameData.Instance.GetCharacterInfoData(GetCharacterDataId());
+        var skeletonDataAsset = _skeletonAnimation == null ? null : ResourceManager.Instance.LoadCharacterSkeletonData(characterData.ResourceKey);
+        _useSkeletonAnimation = skeletonDataAsset != null;
+
+        if (_skeletonAnimation != null)
+        {
+            _skeletonAnimation.gameObject.SetActive(_useSkeletonAnimation);
+        }
+        _characterSpriteRenderer.gameObject.SetActive(!_useSkeletonAnimation);
+
+        if (_useSkeletonAnimation)
+        {
+            InitSkeletonAnimation(skeletonDataAsset);
+            return;
+        }
+
         _spriteIndex = 0;
         _frontSprites.Clear();
         _backSprites.Clear();
-        var characterData = GameData.Instance.GetCharacterInfoData(GetCharacterDataId());
         for (var i = 1; i < 10; i++)
         {
             var resourceKey = string.Format(_frontSpriteFormat, characterData.ResourceKey, i);
@@ -208,9 +231,14 @@ public abstract class MovableObject : MapObject
 
     private void UpdateSprite(float dt)
     {
+        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
+        if (_useSkeletonAnimation)
+        {
+            UpdateSkeletonAnimation(moveDirection);
+            return;
+        }
         if (_frontSprites.Count == 0 || _backSprites.Count == 0) return;
 
-        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
         if (moveDirection.y > 0)
         {
             _isFacingFront = false;
@@ -246,6 +274,52 @@ public abstract class MovableObject : MapObject
         }
 
         _characterSpriteRenderer.sprite = _isFacingFront ? _frontSprites[_spriteIndex] : _backSprites[_spriteIndex];
+    }
+
+    #endregion
+
+    #region SkeletonAnimation
+
+    private void InitSkeletonAnimation(SkeletonDataAsset skeletonDataAsset)
+    {
+        if (_skeletonAnimation == null) return;
+        if (_skeletonAnimation.SkeletonDataAsset != skeletonDataAsset)
+        {
+            _skeletonAnimation.SkeletonDataAsset = skeletonDataAsset;
+            _skeletonAnimation.Initialize(true);
+        }
+
+        var walkAnimation = skeletonDataAsset.GetSkeletonData(false).FindAnimation(_walkAnimationName);
+        if (walkAnimation == null)
+        {
+            LogManager.LogError($"[MovableObject] {skeletonDataAsset.name}: 스파인 애니메이션을 찾을 수 없습니다. Animation: {_walkAnimationName}");
+            return;
+        }
+
+        _skeletonAnimation.AnimationState.SetAnimation(_walkTrackIndex, walkAnimation, true);
+        _skeletonAnimation.timeScale = 0f;
+        _skeletonAnimation.Skeleton.ScaleX = 1f;
+    }
+
+    private void UpdateSkeletonAnimation(Vector2 moveDirection)
+    {
+        if (moveDirection.x > 0)
+        {
+            _skeletonAnimation.Skeleton.ScaleX = 1f;
+        }
+        else if (moveDirection.x < 0)
+        {
+            _skeletonAnimation.Skeleton.ScaleX = -1f;
+        }
+
+        var isMoving = moveDirection != Vector2.zero;
+        _skeletonAnimation.timeScale = isMoving ? 1f : 0f;
+        if (isMoving) return;
+
+        // 정지 시 첫 프레임 포즈로 고정
+        var trackEntry = _skeletonAnimation.AnimationState.GetTrack(_walkTrackIndex);
+        if (trackEntry == null) return;
+        trackEntry.TrackTime = 0f;
     }
 
     #endregion
