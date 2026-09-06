@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: fx_distort_bg_02
+  m_Name: fx_distort_bg_03
   m_Shader: {fileID: 4800000, guid: b312830d45ff146e9af1d3adf8e673ee, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Dtex:
         m_Texture: {fileID: 2800000, guid: d57627878cb39be4ca950ce49340d48b, type: 3}
-        m_Scale: {x: 0.2, y: 0.2}
+        m_Scale: {x: 0.5, y: 2}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
@@ -83,7 +83,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AClip: 0.01
-    - _Ai: 0
+    - _Ai: 1
     - _AtexSpdX: 0
     - _AtexSpdY: 0
     - _BumpScale: 1
@@ -91,18 +91,18 @@ Material:
     - _Culling: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Di: 0.05
+    - _Di: 0.125
     - _DsAi: 0
     - _DsDi: 0
     - _DsEdgeMul: 0
     - _DsEdgeRange: 0
     - _Dsi: 0
     - _DstBlend: 0
-    - _DstMode: 1
+    - _DstMode: 10
     - _DstexSpdX: 0
     - _DstexSpdY: 0
     - _DtexSpdX: 0.05
-    - _DtexSpdY: 0.005
+    - _DtexSpdY: 0.01
     - _Fade: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5

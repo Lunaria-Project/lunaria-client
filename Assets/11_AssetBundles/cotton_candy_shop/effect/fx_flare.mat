@@ -7,16 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: fx_distort_bg_02
-  m_Shader: {fileID: 4800000, guid: b312830d45ff146e9af1d3adf8e673ee, type: 3}
+  m_Name: fx_flare
+  m_Shader: {fileID: 4800000, guid: 935c5cfc617946cfaa60892b8ed7d1da, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _MTEXWRAPMODE_NONE
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -44,24 +43,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DsAtex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Dstex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Dtex:
-        m_Texture: {fileID: 2800000, guid: d57627878cb39be4ca950ce49340d48b, type: 3}
-        m_Scale: {x: 0.2, y: 0.2}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b53d5acbf63a2014d97fe10a1d14a2fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,8 +77,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AClip: 0.01
-    - _Ai: 0
+    - _Ai: 1
     - _AtexSpdX: 0
     - _AtexSpdY: 0
     - _BumpScale: 1
@@ -91,9 +85,7 @@ Material:
     - _Culling: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Di: 0.05
-    - _DsAi: 0
-    - _DsDi: 0
+    - _Di: 0
     - _DsEdgeMul: 0
     - _DsEdgeRange: 0
     - _Dsi: 0
@@ -101,8 +93,8 @@ Material:
     - _DstMode: 1
     - _DstexSpdX: 0
     - _DstexSpdY: 0
-    - _DtexSpdX: 0.05
-    - _DtexSpdY: 0.005
+    - _DtexSpdX: 0
+    - _DtexSpdY: 0
     - _Fade: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -111,7 +103,6 @@ Material:
     - _Mode: 0
     - _MtexSpdX: 0
     - _MtexSpdY: 0
-    - _MtexWrapMode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SBDi: 0
@@ -128,10 +119,6 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UVSec: 0
-    - _UseDDsTex: 0
-    - _UseDsATex: 0
-    - _UsePolar: 0
-    - _UseUIAlphaClip: 0
     - _UseUnscaledTime: 0
     - _ZWrite: 1
     - _Zwrite: 0
@@ -140,9 +127,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DsEdgeC: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MtexC: {r: 1, g: 1, b: 1, a: 1}
-    - _MtexUV: {r: 0, g: 0, b: 1, a: 1}
+    - _MtexC: {r: 1.4142135, g: 1.4142135, b: 1.4142135, a: 1}
     - _SBtexC: {r: 1, g: 1, b: 1, a: 1}
-    - _UnscaledTime: {r: 31.932322, g: 638.6464, b: 1277.2928, a: 1915.9392}
+    - _UnscaledTime: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
