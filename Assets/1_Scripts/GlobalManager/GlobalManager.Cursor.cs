@@ -38,7 +38,6 @@ public partial class GlobalManager
     [SerializeField] private SerializedCursorData _cursorPrefix = new();
     [SerializeField] private LayoutSwitcher _layoutSwitcher;
     [SerializeField] private GameObject _starEffect;
-    [SerializeField] private float _starEffectIdleDuration = 0.1f;
 
     private readonly List<Sprite> _currentCursorSprites = new();
     private int _currentCursorIndex;
@@ -46,8 +45,7 @@ public partial class GlobalManager
     private Vector3 _lastMousePosition;
     private float _mouseIdleTime;
 
-    private const string ALayoutKey = "A";
-    private const string BLayoutKey = "B";
+    private const float _starEffectIdleDuration = 0.37f;
 
     public void SetDefaultCursor()
     {
