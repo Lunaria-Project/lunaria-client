@@ -39,8 +39,10 @@ public abstract class MovableObject : MapObject
 
     // skeleton animation
     private bool _useSkeletonAnimation;
-    private const string _walkAnimationName = "animation";
-    private const int _walkTrackIndex = 0;
+    private bool _isWalkAnimationPlaying;
+    private const string _idleAnimationName = "idle";
+    private const string _walkAnimationName = "walking";
+    private const int _animationTrackIndex = 0;
 
     #region UnityEvent
 
@@ -289,16 +291,10 @@ public abstract class MovableObject : MapObject
             _skeletonAnimation.Initialize(true);
         }
 
-        var walkAnimation = skeletonDataAsset.GetSkeletonData(false).FindAnimation(_walkAnimationName);
-        if (walkAnimation == null)
-        {
-            LogManager.LogError($"[MovableObject] {skeletonDataAsset.name}: 스파인 애니메이션을 찾을 수 없습니다. Animation: {_walkAnimationName}");
-            return;
-        }
-
-        _skeletonAnimation.AnimationState.SetAnimation(_walkTrackIndex, walkAnimation, true);
-        _skeletonAnimation.timeScale = 0f;
+        _skeletonAnimation.timeScale = 1f;
         _skeletonAnimation.Skeleton.ScaleX = 1f;
+        _isWalkAnimationPlaying = false;
+        PlaySkeletonAnimation(_idleAnimationName);
     }
 
     private void UpdateSkeletonAnimation(Vector2 moveDirection)
@@ -313,13 +309,22 @@ public abstract class MovableObject : MapObject
         }
 
         var isMoving = moveDirection != Vector2.zero;
-        _skeletonAnimation.timeScale = isMoving ? 1f : 0f;
-        if (isMoving) return;
+        if (_isWalkAnimationPlaying == isMoving) return;
 
-        // 정지 시 첫 프레임 포즈로 고정
-        var trackEntry = _skeletonAnimation.AnimationState.GetTrack(_walkTrackIndex);
-        if (trackEntry == null) return;
-        trackEntry.TrackTime = 0f;
+        _isWalkAnimationPlaying = isMoving;
+        PlaySkeletonAnimation(isMoving ? _walkAnimationName : _idleAnimationName);
+    }
+
+    private void PlaySkeletonAnimation(string animationName)
+    {
+        var animation = _skeletonAnimation.SkeletonDataAsset.GetSkeletonData(false).FindAnimation(animationName);
+        if (animation == null)
+        {
+            LogManager.LogError($"[MovableObject] {_skeletonAnimation.SkeletonDataAsset.name}: 스파인 애니메이션을 찾을 수 없습니다. Animation: {animationName}");
+            return;
+        }
+
+        _skeletonAnimation.AnimationState.SetAnimation(_animationTrackIndex, animation, true);
     }
 
     #endregion
