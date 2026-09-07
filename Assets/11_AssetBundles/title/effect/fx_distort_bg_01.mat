@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Dtex:
         m_Texture: {fileID: 2800000, guid: d57627878cb39be4ca950ce49340d48b, type: 3}
-        m_Scale: {x: 0.2, y: 0.2}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
@@ -83,7 +83,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AClip: 0.01
-    - _Ai: 0
+    - _Ai: 1
     - _AtexSpdX: 0
     - _AtexSpdY: 0
     - _BumpScale: 1
@@ -101,8 +101,8 @@ Material:
     - _DstMode: 1
     - _DstexSpdX: 0
     - _DstexSpdY: 0
-    - _DtexSpdX: 0.05
-    - _DtexSpdY: 0.005
+    - _DtexSpdX: 0.1
+    - _DtexSpdY: 0.1
     - _Fade: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
