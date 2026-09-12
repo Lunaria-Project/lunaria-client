@@ -39,9 +39,11 @@ public abstract class MovableObject : MapObject
 
     // skeleton animation
     private bool _useSkeletonAnimation;
-    private bool _isWalkAnimationPlaying;
+    private string _currentAnimationName;
     private const string _idleAnimationName = "idle";
+    private const string _idleBackAnimationName = "idle_back";
     private const string _walkAnimationName = "walking";
+    private const string _walkBackAnimationName = "walking_back";
     private const int _animationTrackIndex = 0;
 
     #region UnityEvent
@@ -293,7 +295,7 @@ public abstract class MovableObject : MapObject
 
         _skeletonAnimation.timeScale = 1f;
         _skeletonAnimation.Skeleton.ScaleX = 1f;
-        _isWalkAnimationPlaying = false;
+        _currentAnimationName = _idleAnimationName;
         PlaySkeletonAnimation(_idleAnimationName);
     }
 
@@ -308,11 +310,30 @@ public abstract class MovableObject : MapObject
             _skeletonAnimation.Skeleton.ScaleX = -1f;
         }
 
-        var isMoving = moveDirection != Vector2.zero;
-        if (_isWalkAnimationPlaying == isMoving) return;
+        if (moveDirection.y > 0)
+        {
+            _isFacingFront = false;
+        }
+        else if (moveDirection.y < 0)
+        {
+            _isFacingFront = true;
+        }
 
-        _isWalkAnimationPlaying = isMoving;
-        PlaySkeletonAnimation(isMoving ? _walkAnimationName : _idleAnimationName);
+        var isMoving = moveDirection != Vector2.zero;
+        var animationName = GetSkeletonAnimationName(isMoving, _isFacingFront);
+        if (_currentAnimationName == animationName) return;
+
+        _currentAnimationName = animationName;
+        PlaySkeletonAnimation(animationName);
+    }
+
+    private static string GetSkeletonAnimationName(bool isMoving, bool isFacingFront)
+    {
+        if (isMoving)
+        {
+            return isFacingFront ? _walkAnimationName : _walkBackAnimationName;
+        }
+        return isFacingFront ? _idleAnimationName : _idleBackAnimationName;
     }
 
     private void PlaySkeletonAnimation(string animationName)
