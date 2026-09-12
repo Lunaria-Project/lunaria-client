@@ -17,6 +17,8 @@ public abstract class MovableObject : MapObject
 
     public CircleCollider2D Collider => _collider2D;
     public Vector2 MoveDirection { get; protected set; }
+    [CanBeNull] protected SkeletonAnimation SkeletonAnimation => _skeletonAnimation;
+    protected bool UseSkeletonAnimation => _useSkeletonAnimation;
     private MapConfig Config;
 
     // move
@@ -297,7 +299,10 @@ public abstract class MovableObject : MapObject
         _skeletonAnimation.Skeleton.ScaleX = 1f;
         _currentAnimationName = _idleAnimationName;
         PlaySkeletonAnimation(_idleAnimationName);
+        OnSkeletonAnimationInitialized();
     }
+
+    protected virtual void OnSkeletonAnimationInitialized() { }
 
     private void UpdateSkeletonAnimation(Vector2 moveDirection)
     {

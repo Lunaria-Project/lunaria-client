@@ -15,4 +15,9 @@ public static class NameContainer
     {
         public const string Artifact = "stick";
     }
+
+    public static class SpineAttachment
+    {
+        public const string Artifact = "stick";
+    }
 }

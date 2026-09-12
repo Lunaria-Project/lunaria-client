@@ -5,6 +5,7 @@ public partial class UserData // Inventory
 {
     public event Action<int> OnItemQuantityChanged;
     public event Action OnQuickSlotChanged;
+    public event Action OnEquippedArtifactChanged;
 
     public long GetItemQuantity(int itemDataId)
     {
@@ -61,7 +62,9 @@ public partial class UserData // Inventory
 
     public void SetEquippedArtifact(int itemId)
     {
+        if (_userDataInfo.EquippedArtifactId == itemId) return;
         _userDataInfo.EquippedArtifactId = itemId;
+        OnEquippedArtifactChanged?.Invoke();
     }
 
     public bool TrySetEquippedArtifact(ArtifactType artifactType)
@@ -72,7 +75,7 @@ public partial class UserData // Inventory
             if (quantity <= 0) continue;
             var data = GameData.Instance.GetArtifactData(id);
             if (data.ArtifactType != artifactType) continue;
-            _userDataInfo.EquippedArtifactId = id;
+            SetEquippedArtifact(id);
             return true;
         }
         return false;
