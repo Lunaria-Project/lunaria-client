@@ -137,11 +137,13 @@ namespace Generated
     {
         public int Id { get; private set; }
         public ArtifactType ArtifactType { get; private set; }
+        public string ResourceKey { get; private set; }
 
-        public ArtifactData(int id, ArtifactType artifactType)
+        public ArtifactData(int id, ArtifactType artifactType, string resourceKey)
         {
             Id = id;
             ArtifactType = artifactType;
+            ResourceKey = resourceKey;
         }
     }
 

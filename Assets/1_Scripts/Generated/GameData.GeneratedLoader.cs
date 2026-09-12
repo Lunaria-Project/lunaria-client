@@ -65,7 +65,7 @@ public partial class GameData
         _dtArtifactData.Clear();
         foreach (var row in rows)
         {
-            var newData = new ArtifactData(Convert.ToInt32(row[0]), ((string)row[1]).ParseEnum<ArtifactType>());
+            var newData = new ArtifactData(Convert.ToInt32(row[0]), ((string)row[1]).ParseEnum<ArtifactType>(), (row[2] as string) ?? string.Empty);
             _dtArtifactData.Add(newData.Id, newData);
         }
     }

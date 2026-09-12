@@ -5,4 +5,14 @@ public static class NameContainer
         public const string MapObject = "MapObject";
         public const string UI = "UI";
     }
+
+    public static class SpineSkin
+    {
+        public const string Artifact = "stick1";
+    }
+
+    public static class SpineSlot
+    {
+        public const string Artifact = "stick";
+    }
 }
