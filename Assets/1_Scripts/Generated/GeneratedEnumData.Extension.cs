@@ -28,6 +28,7 @@ public static class GeneratedEnumExtensions
             ItemType.Quest                 => "EnumData.Enum.ItemType.8",
             ItemType.Ride                  => "EnumData.Enum.ItemType.9",
             ItemType.FamiliarCall          => "EnumData.Enum.ItemType.10",
+            ItemType.ArtifactRateUp        => "EnumData.Enum.ItemType.11",
             _                              => value.ToString(),
         };
         return GameData.Instance.GetLocalString(key);

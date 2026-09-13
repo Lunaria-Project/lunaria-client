@@ -45,6 +45,7 @@ public enum ItemType
     Quest = 8,
     Ride = 9,
     FamiliarCall = 10,
+    ArtifactRateUp = 11,
 }
 
 [SerializeEnum]
