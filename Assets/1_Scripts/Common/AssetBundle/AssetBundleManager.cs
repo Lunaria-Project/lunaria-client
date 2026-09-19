@@ -118,6 +118,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             foreach (var assetPath in assetPaths)
             {
                 if (!assetPath.Contains(AssetBundlePath)) continue;
+                if (!AssetBundleIndex.IsIndexTarget(assetPath)) continue;
                 var mainType = AssetDatabase.GetMainAssetTypeAtPath(assetPath);
                 if (mainType == null) continue;
 
