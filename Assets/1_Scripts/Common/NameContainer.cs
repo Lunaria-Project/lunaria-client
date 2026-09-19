@@ -8,16 +8,16 @@ public static class NameContainer
 
     public static class SpineSkin
     {
-        public const string Artifact = "stick1";
+        public const string Artifact = "artifact";
     }
 
     public static class SpineSlot
     {
-        public const string Artifact = "stick";
+        public const string Artifact = "artifact";
     }
 
     public static class SpineAttachment
     {
-        public const string Artifact = "stick";
+        public const string Artifact = "artifact";
     }
 }
