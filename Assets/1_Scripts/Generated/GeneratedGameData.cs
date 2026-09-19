@@ -147,6 +147,24 @@ namespace Generated
         }
     }
 
+    public partial class FamiliarCallData
+    {
+        public int Id { get; private set; }
+        public int FamiliarId { get; private set; }
+        public string ResourceKey { get; private set; }
+        public string Name { get; private set; }
+        public int hp { get; private set; }
+
+        public FamiliarCallData(int id, int familiarId, string resourceKey, string name, int hp)
+        {
+            Id = id;
+            FamiliarId = familiarId;
+            ResourceKey = resourceKey;
+            Name = name;
+            hp = hp;
+        }
+    }
+
     public partial class InitialItemData
     {
         public int ItemId { get; private set; }

@@ -47,6 +47,13 @@ public partial class GameData
     public bool ContainsArtifactData(int key) => DTArtifactData.ContainsKey(key);
     private readonly Dictionary<int, ArtifactData> _dtArtifactData = new();
 
+    // FamiliarCallData - FamiliarCallData, key: Id
+    public IReadOnlyDictionary<int, FamiliarCallData> DTFamiliarCallData => _dtFamiliarCallData;
+    public bool TryGetFamiliarCallData(int key, out FamiliarCallData result) => DTFamiliarCallData.TryGetValue(key, out result);
+    public FamiliarCallData GetFamiliarCallData(int key) => DTFamiliarCallData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsFamiliarCallData(int key) => DTFamiliarCallData.ContainsKey(key);
+    private readonly Dictionary<int, FamiliarCallData> _dtFamiliarCallData = new();
+
     // InitialItemData - InitialItemData, key: ItemId
     public IReadOnlyDictionary<int, InitialItemData> DTInitialItemData => _dtInitialItemData;
     public bool TryGetInitialItemData(int key, out InitialItemData result) => DTInitialItemData.TryGetValue(key, out result);

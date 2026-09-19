@@ -70,6 +70,17 @@ public partial class GameData
         }
     }
 
+    private void LoadFamiliarCallData(List<object[]> rows)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtFamiliarCallData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new FamiliarCallData(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), (row[2] as string) ?? string.Empty, GetLocalString((row[3] as string) ?? string.Empty), Convert.ToInt32(row[4]));
+            _dtFamiliarCallData.Add(newData.Id, newData);
+        }
+    }
+
     private void LoadInitialItemData(List<object[]> rows)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -223,6 +234,7 @@ public partial class GameData
             case "CutsceneSelection": LoadCutsceneSelectionData(rows); break;
             case "Localization": LoadLocalizationData(rows); break;
             case "Artifact": LoadArtifactData(rows); break;
+            case "FamiliarCall": LoadFamiliarCallData(rows); break;
             case "InitialItem": LoadInitialItemData(rows); break;
             case "InventoryTab": LoadInventoryTabData(rows); break;
             case "Item": LoadItemData(rows); break;
