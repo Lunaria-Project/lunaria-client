@@ -12,6 +12,7 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
     protected void Awake()
     {
         _quickBlock.SetClickAction(OnQuickSlotClick);
+        _quickBlock.SetDoubleClickAction(OnQuickSlotDoubleClick);
     }
 
     protected override void OnShow(params object[] args)
@@ -39,4 +40,11 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
     }
 
     private void OnQuickSlotClick(int index) { }
+
+    private void OnQuickSlotDoubleClick(int index)
+    {
+        var itemId = UserData.Instance.GetQuickSlotItemId(index);
+        if (itemId == 0) return;
+        ItemUseManager.Instance.Use(itemId);
+    }
 }

@@ -9,12 +9,18 @@ public class InventoryQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler
     private int _slotIndex;
     private Action<int> _onDropAction;
     private Action<int> _onClickAction;
+    private Action<int> _onDoubleClickAction;
     private Action<int> _onBeginDragAction;
     private Action _onEndDragAction;
 
     public void SetClickAction(Action<int> onClickAction)
     {
         _onClickAction = onClickAction;
+    }
+
+    public void SetDoubleClickAction(Action<int> onDoubleClickAction)
+    {
+        _onDoubleClickAction = onDoubleClickAction;
     }
 
     public void SetDragAction(Action<int> onBeginDrag, Action onEndDrag, Action<int> onDropAction)
@@ -76,7 +82,11 @@ public class InventoryQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.clickCount < 2) return;
-        _onClickAction?.Invoke(_slotIndex);
+        if (eventData.clickCount < 2)
+        {
+            _onClickAction?.Invoke(_slotIndex);
+            return;
+        }
+        _onDoubleClickAction?.Invoke(_slotIndex);
     }
 }

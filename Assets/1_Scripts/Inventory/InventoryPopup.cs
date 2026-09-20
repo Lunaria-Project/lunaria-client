@@ -25,9 +25,11 @@ public class InventoryPopup : EmptyParamPopup
         foreach (var cell in _cells)
         {
             cell.SetClickAction(OnCellClick);
+            cell.SetDoubleClickAction(OnCellDoubleClick);
             cell.SetDragAction(OnCellBeginDrag, OnCellEndDrag);
         }
         _quickBlock.SetClickAction(OnQuickSlotClick);
+        _quickBlock.SetDoubleClickAction(OnQuickSlotDoubleClick);
         _quickBlock.SetDragAction(OnQuickSlotBeginDrag, OnCellEndDrag, OnQuickSlotDrop);
     }
 
@@ -57,6 +59,12 @@ public class InventoryPopup : EmptyParamPopup
         UserData.Instance.CheckNewItem(_selectedItemId);
         _infoCell.SetData(_selectedItemId);
         RefreshCells();
+    }
+
+    private void OnCellDoubleClick(int index)
+    {
+        if (index < 0 || index >= _filteredItems.Count) return;
+        ItemUseManager.Instance.Use(_filteredItems[index].ItemId);
     }
 
     private void OnTabChanged(int tabIndex)
@@ -151,5 +159,12 @@ public class InventoryPopup : EmptyParamPopup
         var itemId = UserData.Instance.GetQuickSlotItemId(slotIndex);
         if (itemId == 0) return;
         UserData.Instance.ClearQuickSlot(slotIndex);
+    }
+
+    private void OnQuickSlotDoubleClick(int slotIndex)
+    {
+        var itemId = UserData.Instance.GetQuickSlotItemId(slotIndex);
+        if (itemId == 0) return;
+        ItemUseManager.Instance.Use(itemId);
     }
 }

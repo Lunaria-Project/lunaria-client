@@ -4,7 +4,7 @@ using Lunaria;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField] private Image _image;
     [SerializeField] private GameObject[] _quantityTextObjects;
@@ -17,12 +17,18 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public int ItemDataId { get; private set; }
     private int _index;
     private Action<int> _onClickAction;
+    private Action<int> _onDoubleClickAction;
     private Action<InventoryCell> _onBeginDragAction;
     private Action _onEndDragAction;
 
     public void SetClickAction(Action<int> onClickAction)
     {
         _onClickAction = onClickAction;
+    }
+
+    public void SetDoubleClickAction(Action<int> onDoubleClickAction)
+    {
+        _onDoubleClickAction = onDoubleClickAction;
     }
 
     public void SetDragAction(Action<InventoryCell> onBeginDrag, Action onEndDrag)
@@ -80,6 +86,13 @@ public class InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         _onEndDragAction?.Invoke();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (ItemDataId == 0) return;
+        if (eventData.clickCount < 2) return;
+        _onDoubleClickAction?.Invoke(_index);
     }
 
     public void OnClickButton()

@@ -15,6 +15,14 @@ public class InventoryQuickBlock : MonoBehaviour
         }
     }
 
+    public void SetDoubleClickAction(Action<int> onDoubleClickAction)
+    {
+        foreach (var quickSlot in _quickSlots)
+        {
+            quickSlot.SetDoubleClickAction(onDoubleClickAction);
+        }
+    }
+
     public void SetDragAction(Action<int> onBeginDrag, Action onEndDrag, Action<int> onDropAction)
     {
         foreach (var quickSlot in _quickSlots)
