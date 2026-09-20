@@ -55,7 +55,7 @@ public abstract class MovableObject : MapObject
         base.Update();
         if (!GlobalManager.Instance.CanPlayerMove()) return;
         UpdateAutoMove();
-        UpdateSprite(Time.deltaTime);
+        UpdateAnimation(Time.deltaTime);
         UpdateZPosition();
     }
 
@@ -235,7 +235,7 @@ public abstract class MovableObject : MapObject
         _spriteFrameTime = 0;
     }
 
-    private void UpdateSprite(float dt)
+    private void UpdateAnimation(float dt)
     {
         var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
         if (_useSkeletonAnimation)
