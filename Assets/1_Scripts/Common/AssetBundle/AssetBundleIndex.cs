@@ -21,6 +21,7 @@ public class AssetBundleIndex
         ".prefab",
         ".png",
         ".spriteatlas",
+        ".asset",
     };
 
     [SerializeField] private List<AssetBundleIndexEntry> _entries = new();
