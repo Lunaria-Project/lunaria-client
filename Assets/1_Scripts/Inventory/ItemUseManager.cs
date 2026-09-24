@@ -16,8 +16,8 @@ public class ItemUseManager : Singleton<ItemUseManager>
         {
             case ItemType.FamiliarCall:
             {
-                // TODO: 패밀리어 소환 처리
-                LogManager.Log($"[Item] Use: FamiliarCall (itemId={itemId})");
+                if (!UserData.Instance.TrySummonFamiliar(itemId)) break;
+                UserData.Instance.RemoveItem(itemId, 1);
                 break;
             }
             default:

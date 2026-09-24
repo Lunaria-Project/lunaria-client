@@ -47,6 +47,10 @@ public class TitleMainPanel : Panel<TitleMainPanel>
         {
             userDataInfo.AddItem(id.DataId, quantity);
         }
+        foreach (var familiar in userData.SummonedFamiliars)
+        {
+            userDataInfo.AddFamiliar(familiar.DataId);
+        }
         userDataInfo.SlimeGauge = Mathf.Min(userData.InitSlimeGauge, 100);
         userDataInfo.CurrentDay = 1;
         StartGame(userDataInfo).Forget();

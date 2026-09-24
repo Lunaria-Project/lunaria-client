@@ -20,6 +20,7 @@ public class UserDataInfo
     public HashSet<int> CheckedNewItemIds = new();
     public int CurrentDay;
     public Dictionary<int, Dictionary<ShopType, List<ItemInfo>>> ShopPurchaseRecords = new();
+    public List<FamiliarInfo> Familiars = new();
 
     public void AddItem(int itemId, long quantity)
     {
@@ -30,6 +31,30 @@ public class UserDataInfo
             return;
         }
         ItemList.Add((itemId, quantity));
+    }
+
+    public bool AddFamiliar(int familiarCallId)
+    {
+        if (Familiars.Count >= GameSetting.Instance.MaxFamiliarSlotCount)
+        {
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_ExcessCountWarning.Text());
+            return false;
+        }
+
+        foreach (var familiar in Familiars)
+        {
+            if (familiar.FamiliarCallId != familiarCallId) continue;
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_DuplicationWarning.Text());
+            return false;
+        }
+
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallId);
+        Familiars.Add(new FamiliarInfo
+        {
+            FamiliarCallId = familiarCallId,
+            Hp = familiarCallData.MaxHp,
+        });
+        return true;
     }
 }
 

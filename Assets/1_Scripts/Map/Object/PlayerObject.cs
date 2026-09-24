@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerObject : MovableObject
 {
+    [SerializeField] private FamiliarObject[] _familiarObjects;
+
     public void Init(Vector2 position)
     {
         InitPositionAndScale(position, new Vector2(0, 86), 0.5f, 1);
@@ -14,11 +16,15 @@ public class PlayerObject : MovableObject
     {
         UserData.Instance.OnEquippedArtifactChanged -= RefreshArtifactSkin;
         UserData.Instance.OnEquippedArtifactChanged += RefreshArtifactSkin;
+        UserData.Instance.OnFamiliarChanged -= RefreshFamiliars;
+        UserData.Instance.OnFamiliarChanged += RefreshFamiliars;
+        RefreshFamiliars();
     }
 
     protected void OnDisable()
     {
         UserData.Instance.OnEquippedArtifactChanged -= RefreshArtifactSkin;
+        UserData.Instance.OnFamiliarChanged -= RefreshFamiliars;
     }
 
     protected override void Update()
@@ -26,6 +32,12 @@ public class PlayerObject : MovableObject
         base.Update();
         if (!GlobalManager.Instance.CanPlayerMove()) return;
 
+        UpdateInput();
+        UpdateFamiliarAnimation(Time.deltaTime);
+    }
+
+    private void UpdateInput()
+    {
         var moveUp = Input.GetKey(KeyCode.W);
         var moveDown = Input.GetKey(KeyCode.S);
         var moveRight = Input.GetKey(KeyCode.D);
@@ -75,6 +87,33 @@ public class PlayerObject : MovableObject
     {
         return 1000011;
     }
+
+    #region Familiar
+
+    private void RefreshFamiliars()
+    {
+        var familiars = UserData.Instance.Familiars;
+        for (var i = 0; i < _familiarObjects.Length; i++)
+        {
+            if (i >= familiars.Count)
+            {
+                _familiarObjects[i].Hide();
+                continue;
+            }
+            _familiarObjects[i].Show(familiars[i].FamiliarCallId);
+        }
+    }
+
+    private void UpdateFamiliarAnimation(float dt)
+    {
+        foreach (var familiarObject in _familiarObjects)
+        {
+            if (familiarObject.FamiliarCallId == 0) continue;
+            familiarObject.UpdateAnimation(CurrentMoveDirection, dt);
+        }
+    }
+
+    #endregion
 
     #region Artifact
 

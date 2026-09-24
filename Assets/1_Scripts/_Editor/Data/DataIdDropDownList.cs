@@ -44,6 +44,17 @@ public static class DataIdDropDownList
         _itemDataIdCache = null;
         _characterDataIdCache = null;
         _npcDataIdCache = null;
+        _familiarCallDataIdCache = null;
+    }
+
+    private static ValueDropdownList<int> _familiarCallDataIdCache;
+    public static ValueDropdownList<int> GetFamiliarCallDataIds()
+    {
+        if (_familiarCallDataIdCache.IsNullOrEmpty())
+        {
+            _familiarCallDataIdCache = GetDropdownListFromGameData("FamiliarCall", "Id");
+        }
+        return _familiarCallDataIdCache;
     }
 
     private static ValueDropdownList<int> _itemDataIdCache;

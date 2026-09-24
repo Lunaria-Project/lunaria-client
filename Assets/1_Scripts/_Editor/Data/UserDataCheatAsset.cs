@@ -17,11 +17,22 @@ public class UserDataCheatAsset : ScriptableObject
         public int DataId;
     }
 
+    [Serializable]
+    public struct FamiliarCallDataId
+    {
+#if UNITY_EDITOR
+        [ValueDropdown("@DataIdDropDownList.GetFamiliarCallDataIds()")]
+#endif
+        public int DataId;
+    }
+
     [SerializeField] private SerializedUserData _userInventory = new();
+    [SerializeField] private FamiliarCallDataId[] _summonedFamiliars = Array.Empty<FamiliarCallDataId>();
     [SerializeField] private float _initSlimeGauge;
     [SerializeField] private int _timeSpeedMultiplier;
 
     public SerializedUserData UserInventory => _userInventory;
+    public FamiliarCallDataId[] SummonedFamiliars => _summonedFamiliars;
     public float InitSlimeGauge => _initSlimeGauge;
     public int TimeSpeedMultiplier => _timeSpeedMultiplier;
 }
