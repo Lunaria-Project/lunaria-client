@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f1552f871209a400094f5b1f99f3a3e8
+guid: 0fdccf4209c82464aa137090e2578cc1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2819161006190888971
-    second: stick01_0
+      213: 5209314201399264998
+    second: equip_stick_01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stick01_0
+      name: equip_stick_01_0
       rect:
         serializedVersion: 2
-        x: 60
-        y: 13
-        width: 120
-        height: 60
+        x: 19
+        y: 0
+        width: 163
+        height: 81
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b0804a2affbaf1720800000000000000
-      internalID: 2819161006190888971
+      spriteID: 6e60dc18aa33b4840800000000000000
+      internalID: 5209314201399264998
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      stick01_0: 2819161006190888971
+      equip_stick_01_0: 5209314201399264998
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: SpritePostprocessor_Applied

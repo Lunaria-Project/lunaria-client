@@ -21,6 +21,14 @@ public class SpritePostprocessor : AssetPostprocessor
         {
             importer.spritePixelsPerUnit = DefaultPixelsPerUnit;
         }
+
+        // TextureImportContainer가 있으면 그 규칙으로 덮어쓴다.
+        var container = TextureImportContainer.Find(assetPath);
+        if (container != null)
+        {
+            container.Apply(importer);
+        }
+
         importer.userData = AppliedFlag;
     }
 }
