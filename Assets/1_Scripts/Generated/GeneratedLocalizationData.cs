@@ -57,4 +57,7 @@ public static class LocalizationKey
     public static readonly LocalKey CottonCandyMinigameResultPopup_Description = new("CottonCandyMinigameResultPopup.Description");
     public static readonly LocalKey CottonCandyMinigame_Step1 = new("CottonCandyMinigame.Step1");
     public static readonly LocalKey CottonCandyMinigame_Step2 = new("CottonCandyMinigame.Step2");
+    public static readonly LocalKey Familiar_ExcessCountWarning = new("Familiar.ExcessCountWarning");
+    public static readonly LocalKey Familiar_DuplicationWarning = new("Familiar.DuplicationWarning");
+    public static readonly LocalKey InventoryPopup_ItemCountZero = new("InventoryPopup.ItemCountZero");
 }

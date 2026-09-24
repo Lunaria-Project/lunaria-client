@@ -153,15 +153,15 @@ namespace Generated
         public int FamiliarId { get; private set; }
         public string ResourceKey { get; private set; }
         public string Name { get; private set; }
-        public int hp { get; private set; }
+        public int MaxHp { get; private set; }
 
-        public FamiliarCallData(int id, int familiarId, string resourceKey, string name, int hp)
+        public FamiliarCallData(int id, int familiarId, string resourceKey, string name, int maxHp)
         {
             Id = id;
             FamiliarId = familiarId;
             ResourceKey = resourceKey;
             Name = name;
-            hp = hp;
+            MaxHp = maxHp;
         }
     }
 
