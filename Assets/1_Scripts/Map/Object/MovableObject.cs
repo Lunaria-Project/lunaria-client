@@ -17,6 +17,7 @@ public abstract class MovableObject : MapObject
 
     public CircleCollider2D Collider => _collider2D;
     public Vector2 MoveDirection { get; protected set; }
+    protected Vector2 CurrentMoveDirection => _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
     [CanBeNull] protected SkeletonAnimation SkeletonAnimation => _skeletonAnimation;
     protected bool UseSkeletonAnimation => _useSkeletonAnimation;
     private MapConfig Config;
@@ -103,8 +104,7 @@ public abstract class MovableObject : MapObject
 
     private void UpdateMove(float dt)
     {
-        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
-        moveDirection = moveDirection.normalized;
+        var moveDirection = CurrentMoveDirection.normalized;
         if (moveDirection == Vector2.zero) return;
 
         var deltaPosition = moveDirection * (dt * Config.MapCharacterSpeed);
@@ -237,7 +237,7 @@ public abstract class MovableObject : MapObject
 
     private void UpdateAnimation(float dt)
     {
-        var moveDirection = _forceMoveDirection != Vector2.zero ? _forceMoveDirection : MoveDirection;
+        var moveDirection = CurrentMoveDirection;
         if (_useSkeletonAnimation)
         {
             UpdateSkeletonAnimation(moveDirection);
