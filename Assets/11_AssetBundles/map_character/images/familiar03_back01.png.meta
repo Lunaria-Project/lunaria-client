@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 583dbb7a39f884c80aeddf8c1ab35a43
+guid: 7d4e827a2e07843dbbc812a05d11535d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2773593420043418053
-    second: familiar_a_front01_0
-  - first:
-      213: -5520271109558674841
-    second: familiar_a_front01_1
+      213: 6526692426567856494
+    second: familiar_c_back01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: familiar_a_front01_0
+      name: familiar_c_back01_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 73
-        width: 26
-        height: 32
+        x: 4
+        y: 21
+        width: 104
+        height: 105
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b3683f6ca773289d0800000000000000
-      internalID: -2773593420043418053
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: familiar_a_front01_1
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 22
-        width: 92
-        height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 76a57ea6cae0463b0800000000000000
-      internalID: -5520271109558674841
+      spriteID: e613fcb9e28739a50800000000000000
+      internalID: 6526692426567856494
       vertices: []
       indices: 
       edges: []
@@ -159,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      familiar_c_back01_0: 6526692426567856494
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: SpritePostprocessor_Applied
