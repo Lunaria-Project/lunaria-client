@@ -44,13 +44,8 @@ public class InventoryQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
         }
 
+        // TODO(지선): 0개일 때는 딤드처리 되어야함
         var quantity = UserData.Instance.GetItemQuantity(itemId);
-        if (quantity <= 0)
-        {
-            // TODO(지선): 비우는게 아니라 딤드처리 되어야함
-            return;
-        }
-
         _cell.SetData(_slotIndex, itemId, quantity, false); // TODO(지선): 선택된 상태는 어떻게 처리할지 고민
     }
 

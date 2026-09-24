@@ -35,12 +35,20 @@ public class InventoryQuickBlock : MonoBehaviour
     {
         UserData.Instance.OnQuickSlotChanged -= Refresh;
         UserData.Instance.OnQuickSlotChanged += Refresh;
+        UserData.Instance.OnItemQuantityChanged -= OnItemQuantityChanged;
+        UserData.Instance.OnItemQuantityChanged += OnItemQuantityChanged;
         Refresh();
     }
 
     protected void OnDisable()
     {
         UserData.Instance.OnQuickSlotChanged -= Refresh;
+        UserData.Instance.OnItemQuantityChanged -= OnItemQuantityChanged;
+    }
+
+    private void OnItemQuantityChanged(int itemId)
+    {
+        Refresh();
     }
 
     public void Init()

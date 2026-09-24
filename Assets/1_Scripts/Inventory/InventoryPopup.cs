@@ -45,11 +45,26 @@ public class InventoryPopup : EmptyParamPopup
         var maxSlotCount = GameSetting.Instance.MaxInventorySlotCount;
         LogManager.Assert(_cells.Length >= maxSlotCount, $"InventoryPopup: Cell count({_cells.Length}) must be >= MaxInventorySlotCount({maxSlotCount})");
 
+        UserData.Instance.OnItemQuantityChanged -= OnItemQuantityChanged;
+        UserData.Instance.OnItemQuantityChanged += OnItemQuantityChanged;
+
         _tabGroup.Init();
         _quickBlock.Init();
     }
 
-    protected override void OnHide() { }
+    protected override void OnHide()
+    {
+        UserData.Instance.OnItemQuantityChanged -= OnItemQuantityChanged;
+    }
+
+    private void OnItemQuantityChanged(int itemId)
+    {
+        RefreshCells();
+
+        // 선택 중이던 아이템을 다 썼으면 첫 번째 아이템으로 선택을 옮긴다.
+        if (UserData.Instance.GetItemQuantity(_selectedItemId) > 0) return;
+        OnCellClick(0);
+    }
 
     private void OnCellClick(int index)
     {

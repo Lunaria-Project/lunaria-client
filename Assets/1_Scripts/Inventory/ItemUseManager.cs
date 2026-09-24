@@ -7,7 +7,7 @@ public class ItemUseManager : Singleton<ItemUseManager>
         var quantity = UserData.Instance.GetItemQuantity(itemId);
         if (quantity <= 0)
         {
-            LogManager.Log($"[Item] Use: 보유 수량이 없음 (itemId={itemId})");
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.InventoryPopup_ItemCountZero.Text());
             return;
         }
 

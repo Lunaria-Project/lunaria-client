@@ -27,7 +27,15 @@ public class UserDataInfo
         for (var i = 0; i < ItemList.Count; i++)
         {
             if (ItemList[i].ItemId != itemId) continue;
-            ItemList[i] = (itemId, ItemList[i].Quantity + quantity);
+
+            // 다 쓴 아이템은 목록에서 제거해 인벤토리 슬롯을 비운다. 퀵슬롯은 아이디를 따로 들고 있어 그대로 유지된다.
+            var newQuantity = ItemList[i].Quantity + quantity;
+            if (newQuantity <= 0)
+            {
+                ItemList.RemoveAt(i);
+                return;
+            }
+            ItemList[i] = (itemId, newQuantity);
             return;
         }
         ItemList.Add((itemId, quantity));
