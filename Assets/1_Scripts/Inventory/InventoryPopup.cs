@@ -69,8 +69,12 @@ public class InventoryPopup : EmptyParamPopup
     private void OnCellClick(int index)
     {
         if (index < 0 || index >= _filteredItems.Count) return;
+        SelectItem(_filteredItems[index].ItemId);
+    }
 
-        _selectedItemId = _filteredItems[index].ItemId;
+    private void SelectItem(int itemId)
+    {
+        _selectedItemId = itemId;
         UserData.Instance.CheckNewItem(_selectedItemId);
         _infoCell.SetData(_selectedItemId);
         RefreshCells();
@@ -145,6 +149,7 @@ public class InventoryPopup : EmptyParamPopup
         _dragImage.SetSprite(ResourceManager.Instance.LoadSprite(itemData.IconResourceKey));
         _dragImage.SetActive(true);
         _isDragging = true;
+        SelectItem(_draggingItemId);
     }
 
     private void OnQuickSlotBeginDrag(int itemId)
