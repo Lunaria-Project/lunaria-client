@@ -154,14 +154,16 @@ namespace Generated
         public string ResourceKey { get; private set; }
         public string Name { get; private set; }
         public int MaxHp { get; private set; }
+        public bool IsTemporary { get; private set; }
 
-        public FamiliarCallData(int id, int familiarId, string resourceKey, string name, int maxHp)
+        public FamiliarCallData(int id, int familiarId, string resourceKey, string name, int maxHp, bool isTemporary)
         {
             Id = id;
             FamiliarId = familiarId;
             ResourceKey = resourceKey;
             Name = name;
             MaxHp = maxHp;
+            IsTemporary = isTemporary;
         }
     }
 

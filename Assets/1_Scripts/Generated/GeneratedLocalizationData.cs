@@ -48,6 +48,7 @@ public static class LocalizationKey
     public static readonly LocalKey MinigameResultPopup_NoRewardButton = new("MinigameResultPopup.NoRewardButton");
     public static readonly LocalKey ShopEndPopup_Description = new("ShopEndPopup.Description");
     public static readonly LocalKey ConfirmButton = new("ConfirmButton");
+    public static readonly LocalKey CancelButton = new("CancelButton");
     public static readonly LocalKey ShopPopup_PurchasedAllTodayGuide = new("ShopPopup.PurchasedAllTodayGuide");
     public static readonly LocalKey ShopPopup_PurchasedAllGuide = new("ShopPopup.PurchasedAllGuide");
     public static readonly LocalKey ShopPopup_InsufficientPriceItem = new("ShopPopup.InsufficientPriceItem");
@@ -60,4 +61,7 @@ public static class LocalizationKey
     public static readonly LocalKey Familiar_ExcessCountWarning = new("Familiar.ExcessCountWarning");
     public static readonly LocalKey Familiar_DuplicationWarning = new("Familiar.DuplicationWarning");
     public static readonly LocalKey InventoryPopup_ItemCountZero = new("InventoryPopup.ItemCountZero");
+    public static readonly LocalKey Familiar_CallMessage = new("Familiar.CallMessage");
+    public static readonly LocalKey Familiar_SetIdleState = new("Familiar.SetIdleState");
+    public static readonly LocalKey Familiar_SetSummonedState = new("Familiar.SetSummonedState");
 }

@@ -22,6 +22,11 @@ public class GameSetting : Singleton<GameSetting>
     public int InitialQuickSlotCount { get; private set; }
     public int MaxQuickSlotCount { get; private set; }
     public int MaxFamiliarSlotCount { get; private set; }
+    public int StartFamiliarSlotCount { get; private set; }
+    public int FamiliarWorkingHours { get; private set; }
+    public int FamiliarSummonedStartHp { get; private set; }
+    public int FamiliarSummonedConsumingHpPerHour { get; private set; }
+    public int FamiliarAutoRecoveryHpPerHour { get; private set; }
 
     public void InvokeLoadForSheet(SheetInfo sheetInfo)
     {
@@ -50,6 +55,11 @@ public class GameSetting : Singleton<GameSetting>
                 case "InitialQuickSlotCount": InitialQuickSlotCount = Convert.ToInt32(row[2]); break;
                 case "MaxQuickSlotCount": MaxQuickSlotCount = Convert.ToInt32(row[2]); break;
                 case "MaxFamiliarSlotCount": MaxFamiliarSlotCount = Convert.ToInt32(row[2]); break;
+                case "StartFamiliarSlotCount": StartFamiliarSlotCount = Convert.ToInt32(row[2]); break;
+                case "FamiliarWorkingHours": FamiliarWorkingHours = Convert.ToInt32(row[2]); break;
+                case "FamiliarSummonedStartHp": FamiliarSummonedStartHp = Convert.ToInt32(row[2]); break;
+                case "FamiliarSummonedConsumingHpPerHour": FamiliarSummonedConsumingHpPerHour = Convert.ToInt32(row[2]); break;
+                case "FamiliarAutoRecoveryHpPerHour": FamiliarAutoRecoveryHpPerHour = Convert.ToInt32(row[2]); break;
             }
         }
     }
