@@ -33,6 +33,7 @@ public struct GameTime
 public static class TimeUtil
 {
     public const int SecondsPerDay = HoursPerDay * MinutesPerHour * SecondsPerMinute;
+    public const int SecondsPerHour = MinutesPerHour * SecondsPerMinute;
     public const int SecondsPerMinute = 60;
     public const int MinutesPerHour = 60;
     public const int HoursPerDay = 24;
@@ -70,10 +71,25 @@ public static class TimeUtil
         return Sb.ToString();
     }
 
+    public static long CeilToTenMinuteInterval(long timeSeconds)
+    {
+        const int intervalSeconds = MinutesPerInterval * SecondsPerMinute;
+        return (timeSeconds + intervalSeconds - 1) / intervalSeconds * intervalSeconds;
+    }
+
     public static int GetTenMinuteIntervalIndex(long totalSecondsInDay)
     {
         var totalMinutes = Mathf.FloorToInt((float)totalSecondsInDay / SecondsPerMinute);
         return totalMinutes / MinutesPerInterval;
+    }
+
+    public static string SecondsToHourMinuteString(long timeSeconds)
+    {
+        Sb.Clear();
+        var hours = SecondsToHours(timeSeconds);
+        var minutes = SecondsToMinutes(timeSeconds) % MinutesPerHour;
+        Sb.AppendFormat(TimeFormat, hours, minutes);
+        return Sb.ToString();
     }
 
     public static string SecondsToMinuteSecondString(int timeSeconds)

@@ -40,6 +40,12 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadSprite(cutsceneResourceKey);
     }
 
+    public Sprite LoadFamiliarSprite(string resourceKey, bool isFront, int frameNumber)
+    {
+        var direction = isFront ? "front" : "back";
+        return LoadSprite($"{resourceKey}_{direction}{frameNumber:D2}");
+    }
+
     public Sprite LoadSlimeMinigameSprite(SlimeType type)
     {
         var resourceKey = type switch

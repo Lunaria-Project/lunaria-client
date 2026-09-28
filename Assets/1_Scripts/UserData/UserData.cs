@@ -95,6 +95,7 @@ public partial class UserData : Singleton<UserData>
         var amount = UnityEngine.Random.Range(GameSetting.Instance.MinSlimeGaugePer10Minutes, GameSetting.Instance.MaxSlimeGaugePer10Minutes);
         AddSlimeGauge(amount);
         UpdateFamiliarWork();
+        UpdateFamiliarHp();
     }
 
     public void AddSlimeGauge(float amount)

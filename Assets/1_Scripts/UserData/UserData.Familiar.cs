@@ -6,6 +6,7 @@ public enum FamiliarState
     Idle,
     Summoned,
     Working,
+    NoEnergy,
 }
 
 public class FamiliarInfo
@@ -15,6 +16,7 @@ public class FamiliarInfo
     public FamiliarState State;
     public MinigameType WorkingMinigameType;
     public long WorkEndGameSeconds;
+    public long LastHpUpdatedGameSeconds;
 
     public int WorkRemainMinutes
     {
@@ -30,6 +32,8 @@ public class FamiliarInfo
 public partial class UserData // Familiar
 {
     public event Action OnFamiliarChanged;
+
+    private const float NoEnergyReleaseHpRatio = 0.5f;
 
     public IReadOnlyList<FamiliarInfo> Familiars => _userDataInfo.Familiars;
     public int UnlockedFamiliarSlotCount => _userDataInfo.UnlockedFamiliarSlotCount;
@@ -70,6 +74,36 @@ public partial class UserData // Familiar
         return true;
     }
 
+    public void SummonFamiliar(FamiliarInfo familiar)
+    {
+        if (familiar.State is not FamiliarState.Idle) return;
+
+        familiar.State = FamiliarState.Summoned;
+        familiar.LastHpUpdatedGameSeconds = GameTimeManager.Instance.CurrentGameTime.TotalSeconds;
+        ConsumeFamiliarHp(familiar, GameSetting.Instance.FamiliarSummonedStartHp);
+        OnFamiliarChanged?.Invoke();
+    }
+
+    public void UnsummonFamiliar(FamiliarInfo familiar)
+    {
+        if (familiar.State is not FamiliarState.Summoned) return;
+
+        familiar.State = FamiliarState.Idle;
+        familiar.LastHpUpdatedGameSeconds = GameTimeManager.Instance.CurrentGameTime.TotalSeconds;
+        OnFamiliarChanged?.Invoke();
+    }
+
+    public long GetNoEnergyRemainSeconds(FamiliarInfo familiar)
+    {
+        if (familiar.State is not FamiliarState.NoEnergy) return 0;
+
+        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
+        var releaseHp = (int)Math.Ceiling(maxHp * NoEnergyReleaseHpRatio);
+        var requiredHours = (int)Math.Ceiling((float)(releaseHp - familiar.CurrentHp) / GameSetting.Instance.FamiliarAutoRecoveryHpPerHour);
+        var releaseGameSeconds = familiar.LastHpUpdatedGameSeconds + requiredHours * TimeUtil.SecondsPerHour;
+        return Math.Max(0, releaseGameSeconds - GameTimeManager.Instance.CurrentGameTime.TotalSeconds);
+    }
+
     private void UpdateFamiliarWork()
     {
         var isChanged = false;
@@ -79,7 +113,36 @@ public partial class UserData // Familiar
             if (familiar.State is not FamiliarState.Working) continue;
             if (familiar.WorkEndGameSeconds > currentSeconds) continue;
 
-            EndFamiliarWork(familiar);
+            EndFamiliarWork(familiar, currentSeconds);
+            isChanged = true;
+        }
+
+        if (isChanged)
+        {
+            OnFamiliarChanged?.Invoke();
+        }
+    }
+
+    private void UpdateFamiliarHp()
+    {
+        var isChanged = false;
+        var currentSeconds = GameTimeManager.Instance.CurrentGameTime.TotalSeconds;
+        foreach (var familiar in _userDataInfo.Familiars)
+        {
+            if (familiar.State is FamiliarState.Working) continue;
+
+            var elapsedHours = TimeUtil.SecondsToHours(currentSeconds - familiar.LastHpUpdatedGameSeconds);
+            if (elapsedHours <= 0) continue;
+
+            familiar.LastHpUpdatedGameSeconds += elapsedHours * TimeUtil.SecondsPerHour;
+            if (familiar.State is FamiliarState.Summoned)
+            {
+                ConsumeFamiliarHp(familiar, elapsedHours * GameSetting.Instance.FamiliarSummonedConsumingHpPerHour);
+            }
+            else
+            {
+                RecoverFamiliarHp(familiar, elapsedHours * GameSetting.Instance.FamiliarAutoRecoveryHpPerHour);
+            }
             isChanged = true;
         }
 
@@ -93,18 +156,46 @@ public partial class UserData // Familiar
     {
         // 일시적 패밀리어는 하루가 지나면 사라지고, 근무 중이던 패밀리어는 대기 상태로 돌아간다.
         _userDataInfo.Familiars.RemoveAll(familiar => GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).IsTemporary);
+
+        var startSeconds = GameSetting.Instance.StartGameTimeSeconds;
+        var sleepHours = TimeUtil.SecondsToHours(TimeUtil.SecondsPerDay - GameSetting.Instance.EndGameTimeSeconds + startSeconds);
         foreach (var familiar in _userDataInfo.Familiars)
         {
-            if (familiar.State is not FamiliarState.Working) continue;
-            EndFamiliarWork(familiar);
+            if (familiar.State is FamiliarState.Working)
+            {
+                EndFamiliarWork(familiar, startSeconds);
+            }
+
+            RecoverFamiliarHp(familiar, sleepHours * GameSetting.Instance.FamiliarAutoRecoveryHpPerHour);
+            familiar.LastHpUpdatedGameSeconds = startSeconds;
         }
         OnFamiliarChanged?.Invoke();
     }
 
-    private static void EndFamiliarWork(FamiliarInfo familiar)
+    private static void ConsumeFamiliarHp(FamiliarInfo familiar, int amount)
+    {
+        familiar.CurrentHp = Math.Max(0, familiar.CurrentHp - amount);
+        if (familiar.CurrentHp > 0) return;
+
+        familiar.State = FamiliarState.NoEnergy;
+    }
+
+    private static void RecoverFamiliarHp(FamiliarInfo familiar, int amount)
+    {
+        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
+        familiar.CurrentHp = Math.Min(maxHp, familiar.CurrentHp + amount);
+
+        if (familiar.State is not FamiliarState.NoEnergy) return;
+        if (familiar.CurrentHp < maxHp * NoEnergyReleaseHpRatio) return;
+
+        familiar.State = FamiliarState.Idle;
+    }
+
+    private static void EndFamiliarWork(FamiliarInfo familiar, long endGameSeconds)
     {
         familiar.State = FamiliarState.Idle;
         familiar.WorkingMinigameType = default;
         familiar.WorkEndGameSeconds = 0;
+        familiar.LastHpUpdatedGameSeconds = endGameSeconds;
     }
 }

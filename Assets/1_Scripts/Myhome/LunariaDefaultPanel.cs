@@ -7,6 +7,7 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
     [SerializeField] private TopTimeUI _timeUI;
     [SerializeField] private MyhomeArtifactUI _artifactUI;
     [SerializeField] private InventoryQuickBlock _quickBlock;
+    [SerializeField] private FamiliarSlotGroup _familiarSlotGroup;
     [SerializeField] private GameObject _shoppingSquareButton;
 
     protected void Awake()
@@ -24,6 +25,7 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
         _walletUI.Refresh();
 
         _quickBlock.Init();
+        _familiarSlotGroup.OnShow();
 
         _shoppingSquareButton.SetActive(mapType == MapType.Myhome);
     }
@@ -32,6 +34,7 @@ public class LunariaDefaultPanel : Panel<LunariaDefaultPanel>
     {
         _timeUI.OnHide();
         _artifactUI.OnHide();
+        _familiarSlotGroup.OnHide();
     }
 
     public void OnShoppingSquareButtonClick()

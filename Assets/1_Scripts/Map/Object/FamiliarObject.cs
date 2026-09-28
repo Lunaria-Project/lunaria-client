@@ -14,8 +14,6 @@ public class FamiliarObject : MonoBehaviour
     private int _spriteIndex;
     private readonly List<Sprite> _frontSprites = new();
     private readonly List<Sprite> _backSprites = new();
-    private const string _frontSpriteFormat = "{0}_front{1:D2}";
-    private const string _backSpriteFormat = "{0}_back{1:D2}";
     private const int _maxSpriteCount = 10;
 
     public void Show(int familiarCallItemId)
@@ -81,8 +79,8 @@ public class FamiliarObject : MonoBehaviour
         _isFacingFront = true;
         _spriteIndex = 0;
         _spriteFrameTime = 0;
-        LoadSprites(_frontSpriteFormat, resourceKey, _frontSprites);
-        LoadSprites(_backSpriteFormat, resourceKey, _backSprites);
+        LoadSprites(resourceKey, true, _frontSprites);
+        LoadSprites(resourceKey, false, _backSprites);
 
         if (_frontSprites.Count == 0 || _backSprites.Count == 0)
         {
@@ -92,12 +90,12 @@ public class FamiliarObject : MonoBehaviour
         _spriteRenderer.sprite = _frontSprites[_spriteIndex];
     }
 
-    private static void LoadSprites(string spriteFormat, string resourceKey, List<Sprite> sprites)
+    private static void LoadSprites(string resourceKey, bool isFront, List<Sprite> sprites)
     {
         sprites.Clear();
         for (var i = 1; i <= _maxSpriteCount; i++)
         {
-            var sprite = ResourceManager.Instance.LoadSprite(string.Format(spriteFormat, resourceKey, i));
+            var sprite = ResourceManager.Instance.LoadFamiliarSprite(resourceKey, isFront, i);
             if (sprite == null) break;
             sprites.Add(sprite);
         }

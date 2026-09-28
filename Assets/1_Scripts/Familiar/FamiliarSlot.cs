@@ -1,0 +1,122 @@
+using Lunaria;
+using UnityEngine;
+
+public enum FamiliarSlotState
+{
+    Locked,
+    Empty,
+    Idle,
+    Summoned,
+    NoEnergy,
+    Working,
+}
+
+public class FamiliarSlot : MonoBehaviour
+{
+    [SerializeField] private LayoutSwitcher _layoutSwitcher;
+    [SerializeField] private Image _familiarImage;
+    [SerializeField] private UnityEngine.UI.Slider _hpSlider;
+    [SerializeField] private GameObject _hpGreenObject;
+    [SerializeField] private GameObject _hpRedObject;
+    [SerializeField] private Text _noEnergyRemainTimeText;
+
+    private const string LockedLayoutKey = "Locked";
+    private const string IdleLayoutKey = "Idle";
+    private const string SummonedLayoutKey = "Summoned";
+    private const string NoEnergyLayoutKey = "NoEnergy";
+    private const string WorkingLayoutKey = "Working";
+    private const string EmptyLayoutKey = "Empty";
+
+    private const int FamiliarImageFrameNumber = 1;
+    private const float LowHpRatio = 0.2f;
+
+    private FamiliarSlotState _state;
+    private FamiliarInfo _familiar;
+
+    public void SetData(FamiliarSlotState state, FamiliarInfo familiar)
+    {
+        _state = state;
+        _familiar = familiar;
+        _layoutSwitcher.SetLayout(GetLayoutKey(state));
+
+        if (familiar == null) return;
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
+        RefreshHp(familiar.CurrentHp, familiarCallData.MaxHp);
+
+        if (state is FamiliarSlotState.NoEnergy)
+        {
+            var remainSeconds = UserData.Instance.GetNoEnergyRemainSeconds(familiar);
+            _noEnergyRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
+        }
+    }
+
+    private void RefreshHp(int currentHp, int maxHp)
+    {
+        var hpRatio = (float)currentHp / maxHp;
+        _hpSlider.value = hpRatio;
+
+        var isLowHp = hpRatio <= LowHpRatio;
+        _hpRedObject.SetActive(isLowHp);
+        _hpGreenObject.SetActive(!isLowHp);
+    }
+
+    private void ShowSummonPopup()
+    {
+        var familiar = _familiar;
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        var parameter = new SystemTwoButtonParameter
+        {
+            Description = LocalizationKey.Familiar_SetSummonedState.Text(familiarCallData.Name),
+            ConfirmButtonText = LocalizationKey.ConfirmButton,
+            CancelButtonText = LocalizationKey.CancelButton,
+            OnConfirm = () => { UserData.Instance.SummonFamiliar(familiar); },
+        };
+        PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
+    }
+
+    private void ShowUnsummonPopup()
+    {
+        var familiar = _familiar;
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        var parameter = new SystemTwoButtonParameter
+        {
+            Description = LocalizationKey.Familiar_SetIdleState.Text(familiarCallData.Name),
+            ConfirmButtonText = LocalizationKey.ConfirmButton,
+            CancelButtonText = LocalizationKey.CancelButton,
+            OnConfirm = () => { UserData.Instance.UnsummonFamiliar(familiar); },
+        };
+        PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
+    }
+
+    public void OnButtonClick()
+    {
+        switch (_state)
+        {
+            case FamiliarSlotState.Idle:
+            {
+                ShowSummonPopup();
+                break;
+            }
+            case FamiliarSlotState.Summoned:
+            {
+                ShowUnsummonPopup();
+                break;
+            }
+        }
+    }
+
+    private static string GetLayoutKey(FamiliarSlotState state)
+    {
+        return state switch
+        {
+            FamiliarSlotState.Locked   => LockedLayoutKey,
+            FamiliarSlotState.Empty    => EmptyLayoutKey,
+            FamiliarSlotState.Idle     => IdleLayoutKey,
+            FamiliarSlotState.Summoned => SummonedLayoutKey,
+            FamiliarSlotState.NoEnergy => NoEnergyLayoutKey,
+            FamiliarSlotState.Working  => WorkingLayoutKey,
+            _                          => EmptyLayoutKey,
+        };
+    }
+}
