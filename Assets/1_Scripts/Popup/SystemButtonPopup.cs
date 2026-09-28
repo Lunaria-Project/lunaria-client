@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class SystemButtonPopupParameter : IPopupParameter
 {
-    public LocalKey Description { get; init; }
+    public string Description { get; init; }
     public LocalKey ConfirmButtonText { get; init; }
     public Action OnConfirm { get; init; }
 }
@@ -29,7 +29,7 @@ public class SystemButtonPopup : Popup<SystemButtonPopupParameter>
 
     protected override void OnShow(SystemButtonPopupParameter parameter)
     {
-        _descriptionText.SetText(parameter.Description.Text());
+        _descriptionText.SetText(parameter.Description);
         _confirmButtonText.SetText(parameter.ConfirmButtonText);
         _onConfirm = parameter.OnConfirm;
 

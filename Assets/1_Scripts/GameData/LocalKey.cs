@@ -20,4 +20,10 @@ public readonly struct LocalKey
     {
         return GameData.Instance.GetLocalString(Value);
     }
+
+    public string Text(params object[] args)
+    {
+        if (args is null or { Length: 0 }) return Text();
+        return Format(args);
+    }
 }

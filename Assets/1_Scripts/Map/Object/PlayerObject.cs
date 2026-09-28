@@ -92,15 +92,18 @@ public class PlayerObject : MovableObject
 
     private void RefreshFamiliars()
     {
-        var familiars = UserData.Instance.Familiars;
-        for (var i = 0; i < _familiarObjects.Length; i++)
+        var slotIndex = 0;
+        foreach (var familiar in UserData.Instance.Familiars)
         {
-            if (i >= familiars.Count)
-            {
-                _familiarObjects[i].Hide();
-                continue;
-            }
-            _familiarObjects[i].Show(familiars[i].FamiliarCallId);
+            if (familiar.State is not FamiliarState.Summoned) continue;
+            if (slotIndex >= _familiarObjects.Length) break;
+            _familiarObjects[slotIndex].Show(familiar.FamiliarCallItemId);
+            slotIndex++;
+        }
+
+        for (var i = slotIndex; i < _familiarObjects.Length; i++)
+        {
+            _familiarObjects[i].Hide();
         }
     }
 
@@ -108,7 +111,7 @@ public class PlayerObject : MovableObject
     {
         foreach (var familiarObject in _familiarObjects)
         {
-            if (familiarObject.FamiliarCallId == 0) continue;
+            if (familiarObject.FamiliarCallItemId == 0) continue;
             familiarObject.UpdateAnimation(CurrentMoveDirection, dt);
         }
     }

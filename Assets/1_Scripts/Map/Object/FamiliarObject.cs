@@ -5,7 +5,7 @@ public class FamiliarObject : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public int FamiliarCallId { get; private set; }
+    public int FamiliarCallItemId { get; private set; }
 
     private MapConfig _config;
 
@@ -18,24 +18,24 @@ public class FamiliarObject : MonoBehaviour
     private const string _backSpriteFormat = "{0}_back{1:D2}";
     private const int _maxSpriteCount = 10;
 
-    public void Show(int familiarCallId)
+    public void Show(int familiarCallItemId)
     {
         gameObject.SetActive(true);
-        if (FamiliarCallId == familiarCallId) return;
+        if (FamiliarCallItemId == familiarCallItemId) return;
 
-        FamiliarCallId = familiarCallId;
+        FamiliarCallItemId = familiarCallItemId;
         if (_config == null)
         {
             _config = ResourceManager.Instance.LoadMapConfig();
         }
 
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallItemId);
         InitSprite(familiarCallData.ResourceKey);
     }
 
     public void Hide()
     {
-        FamiliarCallId = 0;
+        FamiliarCallItemId = 0;
         gameObject.SetActive(false);
     }
 

@@ -16,8 +16,21 @@ public class ItemUseManager : Singleton<ItemUseManager>
         {
             case ItemType.FamiliarCall:
             {
-                if (!UserData.Instance.TrySummonFamiliar(itemId)) break;
-                UserData.Instance.RemoveItem(itemId, 1);
+                if (!UserData.Instance.CanAddFamiliar(itemId)) break;
+
+                var familiarCallData = GameData.Instance.GetFamiliarCallData(itemId);
+                var parameter = new SystemTwoButtonParameter
+                {
+                    Description = LocalizationKey.Familiar_CallMessage.Text(itemData.Name, familiarCallData.Name),
+                    ConfirmButtonText = LocalizationKey.ConfirmButton,
+                    CancelButtonText = LocalizationKey.CancelButton,
+                    OnConfirm = () =>
+                    {
+                        if (!UserData.Instance.TryAddFamiliar(itemId)) return;
+                        UserData.Instance.RemoveItem(itemId, 1);
+                    },
+                };
+                PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
                 break;
             }
             default:

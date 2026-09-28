@@ -190,7 +190,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         GameTimeManager.Instance.Pause(this);
         var parameter = new SystemOneButtonParameter()
         {
-            Description = LocalizationKey.ShopEndPopup_Description,
+            Description = LocalizationKey.ShopEndPopup_Description.Text(),
             ConfirmButtonText = LocalizationKey.ConfirmButton,
             OnConfirm = () =>
             {

@@ -21,6 +21,7 @@ public class UserDataInfo
     public int CurrentDay;
     public Dictionary<int, Dictionary<ShopType, List<ItemInfo>>> ShopPurchaseRecords = new();
     public List<FamiliarInfo> Familiars = new();
+    public int UnlockedFamiliarSlotCount;
 
     public void AddItem(int itemId, long quantity)
     {
@@ -41,28 +42,15 @@ public class UserDataInfo
         ItemList.Add((itemId, quantity));
     }
 
-    public bool AddFamiliar(int familiarCallId)
+    public void AddFamiliar(int familiarCallItemId)
     {
-        if (Familiars.Count >= GameSetting.Instance.MaxFamiliarSlotCount)
-        {
-            GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_ExcessCountWarning.Text());
-            return false;
-        }
-
-        foreach (var familiar in Familiars)
-        {
-            if (familiar.FamiliarCallId != familiarCallId) continue;
-            GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_DuplicationWarning.Text());
-            return false;
-        }
-
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallItemId);
         Familiars.Add(new FamiliarInfo
         {
-            FamiliarCallId = familiarCallId,
-            Hp = familiarCallData.MaxHp,
+            FamiliarCallItemId = familiarCallItemId,
+            CurrentHp = familiarCallData.MaxHp,
+            State = FamiliarState.Idle,
         });
-        return true;
     }
 }
 
@@ -91,6 +79,7 @@ public partial class UserData : Singleton<UserData>
         {
             _userDataInfo.UnlockedInventorySlotCount = GameSetting.Instance.InitialInventoryUnlockedSlotCount;
             _userDataInfo.UnlockedQuickSlotCount = GameSetting.Instance.InitialQuickSlotCount;
+            _userDataInfo.UnlockedFamiliarSlotCount = GameSetting.Instance.StartFamiliarSlotCount;
             foreach (var (id, data) in GameData.Instance.DTInitialItemData)
             {
                 _userDataInfo.AddItem(id, data.Quantity);
@@ -105,6 +94,7 @@ public partial class UserData : Singleton<UserData>
     {
         var amount = UnityEngine.Random.Range(GameSetting.Instance.MinSlimeGaugePer10Minutes, GameSetting.Instance.MaxSlimeGaugePer10Minutes);
         AddSlimeGauge(amount);
+        UpdateFamiliarWork();
     }
 
     public void AddSlimeGauge(float amount)
@@ -116,5 +106,6 @@ public partial class UserData : Singleton<UserData>
     public void AddDay()
     {
         _userDataInfo.CurrentDay++;
+        RefreshFamiliarsOnNewDay();
     }
 }
