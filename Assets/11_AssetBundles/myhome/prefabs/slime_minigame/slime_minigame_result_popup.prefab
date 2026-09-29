@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 1766861252014419180}
   - component: {fileID: 8167363978604792011}
   - component: {fileID: 3328998870228133126}
+  - component: {fileID: 2172589946998544364}
   m_Layer: 5
   m_Name: slime_minigame_result_popup
   m_TagString: Untagged
@@ -376,6 +377,28 @@ MonoBehaviour:
   - Key: NoReward
     Objects:
     - {fileID: 9072835863813850285}
+--- !u!95 &2172589946998544364
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c33be97525b57c4d9d893b2746fa1cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3084591874031221302
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +706,7 @@ GameObject:
   - component: {fileID: 8904694953541734007}
   - component: {fileID: 8559241690425629163}
   m_Layer: 5
-  m_Name: Group_Slime_Results
+  m_Name: Group_Powder_Results
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

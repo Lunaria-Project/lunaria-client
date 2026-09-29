@@ -873,6 +873,7 @@ GameObject:
   - component: {fileID: 1766861252014419180}
   - component: {fileID: 4564324641084014338}
   - component: {fileID: 8517866421058652995}
+  - component: {fileID: 465977415034939096}
   m_Layer: 5
   m_Name: powder_portal_minigame_result_popup
   m_TagString: Untagged
@@ -943,6 +944,28 @@ MonoBehaviour:
   - Key: NoReward
     Objects:
     - {fileID: 8609927525864389439}
+--- !u!95 &465977415034939096
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c33be97525b57c4d9d893b2746fa1cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2126799407005347506
 GameObject:
   m_ObjectHideFlags: 0

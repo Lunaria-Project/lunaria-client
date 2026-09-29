@@ -523,6 +523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766861252014419180}
   - component: {fileID: 761013695434237257}
+  - component: {fileID: 3772739422494781110}
   m_Layer: 5
   m_Name: powder_portal_minigame_ready_popup
   m_TagString: Untagged
@@ -569,6 +570,28 @@ MonoBehaviour:
   _familiarButton: {fileID: 2224648291170994858}
   _titleText: {fileID: 8713054495554383210}
   _descriptionText: {fileID: 5873650831754998179}
+--- !u!95 &3772739422494781110
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5351377740dd4cc45a4614c819f57966, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2543024437557441078
 GameObject:
   m_ObjectHideFlags: 0
