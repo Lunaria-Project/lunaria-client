@@ -27,6 +27,7 @@ public class GameSetting : Singleton<GameSetting>
     public int FamiliarSummonedStartHp { get; private set; }
     public int FamiliarSummonedConsumingHpPerHour { get; private set; }
     public int FamiliarAutoRecoveryHpPerHour { get; private set; }
+    public int FamiliarNoEnergyRecoveryHpHour { get; private set; }
 
     public void InvokeLoadForSheet(SheetInfo sheetInfo)
     {
@@ -60,6 +61,7 @@ public class GameSetting : Singleton<GameSetting>
                 case "FamiliarSummonedStartHp": FamiliarSummonedStartHp = Convert.ToInt32(row[2]); break;
                 case "FamiliarSummonedConsumingHpPerHour": FamiliarSummonedConsumingHpPerHour = Convert.ToInt32(row[2]); break;
                 case "FamiliarAutoRecoveryHpPerHour": FamiliarAutoRecoveryHpPerHour = Convert.ToInt32(row[2]); break;
+                case "FamiliarNoEnergyRecoveryHpHour": FamiliarNoEnergyRecoveryHpHour = Convert.ToInt32(row[2]); break;
             }
         }
     }

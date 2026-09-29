@@ -17,6 +17,7 @@ public class FamiliarInfo
     public MinigameType WorkingMinigameType;
     public long WorkEndGameSeconds;
     public long LastHpUpdatedGameSeconds;
+    public long NoEnergyElapsedSeconds;
 
     public int WorkRemainMinutes
     {
@@ -97,11 +98,8 @@ public partial class UserData // Familiar
     {
         if (familiar.State is not FamiliarState.NoEnergy) return 0;
 
-        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
-        var releaseHp = (int)Math.Ceiling(maxHp * NoEnergyReleaseHpRatio);
-        var requiredHours = (int)Math.Ceiling((float)(releaseHp - familiar.CurrentHp) / GameSetting.Instance.FamiliarAutoRecoveryHpPerHour);
-        var releaseGameSeconds = familiar.LastHpUpdatedGameSeconds + requiredHours * TimeUtil.SecondsPerHour;
-        return Math.Max(0, releaseGameSeconds - GameTimeManager.Instance.CurrentGameTime.TotalSeconds);
+        var elapsedSeconds = familiar.NoEnergyElapsedSeconds + GameTimeManager.Instance.CurrentGameTime.TotalSeconds - familiar.LastHpUpdatedGameSeconds;
+        return Math.Max(0, GetNoEnergyRecoverySeconds() - elapsedSeconds);
     }
 
     private void UpdateFamiliarWork()
@@ -131,6 +129,14 @@ public partial class UserData // Familiar
         {
             if (familiar.State is FamiliarState.Working) continue;
 
+            if (familiar.State is FamiliarState.NoEnergy)
+            {
+                RecoverNoEnergyFamiliarHp(familiar, currentSeconds - familiar.LastHpUpdatedGameSeconds);
+                familiar.LastHpUpdatedGameSeconds = currentSeconds;
+                isChanged = true;
+                continue;
+            }
+
             var elapsedHours = TimeUtil.SecondsToHours(currentSeconds - familiar.LastHpUpdatedGameSeconds);
             if (elapsedHours <= 0) continue;
 
@@ -158,7 +164,8 @@ public partial class UserData // Familiar
         _userDataInfo.Familiars.RemoveAll(familiar => GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).IsTemporary);
 
         var startSeconds = GameSetting.Instance.StartGameTimeSeconds;
-        var sleepHours = TimeUtil.SecondsToHours(TimeUtil.SecondsPerDay - GameSetting.Instance.EndGameTimeSeconds + startSeconds);
+        var sleepSeconds = TimeUtil.SecondsPerDay - GameSetting.Instance.EndGameTimeSeconds + startSeconds;
+        var sleepHours = TimeUtil.SecondsToHours(sleepSeconds);
         foreach (var familiar in _userDataInfo.Familiars)
         {
             if (familiar.State is FamiliarState.Working)
@@ -166,7 +173,14 @@ public partial class UserData // Familiar
                 EndFamiliarWork(familiar, startSeconds);
             }
 
-            RecoverFamiliarHp(familiar, sleepHours * GameSetting.Instance.FamiliarAutoRecoveryHpPerHour);
+            if (familiar.State is FamiliarState.NoEnergy)
+            {
+                RecoverNoEnergyFamiliarHp(familiar, sleepSeconds);
+            }
+            else
+            {
+                RecoverFamiliarHp(familiar, sleepHours * GameSetting.Instance.FamiliarAutoRecoveryHpPerHour);
+            }
             familiar.LastHpUpdatedGameSeconds = startSeconds;
         }
         OnFamiliarChanged?.Invoke();
@@ -178,17 +192,36 @@ public partial class UserData // Familiar
         if (familiar.CurrentHp > 0) return;
 
         familiar.State = FamiliarState.NoEnergy;
+        familiar.NoEnergyElapsedSeconds = 0;
     }
 
     private static void RecoverFamiliarHp(FamiliarInfo familiar, int amount)
     {
         var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
         familiar.CurrentHp = Math.Min(maxHp, familiar.CurrentHp + amount);
+    }
 
-        if (familiar.State is not FamiliarState.NoEnergy) return;
-        if (familiar.CurrentHp < maxHp * NoEnergyReleaseHpRatio) return;
+    private static void RecoverNoEnergyFamiliarHp(FamiliarInfo familiar, long elapsedSeconds)
+    {
+        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
+        var releaseHp = (int)Math.Ceiling(maxHp * NoEnergyReleaseHpRatio);
+        var recoverySeconds = GetNoEnergyRecoverySeconds();
 
-        familiar.State = FamiliarState.Idle;
+        familiar.NoEnergyElapsedSeconds += elapsedSeconds;
+        if (familiar.NoEnergyElapsedSeconds >= recoverySeconds)
+        {
+            familiar.CurrentHp = releaseHp;
+            familiar.NoEnergyElapsedSeconds = 0;
+            familiar.State = FamiliarState.Idle;
+            return;
+        }
+
+        familiar.CurrentHp = (int)(releaseHp * familiar.NoEnergyElapsedSeconds / recoverySeconds);
+    }
+
+    private static long GetNoEnergyRecoverySeconds()
+    {
+        return (long)GameSetting.Instance.FamiliarNoEnergyRecoveryHpHour * TimeUtil.SecondsPerHour;
     }
 
     private static void EndFamiliarWork(FamiliarInfo familiar, long endGameSeconds)
