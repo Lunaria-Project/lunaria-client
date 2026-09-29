@@ -89,10 +89,34 @@ public class FamiliarSlot : MonoBehaviour
         PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
     }
 
+    private void ShowFamiliarCallItemSelection()
+    {
+        var familiarCallItems = UserData.Instance.GetItemQuantities(ItemType.FamiliarCall);
+        familiarCallItems.RemoveAll(item => !UserData.Instance.CanAddFamiliar(item.ItemId, false));
+        if (familiarCallItems.Count == 0)
+        {
+            GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_EmptySlotNoFamiliarMessage.Text());
+            return;
+        }
+        if (familiarCallItems.Count == 1)
+        {
+            ItemUseManager.Instance.Use(familiarCallItems[0].ItemId);
+            return;
+        }
+
+        PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.Inventory);
+        GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_EmptySlotMessage.Text());
+    }
+
     public void OnButtonClick()
     {
         switch (_state)
         {
+            case FamiliarSlotState.Empty:
+            {
+                ShowFamiliarCallItemSelection();
+                break;
+            }
             case FamiliarSlotState.Idle:
             {
                 ShowSummonPopup();
@@ -101,6 +125,16 @@ public class FamiliarSlot : MonoBehaviour
             case FamiliarSlotState.Summoned:
             {
                 ShowUnsummonPopup();
+                break;
+            }
+            case FamiliarSlotState.Locked:
+            {
+                // TODO(지선): 슬롯 해제 아이템 타입 작업할 때 작업 필요
+                GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_LockedSlotMessage.Text());
+                break;
+            }
+            case FamiliarSlotState.NoEnergy: // DO NOTHING
+            {
                 break;
             }
         }

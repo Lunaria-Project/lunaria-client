@@ -64,4 +64,7 @@ public static class LocalizationKey
     public static readonly LocalKey Familiar_CallMessage = new("Familiar.CallMessage");
     public static readonly LocalKey Familiar_SetIdleState = new("Familiar.SetIdleState");
     public static readonly LocalKey Familiar_SetSummonedState = new("Familiar.SetSummonedState");
+    public static readonly LocalKey Familiar_EmptySlotMessage = new("Familiar.EmptySlotMessage");
+    public static readonly LocalKey Familiar_EmptySlotNoFamiliarMessage = new("Familiar.EmptySlotNoFamiliarMessage");
+    public static readonly LocalKey Familiar_LockedSlotMessage = new("Familiar.LockedSlotMessage");
 }
