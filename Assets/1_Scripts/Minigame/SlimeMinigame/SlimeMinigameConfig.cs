@@ -17,8 +17,12 @@ public class SlimeMinigameConfig : ScriptableObject
     [SerializeField] private float _slime2Size = 0.6f;
     [SerializeField] private float _slime3Size = 1f;
     [SerializeField] private float _slime4Size = 1.2f;
+    [SerializeField] private float _feverRemainSeconds = 10f;
+    [SerializeField] private int _feverSlimeShowCountMultiplier = 2;
 
     public int SlimeShowCount => _slimeShowCount;
+    public float FeverRemainSeconds => _feverRemainSeconds;
+    public int FeverSlimeShowCount => _slimeShowCount * _feverSlimeShowCountMultiplier;
 
     public float GetShowDelayRandomSeconds(SlimeType type)
     {

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1865bcbe5fad34dcf81cf217b68ac833, type: 3}
   m_Name: slime_minigame_config
   m_EditorClassIdentifier: Assembly-CSharp::SlimeMinigameConfig
-  _minigameSeconds: 60
   _slimeShowCount: 3
   _showDelayMinSeconds: 1
   _showDelayMaxSeconds: 3
@@ -27,3 +26,5 @@ MonoBehaviour:
   _slime2Size: 0.6
   _slime3Size: 1
   _slime4Size: 1.2
+  _feverRemainSeconds: 10
+  _feverSlimeShowCountMultiplier: 2

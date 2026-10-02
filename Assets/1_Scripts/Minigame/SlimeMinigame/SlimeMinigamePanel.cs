@@ -22,6 +22,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     [SerializeField] private Text _countText;
     [SerializeField] private SlimeBlock[] _slimeBlocks;
     [SerializeField] private SlimeMinigameConfig _config;
+    [SerializeField] private GameObject _feverEffectObject;
 
     private bool _isInitialized;
     private float _remainTime;
@@ -29,6 +30,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     private readonly List<Coroutine> _coroutines = new();
     private int _slimeCount;
     private bool _isPaused;
+    private bool _isFever;
 
     private void Awake()
     {
@@ -44,6 +46,11 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         _remainTime -= Time.deltaTime;
         _remainTimeImage.fillAmount = (_minigameTime - _remainTime) / _minigameTime;
         _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+
+        if (!_isFever && _remainTime <= _config.FeverRemainSeconds)
+        {
+            StartFever();
+        }
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Equals))
@@ -94,6 +101,8 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         _remainTime = minigameSeconds;
         _minigameTime = minigameSeconds;
         _slimeCount = 0;
+        _isFever = false;
+        _feverEffectObject.SetActive(false);
         _remainTimeImage.fillAmount = 0;
         _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
 
@@ -116,6 +125,17 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     {
         _coroutines.Clear();
         for (var i = 0; i < _config.SlimeShowCount; i++)
+        {
+            _coroutines.Add(StartCoroutine(CoShowSlime()));
+        }
+    }
+
+    private void StartFever()
+    {
+        _isFever = true;
+        _feverEffectObject.SetActive(true);
+        var addCount = _config.FeverSlimeShowCount - _config.SlimeShowCount;
+        for (var i = 0; i < addCount; i++)
         {
             _coroutines.Add(StartCoroutine(CoShowSlime()));
         }
