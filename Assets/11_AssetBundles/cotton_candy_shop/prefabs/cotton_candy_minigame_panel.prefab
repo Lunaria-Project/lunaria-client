@@ -55249,9 +55249,7 @@ MonoBehaviour:
   _cottonCandyBlock: {fileID: 3063148067984648299}
   _customerBlock: {fileID: 6200033117411420575}
   _config: {fileID: 11400000, guid: 2ef682405479b4f32a02bc765acb24c0, type: 2}
-  _waitReadyMillis: 600
-  _closedObject: {fileID: 2403882812877180236}
-  _openedObject: {fileID: 2875357582792147481}
+  _readyAnimator: {fileID: 4550237341685524992}
   _coverObject: {fileID: 2277102894885313743}
   _coverText: {fileID: 3456833807601089286}
 --- !u!95 &4550237341685524992
@@ -160297,6 +160295,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1441976001720063348, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -160309,9 +160311,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2285501146362681199, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3050084925326715001, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_Name
       value: item_minigame_Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217001838018298347, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.x

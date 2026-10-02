@@ -1,9 +1,10 @@
-using Cysharp.Threading.Tasks;
 using Lunaria;
 using UnityEngine;
 
 public partial class CottonCandyMinigamePanel
 {
+    private static readonly int ReadyStateHash = Animator.StringToHash("Ready");
+
     [SerializeField] private MinigameRemainTime _minigameRemainTime;
     [SerializeField] private Text _scoreText;
     [SerializeField] private CottonCandyOrderBlock currentOrderBlock;
@@ -14,9 +15,7 @@ public partial class CottonCandyMinigamePanel
     [SerializeField] private CottonCandyBlock _cottonCandyBlock;
     [SerializeField] private CottonCandyMinigameCustomerBlock _customerBlock;
     [SerializeField] private CottonCandyMinigameConfig _config;
-    [SerializeField] private int _waitReadyMillis;
-    [SerializeField] private GameObject _closedObject;
-    [SerializeField] private GameObject _openedObject;
+    [SerializeField] private Animator _readyAnimator;
     [SerializeField] private GameObject _coverObject;
     [SerializeField] private Text _coverText;
 
@@ -46,16 +45,18 @@ public partial class CottonCandyMinigamePanel
         DeselectAllButtons();
         _cottonCandyBlock.Init(_config);
         _customerBlock.Init(_config);
-        _openedObject.SetActive(false);
-        _closedObject.SetActive(true);
+        _readyAnimator.Rebind();
+        _readyAnimator.Update(0f);
     }
 
-    private async UniTask ShowReady()
+    private void PlayReadyAnimation()
     {
-        _closedObject.SetActive(false);
-        _openedObject.SetActive(true);
-        await UniTask.Delay(_waitReadyMillis);
-        _openedObject.SetActive(false);
+        _readyAnimator.Play(ReadyStateHash);
+    }
+
+    // Ready 클립 마지막 프레임의 Animation Event에서 호출
+    public void OnReadyAnimationEnd()
+    {
         _isInitialized = true;
     }
 

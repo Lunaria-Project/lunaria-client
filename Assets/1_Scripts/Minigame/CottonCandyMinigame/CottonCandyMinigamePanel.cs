@@ -67,8 +67,11 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
 
         InitUI();
 
-        PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter { CountDownSeconds = 3 })
-            .SetOnHideAction(() => { ShowReady().Forget(); });
+        PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter
+        {
+            CountDownSeconds = 3,
+            OnLastSecondAction = PlayReadyAnimation,
+        });
     }
 
     private void UpdateTime()
