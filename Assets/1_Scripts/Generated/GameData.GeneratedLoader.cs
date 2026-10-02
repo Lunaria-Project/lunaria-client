@@ -175,7 +175,7 @@ public partial class GameData
         _dtMinigameInfoData.Clear();
         foreach (var row in rows)
         {
-            var newData = new MinigameInfoData(((string)row[0]).ParseEnum<MinigameType>(), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), ((string)row[4]).ParseEnum<ArtifactType>(), (row[5] as string) ?? string.Empty, (row[6] as string) ?? string.Empty);
+            var newData = new MinigameInfoData(((string)row[0]).ParseEnum<MinigameType>(), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), ((string)row[4]).ParseEnum<ArtifactType>(), (row[5] as string) ?? string.Empty, (row[6] as string) ?? string.Empty, (row[7] as string).ParseIntList(), (row[8] as string).ParseIntList());
             _dtMinigameInfoData.Add(newData.MinigameType, newData);
         }
     }

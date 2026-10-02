@@ -253,10 +253,31 @@ public partial class UserData // Familiar
         return (long)GameSetting.Instance.FamiliarNoEnergyRecoveryHpHour * TimeUtil.SecondsPerHour;
     }
 
-    private static void EndFamiliarWork(FamiliarInfo familiar, long endGameSeconds)
+    private void EndFamiliarWork(FamiliarInfo familiar, long endGameSeconds)
     {
         familiar.State = FamiliarState.WorkDone;
         familiar.WorkEndGameSeconds = 0;
         familiar.LastHpUpdatedGameSeconds = endGameSeconds;
+        // TODO(지선): 보상 버튼을 눌렀을 때 보상받게 작업 필요
+        AddFamiliarWorkRewards(familiar.WorkingMinigameType);
+    }
+
+    private void AddFamiliarWorkRewards(MinigameType minigameType)
+    {
+        var infoData = GameData.Instance.GetMinigameInfoData(minigameType);
+        var rewardCount = Math.Min(infoData.FamiliarRewardIds.Count, infoData.FamiliarRewardQuantities.Count);
+        if (infoData.FamiliarRewardIds.Count != infoData.FamiliarRewardQuantities.Count)
+        {
+            LogManager.LogError("[Familiar] AddFamiliarWorkRewards: 패밀리어 보상 아이템과 수량의 개수가 일치하지 않습니다.");
+        }
+        
+        for (var i = 0; i < rewardCount; i++)
+        {
+            var itemId = infoData.FamiliarRewardIds[i];
+            var quantity = infoData.FamiliarRewardQuantities[i];
+            if (quantity <= 0) continue;
+
+            AddReward(itemId, quantity);
+        }
     }
 }

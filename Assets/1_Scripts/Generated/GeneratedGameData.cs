@@ -322,8 +322,10 @@ namespace Generated
         public ArtifactType EquippedArtifactType { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
+        public List<int> FamiliarRewardIds { get; private set; }
+        public List<int> FamiliarRewardQuantities { get; private set; }
 
-        public MinigameInfoData(MinigameType minigameType, int durationHours, int familiarDurationHours, int minigameSeconds, ArtifactType equippedArtifactType, string title, string description)
+        public MinigameInfoData(MinigameType minigameType, int durationHours, int familiarDurationHours, int minigameSeconds, ArtifactType equippedArtifactType, string title, string description, List<int> familiarRewardIds, List<int> familiarRewardQuantities)
         {
             MinigameType = minigameType;
             DurationHours = durationHours;
@@ -332,6 +334,8 @@ namespace Generated
             EquippedArtifactType = equippedArtifactType;
             Title = title;
             Description = description;
+            FamiliarRewardIds = familiarRewardIds;
+            FamiliarRewardQuantities = familiarRewardQuantities;
         }
     }
 
