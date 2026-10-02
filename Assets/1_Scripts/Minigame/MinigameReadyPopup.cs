@@ -1,12 +1,10 @@
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Lunaria;
 using UnityEngine;
 
 public class MinigameReadyPopup : EmptyParamPopup
 {
     [SerializeField] private MinigameType _minigameType;
-    [SerializeField, CanBeNull] private GameObject _familiarButton;
     [SerializeField] private Text _titleText;
     [SerializeField] private Text _descriptionText;
 
@@ -15,12 +13,6 @@ public class MinigameReadyPopup : EmptyParamPopup
         var infoData = GameData.Instance.GetMinigameInfoData(_minigameType);
         _titleText.SetText(infoData.Title);
         _descriptionText.SetText(infoData.Description);
-
-        if (_familiarButton != null)
-        {
-            // TODO(지선) : 패밀리어 시스템 작업할 때 하기
-            _familiarButton.SetActive(false);
-        }
     }
 
     protected override void OnHide() { }
@@ -96,6 +88,12 @@ public class MinigameReadyPopup : EmptyParamPopup
 
     public void OnFamiliarButtonClick()
     {
-        // TODO(지선)
+        OnHideButtonClick();
+        var parameter = new MinigameFamiliarSelectPopupParameter
+        {
+            MinigameType = _minigameType,
+            ReadyPopupType = GetReadyPopupType(),
+        };
+        PopupManager.Instance.ShowPopup(PopupManager.Type.MinigameFamiliarSelect, parameter);
     }
 }

@@ -67,4 +67,6 @@ public static class LocalizationKey
     public static readonly LocalKey Familiar_EmptySlotMessage = new("Familiar.EmptySlotMessage");
     public static readonly LocalKey Familiar_EmptySlotNoFamiliarMessage = new("Familiar.EmptySlotNoFamiliarMessage");
     public static readonly LocalKey Familiar_LockedSlotMessage = new("Familiar.LockedSlotMessage");
+    public static readonly LocalKey FamiliarSelectPopup_NotSelectMessage = new("FamiliarSelectPopup.NotSelectMessage");
+    public static readonly LocalKey FamiliarSelectPopup_WorkingTimeMessage = new("FamiliarSelectPopup.WorkingTimeMessage");
 }

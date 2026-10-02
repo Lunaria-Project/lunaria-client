@@ -41,6 +41,7 @@ public class FamiliarSlotGroup : MonoBehaviour
             FamiliarState.Summoned => FamiliarSlotState.Summoned,
             FamiliarState.Working  => FamiliarSlotState.Working,
             FamiliarState.NoEnergy => FamiliarSlotState.NoEnergy,
+            FamiliarState.WorkDone => FamiliarSlotState.WorkDone,
             _                      => FamiliarSlotState.Idle,
         };
     }

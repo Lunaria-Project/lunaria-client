@@ -9,6 +9,7 @@ public enum FamiliarSlotState
     Summoned,
     NoEnergy,
     Working,
+    WorkDone,
 }
 
 public class FamiliarSlot : MonoBehaviour
@@ -19,6 +20,7 @@ public class FamiliarSlot : MonoBehaviour
     [SerializeField] private GameObject _hpGreenObject;
     [SerializeField] private GameObject _hpRedObject;
     [SerializeField] private Text _noEnergyRemainTimeText;
+    [SerializeField] private Text _workRemainTimeText;
 
     private const string LockedLayoutKey = "Locked";
     private const string IdleLayoutKey = "Idle";
@@ -26,6 +28,7 @@ public class FamiliarSlot : MonoBehaviour
     private const string NoEnergyLayoutKey = "NoEnergy";
     private const string WorkingLayoutKey = "Working";
     private const string EmptyLayoutKey = "Empty";
+    private const string WorkDoneLayoutKey = "WorkDone";
 
     private const int FamiliarImageFrameNumber = 1;
     private const float LowHpRatio = 0.2f;
@@ -44,10 +47,20 @@ public class FamiliarSlot : MonoBehaviour
         _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
         RefreshHp(familiar.CurrentHp, familiarCallData.MaxHp);
 
-        if (state is FamiliarSlotState.NoEnergy)
+        switch (state)
         {
-            var remainSeconds = UserData.Instance.GetNoEnergyRemainSeconds(familiar);
-            _noEnergyRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
+            case FamiliarSlotState.NoEnergy:
+            {
+                var remainSeconds = UserData.Instance.GetNoEnergyRemainSeconds(familiar);
+                _noEnergyRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
+                break;
+            }
+            case FamiliarSlotState.Working:
+            {
+                var remainSeconds = UserData.Instance.GetWorkRemainSeconds(familiar);
+                _workRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
+                break;
+            }
         }
     }
 
@@ -127,6 +140,11 @@ public class FamiliarSlot : MonoBehaviour
                 ShowUnsummonPopup();
                 break;
             }
+            case FamiliarSlotState.WorkDone:
+            {
+                // TODO(지선): 근무 완료 보상 팝업 띄우기
+                break;
+            }
             case FamiliarSlotState.Locked:
             {
                 // TODO(지선): 슬롯 해제 아이템 타입 작업할 때 작업 필요
@@ -150,6 +168,7 @@ public class FamiliarSlot : MonoBehaviour
             FamiliarSlotState.Summoned => SummonedLayoutKey,
             FamiliarSlotState.NoEnergy => NoEnergyLayoutKey,
             FamiliarSlotState.Working  => WorkingLayoutKey,
+            FamiliarSlotState.WorkDone => WorkDoneLayoutKey,
             _                          => EmptyLayoutKey,
         };
     }

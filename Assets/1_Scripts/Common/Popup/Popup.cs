@@ -19,7 +19,7 @@ public abstract class PopupBase : MonoBehaviour
 
     [SerializeField] private bool _hideOnEscapeKey = false;
     [SerializeField] private bool _pauseTime = true;
-    [SerializeField] private PopupBackground _popupBackground = PopupBackground.None;
+    [SerializeField] private PopupBackground _popupBackground = PopupBackground.Dim0;
 
     public PopupManager.Type PopupType { get; private set; }
     public PopupBackground Background => _popupBackground;

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6750273602161028319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -867,6 +867,7 @@ MonoBehaviour:
   _hpGreenObject: {fileID: 6625779350849681554}
   _hpRedObject: {fileID: 1624837658886670855}
   _noEnergyRemainTimeText: {fileID: 8865667465120973308}
+  _workRemainTimeText: {fileID: 6939389880785775557}
 --- !u!114 &493327602121786357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,6 +914,13 @@ MonoBehaviour:
   - Key: Empty
     Objects:
     - {fileID: 2924079604726109525}
+  - Key: WorkDone
+    Objects:
+    - {fileID: 2924079604726109525}
+    - {fileID: 6842518310435671450}
+    - {fileID: 7648270247609129694}
+    - {fileID: 9123537810181542808}
+    - {fileID: 5338986592126133418}
 --- !u!1 &6842518310435671450
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3746249247270770251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1162,7 +1170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &18880095998887622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1237,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2632640550035722553
 RectTransform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public enum FamiliarState
     Summoned,
     Working,
     NoEnergy,
+    WorkDone,
 }
 
 public class FamiliarInfo
@@ -94,6 +95,34 @@ public partial class UserData // Familiar
         OnFamiliarChanged?.Invoke();
     }
 
+    public bool CanStartFamiliarWork(FamiliarInfo familiar)
+    {
+        if (familiar.State is not (FamiliarState.Idle or FamiliarState.Summoned)) return false;
+        return familiar.CurrentHp >= GameSetting.Instance.FamiliarWorkingConsumingHp;
+    }
+
+    public void StartFamiliarWork(FamiliarInfo familiar, MinigameType minigameType)
+    {
+        if (!CanStartFamiliarWork(familiar))
+        {
+            LogManager.LogError($"[Familiar] StartFamiliarWork: 근무를 시작할 수 없는 패밀리어 (familiarCallItemId={familiar.FamiliarCallItemId}, state={familiar.State}, hp={familiar.CurrentHp})");
+            return;
+        }
+
+        var durationHours = GameData.Instance.GetMinigameInfoData(minigameType).FamiliarDurationHours;
+        familiar.CurrentHp -= GameSetting.Instance.FamiliarWorkingConsumingHp;
+        familiar.State = FamiliarState.Working;
+        familiar.WorkingMinigameType = minigameType;
+        familiar.WorkEndGameSeconds = GameTimeManager.Instance.CurrentGameTime.TotalSeconds + durationHours * TimeUtil.SecondsPerHour;
+        OnFamiliarChanged?.Invoke();
+    }
+
+    public long GetWorkRemainSeconds(FamiliarInfo familiar)
+    {
+        if (familiar.State is not FamiliarState.Working) return 0;
+        return Math.Max(0, familiar.WorkEndGameSeconds - GameTimeManager.Instance.CurrentGameTime.TotalSeconds);
+    }
+
     public long GetNoEnergyRemainSeconds(FamiliarInfo familiar)
     {
         if (familiar.State is not FamiliarState.NoEnergy) return 0;
@@ -127,7 +156,7 @@ public partial class UserData // Familiar
         var currentSeconds = GameTimeManager.Instance.CurrentGameTime.TotalSeconds;
         foreach (var familiar in _userDataInfo.Familiars)
         {
-            if (familiar.State is FamiliarState.Working) continue;
+            if (familiar.State is FamiliarState.Working or FamiliarState.WorkDone) continue;
 
             if (familiar.State is FamiliarState.NoEnergy)
             {
@@ -226,8 +255,7 @@ public partial class UserData // Familiar
 
     private static void EndFamiliarWork(FamiliarInfo familiar, long endGameSeconds)
     {
-        familiar.State = FamiliarState.Idle;
-        familiar.WorkingMinigameType = default;
+        familiar.State = FamiliarState.WorkDone;
         familiar.WorkEndGameSeconds = 0;
         familiar.LastHpUpdatedGameSeconds = endGameSeconds;
     }

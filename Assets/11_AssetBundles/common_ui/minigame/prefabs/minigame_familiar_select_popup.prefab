@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
+  - component: {fileID: 7443018717206747323}
   m_Layer: 5
   m_Name: minigame_familiar_select_popup
   m_TagString: Untagged
@@ -111,6 +112,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7443018717206747323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ad028466ca54293ac9b08817033f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameFamiliarSelectPopup
+  _hideOnEscapeKey: 0
+  _pauseTime: 1
+  _popupBackground: 1
+  _cells:
+  - {fileID: 2341137935145405242}
+  - {fileID: 6184987212631440293}
+  - {fileID: 5192659316589572265}
+  - {fileID: 8423672599539702923}
+  _workingTimeText: {fileID: 2717307830454868160}
 --- !u!1 &4003504945962592493
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +412,7 @@ RectTransform:
   - {fileID: 77244091671615339}
   - {fileID: 8411163357685999604}
   - {fileID: 7601796590968024312}
+  - {fileID: 6163717060520853722}
   m_Father: {fileID: 6925526069221839071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -944,7 +967,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3187051855797352169}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7443018717206747323}
+        m_TargetAssemblyTypeName: MinigameFamiliarSelectPopup, Assembly-CSharp
+        m_MethodName: OnCancelButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6744130300684171299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +1000,123 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1001 &116059347026522439
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4183516379792348223}
+    m_Modifications:
+    - target: {fileID: 3762910581740855970, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_Name
+      value: Item_Select_Familiar_Btn (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633282594777989004, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+--- !u!224 &6163717060520853722 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+  m_PrefabInstance: {fileID: 116059347026522439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8423672599539702923 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8465279407888559564, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+  m_PrefabInstance: {fileID: 116059347026522439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c692803778b74777a8122942c9fadf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameFamiliarSelectCell
 --- !u!1001 &2355325278216689257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1066,6 +1218,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+--- !u!114 &6184987212631440293 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8465279407888559564, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+  m_PrefabInstance: {fileID: 2355325278216689257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c692803778b74777a8122942c9fadf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameFamiliarSelectCell
 --- !u!224 &8411163357685999604 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
@@ -1172,6 +1335,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+--- !u!114 &5192659316589572265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8465279407888559564, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+  m_PrefabInstance: {fileID: 4425559486602796389}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c692803778b74777a8122942c9fadf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameFamiliarSelectCell
 --- !u!224 &7601796590968024312 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
@@ -1287,6 +1461,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6058959288309477789, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
   m_PrefabInstance: {fileID: 6127097030866691830}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2341137935145405242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8465279407888559564, guid: 36c5b762ba34e460d8081da745e40e5b, type: 3}
+  m_PrefabInstance: {fileID: 6127097030866691830}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c692803778b74777a8122942c9fadf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameFamiliarSelectCell
 --- !u!1001 &6213052329415373234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1295,6 +1480,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6925526069221839071}
     m_Modifications:
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7443018717206747323}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnConfirmButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MinigameFamiliarSelectPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 10850061209768525, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1206523445999727730, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1310,6 +1523,34 @@ PrefabInstance:
     - target: {fileID: 1206523445999727730, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7443018717206747323}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCancelButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MinigameFamiliarSelectPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556520625088068515, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2607104219497347968, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
       propertyPath: _key
