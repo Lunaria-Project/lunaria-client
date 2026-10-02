@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4163940776963479721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6452611644016071675}
+  m_Father: {fileID: 9069186048641782465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -245,7 +245,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4447059135367724811}
+  m_Father: {fileID: 9069186048641782465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4447059135367724811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -322,7 +322,6 @@ RectTransform:
   m_Children:
   - {fileID: 2522402052878499472}
   - {fileID: 2684287263382433008}
-  - {fileID: 1790032219405925075}
   m_Father: {fileID: 9069186048641782465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -474,7 +473,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6452611644016071675}
+  - {fileID: 4163940776963479721}
   - {fileID: 4447059135367724811}
+  - {fileID: 1790032219405925075}
   - {fileID: 1674603338013003319}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -515,9 +516,11 @@ MonoBehaviour:
   - Key: Day
     Objects:
     - {fileID: 8425082370371640436}
+    - {fileID: 178093916501478323}
   - Key: Night
     Objects:
     - {fileID: 2813446625926104139}
+    - {fileID: 1420003342924053637}
 --- !u!1 &5821472050758440324
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6452611644016071675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -978,7 +981,6 @@ RectTransform:
   m_Children:
   - {fileID: 8804116821177813259}
   - {fileID: 3686827989044191914}
-  - {fileID: 4163940776963479721}
   m_Father: {fileID: 9069186048641782465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
