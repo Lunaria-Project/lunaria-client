@@ -88,6 +88,7 @@ public class SlimeMinigameResultPopup : Popup<SlimeMinigameResultPopupParameter>
     protected override void OnHide()
     {
         UserData.Instance.AddRewards(_rewards);
+        UserData.Instance.RecordPlayerMinigameRewards(MinigameType.Slime, _rewards);
 
         var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.Slime);
         GameTimeManager.Instance.AddHours(infoData.DurationHours);

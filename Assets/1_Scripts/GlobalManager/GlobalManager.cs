@@ -93,8 +93,30 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         if (!_isDayRunning) return;
         _isDayRunning = false;
-        // TODO(지선): 여기서 영수증이 나오게 작업 필요
         LogManager.Log("하루 끝");
+        ShowDailyReceiptAsync().Forget();
+    }
+
+    private async UniTask ShowDailyReceiptAsync()
+    {
+        while (!CanShowDailyReceipt())
+        {
+            await UniTask.NextFrame();
+        }
+
+        var popup = PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.DailyReceipt);
+        popup.SetOnHideAction(OnDailyReceiptHidden);
+    }
+
+    private bool CanShowDailyReceipt()
+    {
+        if (PopupManager.Instance.IsShownAnyPopup) return false;
+        return true;
+    }
+
+    private void OnDailyReceiptHidden()
+    {
+        UserData.Instance.ClearDailyMinigameRecords();
         UserData.Instance.AddDay();
         StartDay();
     }

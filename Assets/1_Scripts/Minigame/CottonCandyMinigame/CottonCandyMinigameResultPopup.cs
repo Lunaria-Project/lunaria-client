@@ -62,6 +62,7 @@ public class CottonCandyMinigameResultPopup : Popup<CottonCandyMinigameResultPop
     protected override void OnHide()
     {
         UserData.Instance.AddReward(_reward.Id, _reward.Quantity);
+        UserData.Instance.RecordPlayerMinigameReward(MinigameType.CottonCandy, _reward.Id, _reward.Quantity);
 
         var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.CottonCandy);
         GameTimeManager.Instance.AddHours(infoData.DurationHours);

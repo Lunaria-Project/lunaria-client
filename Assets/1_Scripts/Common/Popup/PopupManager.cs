@@ -10,6 +10,8 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
 
     private List<PopupBase> PopupList { get; set; } = new();
 
+    public bool IsShownAnyPopup => PopupList.Count > 0;
+
     protected override void Awake()
     {
         base.Awake();

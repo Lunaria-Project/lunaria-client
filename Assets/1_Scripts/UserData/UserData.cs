@@ -22,6 +22,7 @@ public class UserDataInfo
     public Dictionary<int, Dictionary<ShopType, List<ItemInfo>>> ShopPurchaseRecords = new();
     public List<FamiliarInfo> Familiars = new();
     public int UnlockedFamiliarSlotCount;
+    public Dictionary<MinigameType, DailyMinigameRecord> DailyMinigameRecords = new();
 
     public void AddItem(int itemId, long quantity)
     {

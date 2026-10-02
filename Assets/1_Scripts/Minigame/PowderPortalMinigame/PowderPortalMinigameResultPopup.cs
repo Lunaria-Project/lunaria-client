@@ -64,6 +64,7 @@ public class PowderPortalMinigameResultPopup : Popup<PowderPortalMinigameResultP
     protected override void OnHide()
     {
         UserData.Instance.AddReward(_reward.Id, _reward.Quantity);
+        UserData.Instance.RecordPlayerMinigameReward(MinigameType.PowderPortal, _reward.Id, _reward.Quantity);
 
         var infoData = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal);
         GameTimeManager.Instance.AddHours(infoData.DurationHours);

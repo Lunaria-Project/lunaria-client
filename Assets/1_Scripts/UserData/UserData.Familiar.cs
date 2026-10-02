@@ -278,6 +278,7 @@ public partial class UserData // Familiar
             if (quantity <= 0) continue;
 
             AddReward(itemId, quantity);
+            RecordFamiliarMinigameReward(minigameType, itemId, quantity);
         }
     }
 }
