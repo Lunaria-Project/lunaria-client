@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
 {
-    [SerializeField] private Image _remainTimeImage;
-    [SerializeField] private Text[] _remainTimeTexts;
-    [SerializeField] private Text _scoreText;
+    [SerializeField] private MinigameRemainTime _minigameRemainTime;
     [SerializeField] private float _objectDistance = 150;
     [SerializeField] private PowderPortalMinigameObject[] _objectSlots;
     [SerializeField] private PowderPortalMinigameConfig _config;
@@ -47,8 +45,7 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     private void UpdateTimer()
     {
         _remainTime -= Time.deltaTime;
-        _remainTimeImage.fillAmount = (_minigameTime - _remainTime) / _minigameTime;
-        _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+        _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
 
         if (_remainTime <= 0)
         {
@@ -124,8 +121,7 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         var minigameSeconds = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal).MinigameSeconds;
         _remainTime = minigameSeconds;
         _minigameTime = minigameSeconds;
-        _remainTimeImage.fillAmount = 0;
-        _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+        _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
         //_scoreText.SetText(_score.ToString());
         _plusScoreTexts.SetActiveAll(false);
 

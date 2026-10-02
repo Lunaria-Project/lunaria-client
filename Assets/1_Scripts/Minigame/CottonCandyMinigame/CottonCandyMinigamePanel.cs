@@ -74,8 +74,7 @@ public partial class CottonCandyMinigamePanel : Panel<CottonCandyMinigamePanel>
     private void UpdateTime()
     {
         _remainTime -= Time.deltaTime;
-        _remainTimeImage.fillAmount = (_minigameTime - _remainTime) / _minigameTime;
-        _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+        _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
 
         if (!(_remainTime <= 0)) return;
         _isInitialized = false;

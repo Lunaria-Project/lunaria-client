@@ -55231,10 +55231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852f403907b734e819e0650d637844c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CottonCandyMinigamePanel
-  _remainTimeImage: {fileID: 2656652011630144549}
-  _remainTimeTexts:
-  - {fileID: 6819315133789363565}
-  - {fileID: 8043167601052934288}
+  _minigameRemainTime: {fileID: 257828859936876715}
   _scoreText: {fileID: 5350784864964906266}
   currentOrderBlock: {fileID: 5914438764538131320}
   _colorObject: {fileID: 8802854315019617016}
@@ -160288,9 +160285,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4052380850173549595}
     m_Modifications:
+    - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3050084925326715001, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_Name
       value: item_minigame_Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8126005951604308678, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_Pivot.x
@@ -160377,41 +160410,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+--- !u!114 &257828859936876715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7946308589207778582, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+  m_PrefabInstance: {fileID: 7914241214855830973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922cdaf0e1dc24008a3be1efcba3be3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameRemainTime
 --- !u!224 &2094269656476510075 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8126005951604308678, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
   m_PrefabInstance: {fileID: 7914241214855830973}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2656652011630144549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5263400205964177816, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 7914241214855830973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a39c30f99c4819887832eec37de9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Image
---- !u!114 &6819315133789363565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3708180548809195728, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 7914241214855830973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71779f5cfcf44bc5b20abf8c240573b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Text
---- !u!114 &8043167601052934288 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 164973084842671405, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 7914241214855830973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71779f5cfcf44bc5b20abf8c240573b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Text

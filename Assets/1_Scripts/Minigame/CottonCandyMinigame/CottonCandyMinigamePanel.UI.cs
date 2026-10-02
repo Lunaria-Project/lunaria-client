@@ -4,8 +4,7 @@ using UnityEngine;
 
 public partial class CottonCandyMinigamePanel
 {
-    [SerializeField] private Image _remainTimeImage;
-    [SerializeField] private Text[] _remainTimeTexts;
+    [SerializeField] private MinigameRemainTime _minigameRemainTime;
     [SerializeField] private Text _scoreText;
     [SerializeField] private CottonCandyOrderBlock currentOrderBlock;
     [SerializeField] private GameObject _colorObject;
@@ -41,8 +40,7 @@ public partial class CottonCandyMinigamePanel
 
     private void InitUI()
     {
-        _remainTimeImage.fillAmount = 0;
-        _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+        _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
         SetScoreText();
         currentOrderBlock.Hide();
         DeselectAllButtons();

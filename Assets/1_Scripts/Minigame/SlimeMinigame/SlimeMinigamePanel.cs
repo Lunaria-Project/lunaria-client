@@ -17,8 +17,7 @@ public enum SlimeType
 
 public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
 {
-    [SerializeField] private Image _remainTimeImage;
-    [SerializeField] private Text[] _remainTimeTexts;
+    [SerializeField] private MinigameRemainTime _minigameRemainTime;
     [SerializeField] private Text _countText;
     [SerializeField] private SlimeBlock[] _slimeBlocks;
     [SerializeField] private SlimeMinigameConfig _config;
@@ -44,8 +43,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
     {
         if (!_isInitialized) return;
         _remainTime -= Time.deltaTime;
-        _remainTimeImage.fillAmount = (_minigameTime - _remainTime) / _minigameTime;
-        _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+        _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
 
         if (!_isFever && _remainTime <= _config.FeverRemainSeconds)
         {
@@ -103,8 +101,7 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
         _slimeCount = 0;
         _isFever = false;
         _feverEffectObject.SetActive(false);
-        _remainTimeImage.fillAmount = 0;
-        _remainTimeTexts.SetTexts(Mathf.RoundToInt(_remainTime).ToNDigits(2));
+        _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
 
         foreach (var slime in _slimeBlocks)
         {

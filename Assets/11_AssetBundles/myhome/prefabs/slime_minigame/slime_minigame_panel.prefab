@@ -562,10 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78eed22e213648b983fc32c09101488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeMinigamePanel
-  _remainTimeImage: {fileID: 2656652011630144549}
-  _remainTimeTexts:
-  - {fileID: 6819315133789363565}
-  - {fileID: 8043167601052934288}
+  _minigameRemainTime: {fileID: 257828859936876715}
   _countText: {fileID: 5350784864964906266}
   _slimeBlocks:
   - {fileID: 7067403024518467574}
@@ -48600,6 +48597,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1294837181247540104, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1441976001720063348, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -48647,6 +48648,14 @@ PrefabInstance:
     - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537011603980046289, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6624146349169111687, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7442256118613885132, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_SizeDelta.x
@@ -48740,46 +48749,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8341137971305478748, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176958006148927004, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+--- !u!114 &257828859936876715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7946308589207778582, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+  m_PrefabInstance: {fileID: 7914241214855830973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922cdaf0e1dc24008a3be1efcba3be3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameRemainTime
 --- !u!224 &2094269656476510075 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8126005951604308678, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
   m_PrefabInstance: {fileID: 7914241214855830973}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2656652011630144549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5263400205964177816, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 7914241214855830973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a39c30f99c4819887832eec37de9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Image
---- !u!114 &6819315133789363565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3708180548809195728, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 7914241214855830973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71779f5cfcf44bc5b20abf8c240573b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Text
---- !u!114 &8043167601052934288 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 164973084842671405, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 7914241214855830973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71779f5cfcf44bc5b20abf8c240573b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Text

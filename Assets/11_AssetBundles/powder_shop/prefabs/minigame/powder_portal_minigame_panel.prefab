@@ -30192,11 +30192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2a902311a394d82aa7d07b326838c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowderPortalMinigamePanel
-  _remainTimeImage: {fileID: 7747333675440850171}
-  _remainTimeTexts:
-  - {fileID: 1295153196866319795}
-  - {fileID: 2361379693814909006}
-  _scoreText: {fileID: 0}
+  _minigameRemainTime: {fileID: 5533131707977941109}
   _objectDistance: 150
   _objectSlots:
   - {fileID: 3536848582919627530}
@@ -100857,9 +100853,69 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1766861252014419180}
     m_Modifications:
+    - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441976001720063348, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441976001720063348, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285501146362681199, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285501146362681199, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3050084925326715001, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_Name
       value: item_minigame_timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217001838018298347, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217001838018298347, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8126005951604308678, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_Pivot.x
@@ -100946,44 +101002,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
---- !u!114 &1295153196866319795 stripped
+--- !u!114 &5533131707977941109 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3708180548809195728, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7946308589207778582, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
   m_PrefabInstance: {fileID: 2490301991220458851}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71779f5cfcf44bc5b20abf8c240573b, type: 3}
+  m_Script: {fileID: 11500000, guid: 922cdaf0e1dc24008a3be1efcba3be3a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Text
---- !u!114 &2361379693814909006 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 164973084842671405, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 2490301991220458851}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71779f5cfcf44bc5b20abf8c240573b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Text
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameRemainTime
 --- !u!224 &5929564141083758501 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8126005951604308678, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
   m_PrefabInstance: {fileID: 2490301991220458851}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7747333675440850171 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5263400205964177816, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
-  m_PrefabInstance: {fileID: 2490301991220458851}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a39c30f99c4819887832eec37de9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.Image
 --- !u!1001 &2587769803377382162
 PrefabInstance:
   m_ObjectHideFlags: 0
