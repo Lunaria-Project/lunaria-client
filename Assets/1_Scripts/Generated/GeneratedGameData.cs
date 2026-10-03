@@ -372,14 +372,16 @@ namespace Generated
         public int EndTime { get; private set; }
         public ShopType ShopType { get; private set; }
         public MinigameType MinigameType { get; private set; }
+        public string IconResourceKey { get; private set; }
 
-        public ShopInfoData(int shopId, int startTime, int endTime, ShopType shopType, MinigameType minigameType)
+        public ShopInfoData(int shopId, int startTime, int endTime, ShopType shopType, MinigameType minigameType, string iconResourceKey)
         {
             ShopId = shopId;
             StartTime = startTime;
             EndTime = endTime;
             ShopType = shopType;
             MinigameType = minigameType;
+            IconResourceKey = iconResourceKey;
         }
     }
 

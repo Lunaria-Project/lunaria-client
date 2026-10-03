@@ -81,6 +81,18 @@ public partial class GameData
         return null;
     }
 
+    public bool TryGetShopInfoDataByMinigameType(MinigameType minigameType, out ShopInfoData result)
+    {
+        foreach (var (_, data) in _dtShopInfoData)
+        {
+            if (data.MinigameType != minigameType) continue;
+            result = data;
+            return true;
+        }
+        result = null;
+        return false;
+    }
+
     public List<ShopProductData> GetShopProductDataListByShopType(ShopType shopType)
     {
         var result = new List<ShopProductData>();

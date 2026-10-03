@@ -8,6 +8,8 @@ public class DailyReceiptPopup : EmptyParamPopup
     [SerializeField] private Text _dayText;
     [SerializeField] private Text _totalPriceText;
     [SerializeField] private DOTweenAnimation _finishAnimation;
+    [SerializeField] private DailyReceiptMinigameCell[] _minigameSimpleCells;
+    [SerializeField] private DailyReceiptMinigameCell[] _minigameDetailCells;
     
     private const string SimpleLayoutKey = "Simple";
     private const string DetailsLayoutKey = "Details";
@@ -17,10 +19,49 @@ public class DailyReceiptPopup : EmptyParamPopup
         _layoutSwitcher.SetLayout(SimpleLayoutKey);
         _dayText.SetText(LocalizationKey.DayFormat.Text(UserData.Instance.CurrentDay.ToPrice()));
         _totalPriceText.SetText("0"); // TODO(지선)
-        // TODO(지선): 섹션 매핑 확정 후 UserData.Instance.DailyMinigameRecords로 셀 채우기
+        RefreshMinigameCells();
     }
 
     protected override void OnHide() { }
+
+    private void RefreshMinigameCells()
+    {
+        _minigameSimpleCells.SetActiveAll(false);
+        _minigameDetailCells.SetActiveAll(false);
+
+        var cellIndex = 0;
+        foreach (var (minigameType, record) in UserData.Instance.DailyMinigameRecords)
+        {
+            foreach (var (itemId, quantity) in record.PlayerRewards)
+            {
+                if (!TryShowCells(cellIndex++, out var simpleCell, out var detailCell)) return;
+                simpleCell.SetPlayerRewardData(minigameType, itemId, quantity);
+                detailCell.SetPlayerRewardData(minigameType, itemId, quantity);
+            }
+
+            foreach (var (familiarCallItemId, itemId, quantity) in record.FamiliarRewards)
+            {
+                if (!TryShowCells(cellIndex++, out var simpleCell, out var detailCell)) return;
+                simpleCell.SetFamiliarRewardData(minigameType, familiarCallItemId, itemId, quantity);
+                detailCell.SetFamiliarRewardData(minigameType, familiarCallItemId, itemId, quantity);
+            }
+        }
+    }
+
+    private bool TryShowCells(int index, out DailyReceiptMinigameCell simpleCell, out DailyReceiptMinigameCell detailCell)
+    {
+        simpleCell = _minigameSimpleCells.GetAt(index);
+        detailCell = _minigameDetailCells.GetAt(index);
+        if (simpleCell == null || detailCell == null)
+        {
+            LogManager.LogError($"[DailyReceipt] Popup: 셀 개수 부족 (index={index}, simple={_minigameSimpleCells.Length}, detail={_minigameDetailCells.Length})");
+            return false;
+        }
+
+        simpleCell.gameObject.SetActive(true);
+        detailCell.gameObject.SetActive(true);
+        return true;
+    }
     
     public void OnShowDetailButtonClick()
     {

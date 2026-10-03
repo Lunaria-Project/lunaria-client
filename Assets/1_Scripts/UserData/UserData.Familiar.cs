@@ -259,11 +259,12 @@ public partial class UserData // Familiar
         familiar.WorkEndGameSeconds = 0;
         familiar.LastHpUpdatedGameSeconds = endGameSeconds;
         // TODO(지선): 보상 버튼을 눌렀을 때 보상받게 작업 필요
-        AddFamiliarWorkRewards(familiar.WorkingMinigameType);
+        AddFamiliarWorkRewards(familiar);
     }
 
-    private void AddFamiliarWorkRewards(MinigameType minigameType)
+    private void AddFamiliarWorkRewards(FamiliarInfo familiar)
     {
+        var minigameType = familiar.WorkingMinigameType;
         var infoData = GameData.Instance.GetMinigameInfoData(minigameType);
         var rewardCount = Math.Min(infoData.FamiliarRewardIds.Count, infoData.FamiliarRewardQuantities.Count);
         if (infoData.FamiliarRewardIds.Count != infoData.FamiliarRewardQuantities.Count)
@@ -278,7 +279,7 @@ public partial class UserData // Familiar
             if (quantity <= 0) continue;
 
             AddReward(itemId, quantity);
-            RecordFamiliarMinigameReward(minigameType, itemId, quantity);
+            RecordFamiliarMinigameReward(minigameType, familiar.FamiliarCallItemId, itemId, quantity);
         }
     }
 }
