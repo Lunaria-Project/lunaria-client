@@ -110,7 +110,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     private bool CanShowDailyReceipt()
     {
-        if (PopupManager.Instance.IsShownAnyPopup) return false;
+        //if (PopupManager.Instance.IsShownAnyPopup) return false;
         return true;
     }
 
@@ -118,6 +118,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         UserData.Instance.ClearDailyMinigameRecords();
         UserData.Instance.AddDay();
+        OnChangeMap(MapType.Myhome);
         StartDay();
     }
 

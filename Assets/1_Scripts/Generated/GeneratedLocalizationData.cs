@@ -69,4 +69,5 @@ public static class LocalizationKey
     public static readonly LocalKey Familiar_LockedSlotMessage = new("Familiar.LockedSlotMessage");
     public static readonly LocalKey FamiliarSelectPopup_NotSelectMessage = new("FamiliarSelectPopup.NotSelectMessage");
     public static readonly LocalKey FamiliarSelectPopup_WorkingTimeMessage = new("FamiliarSelectPopup.WorkingTimeMessage");
+    public static readonly LocalKey DayFormat = new("DayFormat");
 }
