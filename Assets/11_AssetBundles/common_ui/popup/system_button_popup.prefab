@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 1766861252014419180}
   - component: {fileID: 8533072825533440174}
   - component: {fileID: 659461159506686973}
-  - component: {fileID: 1591080299422644443}
   m_Layer: 5
   m_Name: system_button_popup
   m_TagString: Untagged
@@ -157,41 +156,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SystemOneButtonPopup
   _hideOnEscapeKey: 0
   _pauseTime: 1
-  _popupBackground: 0
+  _popupBackground: 4
   _descriptionText: {fileID: 8226272429016806950}
   _confirmButtonText: {fileID: 1452426284169206816}
   _cancelButtonText: {fileID: 4402144193195126589}
   _cancelButton: {fileID: 6556270507580306785}
---- !u!114 &1591080299422644443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2104908432194044823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fca2ffb97165c4961ae66291495ddcae, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2894711334754189325
 GameObject:
   m_ObjectHideFlags: 0

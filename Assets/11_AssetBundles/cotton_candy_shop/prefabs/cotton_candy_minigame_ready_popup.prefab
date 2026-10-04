@@ -553,9 +553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MinigameReadyPopup
   _hideOnEscapeKey: 1
   _pauseTime: 1
-  _popupBackground: 0
+  _popupBackground: 1
   _minigameType: 3
-  _familiarButton: {fileID: 2224648291170994858}
   _titleText: {fileID: 8713054495554383210}
   _descriptionText: {fileID: 5873650831754998179}
 --- !u!95 &4357361019692102089
@@ -1817,11 +1816,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
---- !u!1 &2224648291170994858 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 920352147265471699, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
-  m_PrefabInstance: {fileID: 1304415186105110137}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2472089338744900660 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3482573977342181965, guid: 7b4331f890c1a4abcac535a4378ce260, type: 3}
