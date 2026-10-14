@@ -38,12 +38,14 @@ public partial class GlobalManager
     [SerializeField] private SerializedCursorData _cursorPrefix = new();
     [SerializeField] private LayoutSwitcher _layoutSwitcher;
     [SerializeField] private GameObject _starEffect;
+    [SerializeField] private RectTransform[] _clickEffectRectTransforms;
 
     private readonly List<Sprite> _currentCursorSprites = new();
     private int _currentCursorIndex;
     private float _lastSpriteChangeTime;
     private Vector3 _lastMousePosition;
     private float _mouseIdleTime;
+    private int _clickEffectIndex;
 
     private const float _starEffectIdleDuration = 0.37f;
 
@@ -89,6 +91,7 @@ public partial class GlobalManager
         }
 
         UpdateStarEffect();
+        UpdateClickEffect();
 
         if (Time.unscaledTime - _lastSpriteChangeTime < _spriteDuration) return;
 
@@ -120,6 +123,21 @@ public partial class GlobalManager
         {
             _starEffect.SetActive(false);
         }
+    }
+
+    private void UpdateClickEffect()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+        if (_clickEffectRectTransforms.IsNullOrEmpty()) return;
+
+        var clickEffect = _clickEffectRectTransforms[_clickEffectIndex];
+        if (!TryGetMouseWorldPosition(clickEffect, out var clickWorldPosition)) return;
+
+        clickEffect.position = clickWorldPosition;
+        clickEffect.SetActive(false);
+        clickEffect.SetActive(true);
+
+        _clickEffectIndex = (_clickEffectIndex + 1) % _clickEffectRectTransforms.Length;
     }
 
     private void HideUserCursor()
