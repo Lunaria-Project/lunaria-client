@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Lunaria;
 using UnityEngine;
 
@@ -21,6 +24,7 @@ public class FamiliarSlot : MonoBehaviour
     [SerializeField] private GameObject _hpRedObject;
     [SerializeField] private Text _noEnergyRemainTimeText;
     [SerializeField] private Text _workRemainTimeText;
+    [SerializeField] private GameObject _noEnergyEffect;
 
     private const string LockedLayoutKey = "Locked";
     private const string IdleLayoutKey = "Idle";
@@ -32,36 +36,61 @@ public class FamiliarSlot : MonoBehaviour
 
     private const int FamiliarImageFrameNumber = 1;
     private const float LowHpRatio = 0.2f;
+    private const float NoEnergyLayoutDelaySeconds = 0.2f;
 
     private FamiliarSlotState _state;
     private FamiliarInfo _familiar;
+    private CancellationTokenSource _layoutCts;
 
-    public void SetData(FamiliarSlotState state, FamiliarInfo familiar)
+    public async UniTask SetDataAsync(FamiliarSlotState state, FamiliarInfo familiar)
     {
+        var previousState = _state;
         _state = state;
         _familiar = familiar;
-        _layoutSwitcher.SetLayout(GetLayoutKey(state));
 
-        if (familiar == null) return;
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId);
-        _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
-        RefreshHp(familiar.CurrentHp, familiarCallData.MaxHp);
-
-        switch (state)
+        if (familiar != null)
         {
-            case FamiliarSlotState.NoEnergy:
+            var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId);
+            _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
+            RefreshHp(familiar.CurrentHp, familiarCallData.MaxHp);
+
+            switch (state)
             {
-                var remainSeconds = UserData.Instance.GetNoEnergyRemainSeconds(familiar);
-                _noEnergyRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
-                break;
-            }
-            case FamiliarSlotState.Working:
-            {
-                var remainSeconds = UserData.Instance.GetWorkRemainSeconds(familiar);
-                _workRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
-                break;
+                case FamiliarSlotState.NoEnergy:
+                {
+                    var remainSeconds = UserData.Instance.GetNoEnergyRemainSeconds(familiar);
+                    _noEnergyRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
+
+                    if (previousState is FamiliarSlotState.NoEnergy) return;
+
+                    _noEnergyEffect.SetActive(false);
+                    _noEnergyEffect.SetActive(true);
+
+                    _layoutCts = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
+                    var isCanceled = await UniTask.Delay(TimeSpan.FromSeconds(NoEnergyLayoutDelaySeconds), cancellationToken: _layoutCts.Token).SuppressCancellationThrow();
+                    if (isCanceled) return;
+                    break;
+                }
+                case FamiliarSlotState.Working:
+                {
+                    var remainSeconds = UserData.Instance.GetWorkRemainSeconds(familiar);
+                    _workRemainTimeText.SetText(TimeUtil.SecondsToHourMinuteString(TimeUtil.CeilToTenMinuteInterval(remainSeconds)));
+                    _noEnergyEffect.SetActive(false);
+                    break;
+                }
+                default:
+                {
+                    _noEnergyEffect.SetActive(false);
+                    break;
+                }
             }
         }
+
+        _layoutCts?.Cancel();
+        _layoutCts?.Dispose();
+        _layoutCts = null;
+
+        _layoutSwitcher.SetLayout(GetLayoutKey(state));
     }
 
     private void RefreshHp(int currentHp, int maxHp)

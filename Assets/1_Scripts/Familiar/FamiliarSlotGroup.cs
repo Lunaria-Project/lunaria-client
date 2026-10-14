@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class FamiliarSlotGroup : MonoBehaviour
@@ -27,7 +28,7 @@ public class FamiliarSlotGroup : MonoBehaviour
         for (var i = 0; i < _slots.Length; i++)
         {
             var familiar = i < familiars.Count ? familiars[i] : null;
-            _slots[i].SetData(GetSlotState(i, unlockedSlotCount, familiars), familiar);
+            _slots[i].SetDataAsync(GetSlotState(i, unlockedSlotCount, familiars), familiar).Forget();
         }
     }
 
