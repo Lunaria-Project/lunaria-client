@@ -42,7 +42,7 @@ public class MinigameFamiliarSelectCell : MonoBehaviour
         _layoutSwitcher.SetLayout(GetLayoutKey(state));
 
         if (familiar == null) return;
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId);
         _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
 
         if (state is MinigameFamiliarSelectCellState.CannotUse)

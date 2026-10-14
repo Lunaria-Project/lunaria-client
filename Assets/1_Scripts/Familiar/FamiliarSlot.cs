@@ -43,7 +43,7 @@ public class FamiliarSlot : MonoBehaviour
         _layoutSwitcher.SetLayout(GetLayoutKey(state));
 
         if (familiar == null) return;
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId);
         _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
         RefreshHp(familiar.CurrentHp, familiarCallData.MaxHp);
 
@@ -77,7 +77,7 @@ public class FamiliarSlot : MonoBehaviour
     private void ShowSummonPopup()
     {
         var familiar = _familiar;
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId);
         var parameter = new SystemTwoButtonParameter
         {
             Description = LocalizationKey.Familiar_SetSummonedState.Text(familiarCallData.Name),
@@ -91,7 +91,7 @@ public class FamiliarSlot : MonoBehaviour
     private void ShowUnsummonPopup()
     {
         var familiar = _familiar;
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId);
         var parameter = new SystemTwoButtonParameter
         {
             Description = LocalizationKey.Familiar_SetIdleState.Text(familiarCallData.Name),

@@ -39,11 +39,11 @@ public class DailyReceiptPopup : EmptyParamPopup
                 detailCell.SetPlayerRewardData(minigameType, itemId, quantity);
             }
 
-            foreach (var (familiarCallItemId, itemId, quantity) in record.FamiliarRewards)
+            foreach (var (familiarId, itemId, quantity) in record.FamiliarRewards)
             {
                 if (!TryShowCells(cellIndex++, out var simpleCell, out var detailCell)) return;
-                simpleCell.SetFamiliarRewardData(minigameType, familiarCallItemId, itemId, quantity);
-                detailCell.SetFamiliarRewardData(minigameType, familiarCallItemId, itemId, quantity);
+                simpleCell.SetFamiliarRewardData(minigameType, familiarId, itemId, quantity);
+                detailCell.SetFamiliarRewardData(minigameType, familiarId, itemId, quantity);
             }
         }
     }

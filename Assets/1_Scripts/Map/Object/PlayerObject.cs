@@ -97,7 +97,7 @@ public class PlayerObject : MovableObject
         {
             if (familiar.State is not FamiliarState.Summoned) continue;
             if (slotIndex >= _familiarObjects.Length) break;
-            _familiarObjects[slotIndex].Show(familiar.FamiliarCallItemId);
+            _familiarObjects[slotIndex].Show(familiar.FamiliarId);
             slotIndex++;
         }
 
@@ -111,7 +111,7 @@ public class PlayerObject : MovableObject
     {
         foreach (var familiarObject in _familiarObjects)
         {
-            if (familiarObject.FamiliarCallItemId == 0) continue;
+            if (familiarObject.FamiliarId == 0) continue;
             familiarObject.UpdateAnimation(CurrentMoveDirection, dt);
         }
     }

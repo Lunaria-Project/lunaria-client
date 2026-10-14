@@ -18,7 +18,7 @@ public class ItemUseManager : Singleton<ItemUseManager>
             {
                 if (!UserData.Instance.CanAddFamiliar(itemId)) break;
 
-                var familiarCallData = GameData.Instance.GetFamiliarCallData(itemId);
+                var familiarCallData = GameData.Instance.GetFamiliarCallDataListByItemId(itemId).GetAtWithError(0);
                 var parameter = new SystemTwoButtonParameter
                 {
                     Description = LocalizationKey.Familiar_CallMessage.Text(itemData.Name, familiarCallData.Name),

@@ -18,11 +18,11 @@ public class DailyReceiptMinigameCell : MonoBehaviour
         _familiarImage.SetActive(false);
     }
 
-    public void SetFamiliarRewardData(MinigameType minigameType, int familiarCallItemId, int itemId, long quantity)
+    public void SetFamiliarRewardData(MinigameType minigameType, int familiarId, int itemId, long quantity)
     {
         SetRewardData(minigameType, itemId, quantity);
 
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallItemId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarId);
         _familiarImage.SetActive(true);
         _familiarImage.SetSprite(ResourceManager.Instance.LoadFamiliarSprite(familiarCallData.ResourceKey, true, FamiliarImageFrameNumber));
     }

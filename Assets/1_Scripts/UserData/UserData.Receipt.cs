@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class DailyMinigameRecord
 {
     public List<(int ItemId, long Quantity)> PlayerRewards = new();
-    public List<(int FamiliarCallItemId, int ItemId, long Quantity)> FamiliarRewards = new();
+    public List<(int FamiliarId, int ItemId, long Quantity)> FamiliarRewards = new();
 }
 
 public partial class UserData // Receipt
@@ -24,18 +24,18 @@ public partial class UserData // Receipt
         AddRecordItem(GetOrCreateDailyMinigameRecord(minigameType).PlayerRewards, itemId, quantity);
     }
 
-    public void RecordFamiliarMinigameReward(MinigameType minigameType, int familiarCallItemId, int itemId, long quantity)
+    public void RecordFamiliarMinigameReward(MinigameType minigameType, int familiarId, int itemId, long quantity)
     {
         if (quantity <= 0) return;
 
         var items = GetOrCreateDailyMinigameRecord(minigameType).FamiliarRewards;
         for (var i = 0; i < items.Count; i++)
         {
-            if (items[i].FamiliarCallItemId != familiarCallItemId || items[i].ItemId != itemId) continue;
-            items[i] = (familiarCallItemId, itemId, items[i].Quantity + quantity);
+            if (items[i].FamiliarId != familiarId || items[i].ItemId != itemId) continue;
+            items[i] = (familiarId, itemId, items[i].Quantity + quantity);
             return;
         }
-        items.Add((familiarCallItemId, itemId, quantity));
+        items.Add((familiarId, itemId, quantity));
     }
 
     public void ClearDailyMinigameRecords()

@@ -43,12 +43,12 @@ public class UserDataInfo
         ItemList.Add((itemId, quantity));
     }
 
-    public void AddFamiliar(int familiarCallItemId)
+    public void AddFamiliar(int familiarId)
     {
-        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarCallItemId);
+        var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarId);
         Familiars.Add(new FamiliarInfo
         {
-            FamiliarCallItemId = familiarCallItemId,
+            FamiliarId = familiarId,
             CurrentHp = familiarCallData.MaxHp,
             State = FamiliarState.Idle,
         });

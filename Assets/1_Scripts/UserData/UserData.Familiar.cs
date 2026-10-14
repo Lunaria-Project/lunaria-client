@@ -12,7 +12,7 @@ public enum FamiliarState
 
 public class FamiliarInfo
 {
-    public int FamiliarCallItemId;
+    public int FamiliarId;
     public int CurrentHp;
     public FamiliarState State;
     public MinigameType WorkingMinigameType;
@@ -44,7 +44,10 @@ public partial class UserData // Familiar
     {
         if (!CanAddFamiliar(familiarCallItemId, showToastMessage)) return false;
 
-        _userDataInfo.AddFamiliar(familiarCallItemId);
+        // 하나의 소환 아이템에 여러 패밀리어가 매칭될 수 있어, 아직 보유하지 않은 패밀리어 중 하나를 랜덤으로 뽑는다.
+        var familiarIds = GetAddableFamiliarIds(familiarCallItemId);
+        var familiarId = familiarIds[UnityEngine.Random.Range(0, familiarIds.Count)];
+        _userDataInfo.AddFamiliar(familiarId);
         OnFamiliarChanged?.Invoke();
         return true;
     }
@@ -61,11 +64,9 @@ public partial class UserData // Familiar
             return false;
         }
 
-        var familiarId = GameData.Instance.GetFamiliarCallData(familiarCallItemId).FamiliarId;
-        foreach (var familiar in Familiars)
+        if (GetAddableFamiliarIds(familiarCallItemId).Count == 0)
         {
-            if (GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).FamiliarId != familiarId) continue;
-            LogManager.Log($"[Familiar] CanAddFamiliar: 이미 보유한 패밀리어 (familiarCallItemId={familiarCallItemId})");
+            LogManager.Log($"[Familiar] CanAddFamiliar: 소환 가능한 패밀리어를 모두 보유함 (familiarCallItemId={familiarCallItemId})");
             if (showToastMessage)
             {
                 GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_DuplicationWarning.Text());
@@ -74,6 +75,26 @@ public partial class UserData // Familiar
         }
 
         return true;
+    }
+
+    private List<int> GetAddableFamiliarIds(int familiarCallItemId)
+    {
+        var result = new List<int>();
+        foreach (var familiarCallData in GameData.Instance.GetFamiliarCallDataListByItemId(familiarCallItemId))
+        {
+            if (HasFamiliar(familiarCallData.FamiliarId)) continue;
+            result.Add(familiarCallData.FamiliarId);
+        }
+        return result;
+    }
+
+    private bool HasFamiliar(int familiarId)
+    {
+        foreach (var familiar in Familiars)
+        {
+            if (familiar.FamiliarId == familiarId) return true;
+        }
+        return false;
     }
 
     public void SummonFamiliar(FamiliarInfo familiar)
@@ -105,7 +126,7 @@ public partial class UserData // Familiar
     {
         if (!CanStartFamiliarWork(familiar))
         {
-            LogManager.LogError($"[Familiar] StartFamiliarWork: 근무를 시작할 수 없는 패밀리어 (familiarCallItemId={familiar.FamiliarCallItemId}, state={familiar.State}, hp={familiar.CurrentHp})");
+            LogManager.LogError($"[Familiar] StartFamiliarWork: 근무를 시작할 수 없는 패밀리어 (familiarId={familiar.FamiliarId}, state={familiar.State}, hp={familiar.CurrentHp})");
             return;
         }
 
@@ -190,7 +211,7 @@ public partial class UserData // Familiar
     private void RefreshFamiliarsOnNewDay()
     {
         // 일시적 패밀리어는 하루가 지나면 사라지고, 근무 중이던 패밀리어는 대기 상태로 돌아간다.
-        _userDataInfo.Familiars.RemoveAll(familiar => GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).IsTemporary);
+        _userDataInfo.Familiars.RemoveAll(familiar => GameData.Instance.GetFamiliarCallData(familiar.FamiliarId).IsTemporary);
 
         var startSeconds = GameSetting.Instance.StartGameTimeSeconds;
         var sleepSeconds = TimeUtil.SecondsPerDay - GameSetting.Instance.EndGameTimeSeconds + startSeconds;
@@ -226,13 +247,13 @@ public partial class UserData // Familiar
 
     private static void RecoverFamiliarHp(FamiliarInfo familiar, int amount)
     {
-        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
+        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId).MaxHp;
         familiar.CurrentHp = Math.Min(maxHp, familiar.CurrentHp + amount);
     }
 
     private static void RecoverNoEnergyFamiliarHp(FamiliarInfo familiar, long elapsedSeconds)
     {
-        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarCallItemId).MaxHp;
+        var maxHp = GameData.Instance.GetFamiliarCallData(familiar.FamiliarId).MaxHp;
         var releaseHp = (int)Math.Ceiling(maxHp * NoEnergyReleaseHpRatio);
         var recoverySeconds = GetNoEnergyRecoverySeconds();
 
@@ -279,7 +300,7 @@ public partial class UserData // Familiar
             if (quantity <= 0) continue;
 
             AddReward(itemId, quantity);
-            RecordFamiliarMinigameReward(minigameType, familiar.FamiliarCallItemId, itemId, quantity);
+            RecordFamiliarMinigameReward(minigameType, familiar.FamiliarId, itemId, quantity);
         }
     }
 }

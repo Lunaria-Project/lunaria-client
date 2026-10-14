@@ -52,7 +52,7 @@ public static class DataIdDropDownList
     {
         if (_familiarCallDataIdCache.IsNullOrEmpty())
         {
-            _familiarCallDataIdCache = GetDropdownListFromGameData("FamiliarCall", "Id");
+            _familiarCallDataIdCache = GetDropdownListFromGameData("FamiliarCall", "FamiliarId");
         }
         return _familiarCallDataIdCache;
     }

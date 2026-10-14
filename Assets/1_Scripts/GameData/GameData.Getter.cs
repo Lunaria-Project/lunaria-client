@@ -104,4 +104,15 @@ public partial class GameData
         }
         return result;
     }
+
+    public List<FamiliarCallData> GetFamiliarCallDataListByItemId(int familiarCallItemId)
+    {
+        var result = new List<FamiliarCallData>();
+        foreach (var (_, data) in _dtFamiliarCallData)
+        {
+            if (data.Id != familiarCallItemId) continue;
+            result.Add(data);
+        }
+        return result;
+    }
 }
