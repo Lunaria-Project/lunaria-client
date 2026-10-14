@@ -113,7 +113,7 @@ public class FamiliarSlot : MonoBehaviour
 
         var isLowHp = hpRatio <= LowHpRatio;
         _hpRedObject.SetActive(isLowHp);
-        _tiredEffect.SetActive(isLowHp);
+        _tiredEffect.SetActive(isLowHp && _state is not FamiliarSlotState.NoEnergy);
         _hpGreenObject.SetActive(!isLowHp);
     }
 
