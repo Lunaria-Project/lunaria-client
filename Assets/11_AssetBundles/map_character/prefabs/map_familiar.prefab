@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FamiliarObject
   _spriteRenderer: {fileID: 6095030367660841490}
+  _temporaryFamiliarEffect: {fileID: 8990778137011093122}
+  _permanentFamiliarEffect: {fileID: 6465148526253880998}
 --- !u!95 &8715683906425910765
 Animator:
   serializedVersion: 7
@@ -291,6 +293,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3913696077167238275, guid: 7fedd49d73f3f7244a3d1714b3806068, type: 3}
   m_PrefabInstance: {fileID: 28136959175153883}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8990778137011093122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8981971504935020121, guid: 7fedd49d73f3f7244a3d1714b3806068, type: 3}
+  m_PrefabInstance: {fileID: 28136959175153883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2674730442008400127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,5 +362,10 @@ PrefabInstance:
 --- !u!4 &1391243892085558396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3913696077167238275, guid: 61b445430bf7dec4ab099d26b068a395, type: 3}
+  m_PrefabInstance: {fileID: 2674730442008400127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6465148526253880998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8981971504935020121, guid: 61b445430bf7dec4ab099d26b068a395, type: 3}
   m_PrefabInstance: {fileID: 2674730442008400127}
   m_PrefabAsset: {fileID: 0}

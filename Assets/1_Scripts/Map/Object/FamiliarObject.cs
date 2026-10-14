@@ -4,6 +4,8 @@ using UnityEngine;
 public class FamiliarObject : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private GameObject _temporaryFamiliarEffect;
+    [SerializeField] private GameObject _permanentFamiliarEffect;
 
     public int FamiliarId { get; private set; }
 
@@ -29,12 +31,17 @@ public class FamiliarObject : MonoBehaviour
 
         var familiarCallData = GameData.Instance.GetFamiliarCallData(familiarId);
         InitSprite(familiarCallData.ResourceKey);
+        
+        _temporaryFamiliarEffect.SetActive(familiarCallData.IsTemporary);
+        _permanentFamiliarEffect.SetActive(!familiarCallData.IsTemporary);
     }
 
     public void Hide()
     {
         FamiliarId = 0;
         gameObject.SetActive(false);
+        _temporaryFamiliarEffect.SetActive(false);
+        _permanentFamiliarEffect.SetActive(false);
     }
 
     #region Animation
