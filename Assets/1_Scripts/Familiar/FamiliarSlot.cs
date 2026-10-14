@@ -22,9 +22,11 @@ public class FamiliarSlot : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider _hpSlider;
     [SerializeField] private GameObject _hpGreenObject;
     [SerializeField] private GameObject _hpRedObject;
+    [SerializeField] private GameObject _tiredEffect;
     [SerializeField] private Text _noEnergyRemainTimeText;
     [SerializeField] private Text _workRemainTimeText;
     [SerializeField] private GameObject _noEnergyEffect;
+    [SerializeField] private GameObject _familiarAddedEffect;
 
     private const string LockedLayoutKey = "Locked";
     private const string IdleLayoutKey = "Idle";
@@ -78,6 +80,17 @@ public class FamiliarSlot : MonoBehaviour
                     _noEnergyEffect.SetActive(false);
                     break;
                 }
+                case FamiliarSlotState.Idle:
+                {
+                    _noEnergyEffect.SetActive(false);
+
+                    if (previousState is FamiliarSlotState.Empty)
+                    {
+                        _familiarAddedEffect.SetActive(false);
+                        _familiarAddedEffect.SetActive(true);
+                    }
+                    break;
+                }
                 default:
                 {
                     _noEnergyEffect.SetActive(false);
@@ -100,6 +113,7 @@ public class FamiliarSlot : MonoBehaviour
 
         var isLowHp = hpRatio <= LowHpRatio;
         _hpRedObject.SetActive(isLowHp);
+        _tiredEffect.SetActive(isLowHp);
         _hpGreenObject.SetActive(!isLowHp);
     }
 

@@ -10748,9 +10748,11 @@ MonoBehaviour:
   _hpSlider: {fileID: 6646780624359350913}
   _hpGreenObject: {fileID: 6625779350849681554}
   _hpRedObject: {fileID: 1624837658886670855}
+  _tiredEffect: {fileID: 5487694312703855667}
   _noEnergyRemainTimeText: {fileID: 8865667465120973308}
   _workRemainTimeText: {fileID: 6939389880785775557}
   _noEnergyEffect: {fileID: 8876214975125664591}
+  _familiarAddedEffect: {fileID: 6837892589013916901}
 --- !u!114 &493327602121786357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12226,6 +12228,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3913696077167238275, guid: d33b226e1c3874b48a8e4bd039234ced, type: 3}
   m_PrefabInstance: {fileID: 2468901040928750268}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6837892589013916901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8981971504935020121, guid: d33b226e1c3874b48a8e4bd039234ced, type: 3}
+  m_PrefabInstance: {fileID: 2468901040928750268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3498852268725250666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12350,6 +12357,11 @@ PrefabInstance:
 --- !u!224 &494927848118990569 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3913696077167238275, guid: 5bba3fad1bf36f5498138f4e3722be6a, type: 3}
+  m_PrefabInstance: {fileID: 3498852268725250666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5487694312703855667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8981971504935020121, guid: 5bba3fad1bf36f5498138f4e3722be6a, type: 3}
   m_PrefabInstance: {fileID: 3498852268725250666}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3585817200304046908
