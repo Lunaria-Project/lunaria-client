@@ -162,6 +162,13 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         SetDefaultCursor();
     }
 
+    public void ShowSpellBookEffect()
+    {
+        var playerObject = MapManager.Instance.PlayerObject;
+        if (playerObject == null) return;
+        playerObject.ShowSpellBookEffect();
+    }
+
     public void UpdateCameraPosition(Vector3 playerPosition)
     {
         var cameraTransform = _globalCamara.transform;

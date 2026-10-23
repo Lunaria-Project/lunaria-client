@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerObject : MovableObject
 {
     [SerializeField] private FamiliarObject[] _familiarObjects;
+    [SerializeField] private GameObject _spellBookEffect;
 
     public void Init(Vector2 position)
     {
@@ -19,6 +20,7 @@ public class PlayerObject : MovableObject
         UserData.Instance.OnFamiliarChanged -= RefreshFamiliars;
         UserData.Instance.OnFamiliarChanged += RefreshFamiliars;
         RefreshFamiliars();
+        _spellBookEffect.SetActive(false);
     }
 
     protected void OnDisable()
@@ -89,6 +91,12 @@ public class PlayerObject : MovableObject
     }
 
     #region Familiar
+    
+    public void ShowSpellBookEffect()
+    {
+        _spellBookEffect.SetActive(false);
+        _spellBookEffect.SetActive(true);
+    }
 
     private void RefreshFamiliars()
     {

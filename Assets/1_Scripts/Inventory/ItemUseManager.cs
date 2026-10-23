@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+
 public class ItemUseManager : Singleton<ItemUseManager>
 {
     public void Use(int itemId)
@@ -30,7 +32,12 @@ public class ItemUseManager : Singleton<ItemUseManager>
                         UserData.Instance.RemoveItem(itemId, 1);
                     },
                 };
-                PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
+                PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter)
+                    .SetOnHideAction(()=>
+                    {
+                        PopupManager.Instance.HideCurrentPopup(PopupManager.Type.Inventory).Forget();
+                        GlobalManager.Instance.ShowSpellBookEffect();
+                    });
                 break;
             }
             default:
