@@ -14,6 +14,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
 
     public event Action OnApplicationPaused;
     public event Action OnApplicationResume;
+    public event Action<bool> OnInventoryPopupShown;
     public bool IsMinigamePlaying;
 
     private bool _isDayRunning;
@@ -234,6 +235,15 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     private void ClearPreviousShortcut()
     {
         _currentShopType = ShopType.None;
+    }
+
+    #endregion
+
+    #region Popup
+
+    public void NotifyInventoryPopupShown(bool isShown)
+    {
+        OnInventoryPopupShown?.Invoke(isShown);
     }
 
     #endregion

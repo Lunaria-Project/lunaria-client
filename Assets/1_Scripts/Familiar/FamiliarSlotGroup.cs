@@ -5,9 +5,16 @@ using UnityEngine;
 public class FamiliarSlotGroup : MonoBehaviour
 {
     [SerializeField] private FamiliarSlot[] _slots;
+    [SerializeField] private bool _hideOnInventoryPopup;
 
     public void OnShow()
     {
+        if (_hideOnInventoryPopup)
+        {
+            GlobalManager.Instance.OnInventoryPopupShown -= OnInventoryShown;
+            GlobalManager.Instance.OnInventoryPopupShown += OnInventoryShown;
+        }
+
         UserData.Instance.OnFamiliarChanged -= Refresh;
         UserData.Instance.OnFamiliarChanged += Refresh;
         GameTimeManager.Instance.OnIntervalChanged -= Refresh;
@@ -17,8 +24,22 @@ public class FamiliarSlotGroup : MonoBehaviour
 
     public void OnHide()
     {
+        GlobalManager.Instance.OnInventoryPopupShown -= OnInventoryShown;
         UserData.Instance.OnFamiliarChanged -= Refresh;
         GameTimeManager.Instance.OnIntervalChanged -= Refresh;
+    }
+
+    private void OnInventoryShown(bool isShown)
+    {
+        gameObject.SetActive(!isShown);
+
+        UserData.Instance.OnFamiliarChanged -= Refresh;
+        GameTimeManager.Instance.OnIntervalChanged -= Refresh;
+        if (isShown) return;
+
+        UserData.Instance.OnFamiliarChanged += Refresh;
+        GameTimeManager.Instance.OnIntervalChanged += Refresh;
+        Refresh();
     }
 
     private void Refresh()

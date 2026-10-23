@@ -10,6 +10,7 @@ public class InventoryPopup : EmptyParamPopup
     [SerializeField] private InventoryInfoCell _infoCell;
 
     [SerializeField] private InventoryQuickBlock _quickBlock;
+    [SerializeField] private FamiliarSlotGroup _familiarSlotGroup;
     [SerializeField] private Image _dragImage;
     [SerializeField] private RectTransform _dragImageRect;
 
@@ -50,11 +51,17 @@ public class InventoryPopup : EmptyParamPopup
 
         _tabGroup.Init();
         _quickBlock.Init();
+        _familiarSlotGroup.OnShow();
+
+        GlobalManager.Instance.NotifyInventoryPopupShown(true);
     }
 
     protected override void OnHide()
     {
         UserData.Instance.OnItemQuantityChanged -= OnItemQuantityChanged;
+        _familiarSlotGroup.OnHide();
+
+        GlobalManager.Instance.NotifyInventoryPopupShown(false);
     }
 
     private void OnItemQuantityChanged(int itemId)
