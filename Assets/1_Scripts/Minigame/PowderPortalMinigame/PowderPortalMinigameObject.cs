@@ -39,9 +39,9 @@ public class PowderPortalMinigameObject : MonoBehaviour
             .OnComplete(() => onComplete?.Invoke(this));
     }
 
-    public void MoveToPosition(float posX)
+    public void MoveBy(float deltaX)
     {
-        _rectTransform.anchoredPosition = Vector2.right * posX;
+        _rectTransform.anchoredPosition += Vector2.right * deltaX;
     }
 
     public void Hide()

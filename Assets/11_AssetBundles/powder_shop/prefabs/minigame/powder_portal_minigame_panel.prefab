@@ -30491,6 +30491,7 @@ MonoBehaviour:
   - {fileID: 8047009494259943287}
   - {fileID: 1017925014289406127}
   _scoreRectTransform: {fileID: 1539982164877640385}
+  _railImage: {fileID: 2796739395766249089}
 --- !u!95 &8134849058075157227
 Animator:
   serializedVersion: 7
@@ -76445,7 +76446,6 @@ GameObject:
   - component: {fileID: 8856901757442113068}
   - component: {fileID: 9134967509741037763}
   - component: {fileID: 2796739395766249089}
-  - component: {fileID: 8398324039379334677}
   m_Layer: 5
   m_Name: Obj (3)
   m_TagString: Untagged
@@ -76510,55 +76510,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8398324039379334677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6605222808475758051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64417bfdaf208cf49b3fd744d3faec32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIEffectController
-  MainTextureTiling: {x: 1, y: 1}
-  MainTextureOffset: {x: 0, y: 0}
-  MainTextureFlowSpeedX: 0.2
-  MainTextureFlowSpeedY: 0
-  MainTextureColor: {r: 1, g: 1, b: 1, a: 1}
-  MainTextureUV: {x: 0, y: 0, z: 1, w: 1}
-  SubTextureTiling: {x: 1, y: 1}
-  SubTextureOffset: {x: 0, y: 0}
-  SubTextureMix: 0
-  SubTextureFlowSpeedX: 0
-  SubTextureFlowSpeedY: 0
-  SubTextureColor: {r: 1, g: 1, b: 1, a: 1}
-  AlphaTextureTiling: {x: 1, y: 1}
-  AlphaTextureOffset: {x: 0, y: 0}
-  AlphaTextureIntensity: 1
-  AlphaTextureFlowSpeedX: 0
-  AlphaTextureFlowSpeedY: 0
-  DistortionTextureTiling: {x: 1, y: 1}
-  DistortionTextureOffset: {x: 0, y: 0}
-  DistortionIntensity: 0
-  DistortionSubTextureIntensity: 0
-  DistortionDissolveTextureIntensity: 0
-  DistortionTextureFlowSpeedX: 0
-  DistortionTextureFlowSpeedY: 0
-  DissolveTextureTiling: {x: 1, y: 1}
-  DissolveTextureOffset: {x: 0, y: 0}
-  DissolveIntensity: 0
-  DissolveEdgeRange: 0
-  DissolveEdgeMultiplier: 0
-  DissolveEdgeColor: {r: 1, g: 1, b: 1, a: 1}
-  DissolveTextureFlowSpeedX: 0
-  DissolveTextureFlowSpeedY: 0
-  DissolveAlphaTextureIntensity: 0
-  DissolveAlphaTextureTiling: {x: 1, y: 1}
-  DissolveAlphaTextureOffset: {x: 0, y: 0}
-  UseUnscaledTime: 0
-  UseUpdate: 1
 --- !u!1 &6612253960465179804
 GameObject:
   m_ObjectHideFlags: 0
@@ -81727,7 +81678,7 @@ RectTransform:
   m_GameObject: {fileID: 7203683399059991735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 202623050295214278}
@@ -82175,7 +82126,7 @@ RectTransform:
   m_GameObject: {fileID: 8222905996723135435}
   m_LocalRotation: {x: -0, y: -0, z: 0.98942775, w: 0.14502673}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2753285678270882800}
@@ -108247,15 +108198,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 946098157208218102, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1294837181247540104, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_SortingLayer
@@ -108271,15 +108222,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1511938927800065896, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2285501146362681199, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_Enabled
@@ -108303,15 +108254,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6065870658383378596, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6537011603980046289, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_SortingLayer

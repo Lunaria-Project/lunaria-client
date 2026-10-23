@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lunaria;
 using UnityEngine;
@@ -15,23 +14,30 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     [SerializeField] private RectTransform _disposeTargetPosition;
     [SerializeField] private Text[] _plusScoreTexts;
     [SerializeField] private RectTransform _scoreRectTransform;
+    [SerializeField] private Image _railImage;
 
     private bool _isInitialized;
     private float _remainTime;
     private float _minigameTime;
     private int _score;
-    private bool _isObjectMoving;
+    private Material _railMaterial;
     private readonly Queue<PowderPortalMinigameObject> _objectQueue = new();
 
     private readonly Color _minusColor = Color.red;
     private readonly Color _plusColor = Color.green;
+
+    protected void Awake()
+    {
+        _railMaterial = new Material(_railImage.material);
+        _railImage.material = _railMaterial;
+    }
 
     private void Update()
     {
         if (!_isInitialized) return;
 
         UpdateTimer();
-        UpdateObjectPosition().Forget();
+        UpdateObjectPosition();
         UpdateInput();
 
 #if UNITY_EDITOR
@@ -54,25 +60,22 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         }
     }
 
-    private async UniTask UpdateObjectPosition()
+    private void UpdateObjectPosition()
     {
-        if (_isObjectMoving) return;
         var frontObject = _objectQueue.Peek();
         if (frontObject.AnchoredPosition.x <= 0) return;
 
+        var moveX = Mathf.Min(_config.RailSpeed * Time.deltaTime, frontObject.AnchoredPosition.x);
         foreach (var objectSlot in _objectQueue)
         {
-            objectSlot.MoveToPosition(objectSlot.AnchoredPosition.x - _objectDistance);
+            objectSlot.MoveBy(-moveX);
         }
-        _isObjectMoving = true;
-        await UniTask.Delay(_config.AdvanceAnimDurationMillis);
-        _isObjectMoving = false;
+        var railRectTransform = _railImage.rectTransform;
+        _railMaterial.mainTextureOffset += Vector2.right * (moveX / (railRectTransform.rect.width * railRectTransform.localScale.x));
     }
 
     private void UpdateInput()
     {
-        if (_isObjectMoving) return;
-
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             OnKeyInput(PowderPortalDirection.Left);
@@ -116,7 +119,6 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     private void Init()
     {
         _isInitialized = false;
-        _isObjectMoving = false;
         _score = 0;
         var minigameSeconds = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal).MinigameSeconds;
         _remainTime = minigameSeconds;
@@ -202,6 +204,14 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
             .AppendInterval(0.2f)
             .Append(availableText.DOFade(0f, 0.3f))
             .OnComplete(() => { availableText.SetActive(false); });
+    }
+
+    protected void OnDestroy()
+    {
+        if (_railMaterial != null)
+        {
+            Destroy(_railMaterial);
+        }
     }
 
     private void ShowResult()

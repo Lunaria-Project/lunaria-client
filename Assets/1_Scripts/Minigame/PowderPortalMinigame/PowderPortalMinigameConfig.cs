@@ -7,7 +7,7 @@ public class PowderPortalMinigameConfig : ScriptableObject
     [SerializeField] private int _visibleSlotCount = 5;
     [SerializeField] private int _correctScore = 10;
     [SerializeField] private int _wrongScore = -5;
-    [SerializeField] private int _advanceAnimDurationMillis = 200;
+    [SerializeField] private float _railSpeed = 750f;
     [SerializeField] private float _sendAnimDuration = 0.3f;
     [SerializeField] private float _sendAnimDuration2 = 0.5f;
 
@@ -24,7 +24,7 @@ public class PowderPortalMinigameConfig : ScriptableObject
     public int VisibleSlotCount => _visibleSlotCount;
     public int CorrectScore => _correctScore;
     public int WrongScore => _wrongScore;
-    public int AdvanceAnimDurationMillis => _advanceAnimDurationMillis;
+    public float RailSpeed => _railSpeed;
     public float SendAnimDuration => _sendAnimDuration;
     public float SendAnimDuration2 => _sendAnimDuration2;
 
