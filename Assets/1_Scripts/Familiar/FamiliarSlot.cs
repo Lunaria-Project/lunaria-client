@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Lunaria;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum FamiliarSlotState
 {
@@ -15,7 +16,7 @@ public enum FamiliarSlotState
     WorkDone,
 }
 
-public class FamiliarSlot : MonoBehaviour
+public class FamiliarSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField] private LayoutSwitcher _layoutSwitcher;
     [SerializeField] private Image _familiarImage;
@@ -43,6 +44,12 @@ public class FamiliarSlot : MonoBehaviour
     private FamiliarSlotState _state;
     private FamiliarInfo _familiar;
     private CancellationTokenSource _layoutCts;
+    private Action _onDropAction;
+
+    public void SetDropAction(Action onDropAction)
+    {
+        _onDropAction = onDropAction;
+    }
 
     public async UniTask SetDataAsync(FamiliarSlotState state, FamiliarInfo familiar)
     {
@@ -162,6 +169,11 @@ public class FamiliarSlot : MonoBehaviour
 
         PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.Inventory);
         GlobalManager.Instance.ShowToastMessage(LocalizationKey.Familiar_EmptySlotMessage.Text());
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        _onDropAction?.Invoke();
     }
 
     public void OnButtonClick()

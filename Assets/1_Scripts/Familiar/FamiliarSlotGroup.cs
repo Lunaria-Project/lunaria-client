@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -6,6 +7,14 @@ public class FamiliarSlotGroup : MonoBehaviour
 {
     [SerializeField] private FamiliarSlot[] _slots;
     [SerializeField] private bool _hideOnInventoryPopup;
+
+    public void SetDropAction(Action onDropAction)
+    {
+        foreach (var slot in _slots)
+        {
+            slot.SetDropAction(onDropAction);
+        }
+    }
 
     public void OnShow()
     {

@@ -32,6 +32,7 @@ public class InventoryPopup : EmptyParamPopup
         _quickBlock.SetClickAction(OnQuickSlotClick);
         _quickBlock.SetDoubleClickAction(OnQuickSlotDoubleClick);
         _quickBlock.SetDragAction(OnQuickSlotBeginDrag, OnCellEndDrag, OnQuickSlotDrop);
+        _familiarSlotGroup.SetDropAction(OnFamiliarSlotDrop);
     }
 
     protected void Update()
@@ -179,6 +180,14 @@ public class InventoryPopup : EmptyParamPopup
     {
         if (_draggingItemId == 0) return;
         UserData.Instance.SetQuickSlot(slotIndex, _draggingItemId);
+    }
+
+    private void OnFamiliarSlotDrop()
+    {
+        if (_draggingItemId == 0) return;
+        var itemData = GameData.Instance.GetItemData(_draggingItemId);
+        if (itemData.ItemType is not ItemType.FamiliarCall) return;
+        ItemUseManager.Instance.Use(_draggingItemId);
     }
 
     private void OnQuickSlotClick(int slotIndex)

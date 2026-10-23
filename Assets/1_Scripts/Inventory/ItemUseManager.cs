@@ -30,14 +30,11 @@ public class ItemUseManager : Singleton<ItemUseManager>
                     {
                         if (!UserData.Instance.TryAddFamiliar(itemId)) return;
                         UserData.Instance.RemoveItem(itemId, 1);
-                    },
-                };
-                PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter)
-                    .SetOnHideAction(()=>
-                    {
                         PopupManager.Instance.HideCurrentPopup(PopupManager.Type.Inventory).Forget();
                         GlobalManager.Instance.ShowSpellBookEffect();
-                    });
+                    },
+                };
+                PopupManager.Instance.ShowPopup(PopupManager.Type.SystemButton, parameter);
                 break;
             }
             default:
