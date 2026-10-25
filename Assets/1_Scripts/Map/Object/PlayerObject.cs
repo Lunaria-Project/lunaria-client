@@ -78,11 +78,8 @@ public class PlayerObject : MovableObject
             MoveDirection += Vector2.right;
         }
 
-        MoveDirection.Normalize();
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            MoveDirection *= GameSetting.Instance.SpeedUpRate;
-        }
+        MoveDirection = MoveDirection.normalized;
+        MoveSpeedRate = Input.GetKey(KeyCode.LeftShift) ? GameSetting.Instance.SpeedUpRate : 1f;
     }
 
     protected override int GetCharacterDataId()
