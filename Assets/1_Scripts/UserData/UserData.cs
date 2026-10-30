@@ -11,6 +11,7 @@ public class ItemInfo
 [Serializable]
 public class UserDataInfo
 {
+    public int SaveVersion;
     public List<(int ItemId, long Quantity)> ItemList = new();
     public int UnlockedInventorySlotCount;
     public int UnlockedQuickSlotCount;

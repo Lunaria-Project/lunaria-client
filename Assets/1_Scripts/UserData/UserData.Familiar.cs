@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public enum FamiliarState
 {
@@ -20,6 +21,7 @@ public class FamiliarInfo
     public long LastHpUpdatedGameSeconds;
     public long NoEnergyElapsedSeconds;
 
+    [JsonIgnore]
     public int WorkRemainMinutes
     {
         get

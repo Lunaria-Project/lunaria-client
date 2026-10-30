@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4965530533386070532}
   - component: {fileID: 2625784888051314965}
   m_Layer: 5
-  m_Name: TestButton (2)
+  m_Name: LoadButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -614, y: -415}
-  m_SizeDelta: {x: 582.5005, y: 190.2867}
+  m_AnchoredPosition: {x: 375, y: -63}
+  m_SizeDelta: {x: 222.55, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6200106638957418325
 CanvasRenderer:
@@ -198,7 +198,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 303915805553033464}
         m_TargetAssemblyTypeName: TitleMainPanel, Assembly-CSharp
-        m_MethodName: OnCutsceneTestButtonClick
+        m_MethodName: OnLoadButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15869,7 +15869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 108, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8312089318071539568
@@ -15900,8 +15900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD76C\uC6D0\uB2D8 \uCEF7\uC2E0 \uBC84\uD2BC\n\uC544\uC774\uB514\uB294
-    title_main_panel\uC5D0 \uC785\uB825\uD574\uC8FC\uC138\uC694."
+  m_text: "\uC774\uC5B4\uD558\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
   m_sharedMaterial: {fileID: 2515134537450242798, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
@@ -15935,7 +15934,7 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 0
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -25928,8 +25927,8 @@ RectTransform:
   - {fileID: 7260235608770897314}
   - {fileID: 5956826641116543289}
   - {fileID: 7341897870899037735}
-  - {fileID: 1707297859884081962}
   - {fileID: 1546202794103755477}
+  - {fileID: 1707297859884081962}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -25950,6 +25949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleMainPanel
   _editorObject: {fileID: 7450613588703444536}
+  _loadButton: {fileID: 108732893199959330}
   _cutsceneId: 1000013
 --- !u!95 &2334972411932768836
 Animator:
@@ -47059,7 +47059,7 @@ GameObject:
   - component: {fileID: 5869255967515782723}
   - component: {fileID: 2467960071687319411}
   m_Layer: 5
-  m_Name: TestButton
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47082,8 +47082,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 227, y: -57}
-  m_SizeDelta: {x: 222.54834, y: 190.28668}
+  m_AnchoredPosition: {x: 375, y: 10}
+  m_SizeDelta: {x: 222.54834, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1833699314491289407
 CanvasRenderer:
@@ -72618,10 +72618,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7341897870899037735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: 0.14334}
-  m_SizeDelta: {x: 222, y: 190}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 108, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3263617765739712138
 CanvasRenderer:
@@ -72651,9 +72651,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Go Myhome
-
-'
+  m_text: "\uC0C8\uB85C \uC2DC\uC791"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
   m_sharedMaterial: {fileID: 2515134537450242798, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
@@ -72687,7 +72685,7 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 0
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -103417,7 +103415,7 @@ GameObject:
   - component: {fileID: 7345303095823124507}
   - component: {fileID: 2677572380902919529}
   m_Layer: 5
-  m_Name: TestButton (1)
+  m_Name: CheatButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103440,8 +103438,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 523, y: -46}
-  m_SizeDelta: {x: 222.54834, y: 190.28668}
+  m_AnchoredPosition: {x: 375, y: -134}
+  m_SizeDelta: {x: 222.54834, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7506924398194425076
 CanvasRenderer:
@@ -129193,10 +129191,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1707297859884081962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: 0.14334}
-  m_SizeDelta: {x: 222, y: 190}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 108, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7393467918183583217
 CanvasRenderer:
@@ -129226,11 +129224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Go Myhome
-
-    (WithCheat)
-
-'
+  m_text: "\uCE58\uD2B8\uB85C \uC2DC\uC791"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
   m_sharedMaterial: {fileID: 2515134537450242798, guid: afb0a8f6c9c124075836b71738502eba, type: 2}
@@ -129264,7 +129258,7 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 0
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

@@ -119,8 +119,10 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
     {
         UserData.Instance.ClearDailyMinigameRecords();
         UserData.Instance.AddDay();
+        UserData.Instance.Save();
         OnChangeMap(MapType.Myhome);
         StartDay();
+        ShowToastMessage("저장되었습니다");
     }
 
     #endregion
