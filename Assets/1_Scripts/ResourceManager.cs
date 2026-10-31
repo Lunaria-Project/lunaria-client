@@ -46,7 +46,7 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadSprite($"{resourceKey}_{direction}{frameNumber:D2}");
     }
 
-    public Sprite LoadSlimeMinigameSprite(SlimeType type)
+    public Sprite LoadSlimeMinigameSprite(SlimeType type, bool isAttack = false)
     {
         var resourceKey = type switch
         {
@@ -58,7 +58,7 @@ public class ResourceManager : Singleton<ResourceManager>
             SlimeType.ToxicLevel3 => "toxic_slime_03",
             _                     => null,
         };
-        return LoadSprite(resourceKey);
+        return LoadSprite(isAttack ? $"{resourceKey}_attack" : resourceKey);
     }
 
     public Sprite LoadCottonCandyMinigameSprite(int layerIndex, CottonCandyColor color, CottonCandyShape shape)

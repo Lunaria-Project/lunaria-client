@@ -22,6 +22,7 @@ public class SlimeBlock : MonoBehaviour
 
     private readonly Color _minusColor = Color.red;
     private readonly Color _plusColor = Color.green;
+    private const float AttackSpriteDuration = 0.13f;
 
     public bool IsShowing { get; private set; }
 
@@ -29,6 +30,8 @@ public class SlimeBlock : MonoBehaviour
     private SlimeType _slimeType;
     private int _remainTouchCount;
     private int _score;
+    private Sprite _normalSprite;
+    private Sprite _attackSprite;
 
     private bool IsToxicSlime => _slimeType is SlimeType.ToxicLevel1 or SlimeType.ToxicLevel2 or SlimeType.ToxicLevel3;
 
@@ -63,7 +66,10 @@ public class SlimeBlock : MonoBehaviour
         _scoreText.SetActive(false);
         _slimeImageRectTransform.SetActive(true);
 
-        _slimeImage.SetSprite(ResourceManager.Instance.LoadSlimeMinigameSprite(type));
+        _normalSprite = ResourceManager.Instance.LoadSlimeMinigameSprite(type);
+        _attackSprite = ResourceManager.Instance.LoadSlimeMinigameSprite(type, true);
+        DOTween.Kill(_slimeImage);
+        _slimeImage.SetSprite(_normalSprite);
         _slimeImageRectTransform.SetLocalScale(scale);
         _healthGroupObjects.SetActiveAll(false);
         _healthEffectObjects.SetActiveAll(false);
@@ -92,6 +98,7 @@ public class SlimeBlock : MonoBehaviour
     public void Hide()
     {
         DOTween.Kill(this);
+        DOTween.Kill(_slimeImage);
         IsShowing = false;
         _touchButton.SetActive(false);
         _healthGroupObjects.SetActiveAll(false);
@@ -132,7 +139,13 @@ public class SlimeBlock : MonoBehaviour
         _remainTouchCount--;
         RefreshHealthObjects();
         ShowHealthEffect(_remainTouchCount);
-        if (_remainTouchCount > 0) return;
+        if (_remainTouchCount > 0)
+        {
+            DOTween.Kill(_slimeImage);
+            _slimeImage.SetSprite(_attackSprite);
+            DOVirtual.DelayedCall(AttackSpriteDuration, () => _slimeImage.SetSprite(_normalSprite)).SetId(_slimeImage);
+            return;
+        }
 
         _onTouchSlime.Invoke(_slimeType);
         Hide();
