@@ -99,11 +99,15 @@ public class SlimeBlock : MonoBehaviour
     {
         DOTween.Kill(this);
         DOTween.Kill(_slimeImage);
+        DOTween.Kill(_scoreText);
         IsShowing = false;
         _touchButton.SetActive(false);
         _healthGroupObjects.SetActiveAll(false);
         _healthObjects.SetActiveAll(false);
         _slimeImageRectTransform.SetActive(false);
+        _scoreText.SetActive(false);
+        _destroyEffect.SetActive(false);
+        _toxicDestroyEffect.SetActive(false);
     }
 
     private void RefreshHealthObjects()

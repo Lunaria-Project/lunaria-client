@@ -145,6 +145,10 @@ public class SlimeMinigamePanel : Panel<SlimeMinigamePanel>
             StopCoroutine(coroutine);
         }
         _coroutines.Clear();
+        foreach (var slime in _slimeBlocks)
+        {
+            slime.Hide();
+        }
         OnShowResult();
     }
 
