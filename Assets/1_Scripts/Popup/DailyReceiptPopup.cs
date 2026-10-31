@@ -13,9 +13,12 @@ public class DailyReceiptPopup : EmptyParamPopup
     private const string SimpleLayoutKey = "Simple";
     private const string DetailsLayoutKey = "Details";
     private static readonly int TouchTriggerHash = Animator.StringToHash("touch");
-    
+
+    private bool _isFinished;
+
     protected override void OnShow()
     {
+        _isFinished = false;
         _layoutSwitcher.SetLayout(SimpleLayoutKey);
         _dayText.SetText(LocalizationKey.DayFormat.Text(UserData.Instance.CurrentDay.ToPrice()));
         _totalPriceText.SetText("0"); // TODO(지선)
@@ -76,6 +79,8 @@ public class DailyReceiptPopup : EmptyParamPopup
     
     public void OnFinishButtonClick()
     {
+        if (_isFinished) return;
+        _isFinished = true;
         _animator.SetTrigger(TouchTriggerHash);
     }
 }
