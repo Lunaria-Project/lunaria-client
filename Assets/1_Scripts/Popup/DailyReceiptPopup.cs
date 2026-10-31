@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Lunaria;
 using UnityEngine;
 
@@ -7,12 +6,13 @@ public class DailyReceiptPopup : EmptyParamPopup
     [SerializeField] private LayoutSwitcher _layoutSwitcher;
     [SerializeField] private Text _dayText;
     [SerializeField] private Text _totalPriceText;
-    [SerializeField] private DOTweenAnimation _finishAnimation;
+    [SerializeField] private Animator _animator;
     [SerializeField] private DailyReceiptMinigameCell[] _minigameSimpleCells;
     [SerializeField] private DailyReceiptMinigameCell[] _minigameDetailCells;
     
     private const string SimpleLayoutKey = "Simple";
     private const string DetailsLayoutKey = "Details";
+    private static readonly int TouchTriggerHash = Animator.StringToHash("touch");
     
     protected override void OnShow()
     {
@@ -76,6 +76,6 @@ public class DailyReceiptPopup : EmptyParamPopup
     
     public void OnFinishButtonClick()
     {
-        _finishAnimation.DOPlay();
+        _animator.SetTrigger(TouchTriggerHash);
     }
 }
