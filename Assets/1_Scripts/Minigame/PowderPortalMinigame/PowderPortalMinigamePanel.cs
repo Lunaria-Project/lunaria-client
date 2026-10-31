@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
 using Lunaria;
 using UnityEngine;
 
@@ -13,22 +12,25 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     [SerializeField] private GameObject _upEffectObject;
     [SerializeField] private GameObject _downEffectObject;
     [SerializeField] private GameObject _disposeEffectObject;
-    [SerializeField] private Text[] _plusScoreTexts;
-    [SerializeField] private RectTransform _scoreRectTransform;
+    [SerializeField] private GameObject _plusEffectObject;
+    [SerializeField] private GameObject _feverEffectObject;
+    [SerializeField] private PowderPortalScoreText[] _scoreTexts;
     [SerializeField] private Image _railImage;
 
     private const float FadeOutDuration = 0.2f;
+    private const int FeverComboCount = 10;
+    private const float FeverBlockRemainSeconds = 1f;
     private static readonly int StartTriggerHash = Animator.StringToHash("start");
 
     private bool _isInitialized;
     private float _remainTime;
     private float _minigameTime;
     private int _score;
+    private int _combo;
+    private bool _isFever;
+    private int _scoreTextIndex;
     private Material _railMaterial;
     private readonly Queue<PowderPortalMinigameObject> _objectQueue = new();
-
-    private readonly Color _minusColor = Color.red;
-    private readonly Color _plusColor = Color.green;
 
     protected void Awake()
     {
@@ -124,15 +126,20 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     {
         _isInitialized = false;
         _score = 0;
+        _combo = 0;
+        _isFever = false;
+        _scoreTextIndex = 0;
         var minigameSeconds = GameData.Instance.GetMinigameInfoData(MinigameType.PowderPortal).MinigameSeconds;
         _remainTime = minigameSeconds;
         _minigameTime = minigameSeconds;
         _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
         //_scoreText.SetText(_score.ToString());
-        _plusScoreTexts.SetActiveAll(false);
+        _scoreTexts.SetActiveAll(false);
         _upEffectObject.SetActive(false);
         _downEffectObject.SetActive(false);
         _disposeEffectObject.SetActive(false);
+        _plusEffectObject.SetActive(false);
+        _feverEffectObject.SetActive(false);
 
         _objectQueue.Clear();
         var initPositionX = _objectDistance * 6;
@@ -156,6 +163,15 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         var isCorrect = frontSlot.CorrectDirection == direction;
         _score += _config.GetScore(isCorrect);
         _score = Mathf.Max(_score, 0);
+        _combo = isCorrect ? _combo + 1 : 0;
+        if (!isCorrect)
+        {
+            _isFever = false;
+        }
+        else if (!_isFever && _combo >= FeverComboCount && _remainTime >= FeverBlockRemainSeconds)
+        {
+            _isFever = true;
+        }
         //_scoreText.SetText(_score.ToString());
 
         var effectObject = direction switch
@@ -193,28 +209,15 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
 
     private void ShowScoreText(int score)
     {
-        Text availableText = null;
-        foreach (var text in _plusScoreTexts)
+        _scoreTexts.GetAt(_scoreTextIndex).Play(score, _isFever);
+        _scoreTextIndex = (_scoreTextIndex + 1) % _scoreTexts.Length;
+
+        if (score > 0)
         {
-            if (text.gameObject.activeSelf) continue;
-            availableText = text;
-            break;
+            var effectObject = _isFever ? _feverEffectObject : _plusEffectObject;
+            effectObject.SetActive(false);
+            effectObject.SetActive(true);
         }
-        if (availableText == null) return;
-
-        var rectTransform = (RectTransform)availableText.transform;
-        rectTransform.position = _scoreRectTransform.position;
-        availableText.SetText(score > 0 ? $"+{score}" : score.ToString());
-        availableText.color = score > 0 ? _plusColor : _minusColor;
-        availableText.SetActive(true);
-
-        var startPos = rectTransform.anchoredPosition;
-        DOTween.Kill(availableText);
-        DOTween.Sequence()
-            .Append(rectTransform.DOAnchorPos(startPos + Vector2.up * 80f, 0.5f).SetEase(Ease.OutQuad))
-            .AppendInterval(0.2f)
-            .Append(availableText.DOFade(0f, 0.3f))
-            .OnComplete(() => { availableText.SetActive(false); });
     }
 
     protected void OnDestroy()
