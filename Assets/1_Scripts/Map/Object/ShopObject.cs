@@ -80,9 +80,9 @@ public class ShopObject : MapObject
                     GlobalManager.Instance.ShortcutInvoke(ShortcutType.CottonCandyShop).Forget();
                     break;
                 }
-                case ShopType.BeddingShop:
+                case ShopType.BlanketShop:
                 {
-                    GlobalManager.Instance.ShowToastMessage("개발중 - 지선"); // TODO(지선)
+                    GlobalManager.Instance.ShortcutInvoke(ShortcutType.BlanketShop).Forget();
                     break;
                 }
             }

@@ -215,7 +215,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         var shortcutType = _currentShopType switch
         {
             ShopType.PowderShop      => ShortcutType.ShoppingSquareByPowderShop,
-            ShopType.BeddingShop     => ShortcutType.ShoppingSquareByBeddingShop,
+            ShopType.BlanketShop     => ShortcutType.ShoppingSquareByBlanketShop,
             ShopType.CottonCandyShop => ShortcutType.ShoppingSquareByCottonCandyShop,
             _                        => ShortcutType.ShoppingSquare,
         };

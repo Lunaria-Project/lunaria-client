@@ -9,8 +9,9 @@ public enum ShortcutType
     PowderShop = 3,
     CottonCandyShop = 4,
     ShoppingSquareByPowderShop = 5,
-    ShoppingSquareByBeddingShop = 6,
+    ShoppingSquareByBlanketShop = 6,
     ShoppingSquareByCottonCandyShop = 7,
+    BlanketShop = 8,
 }
 
 public partial class GlobalManager
@@ -41,8 +42,9 @@ public partial class GlobalManager
             case ShortcutType.ShoppingSquare: return GoToShoppingSquareAsync();
             case ShortcutType.PowderShop: return GoToShopAsync(ShopType.PowderShop);
             case ShortcutType.CottonCandyShop: return GoToShopAsync(ShopType.CottonCandyShop);
+            case ShortcutType.BlanketShop: return GoToShopAsync(ShopType.BlanketShop);
             case ShortcutType.ShoppingSquareByPowderShop: return GoToShoppingSquareAsync(ShopType.PowderShop);
-            case ShortcutType.ShoppingSquareByBeddingShop: return GoToShoppingSquareAsync(ShopType.BeddingShop);
+            case ShortcutType.ShoppingSquareByBlanketShop: return GoToShoppingSquareAsync(ShopType.BlanketShop);
             case ShortcutType.ShoppingSquareByCottonCandyShop: return GoToShoppingSquareAsync(ShopType.CottonCandyShop);
         }
         return UniTask.CompletedTask;
@@ -91,7 +93,7 @@ public partial class GlobalManager
         {
             ShopType.CottonCandyShop => LoadingType.CottonCandyShop,
             ShopType.PowderShop      => LoadingType.PowderShop,
-            ShopType.BeddingShop     => LoadingType.BeddingShop,
+            ShopType.BlanketShop     => LoadingType.BlanketShop,
             _                        => LoadingType.Normal,
         };
         LoadingManager.Instance.ShowLoading(loadingType);
@@ -102,6 +104,7 @@ public partial class GlobalManager
         {
             ShopType.PowderShop      => MapType.PowderShop,
             ShopType.CottonCandyShop => MapType.CottonCandyShop,
+            ShopType.BlanketShop     => MapType.BlanketShop,
             _                        => MapType.ShoppingSquare,
         };
         OnChangeMap(mapType);

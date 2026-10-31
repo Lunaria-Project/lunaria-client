@@ -55,7 +55,7 @@ public enum LoadingType
     Normal = 1,
     CottonCandyShop = 2,
     PowderShop = 3,
-    BeddingShop = 4,
+    BlanketShop = 4,
 }
 
 [SerializeEnum]
@@ -66,6 +66,7 @@ public enum MapType
     ShoppingSquare = 2,
     PowderShop = 3,
     CottonCandyShop = 4,
+    BlanketShop = 5,
 }
 
 [SerializeEnum]
@@ -104,6 +105,6 @@ public enum ShopType
     None = 0,
     CottonCandyShop = 1,
     PowderShop = 2,
-    BeddingShop = 3,
+    BlanketShop = 3,
 }
 

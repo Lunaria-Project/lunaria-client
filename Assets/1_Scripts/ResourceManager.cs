@@ -97,6 +97,7 @@ public class ResourceManager : Singleton<ResourceManager>
             MapType.ShoppingSquare  => "shopping_square_map",
             MapType.PowderShop      => "powder_shop_map",
             MapType.CottonCandyShop => "cotton_candy_shop_map",
+            MapType.BlanketShop     => "blanket_shop_map",
             _                       => string.Empty,
         };
         if (string.IsNullOrEmpty(resourceKey)) return null;
