@@ -9,12 +9,16 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
     [SerializeField] private float _objectDistance = 150;
     [SerializeField] private PowderPortalMinigameObject[] _objectSlots;
     [SerializeField] private PowderPortalMinigameConfig _config;
-    [SerializeField] private RectTransform _upTargetPosition;
-    [SerializeField] private RectTransform _downTargetPosition;
-    [SerializeField] private RectTransform _disposeTargetPosition;
+    [SerializeField] private Animator _disposeAnimator;
+    [SerializeField] private GameObject _upEffectObject;
+    [SerializeField] private GameObject _downEffectObject;
+    [SerializeField] private GameObject _disposeEffectObject;
     [SerializeField] private Text[] _plusScoreTexts;
     [SerializeField] private RectTransform _scoreRectTransform;
     [SerializeField] private Image _railImage;
+
+    private const float FadeOutDuration = 0.2f;
+    private static readonly int StartTriggerHash = Animator.StringToHash("start");
 
     private bool _isInitialized;
     private float _remainTime;
@@ -126,6 +130,9 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         _minigameRemainTime.SetRemainTime(_remainTime, _minigameTime);
         //_scoreText.SetText(_score.ToString());
         _plusScoreTexts.SetActiveAll(false);
+        _upEffectObject.SetActive(false);
+        _downEffectObject.SetActive(false);
+        _disposeEffectObject.SetActive(false);
 
         _objectQueue.Clear();
         var initPositionX = _objectDistance * 6;
@@ -151,16 +158,20 @@ public class PowderPortalMinigamePanel : Panel<PowderPortalMinigamePanel>
         _score = Mathf.Max(_score, 0);
         //_scoreText.SetText(_score.ToString());
 
-        var targetPosition = direction switch
+        var effectObject = direction switch
         {
-            PowderPortalDirection.Left  => _upTargetPosition.position,
-            PowderPortalDirection.Right => _downTargetPosition.position,
-            PowderPortalDirection.Space => _disposeTargetPosition.position,
-            _                           => Vector3.zero
+            PowderPortalDirection.Left  => _upEffectObject,
+            PowderPortalDirection.Right => _downEffectObject,
+            _                           => _disposeEffectObject
         };
+        effectObject.SetActive(false);
+        effectObject.SetActive(true);
+        if (direction is PowderPortalDirection.Space)
+        {
+            _disposeAnimator.SetTrigger(StartTriggerHash);
+        }
         ShowScoreText(_config.GetScore(isCorrect));
-        var duration = direction != PowderPortalDirection.Space ? _config.SendAnimDuration : _config.SendAnimDuration2;
-        frontSlot.PlaySendAnimation(targetPosition, duration, OnSendComplete);
+        frontSlot.PlayFadeOutAnimation(FadeOutDuration, OnSendComplete);
         _objectQueue.Dequeue();
         return;
 
