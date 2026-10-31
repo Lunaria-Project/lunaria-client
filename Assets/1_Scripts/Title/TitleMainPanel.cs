@@ -12,8 +12,11 @@ public class TitleMainPanel : Panel<TitleMainPanel>
 #endif
     [SerializeField] int _cutsceneId;
 
+    private bool _isStarting;
+
     protected override void OnShow(params object[] args)
     {
+        _isStarting = false;
         _loadButton.SetActive(UserData.Instance.HasSaveData);
         _editorObject.SetActive(false);
 #if UNITY_EDITOR
@@ -25,6 +28,8 @@ public class TitleMainPanel : Panel<TitleMainPanel>
 
     private async UniTask StartGame(UserDataInfo info, bool addInitialItems)
     {
+        if (_isStarting) return;
+        _isStarting = true;
         UserData.Instance.Init(info, addInitialItems);
         await SceneManager.LoadSceneAsync(1);
         GlobalManager.Instance.StartDay();
