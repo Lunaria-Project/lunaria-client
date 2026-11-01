@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 4209583302518928480}
   - component: {fileID: 7634158613240342656}
   - component: {fileID: 5684443548150242853}
+  - component: {fileID: 869687274010017149}
   m_Layer: 5
   m_Name: item_num
   m_TagString: Untagged
@@ -298,6 +299,7 @@ GameObject:
   - component: {fileID: 8629833014828292999}
   - component: {fileID: 757383698394207226}
   - component: {fileID: 1299726491465320793}
+  - component: {fileID: 710959700941424840}
   m_Layer: 5
   m_Name: item_num
   m_TagString: Untagged
@@ -1031,6 +1033,7 @@ GameObject:
   - component: {fileID: 2157271929445974867}
   - component: {fileID: 1934874691915894405}
   - component: {fileID: 8412103725137610779}
+  - component: {fileID: 1107652427928244116}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1167,6 +1170,7 @@ GameObject:
   - component: {fileID: 5306546288563240608}
   - component: {fileID: 2273979583248404077}
   - component: {fileID: 7538811844016729284}
+  - component: {fileID: 339794842154719807}
   m_Layer: 5
   m_Name: item_num
   m_TagString: Untagged
@@ -1445,3 +1449,55 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &869687274010017149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249949377683946188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key:
+--- !u!114 &710959700941424840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427634821632562163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key:
+--- !u!114 &1107652427928244116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274453324326838648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key:
+--- !u!114 &339794842154719807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975976311853465617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key:

@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 7472239355602734004}
   - component: {fileID: 375981872797989149}
   - component: {fileID: 1297660964650019855}
+  - component: {fileID: 996066819238468756}
   m_Layer: 5
   m_Name: num
   m_TagString: Untagged
@@ -424,3 +425,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &996066819238468756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836017838429446163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
+  _key:
