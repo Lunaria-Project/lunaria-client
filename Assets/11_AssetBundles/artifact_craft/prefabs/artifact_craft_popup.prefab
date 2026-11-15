@@ -438,7 +438,6 @@ GameObject:
   - component: {fileID: 2539540770586779491}
   - component: {fileID: 1853379946166092752}
   - component: {fileID: 2083039969009515625}
-  - component: {fileID: 7632835190768415773}
   m_Layer: 5
   m_Name: Popup_base
   m_TagString: Untagged
@@ -505,31 +504,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7632835190768415773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870547738811556785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411654edb2673479080968e76185e45e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.LayoutSwitcher
-  _layouts:
-  - Key: Success
-    Objects:
-    - {fileID: 0}
-  - Key: Failed
-    Objects:
-    - {fileID: 0}
-  - Key: CraftConfirm
-    Objects:
-    - {fileID: 0}
-  - Key: PaymentConfirm
-    Objects:
-    - {fileID: 0}
 --- !u!1 &1208030019093253858
 GameObject:
   m_ObjectHideFlags: 0
