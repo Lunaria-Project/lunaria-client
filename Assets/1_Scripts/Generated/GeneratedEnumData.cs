@@ -76,6 +76,7 @@ public enum MinigameType
     Slime = 1,
     PowderPortal = 2,
     CottonCandy = 3,
+    Library = 4,
 }
 
 [SerializeEnum]
@@ -87,6 +88,7 @@ public enum NpcMenuFunctionType
     PlaySlimeMinigame = 3,
     PlayPowderPortalMinigame = 4,
     PlayCottonCandyMinigame = 5,
+    PlayLibraryMinigame = 6,
 }
 
 [SerializeEnum]
