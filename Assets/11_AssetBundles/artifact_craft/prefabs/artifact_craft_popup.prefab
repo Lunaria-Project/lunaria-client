@@ -81058,7 +81058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: -0}
+  m_AnchoredPosition: {x: -11, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &8012343944837382693
@@ -110852,7 +110852,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 4
       maxCurve:
         serializedVersion: 2
@@ -111716,7 +111716,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 2
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -111798,22 +111798,13 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.15321495
         - serializedVersion: 3
-          time: 0.74711436
-          value: 1.0048974
+          time: 1
+          value: 1
           inSlope: -0.05179809
           outSlope: -0.05179809
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0.7076912
-          inSlope: -0.24980317
-          outSlope: -0.24980317
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.16501194
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 1
@@ -112138,7 +112129,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 16608
-        atime2: 57530
+        atime2: 24688
         atime3: 65011
         atime4: 65535
         atime5: 45875
@@ -131582,7 +131573,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 2
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -131674,7 +131665,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.7076912
+          value: 1
           inSlope: -0.24980317
           outSlope: -0.24980317
           tangentMode: 0
@@ -132004,7 +131995,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 16608
-        atime2: 57530
+        atime2: 34563
         atime3: 65011
         atime4: 65535
         atime5: 45875
@@ -135623,7 +135614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: -0}
+  m_AnchoredPosition: {x: -11, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &7248428378716309505
