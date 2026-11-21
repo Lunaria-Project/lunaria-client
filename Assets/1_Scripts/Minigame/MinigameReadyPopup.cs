@@ -35,6 +35,7 @@ public class MinigameReadyPopup : EmptyParamPopup
             MinigameType.Slime        => PanelManager.Type.SlimeMinigame,
             MinigameType.PowderPortal => PanelManager.Type.PowderPortalMinigame,
             MinigameType.CottonCandy  => PanelManager.Type.CottonCandyMinigame,
+            MinigameType.Library      => PanelManager.Type.LibraryMinigame,
             _                         => PanelManager.Type.None,
         };
     }
@@ -46,6 +47,7 @@ public class MinigameReadyPopup : EmptyParamPopup
             MinigameType.Slime        => PopupManager.Type.SlimeMinigameInfo,
             MinigameType.PowderPortal => PopupManager.Type.PowderPortalMinigameInfo,
             MinigameType.CottonCandy  => PopupManager.Type.CottonCandyMinigameInfo,
+            MinigameType.Library      => PopupManager.Type.LibraryMinigameInfo,
             _                         => PopupManager.Type.None,
         };
     }
@@ -57,6 +59,7 @@ public class MinigameReadyPopup : EmptyParamPopup
             MinigameType.Slime        => PopupManager.Type.SlimeMinigameReady,
             MinigameType.PowderPortal => PopupManager.Type.PowderPortalMinigameReady,
             MinigameType.CottonCandy  => PopupManager.Type.CottonCandyMinigameReady,
+            MinigameType.Library      => PopupManager.Type.LibraryMinigameReady,
             _                         => PopupManager.Type.None,
         };
     }
@@ -65,12 +68,18 @@ public class MinigameReadyPopup : EmptyParamPopup
     {
         var requiredArtifactType = GameData.Instance.GetMinigameInfoData(_minigameType).EquippedArtifactType;
         var artifactData = GameData.Instance.GetArtifactData(UserData.Instance.EquippedArtifactId);
-        if (artifactData.ArtifactType != requiredArtifactType)
+        if (artifactData?.ArtifactType != requiredArtifactType)
         {
             if (!UserData.Instance.TrySetEquippedArtifact(requiredArtifactType))
             {
+                var cutsceneId = GetArtifactCutsceneId();
+                if (cutsceneId == 0)
+                {
+                    GlobalManager.Instance.ShowToastMessage("필요한 아티팩트를 보유하고 있지 않습니다.");
+                    return;
+                }
                 OnHideButtonClick();
-                CutsceneManager.Instance.PlayCutscene(GetArtifactCutsceneId()).Forget();
+                CutsceneManager.Instance.PlayCutscene(cutsceneId).Forget();
                 return;
             }
         }

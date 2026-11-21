@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 1766861252014419180}
   - component: {fileID: 3251945782486152936}
   m_Layer: 5
-  m_Name: library_minigame
+  m_Name: library_minigame_panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2152,12 +2152,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104908432194044823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6938b7588fe304ab08ed428e12150211, type: 3}
+  m_Script: {fileID: 11500000, guid: 1153a6f508e642c48447c1cb1cf3bc9c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowderPortalMinigameInfoPopup
-  _hideOnEscapeKey: 1
-  _pauseTime: 1
-  _popupBackground: 0
+  m_EditorClassIdentifier: Assembly-CSharp::LibraryMinigamePanel
+  _bookPrefab: {fileID: 2701684728833149529, guid: 7cb07fa7d67e6481eb7e05c1ec3978ac, type: 3}
+  _bookshelfPrefab: {fileID: 1000000000000000104, guid: 5a990ec8ba4c4a84b2f289b39ab2e0d7, type: 3}
+  _timerPrefab: {fileID: 7946308589207778582, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+  _timeAttackEffectPrefab: {fileID: 8126005951604308678, guid: 8466d73a0d5a33942bd520231ebc3bda, type: 3}
 --- !u!1 &2229353950116378591
 GameObject:
   m_ObjectHideFlags: 0

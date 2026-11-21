@@ -16,5 +16,6 @@ public partial class PanelManager
         SlimeMinigame = 13,
         PowderPortalMinigame = 14,
         CottonCandyMinigame = 15,
+        LibraryMinigame = 16,
     }
 }

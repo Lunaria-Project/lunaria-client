@@ -26,6 +26,11 @@ public partial class GlobalManager
                 PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.CottonCandyMinigameReady);
                 break;
             }
+            case NpcMenuFunctionType.PlayLibraryMinigame:
+            {
+                PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.LibraryMinigameReady);
+                break;
+            }
             default:
             {
                 LogManager.LogErrorPack("Undefined NPC menu function type", functionType);

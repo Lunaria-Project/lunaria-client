@@ -22,6 +22,9 @@ public partial class PopupManager
         CottonCandyMinigameResult = 15,
         MinigameFamiliarSelect = 16,
         DailyReceipt = 17,
+        LibraryMinigameInfo = 18,
+        LibraryMinigameReady = 19,
+        LibraryMinigameResult = 20,
     }
 
     private readonly Dictionary<Type, string> _popupResourceKey = new()
@@ -43,5 +46,7 @@ public partial class PopupManager
         { Type.CottonCandyMinigameResult, "cotton_candy_minigame_result_popup" },
         { Type.MinigameFamiliarSelect, "minigame_familiar_select_popup" },
         { Type.DailyReceipt, "daily_receipt_popup" },
+        { Type.LibraryMinigameInfo, "library_minigame_info_popup" },
+        { Type.LibraryMinigameReady, "library_minigame_ready_popup" },
     };
 }
