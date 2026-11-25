@@ -37,6 +37,7 @@ public class TopTimeUI : MonoBehaviour
     {
         var currentGameTime = GameTimeManager.Instance.CurrentGameTime;
         _currentTimeText.SetText(TimeUtil.GameTimeToStringForTopUI(currentGameTime));
-        _layoutSwitcher.SetLayout(GameTimeManager.Instance.CurrentGameTime.IsAM ? DayLayoutKey : NightLayoutKey);
+        var currentHours = TimeUtil.SecondsToHours(currentGameTime.TotalSeconds);
+        _layoutSwitcher.SetLayout(currentHours >= TimeUtil.NightStartHours ? NightLayoutKey : DayLayoutKey);
     }
 }
