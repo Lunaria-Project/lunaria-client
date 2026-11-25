@@ -120,7 +120,7 @@ public partial class GameData
         _dtLoadingData.Clear();
         foreach (var row in rows)
         {
-            var newData = new LoadingData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty), (row[2] as string) ?? string.Empty, ((string)row[3]).ParseEnum<LoadingType>());
+            var newData = new LoadingData(Convert.ToInt32(row[0]), GetLocalString((row[1] as string) ?? string.Empty), (row[2] as string) ?? string.Empty, (row[3] as string) ?? string.Empty, ((string)row[4]).ParseEnum<LoadingType>());
             _dtLoadingData.Add(newData.Id, newData);
         }
     }

@@ -23,6 +23,11 @@ public class ResourceManager : Singleton<ResourceManager>
         return LoadPrefab<PopupBase>(resourceKey);
     }
 
+    public LoadingObject LoadLoadingObject(string resourceKey)
+    {
+        return LoadPrefab<LoadingObject>(resourceKey);
+    }
+
     public MapConfig LoadMapConfig()
     {
         return LoadScriptableObject<MapConfig>("map_config");

@@ -52,10 +52,13 @@ public enum ItemType
 public enum LoadingType
 {
     None = 0,
-    Normal = 1,
-    CottonCandyShop = 2,
-    PowderShop = 3,
-    BlanketShop = 4,
+    NormalDay = 1,
+    NormalNight = 2,
+    CottonCandyShop = 3,
+    PowderShop = 4,
+    BlanketShop = 5,
+    Library = 6,
+    Bank = 7,
 }
 
 [SerializeEnum]

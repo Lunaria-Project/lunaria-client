@@ -38,6 +38,7 @@ public static class TimeUtil
     public const int MinutesPerHour = 60;
     public const int HoursPerDay = 24;
     public const int HoursPerHalfDay = 12;
+    public const int NightStartHours = 18;
     public const int MinutesPerInterval = 10;
     public const int MillisPerSeconds = 1000;
     private const string TimeFormat = "{0:00}:{1:00}";

@@ -55,7 +55,7 @@ public partial class GlobalManager
     private async UniTask GoToShoppingSquareAsync(ShopType type = ShopType.None)
     {
         GameTimeManager.Instance.Pause(this);
-        LoadingManager.Instance.ShowLoading(LoadingType.Normal);
+        LoadingManager.Instance.ShowNormalLoading();
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
 
@@ -74,7 +74,7 @@ public partial class GlobalManager
     private async UniTask GoToMyhomeAsync()
     {
         GameTimeManager.Instance.Pause(this);
-        LoadingManager.Instance.ShowLoading(LoadingType.Normal);
+        LoadingManager.Instance.ShowNormalLoading();
 
         await UniTask.WhenAll(PopupManager.Instance.HideAllPopups(), UniTask.Delay(LoadingManager.DefaultLoadingAwaitMillis, ignoreTimeScale: true));
 
@@ -94,7 +94,7 @@ public partial class GlobalManager
             ShopType.CottonCandyShop => LoadingType.CottonCandyShop,
             ShopType.PowderShop      => LoadingType.PowderShop,
             ShopType.BlanketShop     => LoadingType.BlanketShop,
-            _                        => LoadingType.Normal,
+            _                        => LoadingType.None,
         };
         LoadingManager.Instance.ShowLoading(loadingType);
 
