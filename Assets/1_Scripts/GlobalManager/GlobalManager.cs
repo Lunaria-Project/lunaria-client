@@ -156,6 +156,7 @@ public partial class GlobalManager : SingletonMonoBehaviour<GlobalManager>
         if (CutsceneManager.Instance.IsPlaying) return false;
         if (GameTimeManager.Instance.IsPaused) return false;
         if (IsMinigamePlaying) return false;
+        if (InputManager.Instance.IsBlocked) return false;
         return true;
     }
 

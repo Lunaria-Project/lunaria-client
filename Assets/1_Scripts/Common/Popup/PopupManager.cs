@@ -21,6 +21,7 @@ public partial class PopupManager : SingletonMonoBehaviour<PopupManager>
     protected override void Update()
     {
         if (PopupList.Count <= 0) return;
+        if (InputManager.Instance.IsBlocked) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
