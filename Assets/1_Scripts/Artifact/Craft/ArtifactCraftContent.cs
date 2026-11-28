@@ -249,9 +249,19 @@ public class ArtifactCraftContent : MonoBehaviour
         var popup = PopupManager.Instance.ShowPopup(PopupManager.Type.ArtifactCraftConfirm, new ArtifactCraftPopupParameter
         {
             ArtifactItemId = _selectedCraftId,
+            OnConfirm = OnCraftConfirm,
         });
         if (popup == null) return;
         popup.SetOnHideAction(_handle.ResetSlider);
+    }
+
+    private void OnCraftConfirm()
+    {
+        var craftData = GameData.Instance.GetArtifactCraftData(_selectedCraftId);
+        PopupManager.Instance.ShowPopup(PopupManager.Type.ArtifactCraftPayment, new ArtifactCraftPaymentPopupParameter
+        {
+            RequiredCoinQuantity = craftData.RequiredCoinQuantity,
+        });
     }
 
     private void OnTabClick(int craftId)

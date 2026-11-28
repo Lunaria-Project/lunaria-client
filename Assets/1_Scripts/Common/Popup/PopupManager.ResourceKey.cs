@@ -26,6 +26,7 @@ public partial class PopupManager
         LibraryMinigameReady = 19,
         LibraryMinigameResult = 20,
         ArtifactCraftConfirm = 21,
+        ArtifactCraftPayment = 22,
     }
 
     private readonly Dictionary<Type, string> _popupResourceKey = new()
@@ -50,5 +51,6 @@ public partial class PopupManager
         { Type.LibraryMinigameInfo, "library_minigame_info_popup" },
         { Type.LibraryMinigameReady, "library_minigame_ready_popup" },
         { Type.ArtifactCraftConfirm, "artifact_craft_confirm_popup" },
+        { Type.ArtifactCraftPayment, "artifact_craft_payment_popup" },
     };
 }
