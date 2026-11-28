@@ -4,6 +4,20 @@ using UnityEditor;
 public static partial class LunariaMenu
 {
     private const string ToggleVisualizeColliderMenuName = "Lunaria/Debug/Visualize Collider";
+    private const string ToggleLibraryRetryButtonMenuName = "Lunaria/Debug/도서관 다시하기 버튼 표시";
+
+    [MenuItem(ToggleLibraryRetryButtonMenuName)]
+    private static void ToggleLibraryRetryButton()
+    {
+        LibraryMinigamePanel.EditorRetryButtonVisible = !LibraryMinigamePanel.EditorRetryButtonVisible;
+    }
+
+    [MenuItem(ToggleLibraryRetryButtonMenuName, true)]
+    private static bool ToggleLibraryRetryButtonValidate()
+    {
+        Menu.SetChecked(ToggleLibraryRetryButtonMenuName, LibraryMinigamePanel.EditorRetryButtonVisible);
+        return true;
+    }
 
     [MenuItem(ToggleVisualizeColliderMenuName)]
     private static void ToggleVisualizeCollider()

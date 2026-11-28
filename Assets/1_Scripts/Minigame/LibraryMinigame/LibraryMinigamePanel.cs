@@ -29,30 +29,49 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
 
     protected override void OnShow(params object[] args)
     {
-        _canInteract = false;
         GlobalManager.Instance.IsMinigamePlaying = true;
         GameTimeManager.Instance.Pause(this);
+        StartRound();
+    }
 
+    private void StartRound()
+    {
         CreateBoard();
         CreateBooks();
         InitTimer();
+#if UNITY_EDITOR
+        CreateEditorRetryButton();
+#endif
 
         var currentBoard = _boardRoot;
         PopupManager.Instance.ShowPopup(PopupManager.Type.CountDown, new CountDownPopupParameter
         {
             CountDownSeconds = 3,
-        }).SetOnHideAction(() => { if (_boardRoot == currentBoard && currentBoard != null) _canInteract = true; });
+        }).SetOnHideAction(() =>
+        {
+            if (currentBoard == null || _boardRoot != currentBoard) return;
+            _canInteract = true;
+#if UNITY_EDITOR
+            _editorRetryButton.interactable = true;
+#endif
+        });
     }
 
     protected override void OnHide()
     {
-        _canInteract = false;
-        _isResolving = false;
         GlobalManager.Instance.IsMinigamePlaying = false;
         GameTimeManager.Instance.Resume(this);
+        ClearRound();
+    }
+
+    private void ClearRound()
+    {
+        _canInteract = false;
+        _isResolving = false;
 
         _pickupSequence?.Kill();
         _pickupSequence = null;
+        _pickupProgress = 0f;
         _resolutionSequence?.Kill();
         _resolutionSequence = null;
 
@@ -63,12 +82,16 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
 
         if (_boardRoot != null)
         {
+            _boardRoot.gameObject.SetActive(false);
             Destroy(_boardRoot.gameObject);
             _boardRoot = null;
         }
 
         _timer = null;
         _timeAttackEffect = null;
+#if UNITY_EDITOR
+        _editorRetryButton = null;
+#endif
         _books.Clear();
         _selectedBooks.Clear();
         System.Array.Clear(_shelfBooks, 0, _shelfBooks.Length);

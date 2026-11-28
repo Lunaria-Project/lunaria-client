@@ -89,4 +89,61 @@ public partial class LibraryMinigamePanel
         rectTransform.sizeDelta = Vector2.zero;
         rectTransform.localScale = Vector3.one;
     }
+
+#if UNITY_EDITOR
+    private const string EditorRetryButtonPref = "Lunaria.LibraryMinigame.ShowRetryButton";
+    private UiButton _editorRetryButton;
+
+    internal static bool EditorRetryButtonVisible
+    {
+        get => UnityEditor.EditorPrefs.GetBool(EditorRetryButtonPref, true);
+        set
+        {
+            UnityEditor.EditorPrefs.SetBool(EditorRetryButtonPref, value);
+            var panel = FindFirstObjectByType<LibraryMinigamePanel>();
+            if (panel != null && panel._editorRetryButton != null)
+            {
+                panel._editorRetryButton.gameObject.SetActive(value);
+            }
+        }
+    }
+
+    private void CreateEditorRetryButton()
+    {
+        var buttonObject = new GameObject("EditorRetryButton", typeof(RectTransform), typeof(UiImage), typeof(UiButton));
+        var image = buttonObject.GetComponent<UiImage>();
+        var rect = image.rectTransform;
+        rect.SetParent(_boardRoot, false);
+        var topRight = new Vector2(1f, 1f);
+        rect.anchorMin = rect.anchorMax = rect.pivot = topRight;
+        rect.anchoredPosition = new Vector2(-24f, -24f);
+        rect.sizeDelta = new Vector2(192f, 60f);
+        image.color = new Color(0.20f, 0.29f, 0.39f);
+
+        var label = new GameObject("Label", typeof(RectTransform), typeof(Lunaria.Text)).GetComponent<Lunaria.Text>();
+        label.rectTransform.SetParent(rect, false);
+        Stretch(label.rectTransform);
+        label.font = UnityEditor.AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>("Assets/Fonts/NPSfont_regular SDF.asset");
+        label.text = "다시하기";
+        label.fontSize = 30f;
+        label.color = Color.white;
+        label.alignment = TMPro.TextAlignmentOptions.Center;
+        label.raycastTarget = false;
+
+        _editorRetryButton = buttonObject.GetComponent<UiButton>();
+        _editorRetryButton.targetGraphic = image;
+        _editorRetryButton.navigation = new Navigation { mode = Navigation.Mode.None };
+        _editorRetryButton.interactable = false;
+        _editorRetryButton.onClick.AddListener(RetryRoundInEditor);
+        buttonObject.SetActive(EditorRetryButtonVisible);
+    }
+
+    private void RetryRoundInEditor()
+    {
+        if (!_canInteract) return;
+
+        ClearRound();
+        StartRound();
+    }
+#endif
 }
