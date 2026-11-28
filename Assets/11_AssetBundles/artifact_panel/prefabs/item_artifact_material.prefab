@@ -5449,7 +5449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1926576312527062438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5782,6 +5782,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7355866701316715871}
+  - component: {fileID: 8282122166765204449}
+  - component: {fileID: 755510602166319701}
   - component: {fileID: 9015916015960272040}
   - component: {fileID: 316002120844383198}
   - component: {fileID: 3240239153228595910}
@@ -5815,6 +5817,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8282122166765204449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618640131916582330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dab5cc4cdbb4060a98b0549bb04d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactCraftInputSlot
+  _thumbnails:
+  - {fileID: 755510602166319701}
+  _layoutSwitcher: {fileID: 9015916015960272040}
+  _rectTransform: {fileID: 7355866701316715871}
+--- !u!114 &755510602166319701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618640131916582330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9922e0c79a4994ac492deb1e10e06eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.ItemThumbnail
+  _images:
+  - {fileID: 4222186784486886381}
+  - {fileID: 7101129730154859298}
+  - {fileID: 6396711716458349354}
+  _quantityTexts:
+  - {fileID: 6859360332189708366}
+  - {fileID: 8740741154788393647}
+  - {fileID: 2713388902407329235}
+  _nameTexts: []
 --- !u!114 &9015916015960272040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5828,7 +5867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lunaria.LayoutSwitcher
   _layouts:
-  - Key: Filled
+  - Key: Normal
     Objects:
     - {fileID: 5191602207522286404}
   - Key: Hover
@@ -5856,7 +5895,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7618640131916582330}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
   m_Name: 
@@ -6204,7 +6243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3314845078712085517
 RectTransform:
   m_ObjectHideFlags: 0
