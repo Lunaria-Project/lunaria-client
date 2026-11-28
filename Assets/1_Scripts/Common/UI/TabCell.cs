@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lunaria
@@ -27,5 +28,22 @@ namespace Lunaria
         {
             _onClicked?.Invoke(_index);
         }
+
+#if UNITY_EDITOR
+        [PropertySpace, OnInspectorGUI]
+        private void DrawPreviewButtons()
+        {
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("미리보기: 선택"))
+            {
+                SetSelected(true);
+            }
+            if (GUILayout.Button("미리보기: 비선택"))
+            {
+                SetSelected(false);
+            }
+            GUILayout.EndHorizontal();
+        }
+#endif
     }
 }
