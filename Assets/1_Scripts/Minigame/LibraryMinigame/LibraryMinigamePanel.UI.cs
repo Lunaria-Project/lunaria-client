@@ -8,11 +8,7 @@ using UiImage = Lunaria.Image;
 
 public partial class LibraryMinigamePanel
 {
-    private const float ShelfWidthRatio = 0.80f;
-    private const float ShelfHeightRatio = 0.46f;
-    private const float ShelfCenterHeightRatio = 0.15f;
-
-    [SerializeField] private UiImage _bookshelfPrefab;
+    [SerializeField] private RectTransform _shelfGrid;
     [SerializeField] private MinigameRemainTime _timerPrefab;
     [SerializeField] private RectTransform _timeAttackEffectPrefab;
 
@@ -24,12 +20,10 @@ public partial class LibraryMinigamePanel
     private float _layoutWidth;
     private float _layoutHeight;
     private float _bookCursorSpacing;
+    private Vector2 _bookSize;
 
     private void CreateBoard()
     {
-        var oldBoard = transform.Find("PanelBlock");
-        if (oldBoard != null) oldBoard.gameObject.SetActive(false);
-
         var rootObject = new GameObject("LibraryMinigameBoard", typeof(RectTransform), typeof(UiImage));
         _boardRoot = rootObject.GetComponent<RectTransform>();
         _boardRoot.SetParent(transform, false);
@@ -37,35 +31,35 @@ public partial class LibraryMinigamePanel
         var boardRect = _boardRoot.rect;
         _layoutWidth = boardRect.width;
         _layoutHeight = boardRect.height;
+        rootObject.GetComponent<UiImage>().raycastTarget = false;
         rootObject.GetComponent<UiImage>().color = Color.clear;
+        var background = (RectTransform)_shelfGrid.parent;
+        var panelBlock = (RectTransform)background.parent;
+        var dim = panelBlock.GetComponent<UiImage>() ?? panelBlock.gameObject.AddComponent<UiImage>();
+        dim.color = new Color(0f, 0f, 0f, 0.82f);
+        dim.raycastTarget = true;
 
-        var shelfWidth = Mathf.Min(_layoutWidth * ShelfWidthRatio, 920f);
-        var shelfHeight = Mathf.Min(_layoutHeight * ShelfHeightRatio, 450f);
-        var shelfCenterY = _layoutHeight * ShelfCenterHeightRatio;
-        var shelf = Instantiate(_bookshelfPrefab, _boardRoot, false);
-        shelf.name = "LibraryBookshelfTemporary";
-        var shelfRect = shelf.rectTransform;
-        shelfRect.anchorMin = shelfRect.anchorMax = new Vector2(0.5f, 0.5f);
-        shelfRect.sizeDelta = new Vector2(shelfWidth, shelfHeight);
-        shelfRect.anchoredPosition = new Vector2(0f, shelfCenterY);
+        var scale = Mathf.Min(_layoutWidth * 0.47f / background.rect.width,
+                              _layoutHeight * 0.58f / background.rect.height);
+        background.localScale = Vector3.one * scale;
+        background.anchoredPosition = Vector2.zero;
+        UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(_shelfGrid);
         var canvas = GetComponentInParent<Canvas>();
         _uiCamera = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay ? canvas.worldCamera : null;
 
         for (var cellIndex = 0; cellIndex < _shelfCells.Length; cellIndex++)
         {
-            _shelfCells[cellIndex] = shelfRect.Find($"ShelfCell_{cellIndex}")?.GetComponent<UiImage>();
+            var cell = _shelfGrid.GetChild(cellIndex).GetComponent<UiImage>();
+            _shelfCells[cellIndex] = cell;
+            cell.raycastTarget = true;
+            // 프리팹의 책 자리 3개는 배치 기준으로 유지하고, 화면에는 플레이에 쓰는 책만 표시합니다.
+            for (var slot = 0; slot < BooksPerShelf; slot++)
+                cell.transform.GetChild(slot).GetComponent<UiImage>().enabled = false;
         }
-
-        if (_shelfCells[0] != null && _shelfCells[1] != null)
-        {
-            var firstCellCenter = _boardRoot.InverseTransformPoint(_shelfCells[0].rectTransform.position);
-            var secondCellCenter = _boardRoot.InverseTransformPoint(_shelfCells[1].rectTransform.position);
-            _bookCursorSpacing = Vector2.Distance(firstCellCenter, secondCellCenter);
-        }
-        else
-        {
-            _bookCursorSpacing = shelfWidth / ShelfColumnCount;
-        }
+        _bookSize = GetRectInRuntimeUi((RectTransform)_shelfCells[0].transform.GetChild(0)).size;
+        var first = _boardRoot.InverseTransformPoint(_shelfCells[0].transform.position);
+        var next = _boardRoot.InverseTransformPoint(_shelfCells[1].transform.position);
+        _bookCursorSpacing = Vector2.Distance(first, next);
     }
 
     private static void Stretch(RectTransform rectTransform)

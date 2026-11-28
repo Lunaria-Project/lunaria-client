@@ -7,14 +7,13 @@ using UnityEngine.EventSystems;
 public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointerDownHandler, IPointerUpHandler
 {
     private const int BooksPerSelection = 3;
-    private const int BooksPerShelf = 3;
+    private const int BooksPerShelf = LibraryMinigameConfig.BooksPerShelf;
     private const int ShelfRowCount = 3;
     private const int ShelfColumnCount = 5;
     private const int ShelfCellCount = ShelfRowCount * ShelfColumnCount;
     private const int DefaultMinigameSeconds = 60;
     private const float TimeAttackSeconds = 10f;
     private static readonly int TimeAttackState = Animator.StringToHash("Base Layer.item_minigame_timer_timeattack");
-    private const float ShelfBookSpacing = 44f;
 
     private readonly List<(Book Book, int CursorOffset)> _selectedBooks = new(BooksPerSelection);
     private readonly Book[,] _shelfBooks = new Book[ShelfCellCount, BooksPerShelf];
@@ -175,16 +174,20 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         if (clickedBook.IsPlaced || clickedBook.IsMoving) return;
 
         var randomCandidates = _books.FindAll(book => book != clickedBook && !book.IsPlaced && !book.IsMoving);
-        if (randomCandidates.Count < BooksPerSelection - 1) return;
+        if (randomCandidates.Count > 0)
+        {
+            var leftIndex = Random.Range(0, randomCandidates.Count);
+            _selectedBooks.Add((randomCandidates[leftIndex], -1));
+            randomCandidates.RemoveAt(leftIndex);
+        }
 
-        var firstBookIndex = Random.Range(0, randomCandidates.Count);
-        var firstRandomBook = randomCandidates[firstBookIndex];
-        randomCandidates.RemoveAt(firstBookIndex);
-        var thirdRandomBook = randomCandidates[Random.Range(0, randomCandidates.Count)];
-
-        _selectedBooks.Add((firstRandomBook, -1));
         _selectedBooks.Add((clickedBook, 0));
-        _selectedBooks.Add((thirdRandomBook, 1));
+        if (randomCandidates.Count > 0)
+        {
+            var rightIndex = Random.Range(0, randomCandidates.Count);
+            _selectedBooks.Add((randomCandidates[rightIndex], 1));
+        }
+
         AnimateBookPickup();
     }
 
@@ -200,7 +203,6 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         {
             book.PickupStartPosition = book.RectTransform.anchoredPosition;
             book.Image.raycastTarget = false;
-            book.RectTransform.sizeDelta = FloorBookSize;
             book.RectTransform.SetSiblingIndex(_timeAttackEffect.GetSiblingIndex() - 1);
             _pickupSequence.Join(book.RectTransform.DORotate(Vector3.zero, pickupDuration).SetEase(Ease.OutQuad));
         }
@@ -250,6 +252,15 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
             sequence.Join(book.RectTransform.DORotate(new Vector3(0, 0, tilt), returnToFloorDuration));
         }
 
+        var boardComplete = true;
+        for (var cell = 0; cell < ShelfCellCount; cell++)
+        {
+            if (IsShelfComplete(cell)) continue;
+            boardComplete = false;
+            break;
+        }
+        if (boardComplete) _canInteract = false;
+
         sequence.OnComplete(() =>
         {
             foreach (var book in rejected)
@@ -262,15 +273,16 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
             _selectedBooks.Clear();
             _resolutionSequence = null;
             _isResolving = false;
+            if (boardComplete) HidePanel();
         });
     }
 
     private void AnimateShelfPlacement(Sequence sequence, Book book, int cellIndex, int slot)
     {
         var cellRect = _shelfCells[cellIndex].rectTransform;
-        var worldPosition = cellRect.TransformPoint(new Vector3((slot - 1) * ShelfBookSpacing, 0f, 0f));
+        var placeholder = (RectTransform)cellRect.GetChild(slot);
+        var worldPosition = placeholder.TransformPoint(placeholder.rect.center);
         var target = _boardRoot.InverseTransformPoint(worldPosition);
-        book.RectTransform.sizeDelta = ShelvedBookSize;
         sequence.Join(book.RectTransform.DOAnchorPos(target, 0.42f).SetEase(Ease.OutBounce));
         sequence.Join(book.RectTransform.DORotate(Vector3.zero, 0.25f));
     }
@@ -282,24 +294,24 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         var right = _shelfBooks[cellIndex, 2];
         if (left == null || middle == null || right == null) return false;
 
-        var sameColor = left.ColorId == middle.ColorId && left.ColorId == right.ColorId;
-        var samePattern = left.PatternId == middle.PatternId && left.PatternId == right.PatternId;
-        if (left.Volume > 0 || middle.Volume > 0 || right.Volume > 0)
+        var sameColor = left.Type.Color == middle.Type.Color && left.Type.Color == right.Type.Color;
+        var samePattern = left.Type.Pattern == middle.Type.Pattern && left.Type.Pattern == right.Type.Pattern;
+        if (left.Type.SeriesNumber > 0 || middle.Type.SeriesNumber > 0 || right.Type.SeriesNumber > 0)
         {
-            return sameColor && samePattern && left.Volume == 1 && middle.Volume == 2 && right.Volume == 3;
+            return sameColor && samePattern && left.Type.SeriesNumber == 1 && middle.Type.SeriesNumber == 2 && right.Type.SeriesNumber == 3;
         }
 
-        return sameColor || samePattern;
+        return sameColor || (left.Type.Pattern > 0 && samePattern);
     }
 
     private void BeginShelfBookDrag(int centerCellIndex)
     {
-        // 양옆 칸이 같은 줄에 있는 가운데 열만 책을 꺼낼 수 있습니다.
         var column = centerCellIndex % ShelfColumnCount;
-        if (column == 0 || column == ShelfColumnCount - 1) return;
         if (_shelfBooks[centerCellIndex, 0] == null) return;
 
-        for (var cellIndex = centerCellIndex - 1; cellIndex <= centerCellIndex + 1; cellIndex++)
+        var firstCell = column == 0 ? centerCellIndex : centerCellIndex - 1;
+        var lastCell = column == ShelfColumnCount - 1 ? centerCellIndex : centerCellIndex + 1;
+        for (var cellIndex = firstCell; cellIndex <= lastCell; cellIndex++)
         {
             if (IsShelfComplete(cellIndex)) continue;
 

@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LibraryMinigamePanel
   _bookPrefab: {fileID: 2701684728833149529, guid: 7cb07fa7d67e6481eb7e05c1ec3978ac, type: 3}
-  _bookshelfPrefab: {fileID: 1000000000000000104, guid: 5a990ec8ba4c4a84b2f289b39ab2e0d7, type: 3}
+  _shelfGrid: {fileID: 294189640711246121}
+  _config: {fileID: 11400000, guid: 0672abc077894eb6aa1e89f2d96210a0, type: 2}
   _timerPrefab: {fileID: 7946308589207778582, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
   _timeAttackEffectPrefab: {fileID: 8126005951604308678, guid: 8466d73a0d5a33942bd520231ebc3bda, type: 3}
 --- !u!114 &4632444892274525797
@@ -1285,6 +1286,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126005951604308678, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050084925326715001, guid: ddd95bc0811ca4cc6a7d0767b2ea1ded, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

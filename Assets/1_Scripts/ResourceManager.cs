@@ -94,12 +94,6 @@ public class ResourceManager : Singleton<ResourceManager>
         };
     }
 
-    public Sprite LoadLibraryMinigameSprite(bool isVolume, int number)
-    {
-        var kind = isVolume ? "volume" : "pattern";
-        return LoadSprite($"ui_library_book_{kind}_{number:D2}");
-    }
-
     public NormalMap LoadMap(MapType type)
     {
         var resourceKey = type switch
