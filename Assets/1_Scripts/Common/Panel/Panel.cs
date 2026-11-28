@@ -3,15 +3,22 @@ using UnityEngine;
 
 public class PanelBase : MonoBehaviour
 {
+    [SerializeField] private bool _pauseTime = false;
+
     private PanelInfo _panelInfo;
 
     public virtual UniTask ShowByManager(PanelManager panelManager, PanelInfo panelInfo, params object[] args)
     {
+        if (_pauseTime)
+        {
+            GameTimeManager.Instance.Pause(this);
+        }
         return UniTask.CompletedTask;
     }
 
     public virtual UniTask<bool> HideByManager()
     {
+        GameTimeManager.Instance.Resume(this);
         return UniTask.FromResult(true);
     }
 }
