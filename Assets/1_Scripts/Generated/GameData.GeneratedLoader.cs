@@ -10,7 +10,7 @@ public partial class GameData
         _dtArtifactCraftData.Clear();
         foreach (var row in rows)
         {
-            var newData = new ArtifactCraftData(Convert.ToInt32(row[0]), (row[1] as string).ParseIntList(), (row[2] as string).ParseIntList(), ((string)row[3]).ParseEnum<RequirementType>(), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]));
+            var newData = new ArtifactCraftData(Convert.ToInt32(row[0]), (row[1] as string).ParseIntList(), (row[2] as string).ParseIntList(), ((string)row[3]).ParseEnum<RequirementType>(), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]), Convert.ToInt32(row[6]));
             _dtArtifactCraftData.Add(newData.Id, newData);
         }
     }

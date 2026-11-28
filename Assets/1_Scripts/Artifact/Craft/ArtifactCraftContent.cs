@@ -25,6 +25,7 @@ public class ArtifactCraftContent : MonoBehaviour
     [SerializeField] private FlyingThumbnail[] _flyingThumbnails;
     [SerializeField] private GameObject _autoFillButtonObject;
     [SerializeField] private GameObject _autoFillDisabledObject;
+    [SerializeField] private ArtifactCraftHandle _handle;
 
     private const float FlyDurationSeconds = 0.3f;
     private const float FlyIntervalSeconds = 0.1f;
@@ -51,6 +52,7 @@ public class ArtifactCraftContent : MonoBehaviour
             cell.SetDragAction(OnMaterialBeginDrag, OnMaterialEndDrag);
         }
         _dropArea.SetDropAction(OnMaterialDrop);
+        _handle.SetPulledAction(OnHandlePulled);
     }
 
     protected void Update()
@@ -157,6 +159,7 @@ public class ArtifactCraftContent : MonoBehaviour
         LogManager.Assert(_inputSlots.Length >= materialCount, $"[ArtifactCraftContent] RefreshInputSlots: InputSlot count({_inputSlots.Length}) must be >= material count({materialCount}), craftId({_selectedCraftId})");
 
         var hasAllMaterials = true;
+        var isAllMaterialFilled = true;
         _inputSlots.SetActiveAll(false);
         for (var i = 0; i < materialCount && i < _inputSlots.Length; i++)
         {
@@ -167,13 +170,20 @@ public class ArtifactCraftContent : MonoBehaviour
                 hasAllMaterials = false;
             }
 
+            var isFilled = _filledMaterialIds.Contains(materialId);
+            if (!isFilled)
+            {
+                isAllMaterialFilled = false;
+            }
+
             var slot = _inputSlots.GetAt(i);
             slot.SetActive(true);
-            slot.SetData(materialId, requiredQuantity, _filledMaterialIds.Contains(materialId), _draggingItemId == materialId);
+            slot.SetData(materialId, requiredQuantity, isFilled, _draggingItemId == materialId);
         }
 
         _autoFillButtonObject.SetActive(hasAllMaterials);
         _autoFillDisabledObject.SetActive(!hasAllMaterials);
+        _handle.SetData(craftData.RequiredCoinQuantity, isAllMaterialFilled);
     }
 
     private void TryFillMaterial(int materialId)
@@ -232,6 +242,16 @@ public class ArtifactCraftContent : MonoBehaviour
         _draggingItemId = 0;
         DragThumbnail.Thumbnail.SetActive(false);
         RefreshInputSlots();
+    }
+
+    private void OnHandlePulled()
+    {
+        var popup = PopupManager.Instance.ShowPopup(PopupManager.Type.ArtifactCraftConfirm, new ArtifactCraftPopupParameter
+        {
+            ArtifactItemId = _selectedCraftId,
+        });
+        if (popup == null) return;
+        popup.SetOnHideAction(_handle.ResetSlider);
     }
 
     private void OnTabClick(int craftId)

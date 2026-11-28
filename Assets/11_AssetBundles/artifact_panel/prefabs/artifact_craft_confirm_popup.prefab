@@ -420,7 +420,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766861252014419180}
-  - component: {fileID: 416575153515835080}
+  - component: {fileID: 4839494006454891961}
+  - component: {fileID: 4703024701167439367}
   m_Layer: 5
   m_Name: artifact_craft_confirm_popup
   m_TagString: Untagged
@@ -448,7 +449,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &416575153515835080
+--- !u!114 &4839494006454891961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -457,14 +458,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104908432194044823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b585ff52bd4c4cf789b5ab9f062e168, type: 3}
+  m_Script: {fileID: 11500000, guid: a67e7fa2b0990430895d5d9d0b091f68, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopPopup
-  _hideOnEscapeKey: 0
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactCraftConfirmPopup
+  _hideOnEscapeKey: 1
   _pauseTime: 1
   _popupBackground: 5
-  _cells: []
-  _infoCell: {fileID: 0}
+  _thumbnail: {fileID: 4703024701167439367}
+--- !u!114 &4703024701167439367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104908432194044823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9922e0c79a4994ac492deb1e10e06eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.ItemThumbnail
+  _images:
+  - {fileID: 945846755757328958}
+  _quantityTexts: []
+  _nameTexts: []
 --- !u!1 &2387517039800026529
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +705,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2930882166951403527}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4839494006454891961}
+        m_TargetAssemblyTypeName: ArtifactCraftConfirmPopup, Assembly-CSharp
+        m_MethodName: OnConfirmButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2835567057090890779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1565,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7363986976857002649}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4839494006454891961}
+        m_TargetAssemblyTypeName: ArtifactCraftConfirmPopup, Assembly-CSharp
+        m_MethodName: OnCancelButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6583335680115094999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,6 +2228,34 @@ PrefabInstance:
     - target: {fileID: 7231828122061104659, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
       propertyPath: m_Name
       value: item_close_btn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4839494006454891961}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCancelButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ArtifactCraftConfirmPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784530697662331913, guid: 542f7fa35c8564a2b845e8da5b436fcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

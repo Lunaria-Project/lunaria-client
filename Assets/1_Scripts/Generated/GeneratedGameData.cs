@@ -11,8 +11,9 @@ namespace Generated
         public RequirementType RequirementType { get; private set; }
         public List<int> RequirementValues { get; private set; }
         public int Order { get; private set; }
+        public int RequiredCoinQuantity { get; private set; }
 
-        public ArtifactCraftData(int id, List<int> materialIds, List<int> materialQuantities, RequirementType requirementType, List<int> requirementValues, int order)
+        public ArtifactCraftData(int id, List<int> materialIds, List<int> materialQuantities, RequirementType requirementType, List<int> requirementValues, int order, int requiredCoinQuantity)
         {
             Id = id;
             MaterialIds = materialIds;
@@ -20,6 +21,7 @@ namespace Generated
             RequirementType = requirementType;
             RequirementValues = requirementValues;
             Order = order;
+            RequiredCoinQuantity = requiredCoinQuantity;
         }
     }
 
