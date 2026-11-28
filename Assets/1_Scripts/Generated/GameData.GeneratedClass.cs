@@ -3,6 +3,13 @@ using Generated;
 
 public partial class GameData
 {
+    // ArtifactCraftData - ArtifactCraftData, key: Id
+    public IReadOnlyDictionary<int, ArtifactCraftData> DTArtifactCraftData => _dtArtifactCraftData;
+    public bool TryGetArtifactCraftData(int key, out ArtifactCraftData result) => DTArtifactCraftData.TryGetValue(key, out result);
+    public ArtifactCraftData GetArtifactCraftData(int key) => DTArtifactCraftData.TryGetValue(key, out var result) ? result : null;
+    public bool ContainsArtifactCraftData(int key) => DTArtifactCraftData.ContainsKey(key);
+    private readonly Dictionary<int, ArtifactCraftData> _dtArtifactCraftData = new();
+
     // CharacterInfoData - CharacterInfoData, key: Id
     public IReadOnlyDictionary<int, CharacterInfoData> DTCharacterInfoData => _dtCharacterInfoData;
     public bool TryGetCharacterInfoData(int key, out CharacterInfoData result) => DTCharacterInfoData.TryGetValue(key, out result);

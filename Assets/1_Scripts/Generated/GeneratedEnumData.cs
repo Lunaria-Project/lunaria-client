@@ -92,6 +92,7 @@ public enum NpcMenuFunctionType
     PlayPowderPortalMinigame = 4,
     PlayCottonCandyMinigame = 5,
     PlayLibraryMinigame = 6,
+    ShowArtifactPanel = 7,
 }
 
 [SerializeEnum]

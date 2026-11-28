@@ -4,6 +4,17 @@ using Generated;
 
 public partial class GameData
 {
+    private void LoadArtifactCraftData(List<object[]> rows)
+    {
+        if (rows.IsNullOrEmpty()) return;
+        _dtArtifactCraftData.Clear();
+        foreach (var row in rows)
+        {
+            var newData = new ArtifactCraftData(Convert.ToInt32(row[0]), (row[1] as string).ParseIntList(), (row[2] as string).ParseIntList(), ((string)row[3]).ParseEnum<RequirementType>(), (row[4] as string).ParseIntList(), Convert.ToInt32(row[5]));
+            _dtArtifactCraftData.Add(newData.Id, newData);
+        }
+    }
+
     private void LoadCharacterInfoData(List<object[]> rows)
     {
         if (rows.IsNullOrEmpty()) return;
@@ -228,6 +239,7 @@ public partial class GameData
     {
         switch (sheetName)
         {
+            case "ArtifactCraft": LoadArtifactCraftData(rows); break;
             case "CharacterInfo": LoadCharacterInfoData(rows); break;
             case "Cutscene": LoadCutsceneData(rows); break;
             case "CutsceneInfo": LoadCutsceneInfoData(rows); break;

@@ -3,6 +3,26 @@ using UnityEngine;
 
 namespace Generated
 {
+    public partial class ArtifactCraftData
+    {
+        public int Id { get; private set; }
+        public List<int> MaterialIds { get; private set; }
+        public List<int> MaterialQuantities { get; private set; }
+        public RequirementType RequirementType { get; private set; }
+        public List<int> RequirementValues { get; private set; }
+        public int Order { get; private set; }
+
+        public ArtifactCraftData(int id, List<int> materialIds, List<int> materialQuantities, RequirementType requirementType, List<int> requirementValues, int order)
+        {
+            Id = id;
+            MaterialIds = materialIds;
+            MaterialQuantities = materialQuantities;
+            RequirementType = requirementType;
+            RequirementValues = requirementValues;
+            Order = order;
+        }
+    }
+
     public partial class CharacterInfoData
     {
         public int Id { get; private set; }
