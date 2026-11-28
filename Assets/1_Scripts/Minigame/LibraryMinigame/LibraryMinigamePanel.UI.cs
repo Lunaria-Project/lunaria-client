@@ -1,8 +1,9 @@
 using Lunaria;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEngine.UI;
-
 using UiButton = Lunaria.Button;
+#endif
 using UiImage = Lunaria.Image;
 
 public partial class LibraryMinigamePanel
@@ -52,21 +53,7 @@ public partial class LibraryMinigamePanel
 
         for (var cellIndex = 0; cellIndex < _shelfCells.Length; cellIndex++)
         {
-            var shelfCell = shelfRect.Find($"ShelfCell_{cellIndex}")?.GetComponent<UiImage>();
-            if (shelfCell == null) continue;
-            _shelfCells[cellIndex] = shelfCell;
-
-            var button = shelfCell.GetComponent<UiButton>() ?? shelfCell.gameObject.AddComponent<UiButton>();
-            button.targetGraphic = shelfCell;
-            button.transition = Selectable.Transition.ColorTint;
-
-            // 양옆 칸이 같은 줄에 있는 가운데 열만 책을 꺼낼 수 있습니다.
-            var column = cellIndex % ShelfColumnCount;
-            if (column > 0 && column < ShelfColumnCount - 1)
-            {
-                var clickedCellIndex = cellIndex;
-                button.onClick.AddListener(() => ReturnLastBooksFromShelf(clickedCellIndex));
-            }
+            _shelfCells[cellIndex] = shelfRect.Find($"ShelfCell_{cellIndex}")?.GetComponent<UiImage>();
         }
 
         if (_shelfCells[0] != null && _shelfCells[1] != null)

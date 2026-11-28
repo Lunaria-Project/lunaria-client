@@ -16,7 +16,7 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
     private static readonly int TimeAttackState = Animator.StringToHash("Base Layer.item_minigame_timer_timeattack");
     private const float ShelfBookSpacing = 44f;
 
-    private readonly List<Book> _selectedBooks = new(BooksPerSelection);
+    private readonly List<(Book Book, int CursorOffset)> _selectedBooks = new(BooksPerSelection);
     private readonly Book[,] _shelfBooks = new Book[ShelfCellCount, BooksPerShelf];
     private readonly Vector3[] _worldCorners = new Vector3[4];
     private float _minigameTime;
@@ -143,17 +143,25 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
 
     private void LateUpdate()
     {
-        if (!_canInteract || _isResolving || _selectedBooks.Count != BooksPerSelection) return;
+        if (!_canInteract || _isResolving || _selectedBooks.Count == 0) return;
         SetSelectedBooksAroundPointer(Input.mousePosition);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
+        if (!_canInteract || _isResolving || _selectedBooks.Count > 0) return;
 
         var hitObject = eventData.pointerCurrentRaycast.gameObject;
         var book = _books.Find(candidate => candidate.Image.gameObject == hitObject);
-        if (book != null) BeginBookDrag(book);
+        if (book != null)
+        {
+            BeginFloorBookDrag(book);
+            return;
+        }
+
+        var cellIndex = System.Array.FindIndex(_shelfCells, cell => cell != null && cell.gameObject == hitObject);
+        if (cellIndex >= 0) BeginShelfBookDrag(cellIndex);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -162,9 +170,9 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         ResolveSelectedBooksAtPointer(eventData.position);
     }
 
-    private void BeginBookDrag(Book clickedBook)
+    private void BeginFloorBookDrag(Book clickedBook)
     {
-        if (!_canInteract || _isResolving || _selectedBooks.Count > 0 || clickedBook.IsPlaced || clickedBook.IsMoving) return;
+        if (clickedBook.IsPlaced || clickedBook.IsMoving) return;
 
         var randomCandidates = _books.FindAll(book => book != clickedBook && !book.IsPlaced && !book.IsMoving);
         if (randomCandidates.Count < BooksPerSelection - 1) return;
@@ -174,19 +182,26 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         randomCandidates.RemoveAt(firstBookIndex);
         var thirdRandomBook = randomCandidates[Random.Range(0, randomCandidates.Count)];
 
-        _selectedBooks.Add(firstRandomBook);
-        _selectedBooks.Add(clickedBook);
-        _selectedBooks.Add(thirdRandomBook);
+        _selectedBooks.Add((firstRandomBook, -1));
+        _selectedBooks.Add((clickedBook, 0));
+        _selectedBooks.Add((thirdRandomBook, 1));
+        AnimateBookPickup();
+    }
+
+    private void AnimateBookPickup()
+    {
         // 책이 모이는 중에도 이동 목표는 현재 커서 위치를 따라갑니다.
         const float pickupDuration = 0.3f;
         _pickupProgress = 0f;
         _pickupSequence = DOTween.Sequence();
         _pickupSequence.Join(DOTween.To(() => _pickupProgress, value => _pickupProgress = value, 1f, pickupDuration)
             .SetEase(Ease.OutBack));
-        foreach (var book in _selectedBooks)
+        foreach (var (book, _) in _selectedBooks)
         {
             book.PickupStartPosition = book.RectTransform.anchoredPosition;
             book.Image.raycastTarget = false;
+            book.RectTransform.sizeDelta = FloorBookSize;
+            book.RectTransform.SetSiblingIndex(_timeAttackEffect.GetSiblingIndex() - 1);
             _pickupSequence.Join(book.RectTransform.DORotate(Vector3.zero, pickupDuration).SetEase(Ease.OutQuad));
         }
 
@@ -195,7 +210,7 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
 
     private void ResolveSelectedBooksAtPointer(Vector2 screenPosition)
     {
-        if (!_canInteract || _isResolving || _selectedBooks.Count != BooksPerSelection) return;
+        if (!_canInteract || _isResolving || _selectedBooks.Count == 0) return;
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_boardRoot, screenPosition, _uiCamera, out _)) return;
 
         // 모이는 연출이 끝나기 전에 놓아도 마우스를 놓은 위치에서 판정합니다.
@@ -207,9 +222,8 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         var sequence = _resolutionSequence = DOTween.Sequence();
         var rejected = new List<Book>(BooksPerSelection);
 
-        for (var index = 0; index < _selectedBooks.Count; index++)
+        foreach (var (book, _) in _selectedBooks)
         {
-            var book = _selectedBooks[index];
             book.RectTransform.localRotation = Quaternion.identity;
             var targetCellIndex = FindOverlappingShelfCell(book.RectTransform);
             var targetSlot = targetCellIndex >= 0 ? FindNextCellSlot(targetCellIndex) : -1;
@@ -278,12 +292,12 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
         return sameColor || samePattern;
     }
 
-    private void ReturnLastBooksFromShelf(int centerCellIndex)
+    private void BeginShelfBookDrag(int centerCellIndex)
     {
-        if (!_canInteract || _isResolving || _selectedBooks.Count > 0) return;
+        // 양옆 칸이 같은 줄에 있는 가운데 열만 책을 꺼낼 수 있습니다.
+        var column = centerCellIndex % ShelfColumnCount;
+        if (column == 0 || column == ShelfColumnCount - 1) return;
         if (_shelfBooks[centerCellIndex, 0] == null) return;
-
-        var returnedBooks = new List<Book>(BooksPerSelection);
 
         for (var cellIndex = centerCellIndex - 1; cellIndex <= centerCellIndex + 1; cellIndex++)
         {
@@ -297,45 +311,21 @@ public partial class LibraryMinigamePanel : Panel<LibraryMinigamePanel>, IPointe
 
                 _shelfBooks[cellIndex, slot] = null;
                 book.IsPlaced = false;
-                book.IsMoving = true;
-                returnedBooks.Add(book);
+                _selectedBooks.Add((book, cellIndex - centerCellIndex));
                 break;
             }
         }
 
-        if (returnedBooks.Count == 0) return;
-
-        _isResolving = true;
-        var sequence = _resolutionSequence = DOTween.Sequence();
-        const float returnDuration = 0.36f;
-        foreach (var book in returnedBooks)
-        {
-            sequence.Join(book.RectTransform.DOAnchorPos(book.FloorPosition, returnDuration).SetEase(Ease.InQuad));
-            sequence.Join(book.RectTransform.DOSizeDelta(FloorBookSize, returnDuration));
-            sequence.Join(book.RectTransform.DOLocalRotate(new Vector3(0f, 0f, book.FloorRotation), returnDuration));
-        }
-
-        sequence.OnComplete(() =>
-        {
-            foreach (var book in returnedBooks)
-            {
-                book.IsMoving = false;
-                book.Image.raycastTarget = true;
-            }
-
-            _resolutionSequence = null;
-            _isResolving = false;
-        });
+        if (_selectedBooks.Count > 0) AnimateBookPickup();
     }
 
     private void SetSelectedBooksAroundPointer(Vector2 screenPosition)
     {
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_boardRoot, screenPosition, _uiCamera, out var pointerPosition)) return;
 
-        for (var index = 0; index < _selectedBooks.Count; index++)
+        foreach (var (book, cursorOffset) in _selectedBooks)
         {
-            var book = _selectedBooks[index];
-            var target = pointerPosition + new Vector2((index - 1) * _bookCursorSpacing, 0f);
+            var target = pointerPosition + new Vector2(cursorOffset * _bookCursorSpacing, 0f);
             book.RectTransform.anchoredPosition = Vector2.LerpUnclamped(book.PickupStartPosition, target, _pickupProgress);
         }
     }

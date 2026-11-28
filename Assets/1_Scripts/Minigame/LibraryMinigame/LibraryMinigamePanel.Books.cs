@@ -32,7 +32,6 @@ public partial class LibraryMinigamePanel
         public bool IsPlaced;
         public bool IsMoving;
         public Vector2 FloorPosition;
-        public float FloorRotation;
         public Vector2 PickupStartPosition;
         public UiImage Image;
         public RectTransform RectTransform;
@@ -142,7 +141,6 @@ public partial class LibraryMinigamePanel
                 PatternId = patternId,
                 Volume = volume,
                 FloorPosition = floorPosition,
-                FloorRotation = floorRotation,
                 Image = image,
                 RectTransform = rectTransform,
                 IsMoving = true,
