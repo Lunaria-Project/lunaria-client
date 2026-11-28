@@ -11,5 +11,6 @@ public partial class PanelManager
         { Type.PowderPortalMinigame, "powder_portal_minigame_panel" },
         { Type.CottonCandyMinigame, "cotton_candy_minigame_panel" },
         { Type.LibraryMinigame, "library_minigame_panel" },
+        { Type.Artifact, "artifact_panel" },
     };
 }

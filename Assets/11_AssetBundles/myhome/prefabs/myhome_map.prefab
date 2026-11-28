@@ -40609,7 +40609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseMap
   _playerInitPosition: {fileID: 6156748052972368937}
-  _staticNpcObjects: []
+  _staticNpcObjects:
+  - {fileID: 1830262043945799425}
 --- !u!1 &7248202822333597260
 GameObject:
   m_ObjectHideFlags: 0
@@ -46864,6 +46865,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6236632513559342967, guid: a3e8f2cb7a7dc4a018aae1ad656ee5c8, type: 3}
   m_PrefabInstance: {fileID: 6598384820807107724}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1830262043945799425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4824562092508744589, guid: a3e8f2cb7a7dc4a018aae1ad656ee5c8, type: 3}
+  m_PrefabInstance: {fileID: 6598384820807107724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be069cfff05074179825db5ede93354f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaticNpcObject
 --- !u!1001 &7078365613513062767
 PrefabInstance:
   m_ObjectHideFlags: 0

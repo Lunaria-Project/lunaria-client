@@ -31,6 +31,11 @@ public partial class GlobalManager
                 PopupManager.Instance.ShowPopupWithEmptyParameter(PopupManager.Type.LibraryMinigameReady);
                 break;
             }
+            case NpcMenuFunctionType.ShowArtifactPanel:
+            {
+                PanelManager.Instance.ShowPanel(PanelManager.Type.Artifact, ArtifactPanel.ArtifactTabType.Craft);
+                break;
+            }
             default:
             {
                 LogManager.LogErrorPack("Undefined NPC menu function type", functionType);

@@ -17,5 +17,6 @@ public partial class PanelManager
         PowderPortalMinigame = 14,
         CottonCandyMinigame = 15,
         LibraryMinigame = 16,
+        Artifact = 17,
     }
 }

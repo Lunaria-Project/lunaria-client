@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3843141353829555128}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 501053797974792182}
+        m_TargetAssemblyTypeName: Lunaria.TabCell, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1608233000227777771
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
-  _key: 
+  _key: ArtifactPanel.Tab.Craft
 --- !u!1 &8232864159427335876
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7645684492693526847}
   - component: {fileID: 4392102572600328782}
+  - component: {fileID: 501053797974792182}
   m_Layer: 5
   m_Name: item_artifact_manu_btn
   m_TagString: Untagged
@@ -528,6 +541,22 @@ MonoBehaviour:
   - Key: unselected
     Objects:
     - {fileID: 1048023208370961424}
+--- !u!114 &501053797974792182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8232864159427335876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2794de2c7f8104640a71426052905bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.TabCell
+  _selectedObjects:
+  - {fileID: 1608233000227777771}
+  _unselectedObjects:
+  - {fileID: 1048023208370961424}
 --- !u!1 &8250904176471617717
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8e92d6a52264d2a9fa9579e3e0acf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationText
-  _key: 
+  _key: ArtifactPanel.Tab.Craft
 --- !u!1 &8600590925888664689
 GameObject:
   m_ObjectHideFlags: 0
