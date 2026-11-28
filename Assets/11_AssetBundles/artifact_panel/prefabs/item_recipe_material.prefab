@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262785842060190179}
+  - component: {fileID: 7335783284810969738}
+  - component: {fileID: 1714909540942524355}
   - component: {fileID: 3334694601083522268}
   m_Layer: 5
   m_Name: item_recipe_material
@@ -40,6 +42,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7335783284810969738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228288667303546748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aff5be02f90248e7b2da9181a5561e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactCraftMaterial
+  _thumbnail: {fileID: 1714909540942524355}
+  _layoutSwitcher: {fileID: 3334694601083522268}
+--- !u!114 &1714909540942524355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228288667303546748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9922e0c79a4994ac492deb1e10e06eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lunaria.ItemThumbnail
+  _images:
+  - {fileID: 7967460757413743359}
+  - {fileID: 2654848601087800140}
+  _quantityTexts:
+  - {fileID: 1297660964650019855}
+  _nameTexts: []
 --- !u!114 &3334694601083522268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,12 +87,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lunaria.LayoutSwitcher
   _layouts:
-  - Key: Ready
+  - Key: Normal
     Objects:
     - {fileID: 1260410071086751321}
     - {fileID: 5906444696019327229}
     - {fileID: 4836017838429446163}
-  - Key: Not
+  - Key: NotEnough
     Objects:
     - {fileID: 7664018609163981461}
     - {fileID: 5906444696019327229}

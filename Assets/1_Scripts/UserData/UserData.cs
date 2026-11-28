@@ -19,6 +19,7 @@ public class UserDataInfo
     public int EquippedArtifactId;
     public float SlimeGauge;
     public HashSet<int> CheckedNewItemIds = new();
+    public HashSet<int> CheckedNewArtifactCraftIds = new();
     public int CurrentDay;
     public Dictionary<int, Dictionary<ShopType, List<ItemInfo>>> ShopPurchaseRecords = new();
     public List<FamiliarInfo> Familiars = new();
@@ -65,11 +66,17 @@ public partial class UserData : Singleton<UserData>
     public int EquippedArtifactId => _userDataInfo.EquippedArtifactId;
     public float SlimeGauge => _userDataInfo.SlimeGauge;
     public HashSet<int> CheckedNewItemIds => _userDataInfo.CheckedNewItemIds;
+    public HashSet<int> CheckedNewArtifactCraftIds => _userDataInfo.CheckedNewArtifactCraftIds;
     public int CurrentDay => _userDataInfo.CurrentDay;
 
     public void CheckNewItem(int itemId)
     {
         _userDataInfo.CheckedNewItemIds.Add(itemId);
+    }
+
+    public void CheckNewArtifactCraft(int craftId)
+    {
+        _userDataInfo.CheckedNewArtifactCraftIds.Add(craftId);
     }
     
     private UserDataInfo _userDataInfo;
